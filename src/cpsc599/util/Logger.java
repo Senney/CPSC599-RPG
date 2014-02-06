@@ -7,7 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Logger {
-	public static final int 	DEBUG = 0,
+	public static final int 	NONE = -1,
+								DEBUG = 0,
 								INFO = 1,
 								WARNING = 2,
 								ERROR = 3,
