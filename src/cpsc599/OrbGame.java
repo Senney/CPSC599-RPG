@@ -3,15 +3,26 @@ package cpsc599;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.assets.AssetManager;
 
+import cpsc599.managers.LevelManager;
 import cpsc599.util.Logger;
 
-public class OrbGame implements ApplicationListener {
+import java.io.IOException;
+
+class OrbGame implements ApplicationListener {
 	AssetManager assetManager;
+    LevelManager levelManager;
 	
 	public OrbGame() {
 		Logger.debug("OrbGame class constructed.");
 		
 		assetManager = new AssetManager();
+
+        try {
+            levelManager = new LevelManager("assets/levels", assetManager);
+        } catch (IOException ex) {
+            Logger.fatal("LevelManager creation failed... Exiting.");
+            System.exit(1);
+        }
 	}
 
 	@Override

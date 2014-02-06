@@ -18,6 +18,8 @@ public class LevelManager {
 	private List<Level> levelList;
 	
 	public LevelManager(String levelsDir, AssetManager assetManager) throws IOException {
+        Logger.debug("Creating LevelManager.");
+
 		this.assetManager = assetManager;
 		this.loader = new LevelLoader(assetManager);
 		this.levelList = new ArrayList<Level>();
