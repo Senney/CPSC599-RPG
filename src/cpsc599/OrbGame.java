@@ -1,13 +1,17 @@
 package cpsc599;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.assets.AssetManager;
 
 import cpsc599.util.Logger;
 
 public class OrbGame implements ApplicationListener {
+	AssetManager assetManager;
+	
 	public OrbGame() {
 		Logger.debug("OrbGame class constructed.");
 		
+		assetManager = new AssetManager();
 	}
 
 	@Override
