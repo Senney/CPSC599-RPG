@@ -42,7 +42,7 @@ public class OrbGame implements ApplicationListener {
 	@Override
 	public void create() {
 		// TODO Auto-generated method stub
-		
+		Logger.debug("OrbGame class create method run.");
 	}
 	
 }
