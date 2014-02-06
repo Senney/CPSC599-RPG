@@ -3,3 +3,9 @@
 # Package Files #
 *.war
 *.ear
+
+# IdeaJ files #
+*.iml
+.idea/
+
+bin/
