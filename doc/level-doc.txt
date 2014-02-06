@@ -1,0 +1,15 @@
+Levels
+
+Levels will specify the various textures that need to be loaded in to a map
+before it can be rendered.
+
+Levels are comprised of
+    * Texture assets
+    * Sound assets
+    * Triggers
+    * Game Objects
+    * Game Object Linkings (e.g. Key->Door/Chest)
+
+Levels do not contain these items however, simply specify their requirement
+and designate a context in which they are to be used.
+
