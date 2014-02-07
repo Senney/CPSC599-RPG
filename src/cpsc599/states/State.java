@@ -13,12 +13,16 @@ import cpsc599.OrbGame;
  */
 public abstract class State {
     protected OrbGame orb;
-    protected static final BitmapFont font = new BitmapFont(true);
+    protected static BitmapFont font = new BitmapFont(true);
     public SpriteBatch spriteBatch;
 
     abstract public void render();
     abstract public void tick(/*Input input*/);
 
+    /**
+     * Initializes the state. Must be called before you can render it.
+     * @param game
+     */
     public void init(OrbGame game) {
         this.orb = game;
 
@@ -40,13 +44,30 @@ public abstract class State {
         spriteBatch.draw(texture, (float)x, (float)y, texture.getRegionWidth(), texture.getRegionHeight());
     }
 
+    /**
+     * Specifies how to align the text. Offsets on the x axis to align.
+     */
     public enum StringAlign {
         LEFT, CENTER, RIGHT
     };
+
+    /**
+     * Draws a string on the screen, left-aligned, at the specified position.
+     * @param string The string to draw.
+     * @param x
+     * @param y
+     */
     public void drawString(String string, int x, int y) {
         font.draw(this.spriteBatch, string, x, y);
     }
 
+    /**
+     * Draws a string on the screen in alignment.
+     * @param string The string to draw.
+     * @param x x position.
+     * @param y y position.
+     * @param align Text alignment.
+     */
     public void drawString(String string, int x, int y, StringAlign align) {
         float xbound = font.getBounds(string).width;
         switch (align) {
