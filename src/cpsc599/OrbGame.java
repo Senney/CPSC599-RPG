@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.assets.AssetManager;
 
 import cpsc599.managers.LevelManager;
+import cpsc599.managers.StateManager;
 import cpsc599.util.Logger;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.io.IOException;
 class OrbGame implements ApplicationListener {
 	private AssetManager assetManager;
     private LevelManager levelManager;
+    private StateManager stateManager;
 
     private int width, height;
     private double scale;
