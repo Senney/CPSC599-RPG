@@ -20,6 +20,7 @@ public class LevelManager {
 	private AssetManager assetManager;
 	private List<Level> levelList;
 
+    private Level current;
 
     /**
      * Sets up the Level Manager with default parameters.
@@ -33,6 +34,8 @@ public class LevelManager {
 		this.assetManager = assetManager;
 		this.loader = new LevelLoader(assetManager);
 		this.levelList = new ArrayList<Level>();
+
+        this.current = null;
 		
 		setLevelDir(levelsDir);
 	}
@@ -68,20 +71,36 @@ public class LevelManager {
 		Logger.info("Updated level listing with " + this.levelList.size() + " level(s).");
 	}
 
+    /** Returns the current level. **/
+    public Level getCurrentLevel() { return current; }
+
     /**
      * Sets the current level to the specified level name, and returns the level object.
      * @param levelName The level name (without the file extension).
-     * @return The specified level.
+     * @return The specified level. null if the level does not exist.
      */
     public Level setLevel(String levelName) {
         for (Level level : this.levelList) {
             if (level.name == levelName) {
-                
+                this.loader.load(level);
+                this.current = level;
+                return level;
             }
         }
+        return null;
     }
 
+    /**
+     * Sets the current level to the specified index.
+     * @param index The index in the list of levels.
+     * @return The selected level. null if the index does not exist.
+     */
     public Level setLevel(int index) {
-
+        int size = levelList.size();
+        if (index < 0 || index > size)
+            return null;
+        this.current = levelList.get(index);
+        this.loader.load(this.current);
+        return this.current;
     }
 }

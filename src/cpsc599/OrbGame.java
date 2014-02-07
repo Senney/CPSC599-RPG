@@ -67,7 +67,7 @@ class OrbGame implements ApplicationListener {
         Logger.debug("Window created with size: (" + this.width + ", " + this.height + "), " +
                 "Scale: " + this.scale);
 
-
+        levelManager.setLevel(0);
 	}
 	
 }

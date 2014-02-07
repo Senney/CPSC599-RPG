@@ -14,8 +14,9 @@ public class LevelLoader {
 	}
 	
 	public boolean load(Level level) {
-		// TODO: Fill out stub.
         Logger.info("Loading level: " + level.name);
+
+
 		
 		return true;
 	}
