@@ -19,6 +19,7 @@ class OrbGame implements ApplicationListener {
     private int width, height;
     private double scale;
 
+    // 60 logic ticks per second.
     final private float accum_time = 1.0f / 60.0f;
     private float accum;
 	
