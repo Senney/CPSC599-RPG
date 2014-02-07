@@ -25,14 +25,20 @@ public class Logger {
 	private static int logLevel = Logger.INFO; // Default log level is INFO.
 	public static void setLogLevel(int level) { Logger.logLevel = level; }	
 	public static int getLogLevel() { return Logger.logLevel; }
-	
+
+    private static String getLevelDescriptor(int level) {
+        if (level < 0 || level > levelNames.length)
+            return "INVALID";
+        return levelNames[level];
+    }
+
 	public static void log(int level, String message) {
 		if (level < logLevel) return;
 		
-		final String fmt = "%s - [%s] - %s\n";
+		final String fmt = "%s\t- [%s]\t- %s\n";
 		
 		String dateString = df.format(Calendar.getInstance().getTime());
-		String outstring = String.format(fmt, dateString, levelNames[getLogLevel()], message);
+		String outstring = String.format(fmt, dateString, getLevelDescriptor(level), message);
 		
 		try {
 			ostream.write(outstring.getBytes());
