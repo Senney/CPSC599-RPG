@@ -1,5 +1,6 @@
 package cpsc599.states;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
@@ -11,17 +12,18 @@ import cpsc599.OrbGame;
  * that must be defined for a state to draw properly.
  */
 public abstract class State {
-    private OrbGame orb;
+    protected OrbGame orb;
+    protected static final BitmapFont font = new BitmapFont(true);
     public SpriteBatch spriteBatch;
 
-    abstract void render();
-    abstract void tick(/*Input input*/);
+    abstract public void render();
+    abstract public void tick(/*Input input*/);
 
-    void init(OrbGame game) {
+    public void init(OrbGame game) {
         this.orb = game;
 
         Matrix4 projection = new Matrix4();
-        projection.setToOrtho(0, 320, 240, 0, -1, 1);
+        projection.setToOrtho(0, 320, 240, 0, 1, -1);
 
         this.spriteBatch = new SpriteBatch();
         this.spriteBatch.setProjectionMatrix(projection);
@@ -36,5 +38,29 @@ public abstract class State {
      */
     public void draw(TextureRegion texture, int x, int y) {
         spriteBatch.draw(texture, (float)x, (float)y, texture.getRegionWidth(), texture.getRegionHeight());
+    }
+
+    public enum StringAlign {
+        LEFT, CENTER, RIGHT
+    };
+    public void drawString(String string, int x, int y) {
+        font.draw(this.spriteBatch, string, x, y);
+    }
+
+    public void drawString(String string, int x, int y, StringAlign align) {
+        float xbound = font.getBounds(string).width;
+        switch (align) {
+            case LEFT:
+                // Do nothing!
+                break;
+            case CENTER:
+                x -= (xbound / 2);
+                break;
+            case RIGHT:
+                x -= xbound;
+                break;
+        }
+
+        font.draw(spriteBatch, string, x, y);
     }
 }

@@ -17,7 +17,7 @@ public class OrbGame implements ApplicationListener {
     private LevelManager levelManager;
     private StateManager stateManager;
 
-    private int width, height;
+    public int width, height;
     private double scale;
 
     // 60 logic ticks per second.
@@ -59,10 +59,11 @@ public class OrbGame implements ApplicationListener {
             Logger.fatal("OrbGame::setState - Unable to set state to " + stateName);
             System.exit(1);
         }
+        this.stateManager.current.init(this);
     }
 
     public void tick() {
-
+        this.stateManager.current.tick();
     }
 
 	@Override
@@ -75,7 +76,7 @@ public class OrbGame implements ApplicationListener {
             this.tick();
             accumulator -= accum_time;
         }
-		
+        this.stateManager.current.render();
 	}
 
 	@Override
@@ -97,8 +98,10 @@ public class OrbGame implements ApplicationListener {
                 "Scale: " + this.scale);
 
         // TODO: Fill this in with the proper state.
-        stateManager.addState("MAIN_MENU", new MainMenuState);
+        stateManager.addState("MAIN_MENU", new MainMenuState());
 
+
+        setState("MAIN_MENU");
         //levelManager.setLevel(0);
 	}
 	
