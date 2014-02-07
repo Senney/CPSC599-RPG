@@ -1,5 +1,7 @@
 package cpsc599;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.assets.AssetManager;
 
@@ -16,15 +18,20 @@ class OrbGame implements ApplicationListener {
 
     private int width, height;
     private double scale;
+
+    final private float accum_time = 1.0f / 60.0f;
+    private float accum;
 	
 	public OrbGame(int w, int h, double scale) {
 		Logger.debug("OrbGame class constructed.");
 
+        this.accum = 0.0f;
         this.width = w;
         this.height = h;
         this.scale = scale;
 
 		assetManager = new AssetManager();
+        stateManager = new StateManager();
 
         try {
             levelManager = new LevelManager("assets/levels", assetManager);
@@ -45,9 +52,22 @@ class OrbGame implements ApplicationListener {
 		
 	}
 
+    public void tick() {
+        switch (stateManager.getState()) {
+            case MAIN_SCREEN:
+                break;
+            case GAME_PLAYING:
+                break;
+        }
+    }
+
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
+        accum += Gdx.graphics.getDeltaTime();
+		while (accum >= accum_time) {
+            this.tick();
+            accum -= accum_time;
+        }
 		
 	}
 
@@ -69,7 +89,9 @@ class OrbGame implements ApplicationListener {
         Logger.debug("Window created with size: (" + this.width + ", " + this.height + "), " +
                 "Scale: " + this.scale);
 
-        levelManager.setLevel(0);
+        stateManager.setState(StateManager.STATES.MAIN_SCREEN);
+
+        //levelManager.setLevel(0);
 	}
 	
 }
