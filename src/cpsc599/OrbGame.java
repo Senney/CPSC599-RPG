@@ -9,12 +9,19 @@ import cpsc599.util.Logger;
 import java.io.IOException;
 
 class OrbGame implements ApplicationListener {
-	AssetManager assetManager;
-    LevelManager levelManager;
+	private AssetManager assetManager;
+    private LevelManager levelManager;
+
+    private int width, height;
+    private double scale;
 	
-	public OrbGame() {
+	public OrbGame(int w, int h, double scale) {
 		Logger.debug("OrbGame class constructed.");
-		
+
+        this.width = w;
+        this.height = h;
+        this.scale = scale;
+
 		assetManager = new AssetManager();
 
         try {
@@ -56,8 +63,11 @@ class OrbGame implements ApplicationListener {
 
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
 		Logger.debug("OrbGame class create method run.");
+        Logger.debug("Window created with size: (" + this.width + ", " + this.height + "), " +
+                "Scale: " + this.scale);
+
+
 	}
 	
 }
