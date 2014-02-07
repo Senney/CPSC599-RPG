@@ -11,7 +11,7 @@ import cpsc599.util.Logger;
 
 import java.io.IOException;
 
-class OrbGame implements ApplicationListener {
+public class OrbGame implements ApplicationListener {
 	private AssetManager assetManager;
     private LevelManager levelManager;
     private StateManager stateManager;
@@ -54,16 +54,14 @@ class OrbGame implements ApplicationListener {
 	}
 
     public void tick() {
-        switch (stateManager.getState()) {
-            case MAIN_SCREEN:
-                break;
-            case GAME_PLAYING:
-                break;
-        }
+
     }
 
 	@Override
 	public void render() {
+        // Clear the rendering surface.
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+
         accum += Gdx.graphics.getDeltaTime();
 		while (accum >= accum_time) {
             this.tick();
@@ -90,7 +88,6 @@ class OrbGame implements ApplicationListener {
         Logger.debug("Window created with size: (" + this.width + ", " + this.height + "), " +
                 "Scale: " + this.scale);
 
-        stateManager.setState(StateManager.STATES.MAIN_SCREEN);
 
         //levelManager.setLevel(0);
 	}
