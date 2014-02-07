@@ -11,12 +11,22 @@ import cpsc599.assets.Level;
 import cpsc599.loaders.LevelLoader;
 import cpsc599.util.Logger;
 
+/**
+ * Detects and loads levels from the file system into the game.
+ */
 public class LevelManager {
 	private String levelDir;
 	private LevelLoader loader;
 	private AssetManager assetManager;
 	private List<Level> levelList;
-	
+
+
+    /**
+     * Sets up the Level Manager with default parameters.
+     * @param levelsDir The directory in which levels are stored.
+     * @param assetManager Global asset manager
+     * @throws IOException levelsDir did not exist, or was not a directory.
+     */
 	public LevelManager(String levelsDir, AssetManager assetManager) throws IOException {
         Logger.debug("Creating LevelManager.");
 
@@ -26,9 +36,14 @@ public class LevelManager {
 		
 		setLevelDir(levelsDir);
 	}
-	
+
+    /**
+     * Sets the level directory and updates the directory listing.
+     * @param levelDir The new level directory.
+     * @throws IOException levelDir did not exist, or was not a directory.
+     */
 	public void setLevelDir(String levelDir) throws IOException { this.levelDir = levelDir; update(); }
-	
+
 	/**
 	 * Updates the listing of all levels.
 	 * @throws IOException
@@ -36,7 +51,7 @@ public class LevelManager {
 	public void update() throws IOException {
 		File levels = new File(this.levelDir);
 		if (!levels.isDirectory()) {
-			Logger.error("LevelManager::update : Expected levelDir to be a directory.");
+			Logger.error("LevelManager::update : Expected " + levels.getAbsoluteFile().toString() + " to be a directory.");
 			throw new IOException("Expected levelDir to be a directory.");
 		}
 		
@@ -45,10 +60,28 @@ public class LevelManager {
 		
 		for (File level : levelList) {
 			Level l = new Level();
-			l.path = level.getAbsolutePath();
+			l.file = level;
+            l.name = level.getName().replaceFirst("[.][^.]+$", "");
 			this.levelList.add(l);
 		}
 		
-		Logger.info("Updated level listing with " + this.levelList.size() + " elements.");
+		Logger.info("Updated level listing with " + this.levelList.size() + " level(s).");
 	}
+
+    /**
+     * Sets the current level to the specified level name, and returns the level object.
+     * @param levelName The level name (without the file extension).
+     * @return The specified level.
+     */
+    public Level setLevel(String levelName) {
+        for (Level level : this.levelList) {
+            if (level.name == levelName) {
+                
+            }
+        }
+    }
+
+    public Level setLevel(int index) {
+
+    }
 }

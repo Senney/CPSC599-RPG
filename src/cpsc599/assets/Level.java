@@ -1,6 +1,8 @@
 package cpsc599.assets;
 
+import java.io.File;
+
 public class Level {
-	public String path;
-	
+	public File file;
+    public String name;
 }
