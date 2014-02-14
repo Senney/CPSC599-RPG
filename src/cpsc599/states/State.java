@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 
 import cpsc599.OrbGame;
+import cpsc599.util.Logger;
 
 /**
  * Super-class for all states. Contains base functions to control drawing, and defines basic abstract functions
@@ -24,6 +25,10 @@ public abstract class State {
      * @param game
      */
     public void init(OrbGame game) {
+        if (this.orb == null) {
+            Logger.debug("State::init - State has already been initialized.");
+        }
+
         this.orb = game;
 
         Matrix4 projection = new Matrix4();

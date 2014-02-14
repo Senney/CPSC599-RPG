@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.AssetManager;
 
 import cpsc599.managers.LevelManager;
 import cpsc599.managers.StateManager;
+import cpsc599.states.IntroLevelState;
 import cpsc599.states.MainMenuState;
 import cpsc599.util.Logger;
 
@@ -99,8 +100,9 @@ public class OrbGame implements ApplicationListener {
 
         // TODO: Fill this in with the proper state.
         stateManager.addState("MAIN_MENU", new MainMenuState());
+        stateManager.addState("LEVEL0", new IntroLevelState(this, levelManager));
 
-        setState("MAIN_MENU");
+        setState("LEVEL0");
         //levelManager.setLevel(0);
 	}
 	
