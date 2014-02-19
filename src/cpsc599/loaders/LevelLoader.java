@@ -28,6 +28,12 @@ public class LevelLoader {
             Logger.fatal("LevelLoader::load - Unable to load requested Tiled Map: " + mapName);
             return false;
         }
+        if (level.tiledMap.getLayers().get("Collision") == null ||
+                level.tiledMap.getLayers().get("collision") == null) {
+            Logger.fatal("LevelLoader::loadMap - The map *must* have a layer named 'Collision'.");
+            return false;
+        }
+        level.collisionLayer = level.tiledMap.getLayers().get("Collision");
 
 		return true;
 	}
