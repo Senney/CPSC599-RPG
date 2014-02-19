@@ -3,6 +3,8 @@ package cpsc599.loaders;
 import com.badlogic.gdx.assets.AssetManager;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import cpsc599.assets.Level;
 import cpsc599.util.Logger;
@@ -28,12 +30,12 @@ public class LevelLoader {
             Logger.fatal("LevelLoader::load - Unable to load requested Tiled Map: " + mapName);
             return false;
         }
-        if (level.tiledMap.getLayers().get("Collision") == null ||
-                level.tiledMap.getLayers().get("collision") == null) {
+
+        if (level.tiledMap.getLayers().get("Collision") == null) {
             Logger.fatal("LevelLoader::loadMap - The map *must* have a layer named 'Collision'.");
             return false;
         }
-        level.collisionLayer = level.tiledMap.getLayers().get("Collision");
+        level.collisionLayer = (TiledMapTileLayer)level.tiledMap.getLayers().get("Collision");
 
 		return true;
 	}
