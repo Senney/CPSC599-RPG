@@ -1,7 +1,41 @@
 package cpsc599.managers;
 
+import cpsc599.assets.Player;
+import cpsc599.util.Logger;
+
+import java.util.ArrayList;
+
 /**
- * Created by srheintz on 19/02/14.
+ * Manages the player controllable characters that are currently in the game.
  */
 public class PlayerManager {
+    private ArrayList<Player> playerList;
+    private Player currentPlayer;
+
+    public PlayerManager() {
+        playerList = new ArrayList<Player>();
+    }
+
+    public void addPlayer(Player p) {
+        Logger.debug("PlayerManager::addPlayer - Adding player '" + p + "'.");
+        playerList.add(p);
+    }
+
+    public Player[] getPlayers() {
+        return playerList.toArray(new Player[playerList.size()]);
+    }
+
+    public Player getPlayer(int index) {
+        if (playerList.size() < index) {
+            Logger.error("Player::setCurrent - index was out of range.");
+            return null;
+        }
+
+        return playerList.get(index);
+    }
+
+    public Player setCurrent(int index) {
+        currentPlayer = this.getPlayer(index);
+        return currentPlayer;
+    }
 }
