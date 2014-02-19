@@ -64,7 +64,7 @@ public class OrbGame implements ApplicationListener {
     }
 
     public void tick() {
-        this.stateManager.current.tick();
+        this.stateManager.current.tick(Gdx.input);
     }
 
 	@Override

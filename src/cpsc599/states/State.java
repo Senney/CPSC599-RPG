@@ -1,5 +1,6 @@
 package cpsc599.states;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,7 +19,7 @@ public abstract class State {
     public SpriteBatch spriteBatch;
 
     abstract public void render();
-    abstract public void tick(/*Input input*/);
+    abstract public void tick(Input input);
 
     /**
      * Initializes the state. Must be called before you can render it.
