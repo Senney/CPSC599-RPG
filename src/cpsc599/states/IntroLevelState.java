@@ -39,6 +39,7 @@ public class IntroLevelState extends LevelState {
     public void tick(Input input) {
         time++;
 
+        /*
         if (input.isKeyPressed(Controls.UP)) {
             super.camera.translate(0f, -TRANSLATE_SPEED);
         }
@@ -52,6 +53,7 @@ public class IntroLevelState extends LevelState {
         } else if (input.isKeyPressed(Controls.RIGHT)) {
             super.camera.translate(-TRANSLATE_SPEED, 0f);
         }
+        */
 
         super.camera.update();
     }
