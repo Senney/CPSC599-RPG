@@ -26,4 +26,9 @@ public class Controls {
      */
     public static int START = Input.Keys.ENTER;
     public static int SELECT = Input.Keys.SPACE;
+
+
+    public static boolean isKeyTapped(Input inew, Input iold, int key) {
+        return ((!inew.isKeyPressed(key)) && iold.isKeyPressed(key));
+    }
 }
