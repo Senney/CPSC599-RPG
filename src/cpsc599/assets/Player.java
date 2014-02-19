@@ -1,7 +1,10 @@
 package cpsc599.assets;
 
 /**
- * Created by srheintz on 19/02/14.
+ * Base class for a Player controlled entity.
  */
 public class Player {
+    public Player(AnimatedSprite sprite) {
+
+    }
 }

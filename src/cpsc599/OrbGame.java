@@ -14,6 +14,8 @@ import cpsc599.util.Logger;
 import java.io.IOException;
 
 public class OrbGame implements ApplicationListener {
+    public static float frameTime = 0f;
+
 	private AssetManager assetManager;
     private LevelManager levelManager;
     private StateManager stateManager;
@@ -64,6 +66,8 @@ public class OrbGame implements ApplicationListener {
     }
 
     public void tick() {
+        frameTime += Gdx.graphics.getDeltaTime();
+
         this.stateManager.current.tick(Gdx.input);
     }
 
