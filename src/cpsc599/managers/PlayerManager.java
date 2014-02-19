@@ -38,4 +38,8 @@ public class PlayerManager {
         currentPlayer = this.getPlayer(index);
         return currentPlayer;
     }
+
+    public Player getCurrent() {
+        return currentPlayer;
+    }
 }
