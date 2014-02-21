@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Disposable;
 import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.assets.Level;
+import cpsc599.controller.PlayerController;
 import cpsc599.util.Logger;
 
 public abstract class LevelState extends State {
@@ -17,10 +18,12 @@ public abstract class LevelState extends State {
 
     protected OrthogonalTiledMapRenderer renderer;
     protected OrthographicCamera camera;
+    protected PlayerController playerController;
     protected static float TRANSLATE_SPEED = 2f;
 
-    protected LevelState(OrbGame game) {
+    protected LevelState(OrbGame game, PlayerController playerController) {
         super.init(game);
+        this.playerController = playerController;
     }
 
     protected void setLevel(Level level) {

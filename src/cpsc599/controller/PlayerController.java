@@ -20,20 +20,18 @@ public class PlayerController {
     public void control(Input input, Input lastInput) {
         Player p = this.playerManager.getCurrent();
         if (Controls.isKeyTapped(input, lastInput, Controls.UP)) {
-            selectorPosition.add(0.0f, -1.0f);
+            p.move(0, -1);
         } else if (Controls.isKeyTapped(input, lastInput, Controls.DOWN)) {
-            selectorPosition.add(0.0f, 1.0f);
+            p.move(0, 1);
         } else if (Controls.isKeyTapped(input, lastInput, Controls.RIGHT)) {
-            selectorPosition.add(1.0f, 0.0f);
+            p.move(1, 0);
         } else if (Controls.isKeyTapped(input, lastInput, Controls.LEFT)) {
-            selectorPosition.add(-1.0f, 0.0f);
+            p.move(-1, 0);
         }
 
         // Move the player.
         if (Controls.isKeyTapped(input, lastInput, Controls.A_BUTTON)) {
-            p.moveTo((int)selectorPosition.x, (int)selectorPosition.y);
-            p.x = (int)selectorPosition.x;
-            p.y = (int)selectorPosition.y;
+            // End the turn here.
         }
 
         // Reset the selector position.

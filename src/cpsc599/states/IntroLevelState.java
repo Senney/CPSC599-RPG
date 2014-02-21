@@ -1,13 +1,11 @@
 package cpsc599.states;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import cpsc599.OrbGame;
 import cpsc599.assets.AnimatedSprite;
+import cpsc599.controller.PlayerController;
 import cpsc599.managers.LevelManager;
-import cpsc599.util.Controls;
-import cpsc599.util.Logger;
 
 /**
  * Basic testing state.
@@ -17,8 +15,8 @@ public class IntroLevelState extends LevelState {
 
     private AnimatedSprite sprite;
 
-    public IntroLevelState(OrbGame game, LevelManager manager) {
-        super(game);
+    public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController) {
+        super(game, playerController);
         super.setLevel(manager.setLevel(0));
 
         TiledMapTileLayer layer = (TiledMapTileLayer)this.currentLevel.tiledMap.getLayers().get(0);
