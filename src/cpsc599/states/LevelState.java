@@ -43,10 +43,10 @@ public abstract class LevelState extends State {
 
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false);
+        camera.setToOrtho(true);
 
         this.currentLevel = level;
-        renderer = new OrthogonalTiledMapRenderer(currentLevel.tiledMap, super.spriteBatch);
+        renderer = new OrthogonalTiledMapRenderer(currentLevel.tiledMap, (float)Main.GAME_SCALE, super.spriteBatch);
         renderer.setView(camera);
     }
 

@@ -33,6 +33,7 @@ public class Player {
         if (moving) {
             this.x = moveX;
             this.y = moveY;
+            Logger.debug("Moving player to: (" + this.x + ", " + this.y + ").");
             moving = false;
         }
     }

@@ -41,7 +41,9 @@ public class IntroLevelState extends LevelState {
     public void tick(Input input) {
         time++;
         playerController.control(input);
-        playerController.getPlayerManager().getCurrent().tick();
+
+        Player current = playerController.getPlayerManager().getCurrent();
+        current.tick();
 
         /*
         if (input.isKeyPressed(Controls.UP)) {
@@ -59,6 +61,8 @@ public class IntroLevelState extends LevelState {
         }
         */
 
+        super.camera.position.x = current.x * 16;
+        super.camera.position.y = current.y * 16;
         super.camera.update();
     }
 }

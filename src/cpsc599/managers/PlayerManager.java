@@ -19,6 +19,7 @@ public class PlayerManager {
     public void addPlayer(Player p) {
         Logger.debug("PlayerManager::addPlayer - Adding player '" + p + "'.");
         playerList.add(p);
+        if (currentPlayer == null) setCurrent(0);
     }
 
     public Player[] getPlayers() {
