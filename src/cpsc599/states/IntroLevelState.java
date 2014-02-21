@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import cpsc599.OrbGame;
 import cpsc599.assets.AnimatedSprite;
+import cpsc599.assets.Player;
 import cpsc599.controller.PlayerController;
 import cpsc599.managers.LevelManager;
 
@@ -20,7 +21,9 @@ public class IntroLevelState extends LevelState {
         super.setLevel(manager.setLevel(0));
 
         TiledMapTileLayer layer = (TiledMapTileLayer)this.currentLevel.tiledMap.getLayers().get(0);
-        sprite = new AnimatedSprite("assets/tilesets/mario.png", 0, 0, 16, 28, 4, 0.1f);
+        sprite = new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f);
+
+        playerController.getPlayerManager().addPlayer(new Player(sprite));
     }
 
     @Override
@@ -29,13 +32,16 @@ public class IntroLevelState extends LevelState {
         super.drawLevel();
 
         super.spriteBatch.begin();
-        sprite.render(super.spriteBatch, 32, 32);
+        for (Player p : playerController.getPlayerManager().getPlayers())
+            p.render(super.spriteBatch);
         super.spriteBatch.end();
     }
 
     @Override
     public void tick(Input input) {
         time++;
+        playerController.control(input);
+        playerController.getPlayerManager().getCurrent().tick();
 
         /*
         if (input.isKeyPressed(Controls.UP)) {

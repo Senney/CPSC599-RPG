@@ -2,6 +2,8 @@ package cpsc599.util;
 
 import com.badlogic.gdx.Input;
 
+import java.util.HashMap;
+
 /**
  * Static variables related to various control elements for the game.
  */
@@ -27,8 +29,16 @@ public class Controls {
     public static int START = Input.Keys.ENTER;
     public static int SELECT = Input.Keys.SPACE;
 
+    private static HashMap<Integer, Boolean> pressed = new HashMap<Integer, Boolean>();
+    public static boolean isKeyTapped(Input inew, int key) {
+        boolean state = inew.isKeyPressed(key);
+        if (!pressed.containsKey(key)) {
+            pressed.put(key, state);
+        }
 
-    public static boolean isKeyTapped(Input inew, Input iold, int key) {
-        return ((!inew.isKeyPressed(key)) && iold.isKeyPressed(key));
+        boolean tapped = (!state && pressed.get(key));
+        pressed.put(key, state);
+
+        return tapped;
     }
 }
