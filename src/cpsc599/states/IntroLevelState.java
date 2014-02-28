@@ -21,7 +21,8 @@ public class IntroLevelState extends LevelState {
     private AnimatedSprite sprite;
     private InventoryMenu inventoryMenu;
 
-    public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController, CameraController cameraController) {
+    public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
+                           CameraController cameraController) {
         super(game, playerController, cameraController);
         super.setLevel(manager.setLevel(0));
 
@@ -64,8 +65,16 @@ public class IntroLevelState extends LevelState {
             current.tick();
             this.cameraController.set(current.x, current.y);
 
-            if (Controls.isKeyTapped(input, Controls.SELECT)) {
-                Logger.debug("IntroLevelState::tick - 'SELECT' pressed.");
+        } else {
+            this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
+        }
+
+        // TODO: Find a way to abstract this into the PlayerController.
+        if (Controls.isKeyTapped(input, Controls.SELECT)) {
+            Logger.debug("IntroLevelState::tick - 'SELECT' pressed.");
+            if (current == null) {
+                // Move cursor to the next available player.
+            } else {
                 // Show the inventory.
                 this.inventoryMenu.toggleVisible();
             }

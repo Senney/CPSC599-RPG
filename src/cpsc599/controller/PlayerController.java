@@ -81,17 +81,17 @@ public class PlayerController {
                         this.playerManager.setCurrent(player);
                     }
                 }
+            } else {
+                this.cursor.x = this.playerManager.getCurrent().x;
+                this.cursor.y = this.playerManager.getCurrent().y;
+                this.playerManager.setCurrent(null); // Nullify the current player.
             }
         }
 
         // Reset the selector position.
         if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
             Logger.debug("PlayerController::control - 'B' button pressed.");
-            if (p != null) {
-                this.cursor.x = this.playerManager.getCurrent().x;
-                this.cursor.y = this.playerManager.getCurrent().y;
-                this.playerManager.setCurrent(null); // Nullify the current player.
-            }
+
         }
     }
 }
