@@ -8,6 +8,7 @@ import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.PlayerController;
 import cpsc599.managers.LevelManager;
+import cpsc599.util.Controls;
 
 /**
  * Basic testing state.
@@ -21,7 +22,6 @@ public class IntroLevelState extends LevelState {
         super(game, playerController, cameraController);
         super.setLevel(manager.setLevel(0));
 
-        TiledMapTileLayer layer = (TiledMapTileLayer)this.currentLevel.tiledMap.getLayers().get(0);
         sprite = new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f);
 
         playerController.getPlayerManager().addPlayer(new Player(sprite));
@@ -32,10 +32,11 @@ public class IntroLevelState extends LevelState {
         super.renderer.setView(camera);
         super.drawLevel();
 
-        super.spriteBatch.begin();
+        super.playerLayer.begin();
+        super.playerLayer.setProjectionMatrix(this.camera.combined);
         for (Player p : playerController.getPlayerManager().getPlayers())
-            p.render(super.spriteBatch);
-        super.spriteBatch.end();
+            p.render(super.playerLayer);
+        super.playerLayer.end();
     }
 
     @Override
@@ -60,6 +61,7 @@ public class IntroLevelState extends LevelState {
         } else if (input.isKeyPressed(Controls.RIGHT)) {
             super.camera.translate(-TRANSLATE_SPEED, 0f);
         }
+        super.camera.update();
         */
 
         this.cameraController.set(current.x, current.y);

@@ -38,6 +38,8 @@ public class CameraController {
         this.camera.setToOrtho(true, size.x, size.y);
         set((int)position.x, (int)position.y);
 
+        this.camera.zoom = (float)this.scale;
+
     }
 
     /**
@@ -53,7 +55,12 @@ public class CameraController {
 
         // Check that the X and Y positions don't overflow the camera off of the map.
         int realx = bound(CoordinateTranslator.translate(x), width);
-        int realy = bound(CoordinateTranslator.translate(y), width);
+        int realy = bound(CoordinateTranslator.translate(y), height);
+
+        if (this.x != realx || this.y != realy) {
+            Logger.info("CameraController::set - Camera set to position (" + realx + ", " + realy + ")");
+            Logger.info("Test: " + CoordinateTranslator.translate(y));
+        }
 
         this.x = realx;
         this.y = realy;
@@ -65,9 +72,9 @@ public class CameraController {
         return this.camera;
     }
 
-    private int bound(int x, int v) {
-        if (x - (v / 2) < 0) x = v / 2;
-        return x;
+    private int bound(int d, int v) {
+        if (d - (v / 2) < 0) d = v / 2;
+        return d;
     }
 
     private void updateCamera() {

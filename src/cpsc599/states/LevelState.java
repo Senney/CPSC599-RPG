@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
@@ -22,12 +23,15 @@ public abstract class LevelState extends State {
     protected OrthographicCamera camera;
     protected PlayerController playerController;
     protected CameraController cameraController;
-    protected static float TRANSLATE_SPEED = 2f;
+    protected static float TRANSLATE_SPEED = 1f;
+
+    protected SpriteBatch playerLayer;
 
     protected LevelState(OrbGame game, PlayerController playerController, CameraController cameraController) {
         super.init(game);
         this.playerController = playerController;
         this.cameraController = cameraController;
+        this.playerLayer = new SpriteBatch();
     }
 
     protected void setLevel(Level level) {
@@ -49,7 +53,7 @@ public abstract class LevelState extends State {
         camera = (OrthographicCamera)cameraController.getCamera();
 
         this.currentLevel = level;
-        renderer = new OrthogonalTiledMapRenderer(currentLevel.tiledMap, (float)Main.GAME_SCALE, super.spriteBatch);
+        renderer = new OrthogonalTiledMapRenderer(currentLevel.tiledMap, 1.0f, super.spriteBatch);
         renderer.setView(camera);
     }
 

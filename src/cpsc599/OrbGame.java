@@ -5,11 +5,15 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.assets.AssetManager;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import cpsc599.controller.CameraController;
 import cpsc599.controller.PlayerController;
 import cpsc599.managers.LevelManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.managers.StateManager;
 import cpsc599.states.IntroLevelState;
+import cpsc599.states.LevelState;
 import cpsc599.states.MainMenuState;
 import cpsc599.util.Logger;
 
@@ -23,6 +27,7 @@ public class OrbGame implements ApplicationListener {
     private StateManager stateManager;
     private PlayerManager playerManager;
 
+    private CameraController cameraController;
     private PlayerController playerController;
 
     public int width, height;
@@ -44,6 +49,7 @@ public class OrbGame implements ApplicationListener {
         stateManager = new StateManager();
         playerManager = new PlayerManager();
         playerController = new PlayerController(playerManager);
+        cameraController = new CameraController(new Vector2(0, 0), new Vector3(w, h, 1));
 
         try {
             levelManager = new LevelManager("assets/levels", assetManager);
@@ -88,7 +94,9 @@ public class OrbGame implements ApplicationListener {
             this.tick();
             accumulator -= accum_time;
         }
+
         this.stateManager.current.render();
+        this.cameraController.getCamera().apply(Gdx.graphics.getGL10());
 	}
 
 	@Override
@@ -111,7 +119,7 @@ public class OrbGame implements ApplicationListener {
 
         // TODO: Fill this in with the proper state.
         stateManager.addState("MAIN_MENU", new MainMenuState());
-        stateManager.addState("LEVEL0", new IntroLevelState(this, levelManager, playerController));
+        stateManager.addState("LEVEL0", new IntroLevelState(this, levelManager, playerController, cameraController));
 
         setState("LEVEL0");
         //levelManager.setLevel(0);
