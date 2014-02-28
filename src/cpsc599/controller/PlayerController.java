@@ -2,6 +2,7 @@ package cpsc599.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import cpsc599.assets.Cursor;
 import cpsc599.assets.Player;
 import cpsc599.managers.PlayerManager;
 import cpsc599.util.Controls;
@@ -14,12 +15,20 @@ public class PlayerController {
         return playerManager;
     }
 
+    private Cursor cursor;
+
     private PlayerManager playerManager;
     private Vector2 selectorPosition;
 
     public PlayerController(PlayerManager manager) {
         this.playerManager = manager;
         this.selectorPosition = new Vector2();
+        cursor = new Cursor();
+    }
+
+    public void ctrl_cursor(Input input)
+    {
+        
     }
 
     public void control(Input input) {
