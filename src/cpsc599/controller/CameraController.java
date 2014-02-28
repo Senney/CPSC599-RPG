@@ -1,5 +1,6 @@
 package cpsc599.controller;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -21,13 +22,12 @@ public class CameraController {
      * @param size (w, h, scale) the parameters that specify the size the camera should view.
      */
     public CameraController(Vector2 position, Vector3 size) {
-        this.x = CoordinateTranslator.translate((int)position.x);
-        this.y = CoordinateTranslator.translate((int)position.y);
         this.width = (int)size.x;
         this.height = (int)size.y;
         this.scale = (double)size.z;
 
         this.camera = new OrthographicCamera(size.x, size.y);
+        set((int)position.x, (int)position.y);
     }
 
     /**
@@ -44,6 +44,10 @@ public class CameraController {
         this.y = realy;
 
         this.updateCamera();
+    }
+
+    public Camera getCamera() {
+        return this.camera;
     }
 
     private int bound(int x, int v) {
