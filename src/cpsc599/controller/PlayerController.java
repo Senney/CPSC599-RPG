@@ -48,26 +48,9 @@ public class PlayerController {
         Player p = this.playerManager.getCurrent();
 
         if (p != null) {
-            if (Controls.isKeyTapped(input, Controls.UP)) {
-                p.move(0, -1);
-            } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
-                p.move(0, 1);
-            } else if (Controls.isKeyTapped(input, Controls.RIGHT)) {
-                p.move(1, 0);
-            } else if (Controls.isKeyTapped(input, Controls.LEFT)) {
-                p.move(-1, 0);
-            }
+            movePlayer(input, p);
         } else {
-            // Control the cursor here.
-            if (Controls.isKeyTapped(input, Controls.UP)) {
-                cursor.move(Controls.UP);
-            } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
-                cursor.move(Controls.DOWN);
-            } else if (Controls.isKeyTapped(input, Controls.RIGHT)) {
-                cursor.move(Controls.LEFT);
-            } else if (Controls.isKeyTapped(input, Controls.LEFT)) {
-                cursor.move(Controls.RIGHT);
-            }
+            moveCursor(input);
         }
 
         // Move the player.
@@ -75,18 +58,10 @@ public class PlayerController {
             Logger.debug("PlayerController::control - 'A' button pressed.");
             // Check to see if we're over a player with our cursor.
             if (p == null) {
-                // We must on the cursor.
-                for (Player player : this.playerManager.getPlayers()) {
-                    if (player.x == cursor.x && player.y == cursor.y) {
-                        this.playerManager.setCurrent(player);
-                        this.selectorPosition.x = player.x;
-                        this.selectorPosition.y = player.y;
-                    }
-                }
+                // No player is selected, so we should check if a player is under the cursor.
+                findPlayerOnCursor();
             } else {
-                this.cursor.x = this.playerManager.getCurrent().x;
-                this.cursor.y = this.playerManager.getCurrent().y;
-                this.playerManager.setCurrent(null); // Nullify the current player.
+                releasePlayer();
             }
         }
 
@@ -95,14 +70,53 @@ public class PlayerController {
             Logger.debug("PlayerController::control - 'B' button pressed.");
             if (p != null) {
                 if (p.x == (int)this.selectorPosition.x && p.y == (int)this.selectorPosition.y) {
-                    this.cursor.x = this.playerManager.getCurrent().x;
-                    this.cursor.y = this.playerManager.getCurrent().y;
-                    this.playerManager.setCurrent(null); // Nullify the current player.
+                    releasePlayer();
                 } else {
                     p.x = (int)this.selectorPosition.x;
                     p.y = (int)this.selectorPosition.y;
                 }
             }
+        }
+    }
+
+    private void findPlayerOnCursor() {
+        for (Player player : this.playerManager.getPlayers()) {
+            if (player.x == cursor.x && player.y == cursor.y) {
+                this.playerManager.setCurrent(player);
+                this.selectorPosition.x = player.x;
+                this.selectorPosition.y = player.y;
+            }
+        }
+    }
+
+    private void releasePlayer() {
+        this.cursor.x = this.playerManager.getCurrent().x;
+        this.cursor.y = this.playerManager.getCurrent().y;
+        this.playerManager.setCurrent(null); // Nullify the current player.
+    }
+
+    private void moveCursor(Input input) {
+        // Control the cursor here.
+        if (Controls.isKeyTapped(input, Controls.UP)) {
+            cursor.move(Controls.UP);
+        } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
+            cursor.move(Controls.DOWN);
+        } else if (Controls.isKeyTapped(input, Controls.RIGHT)) {
+            cursor.move(Controls.LEFT);
+        } else if (Controls.isKeyTapped(input, Controls.LEFT)) {
+            cursor.move(Controls.RIGHT);
+        }
+    }
+
+    private void movePlayer(Input input, Player p) {
+        if (Controls.isKeyTapped(input, Controls.UP)) {
+            p.move(0, -1);
+        } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
+            p.move(0, 1);
+        } else if (Controls.isKeyTapped(input, Controls.RIGHT)) {
+            p.move(1, 0);
+        } else if (Controls.isKeyTapped(input, Controls.LEFT)) {
+            p.move(-1, 0);
         }
     }
 }
