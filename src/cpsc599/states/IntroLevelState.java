@@ -31,8 +31,12 @@ public class IntroLevelState extends LevelState {
         Player p = new Player(sprite);
         p.x = 10;
         p.y = 10;
+        Player p2 = new Player(sprite);
+        p2.x = 12;
+        p2.y = 12;
 
         playerController.getPlayerManager().addPlayer(p);
+        playerController.getPlayerManager().addPlayer(p2);
         playerController.setupCursor();
 
         inventoryMenu = new InventoryMenu(100, 200);
