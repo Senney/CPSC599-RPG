@@ -79,6 +79,8 @@ public class PlayerController {
                 for (Player player : this.playerManager.getPlayers()) {
                     if (player.x == cursor.x && player.y == cursor.y) {
                         this.playerManager.setCurrent(player);
+                        this.selectorPosition.x = player.x;
+                        this.selectorPosition.y = player.y;
                     }
                 }
             } else {
@@ -91,7 +93,16 @@ public class PlayerController {
         // Reset the selector position.
         if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
             Logger.debug("PlayerController::control - 'B' button pressed.");
-
+            if (p != null) {
+                if (p.x == (int)this.selectorPosition.x && p.y == (int)this.selectorPosition.y) {
+                    this.cursor.x = this.playerManager.getCurrent().x;
+                    this.cursor.y = this.playerManager.getCurrent().y;
+                    this.playerManager.setCurrent(null); // Nullify the current player.
+                } else {
+                    p.x = (int)this.selectorPosition.x;
+                    p.y = (int)this.selectorPosition.y;
+                }
+            }
         }
     }
 }
