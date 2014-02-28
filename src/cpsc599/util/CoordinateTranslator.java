@@ -1,5 +1,7 @@
 package cpsc599.util;
 
+import cpsc599.Main;
+
 /**
  * Simple static class to translate between game coordinates to real coordinates.
  */
