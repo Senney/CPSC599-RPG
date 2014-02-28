@@ -2,6 +2,7 @@ package cpsc599.assets;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import cpsc599.OrbGame;
+import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
 
 /**
@@ -43,7 +44,7 @@ public class Player {
      * @param batch The SpriteBatch.
      */
     public void render(SpriteBatch batch) {
-        playerSprite.render(batch, x * 16, y * 16);
+        playerSprite.render(batch, CoordinateTranslator.translate(x), CoordinateTranslator.translate(y));
     }
 
     public void move(int x, int y) {
