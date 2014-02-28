@@ -10,6 +10,7 @@ import cpsc599.controller.PlayerController;
 import cpsc599.managers.LevelManager;
 import cpsc599.menus.InventoryMenu;
 import cpsc599.util.Controls;
+import cpsc599.util.Logger;
 
 /**
  * Basic testing state.
@@ -61,8 +62,13 @@ public class IntroLevelState extends LevelState {
         Player current = playerController.getPlayerManager().getCurrent();
         if (current != null) {
             current.tick();
-
             this.cameraController.set(current.x, current.y);
+
+            if (Controls.isKeyTapped(input, Controls.SELECT)) {
+                Logger.debug("IntroLevelState::tick - 'SELECT' pressed.");
+                // Show the inventory.
+                this.inventoryMenu.toggleVisible();
+            }
         }
 
         /*

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import cpsc599.items.Inventory;
+import cpsc599.util.Logger;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,7 @@ public class InventoryMenu extends Menu {
 
     public boolean toggleVisible() {
         visible = !visible;
+        Logger.debug("Setting visibility of Inventory to: " + visible);
         return visible;
     }
 
