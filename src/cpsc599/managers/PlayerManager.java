@@ -37,6 +37,7 @@ public class PlayerManager {
 
     public Player setCurrent(int index) {
         currentPlayer = this.getPlayer(index);
+        Logger.debug("PlayerManager::setCurrent - Current player set to " + currentPlayer);
         return currentPlayer;
     }
 
@@ -45,6 +46,12 @@ public class PlayerManager {
     }
 
     public void setCurrent(Player p) {
+        if (p != null && !this.playerList.contains(p)) {
+            Logger.error("PlayerManager::setCurrent - Attempted to set current player to player that did not exist.");
+            return;
+        }
+
+        Logger.debug("PlayerManager::setCurrent - Current player set to " + p);
         this.currentPlayer = p;
     }
 }

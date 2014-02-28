@@ -2,11 +2,13 @@ package cpsc599.controller;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxNativesLoader;
 import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
+import sun.net.www.content.text.plain;
 
 /**
  * Class for controlling movement and positioning of the Camera.
@@ -17,6 +19,9 @@ public class CameraController {
     private int width, height;
 
     private OrthographicCamera camera;
+    private Rectangle cameraRect;
+
+    private final int CAMERA_SIDE_THRESH = 32; // 32 pixels from the side of the rectangle, we start to move it.
 
     static {
         // HACK: Don't remove this!! Forces the JVM to load unloaded native dlls... which aren't loaded.
@@ -33,6 +38,8 @@ public class CameraController {
         this.width = (int)size.x;
         this.height = (int)size.y;
         this.scale = (double)size.z;
+        this.cameraRect = new Rectangle(CoordinateTranslator.translate((int)position.x),
+                CoordinateTranslator.translate((int)position.y), size.x, size.y);
 
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(true, size.x, size.y);
@@ -40,6 +47,48 @@ public class CameraController {
 
         this.camera.zoom = (float)this.scale;
 
+    }
+
+    /**
+     * Moves the camera to the noted position, in game-units. This method revolves around a rectangle which
+     * represents the camera. Once the x, y position has reached a threshold (CAMERA_SIDE_THRESH) from the edge
+     * of this rectangle, the rectangle repositions itself accordingly.
+     * <strong>Currently NOT functioning.</strong>
+     * @param x
+     * @param y
+     */
+    public void move(int x, int y) {
+        if (this.camera == null) {
+            Logger.fatal("CameraController::move - Camera must be initialized before it can be used");
+            return;
+        }
+
+        int realx = CoordinateTranslator.translate(x);
+        int realy = CoordinateTranslator.translate(y);
+
+        if (realx <= (this.cameraRect.x + CAMERA_SIDE_THRESH)) {
+            if (realx > CoordinateTranslator.TILE_SIZE) {
+                this.cameraRect.x -= CoordinateTranslator.TILE_SIZE;
+            }
+            this.set((int)this.cameraRect.x, y);
+        } else if (realx >= ((this.cameraRect.x + this.cameraRect.width) - CAMERA_SIDE_THRESH)) {
+            if (realx < CoordinateTranslator.TILE_SIZE) {
+                this.cameraRect.x += CoordinateTranslator.TILE_SIZE;
+            }
+            this.set((int)this.cameraRect.x, y);
+        } else if (realy <= (this.cameraRect.y + CAMERA_SIDE_THRESH)) {
+            if (realy > CoordinateTranslator.TILE_SIZE) {
+                this.cameraRect.y -= CoordinateTranslator.TILE_SIZE;
+            }
+            this.set(x, y);
+        } else if (realy >= ((this.cameraRect.x + this.cameraRect.width) - CAMERA_SIDE_THRESH)) {
+            if (realy < CoordinateTranslator.TILE_SIZE) {
+                this.cameraRect.y += CoordinateTranslator.TILE_SIZE;
+            }
+            this.set(x, y);
+        }
+
+        return;
     }
 
     /**
@@ -59,7 +108,6 @@ public class CameraController {
 
         if (this.x != realx || this.y != realy) {
             Logger.info("CameraController::set - Camera set to position (" + realx + ", " + realy + ")");
-            Logger.info("Test: " + CoordinateTranslator.translate(y));
         }
 
         this.x = realx;

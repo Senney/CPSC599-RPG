@@ -38,6 +38,6 @@ public class Cursor {
                 x--;
                 break;
         }
-        Logger.info("Cursor::move - Moving in direction: " + direction + " to (" + x + ", " + y + ")");
+        Logger.debug("Cursor::move - Moving in direction: " + direction + " to (" + x + ", " + y + ")");
     }
 }

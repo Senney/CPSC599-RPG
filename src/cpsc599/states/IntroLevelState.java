@@ -26,7 +26,11 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f);
 
-        playerController.getPlayerManager().addPlayer(new Player(sprite));
+        Player p = new Player(sprite);
+        p.x = 10;
+        p.y = 10;
+
+        playerController.getPlayerManager().addPlayer(p);
         playerController.setupCursor();
 
         inventoryMenu = new InventoryMenu(100, 200);

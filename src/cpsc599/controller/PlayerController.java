@@ -7,6 +7,7 @@ import cpsc599.assets.Cursor;
 import cpsc599.assets.Player;
 import cpsc599.managers.PlayerManager;
 import cpsc599.util.Controls;
+import cpsc599.util.Logger;
 
 /**
  * Acts as a controller for all players.
@@ -36,7 +37,7 @@ public class PlayerController {
     }
 
     public void setupCursor() {
-        cursor = new Cursor(new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f));
+        cursor = new Cursor(new AnimatedSprite("assets/tilesets/cursor.png", 0, 0, 16, 16, 1, 0.1f));
     }
 
     public Cursor getCursor() {
@@ -71,6 +72,7 @@ public class PlayerController {
 
         // Move the player.
         if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
+            Logger.debug("PlayerController::control - 'A' button pressed.");
             // Check to see if we're over a player with our cursor.
             if (p == null) {
                 // We must on the cursor.
@@ -84,7 +86,12 @@ public class PlayerController {
 
         // Reset the selector position.
         if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
-            this.playerManager.setCurrent(null); // Nullify the current player.
+            Logger.debug("PlayerController::control - 'B' button pressed.");
+            if (p != null) {
+                this.cursor.x = this.playerManager.getCurrent().x;
+                this.cursor.y = this.playerManager.getCurrent().y;
+                this.playerManager.setCurrent(null); // Nullify the current player.
+            }
         }
     }
 }
