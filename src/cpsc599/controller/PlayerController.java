@@ -27,11 +27,6 @@ public class PlayerController {
         this.selectorPosition = new Vector2();
     }
 
-    public void ctrl_cursor(Input input)
-    {
-        
-    }
-
     public boolean isCursor() {
         return (this.playerManager.getCurrent() == null);
     }
