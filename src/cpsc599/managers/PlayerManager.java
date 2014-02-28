@@ -19,7 +19,7 @@ public class PlayerManager {
     public void addPlayer(Player p) {
         Logger.debug("PlayerManager::addPlayer - Adding player '" + p + "'.");
         playerList.add(p);
-        if (currentPlayer == null) setCurrent(0);
+        //if (currentPlayer == null) setCurrent(0); // Commented to allow for cursor selection.
     }
 
     public Player[] getPlayers() {
@@ -42,5 +42,9 @@ public class PlayerManager {
 
     public Player getCurrent() {
         return currentPlayer;
+    }
+
+    public void setCurrent(Player p) {
+        this.currentPlayer = p;
     }
 }

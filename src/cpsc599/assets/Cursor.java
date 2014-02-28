@@ -11,8 +11,8 @@ public class Cursor {
 
     public int x, y;
 
-    public Cursor(){
-        this.cursorSprite = new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f);
+    public Cursor(AnimatedSprite sprite){
+        this.cursorSprite = sprite;
     }
 
     public void tick(){
@@ -26,17 +26,18 @@ public class Cursor {
     public void move(int direction){
         switch(direction){
             case Input.Keys.UP:
-                y++;
-                break;
-            case Input.Keys.DOWN:
                 y--;
                 break;
-            case Input.Keys.LEFT:
-                x--;
+            case Input.Keys.DOWN:
+                y++;
                 break;
-            case Input.Keys.RIGHT:
+            case Input.Keys.LEFT:
                 x++;
                 break;
+            case Input.Keys.RIGHT:
+                x--;
+                break;
         }
+        Logger.info("Cursor::move - Moving in direction: " + direction + " to (" + x + ", " + y + ")");
     }
 }

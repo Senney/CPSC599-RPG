@@ -27,6 +27,7 @@ public class IntroLevelState extends LevelState {
         sprite = new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f);
 
         playerController.getPlayerManager().addPlayer(new Player(sprite));
+        playerController.setupCursor();
 
         inventoryMenu = new InventoryMenu(100, 200);
     }
@@ -42,6 +43,9 @@ public class IntroLevelState extends LevelState {
         super.playerLayer.setProjectionMatrix(this.camera.combined);
         for (Player p : playerController.getPlayerManager().getPlayers())
             p.render(super.playerLayer);
+        if (this.playerController.isCursor()) {
+            this.playerController.getCursor().render(this.playerLayer);
+        }
         super.playerLayer.end();
     }
 
@@ -51,7 +55,11 @@ public class IntroLevelState extends LevelState {
         playerController.control(input);
 
         Player current = playerController.getPlayerManager().getCurrent();
-        current.tick();
+        if (current != null) {
+            current.tick();
+
+            this.cameraController.set(current.x, current.y);
+        }
 
         /*
         if (input.isKeyPressed(Controls.UP)) {
@@ -69,7 +77,5 @@ public class IntroLevelState extends LevelState {
         }
         super.camera.update();
         */
-
-        this.cameraController.set(current.x, current.y);
     }
 }

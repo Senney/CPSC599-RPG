@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import cpsc599.OrbGame;
+import cpsc599.util.Logger;
 
 /**
  * Basic class for an animated sprite.
@@ -37,7 +38,13 @@ public class AnimatedSprite {
      * @return True if the sprite was loaded successfully.
      */
     public boolean loadSprite(String filename, int xoff, int yoff, int xsize, int ysize, int frames, float frameTime) {
-        spriteSheet = new Texture(filename);
+        Logger.debug("AnimatedSprite::loadSprite - Loading sprite: " + filename);
+        try {
+            spriteSheet = new Texture(filename);
+        } catch (NullPointerException ex) {
+            Logger.fatal("AnimatedSprite::loadSprite - Unable to load sprite at: " + filename);
+            return false;
+        }
         TextureRegion[][] tempRegion = TextureRegion.split(spriteSheet, xsize, ysize);
         spriteFrames = new TextureRegion[frames];
         for (int i = 0; i < frames; i++) {
@@ -49,6 +56,10 @@ public class AnimatedSprite {
     }
 
     public void render(SpriteBatch batch, int x, int y) {
+        if (this.spriteAnimation == null) {
+            return;
+        }
+
         currentFrame = spriteAnimation.getKeyFrame(OrbGame.frameTime, true);
         batch.draw(currentFrame, x, y);
     }
