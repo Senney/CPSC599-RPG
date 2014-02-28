@@ -16,7 +16,6 @@ public class InventoryMenu extends Menu {
 
     private ArrayList<String> options;
     private BitmapFont font;
-    private boolean visible;
 
     public InventoryMenu(int width, int height) {
         super(width, height);
@@ -32,12 +31,6 @@ public class InventoryMenu extends Menu {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
-    }
-
-    public boolean toggleVisible() {
-        visible = !visible;
-        Logger.debug("Setting visibility of Inventory to: " + visible);
-        return visible;
     }
 
     @Override
