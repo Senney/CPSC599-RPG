@@ -2,6 +2,7 @@ package cpsc599.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.utils.Disposable;
 import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.assets.Level;
+import cpsc599.controller.CameraController;
 import cpsc599.controller.PlayerController;
 import cpsc599.util.Logger;
 
@@ -19,11 +21,13 @@ public abstract class LevelState extends State {
     protected OrthogonalTiledMapRenderer renderer;
     protected OrthographicCamera camera;
     protected PlayerController playerController;
+    protected CameraController cameraController;
     protected static float TRANSLATE_SPEED = 2f;
 
-    protected LevelState(OrbGame game, PlayerController playerController) {
+    protected LevelState(OrbGame game, PlayerController playerController, CameraController cameraController) {
         super.init(game);
         this.playerController = playerController;
+        this.cameraController = cameraController;
     }
 
     protected void setLevel(Level level) {
@@ -42,8 +46,7 @@ public abstract class LevelState extends State {
         }
 
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(true);
+        camera = (OrthographicCamera)cameraController.getCamera();
 
         this.currentLevel = level;
         renderer = new OrthogonalTiledMapRenderer(currentLevel.tiledMap, (float)Main.GAME_SCALE, super.spriteBatch);
@@ -67,5 +70,9 @@ public abstract class LevelState extends State {
         this.spriteBatch.begin();
         this.drawString("FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);
         this.spriteBatch.end();
+    }
+
+    public Camera getCamera() {
+        return this.camera;
     }
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import cpsc599.OrbGame;
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Player;
+import cpsc599.controller.CameraController;
 import cpsc599.controller.PlayerController;
 import cpsc599.managers.LevelManager;
 
@@ -16,8 +17,8 @@ public class IntroLevelState extends LevelState {
 
     private AnimatedSprite sprite;
 
-    public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController) {
-        super(game, playerController);
+    public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController, CameraController cameraController) {
+        super(game, playerController, cameraController);
         super.setLevel(manager.setLevel(0));
 
         TiledMapTileLayer layer = (TiledMapTileLayer)this.currentLevel.tiledMap.getLayers().get(0);
@@ -61,8 +62,6 @@ public class IntroLevelState extends LevelState {
         }
         */
 
-        super.camera.position.x = current.x * 16;
-        super.camera.position.y = current.y * 16;
-        super.camera.update();
+        this.cameraController.set(current.x, current.y);
     }
 }

@@ -59,8 +59,6 @@ public class CameraController {
         this.y = realy;
 
         this.updateCamera();
-
-        Logger.info("CameraController::set - Camera set to position (" + this.x + ", " + this.y + ")");
     }
 
     public Camera getCamera() {
