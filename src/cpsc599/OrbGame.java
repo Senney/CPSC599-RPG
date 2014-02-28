@@ -48,6 +48,7 @@ public class OrbGame implements ApplicationListener {
 		assetManager = new AssetManager();
         stateManager = new StateManager();
         playerManager = new PlayerManager();
+
         playerController = new PlayerController(playerManager);
         cameraController = new CameraController(new Vector2(0, 0), new Vector3(w, h, 1));
 

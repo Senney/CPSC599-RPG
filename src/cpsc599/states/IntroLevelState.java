@@ -8,6 +8,7 @@ import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.PlayerController;
 import cpsc599.managers.LevelManager;
+import cpsc599.menus.InventoryMenu;
 import cpsc599.util.Controls;
 
 /**
@@ -17,6 +18,7 @@ public class IntroLevelState extends LevelState {
     int time = 0;
 
     private AnimatedSprite sprite;
+    private InventoryMenu inventoryMenu;
 
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController, CameraController cameraController) {
         super(game, playerController, cameraController);
@@ -25,6 +27,8 @@ public class IntroLevelState extends LevelState {
         sprite = new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f);
 
         playerController.getPlayerManager().addPlayer(new Player(sprite));
+
+        inventoryMenu = new InventoryMenu(100, 200);
     }
 
     @Override
@@ -32,7 +36,9 @@ public class IntroLevelState extends LevelState {
         super.renderer.setView(camera);
         super.drawLevel();
 
+
         super.playerLayer.begin();
+        inventoryMenu.render(super.playerLayer);
         super.playerLayer.setProjectionMatrix(this.camera.combined);
         for (Player p : playerController.getPlayerManager().getPlayers())
             p.render(super.playerLayer);
