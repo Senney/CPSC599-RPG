@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.PlayerController;
+import cpsc599.managers.EnemyManager;
 import cpsc599.managers.LevelManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.managers.StateManager;
@@ -26,6 +27,7 @@ public class OrbGame implements ApplicationListener {
     private LevelManager levelManager;
     private StateManager stateManager;
     private PlayerManager playerManager;
+    private EnemyManager enemyManager;
 
     private CameraController cameraController;
     private PlayerController playerController;
