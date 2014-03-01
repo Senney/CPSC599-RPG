@@ -7,6 +7,8 @@ import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.PlayerController;
+import cpsc599.items.Inventory;
+import cpsc599.items.Item;
 import cpsc599.managers.LevelManager;
 import cpsc599.menus.InventoryMenu;
 import cpsc599.util.Controls;
@@ -29,6 +31,8 @@ public class IntroLevelState extends LevelState {
         sprite = new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f);
 
         Player p = new Player(sprite, 10, 10, 8);
+        p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT));
+        p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT));
         Player p2 = new Player(sprite, 12, 12, 6);
 
         playerController.getPlayerManager().addPlayer(p);
@@ -65,6 +69,7 @@ public class IntroLevelState extends LevelState {
         if (current != null) {
             current.tick();
             this.cameraController.set(current.x, current.y);
+            inventoryMenu.setInventory(current.getPlayerInventory());
 
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);

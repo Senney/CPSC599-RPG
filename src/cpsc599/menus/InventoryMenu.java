@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import cpsc599.items.Inventory;
+import cpsc599.items.Item;
 import cpsc599.util.Logger;
 
 import java.util.ArrayList;
@@ -20,11 +21,6 @@ public class InventoryMenu extends Menu {
     public InventoryMenu(int width, int height) {
         super(width, height);
         this.visible = false;
-
-        options = new ArrayList<String>();
-        for (int x = 0; x < 14; x++) {
-            options.add("Item " + (x+1));
-        }
 
         font = new BitmapFont();
     }
@@ -45,9 +41,10 @@ public class InventoryMenu extends Menu {
         shapeRenderer.end();
 
         int yv = 0;
-        for (String s : options) {
-            yv += font.getBounds(s).height + 2;
-            font.draw(batch, s, 22, 22 + yv);
+        for (Item i : this.inventory.getCarry()) {
+            if (i == null) continue;
+            yv += font.getBounds(i.name).height + 2;
+            font.draw(batch, i.name, 22, 22 - yv);
         }
     }
 
