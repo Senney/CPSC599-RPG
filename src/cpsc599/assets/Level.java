@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
 import cpsc599.util.Logger;
 
 import java.io.File;
@@ -14,6 +15,11 @@ public class Level {
 
     public TiledMap tiledMap;
     public TiledMapTileLayer collisionLayer;
+    public Vector2 player_spawn;
+
+    public Level() {
+        this.player_spawn = new Vector2(0, 0);
+    }
 
     public boolean collide(int x, int y) {
         if (collisionLayer == null) {

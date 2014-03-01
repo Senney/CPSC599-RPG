@@ -2,14 +2,19 @@ package cpsc599.loaders;
 
 import com.badlogic.gdx.assets.AssetManager;
 
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Level;
 import cpsc599.util.Logger;
 
 import java.io.File;
+import java.util.Iterator;
 
 public class LevelLoader {
 	private AssetManager assetManager;
@@ -37,8 +42,38 @@ public class LevelLoader {
         }
         level.collisionLayer = (TiledMapTileLayer)level.tiledMap.getLayers().get("Collision");
 
+        // Load the spawn point of the user
+        MapProperties properties = level.tiledMap.getProperties();
+        if (!getPlayerSpawn(level, properties)) return false;
+
+        // Loop over each cell and find cells of interest (dialogue, quest objectives, spawn points, etc.)
+        MapObjects objects = level.tiledMap.getLayers().get(0).getObjects();
+        Iterator<MapObject> iter = objects.iterator();
+        while (iter.hasNext()) {
+            MapObject obj = iter.next();
+            MapProperties cellProperties = obj.getProperties();
+
+            // Handle tile-specific properties.
+        }
+
 		return true;
 	}
+
+    private boolean getPlayerSpawn(Level level, MapProperties properties) {
+        if (properties.containsKey("player_spawn")) {
+            String val = (String)properties.get("player_spawn");
+            try {
+                level.player_spawn.x = Integer.parseInt(val.split(" ")[0]);
+                level.player_spawn.y = Integer.parseInt(val.split(" ")[1]);
+                Logger.debug("LevelLoader::loadMap - Set player spawn point to (" + level.player_spawn.x + ", " +
+                    level.player_spawn.y + ").");
+            } catch (NumberFormatException ex) {
+                Logger.fatal("LevelLoader::loadMap - Player spawn point contained invalid values.");
+                return false;
+            }
+        }
+        return true;
+    }
 
     private TiledMap loadMap(String mapName) {
         Logger.info("LevelLoader::loadMap - Loading Tiled map: " + mapName);

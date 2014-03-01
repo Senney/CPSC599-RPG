@@ -40,6 +40,8 @@ public class IntroLevelState extends LevelState {
 
         // TODO: Make this not stupid.
         playerController.setupCursor();
+        playerController.getCursor().x = (int)manager.getCurrentLevel().player_spawn.x;
+        playerController.getCursor().y = (int)manager.getCurrentLevel().player_spawn.y;
 
         inventoryMenu = new InventoryMenu(100, 200);
     }
@@ -54,6 +56,8 @@ public class IntroLevelState extends LevelState {
         super.playerLayer.setProjectionMatrix(this.camera.combined);
         for (Player p : playerController.getPlayerManager().getPlayers())
             p.render(super.playerLayer);
+
+        // If we're in cursor-mode, render the cursor.
         if (this.playerController.isCursor()) {
             this.playerController.getCursor().render(this.playerLayer);
         }
