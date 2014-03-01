@@ -70,10 +70,6 @@ public abstract class LevelState extends State {
     protected void drawLevel() {
         // TODO: Add the logic to draw a level here.
         renderer.render();
-
-        this.spriteBatch.begin();
-        this.drawString("FPS: " + Gdx.graphics.getFramesPerSecond(), 10, 20);
-        this.spriteBatch.end();
     }
 
     public Camera getCamera() {

@@ -106,10 +106,6 @@ public class CameraController {
         int realx = bound(CoordinateTranslator.translate(x), width);
         int realy = bound(CoordinateTranslator.translate(y), height);
 
-        if (this.x != realx || this.y != realy) {
-            Logger.info("CameraController::set - Camera set to position (" + realx + ", " + realy + ")");
-        }
-
         this.x = realx;
         this.y = realy;
 
