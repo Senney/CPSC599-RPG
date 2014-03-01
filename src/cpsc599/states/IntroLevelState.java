@@ -53,6 +53,8 @@ public class IntroLevelState extends LevelState {
 
         super.playerLayer.begin();
         inventoryMenu.render(super.playerLayer);
+        Player current = playerController.getPlayerManager().getCurrent();
+        if (current != null) current.getPlayerHealthBar().render(10, 15, super.playerLayer);
         super.playerLayer.setProjectionMatrix(this.camera.combined);
         for (Player p : playerController.getPlayerManager().getPlayers())
             p.render(super.playerLayer);

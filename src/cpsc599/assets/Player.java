@@ -27,6 +27,8 @@ public class Player {
 
     private Inventory playerInventory;
 
+    private HealthBar playerHealthBar;
+
     // to be used for animation.
     //private float moveStart, moveEnd;
 
@@ -42,6 +44,7 @@ public class Player {
         this.maxMove = moveDist;
 
         this.playerInventory = new Inventory(this);
+        this.playerHealthBar = new HealthBar();
     }
 
     public void tick() {
@@ -55,6 +58,10 @@ public class Player {
 
     public void resetMove() {
         this.curMove = maxMove;
+    }
+
+    public HealthBar getPlayerHealthBar() {
+        return playerHealthBar;
     }
 
     /**
