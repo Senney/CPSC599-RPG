@@ -2,6 +2,7 @@ package cpsc599.items;
 
 import java.util.ArrayList;
 
+import cpsc599.assets.Player;
 import cpsc599.util.Logger;
 
 public class Inventory {
@@ -14,19 +15,22 @@ public class Inventory {
 	private Item[] equip;
 	private Item[] carry;
 	
-	private static final int HEAD_SLOT = 0;
-	private static final int CHEST_SLOT = 1;
-	private static final int RHAND_SLOT = 2;
-	private static final int LHAND_SLOT = 3;
-	private static final int LEGS_SLOT = 4;
+	public static final int HEAD_SLOT = 0;
+	public static final int CHEST_SLOT = 1;
+	public static final int RHAND_SLOT = 2;
+	public static final int LHAND_SLOT = 3;
+	public static final int LEGS_SLOT = 4;
 	
 	private int carryIndex = 0;
 
-	public Inventory()
+    private Player owner;
+
+	public Inventory(Player p)
 	{
 		Logger.debug("Inventory::contruc - Creating inventory.");
 		equip = new Item[EQUIP_SIZE];
 		carry = new Item[CARRY_SIZE];
+        this.owner = p;
 	}
 	
 	public boolean pickUp(Item item)
@@ -115,7 +119,7 @@ public class Inventory {
 		Item sword = new Item("sword", true, RHAND_SLOT);
 		Item potion = new Item("potion", false, -1);
 		
-		Inventory inventory = new Inventory();
+		Inventory inventory = new Inventory(new Player(null));
 		
 		inventory.pickUp(sword);
 		inventory.pickUp(potion);

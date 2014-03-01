@@ -2,6 +2,7 @@ package cpsc599.assets;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import cpsc599.OrbGame;
+import cpsc599.items.Inventory;
 import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
 
@@ -24,6 +25,8 @@ public class Player {
     private int moveX, moveY;
     private boolean moving;
 
+    private Inventory playerInventory;
+
     // to be used for animation.
     //private float moveStart, moveEnd;
 
@@ -37,6 +40,8 @@ public class Player {
         this.x = x;
         this.y = y;
         this.maxMove = moveDist;
+
+        this.playerInventory = new Inventory(this);
     }
 
     public void tick() {
@@ -75,4 +80,9 @@ public class Player {
         moving = true;
         curMove--;
     }
+
+    public Inventory getPlayerInventory() {
+        return playerInventory;
+    }
+
 }
