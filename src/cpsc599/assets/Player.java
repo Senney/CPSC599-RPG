@@ -27,8 +27,14 @@ public class Player {
     //private float moveStart, moveEnd;
 
     public Player(AnimatedSprite sprite) {
-        this.playerSprite = sprite;
+        this(sprite, 0, 0);
+    }
+
+    public Player(AnimatedSprite sprite, int x, int y) {
         //this.moveStart = 0f;
+        this.playerSprite = sprite;
+        this.x = x;
+        this.y = y;
     }
 
     public void tick() {
