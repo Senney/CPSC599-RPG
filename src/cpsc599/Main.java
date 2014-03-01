@@ -4,7 +4,7 @@ import cpsc599.util.Logger;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 
 public class Main {
-    public static final int GAME_WIDTH = 320;
+    public static final int GAME_WIDTH = 256;
     public static final int GAME_HEIGHT = 240;
     public static final double GAME_SCALE = 2;
 

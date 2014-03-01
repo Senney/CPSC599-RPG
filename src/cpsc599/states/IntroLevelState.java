@@ -33,6 +33,8 @@ public class IntroLevelState extends LevelState {
 
         playerController.getPlayerManager().addPlayer(p);
         playerController.getPlayerManager().addPlayer(p2);
+
+        // TODO: Make this not stupid.
         playerController.setupCursor();
 
         inventoryMenu = new InventoryMenu(100, 200);
