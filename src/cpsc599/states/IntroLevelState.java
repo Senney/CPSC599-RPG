@@ -28,8 +28,8 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f);
 
-        Player p = new Player(sprite, 10, 10);
-        Player p2 = new Player(sprite, 12, 12);
+        Player p = new Player(sprite, 10, 10, 8);
+        Player p2 = new Player(sprite, 12, 12, 6);
 
         playerController.getPlayerManager().addPlayer(p);
         playerController.getPlayerManager().addPlayer(p2);
