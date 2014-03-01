@@ -54,7 +54,7 @@ public class PlayerController {
             // Check to see if we're over a player with our cursor.
             if (p == null) {
                 // No player is selected, so we should check if a player is under the cursor.
-                findPlayerOnCursor();
+                selectPlayerOnCursor();
             } else {
                 releasePlayer();
             }
@@ -67,19 +67,25 @@ public class PlayerController {
                 if (p.x == (int)this.selectorPosition.x && p.y == (int)this.selectorPosition.y) {
                     releasePlayer();
                 } else {
-                    p.x = (int)this.selectorPosition.x;
-                    p.y = (int)this.selectorPosition.y;
+                    resetPlayerToCursor(p);
                 }
             }
         }
     }
 
-    private void findPlayerOnCursor() {
+    private void resetPlayerToCursor(Player p) {
+        p.x = (int)this.selectorPosition.x;
+        p.y = (int)this.selectorPosition.y;
+        p.resetMove();
+    }
+
+    private void selectPlayerOnCursor() {
         for (Player player : this.playerManager.getPlayers()) {
             if (player.x == cursor.x && player.y == cursor.y) {
                 this.playerManager.setCurrent(player);
                 this.selectorPosition.x = player.x;
                 this.selectorPosition.y = player.y;
+                player.resetMove();
             }
         }
     }
