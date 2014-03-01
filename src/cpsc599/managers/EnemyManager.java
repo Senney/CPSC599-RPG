@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class EnemyManager {
 
     private ArrayList<Enemy> enemyList;
-    private Enemy currentEnemy;
 
     public EnemyManager() {
         enemyList = new ArrayList<Enemy>();
@@ -22,7 +21,6 @@ public class EnemyManager {
     public void addEnemy(Enemy e) {
         Logger.debug("EnemyManager::addEnemy - Adding Enemy '" + e + "'.");
         enemyList.add(e);
-        //if (currentEnemy == null) setCurrent(0); // Commented to allow for cursor selection.
     }
 
     public Enemy[] getEnemies() {
@@ -37,25 +35,4 @@ public class EnemyManager {
 
         return enemyList.get(index);
     }
-
-    public Enemy setCurrent(int index) {
-        currentEnemy = this.getEnemy(index);
-        Logger.debug("EnemyManager::setCurrent - Current enemy set to " + currentEnemy);
-        return currentEnemy;
-    }
-
-    public Enemy getCurrent() {
-        return currentEnemy;
-    }
-
-    public void setCurrent(Enemy e) {
-        if (e != null && !this.enemyList.contains(e)) {
-            Logger.error("EnemyManager::setCurrent - Attempted to set current enemy to enemy that did not exist.");
-            return;
-        }
-
-        Logger.debug("EnemyManager::setCurrent - Current enemy set to " + e);
-        this.currentEnemy = e;
-    }
-
 }

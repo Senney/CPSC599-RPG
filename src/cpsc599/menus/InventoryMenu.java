@@ -44,7 +44,7 @@ public class InventoryMenu extends Menu {
         for (Item i : this.inventory.getCarry()) {
             if (i == null) continue;
             yv += font.getBounds(i.name).height + 2;
-            font.draw(batch, i.name, 22, 22 - yv);
+            font.draw(batch, i.name, 22, 22 + yv);
         }
     }
 
