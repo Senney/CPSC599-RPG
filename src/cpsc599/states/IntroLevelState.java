@@ -98,12 +98,16 @@ public class IntroLevelState extends LevelState {
             if (current == null) {
                 // Move cursor to the next available player.
             } else {
+                Boolean isVis = false;
                 // Show the inventory.
                 if(playerController.getActMenu().isVisible())
+                {
                     playerController.getActMenu().toggleVisible();
+                    isVis = true;
+                }
                 this.inventoryMenu.toggleVisible();
 
-                if(!this.inventoryMenu.isVisible())
+                if(!this.inventoryMenu.isVisible() && isVis)
                     playerController.getActMenu().toggleVisible();
             }
         }

@@ -75,7 +75,7 @@ public class PlayerController {
                     releasePlayer();
                 }
                 else if(action.equals("Attack"));*/
-                
+
                 releasePlayer();
             }
         }
