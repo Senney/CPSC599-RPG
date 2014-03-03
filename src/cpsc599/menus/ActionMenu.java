@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import cpsc599.util.Logger;
 
 import java.util.ArrayList;
 
@@ -12,13 +13,15 @@ import java.util.ArrayList;
  * Menu that is opened after a player has decided where to move.
  */
 public class ActionMenu extends Menu {
-
     private ArrayList<String> options;
     private BitmapFont font;
+
+    int pointer;
 
     public ActionMenu(int width, int height) {
         super(width, height);
         this.visible = false;
+        this.pointer = 0;
 
         options = new ArrayList<String>();
 
@@ -30,6 +33,22 @@ public class ActionMenu extends Menu {
         options.add("Inventory");
 
         font = new BitmapFont();
+    }
+
+    public void movePointer(int dir) {
+        pointer += dir;
+
+        if (pointer >= options.size()) {
+            pointer = 0;
+        } if (pointer < 0) {
+            pointer = options.size() - 1;
+        }
+
+        Logger.debug("ActionMenu::movePointer - Setting pointer to: " + this.options.get(pointer));
+    }
+
+    public String getAction() {
+        return this.options.get(pointer);
     }
 
     @Override

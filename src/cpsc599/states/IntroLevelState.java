@@ -1,7 +1,6 @@
 package cpsc599.states;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import cpsc599.OrbGame;
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Enemy;
@@ -12,8 +11,6 @@ import cpsc599.controller.PlayerController;
 import cpsc599.items.Inventory;
 import cpsc599.items.Item;
 import cpsc599.managers.LevelManager;
-import cpsc599.menus.ActionMenu;
-import cpsc599.menus.InventoryMenu;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 
@@ -24,7 +21,6 @@ public class IntroLevelState extends LevelState {
     int time = 0;
 
     private AnimatedSprite sprite;
-    private InventoryMenu inventoryMenu;
 
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
                            CameraController cameraController, EnemyController enemyController) { //Need to add Enemy controller
@@ -51,9 +47,7 @@ public class IntroLevelState extends LevelState {
         playerController.getCursor().x = (int)manager.getCurrentLevel().player_spawn.x;
         playerController.getCursor().y = (int)manager.getCurrentLevel().player_spawn.y;
 
-        playerController.setupActionmenu();
-
-        inventoryMenu = new InventoryMenu(100, 200);
+        playerController.setupMenus();
     }
 
     @Override
@@ -61,28 +55,25 @@ public class IntroLevelState extends LevelState {
         super.renderer.setView(camera);
         super.drawLevel();
 
-        super.enemyLayer.begin();
-        super.enemyLayer.setProjectionMatrix(this.camera.combined);
-        for(Enemy e : enemyController.getEnemyManager().getEnemies())
-            e.render(super.enemyLayer);
-        super.enemyLayer.end();
-
-        super.playerLayer.begin();
-        inventoryMenu.render(super.playerLayer);
-
+        super.overlayLayer.begin();
         Player current = playerController.getPlayerManager().getCurrent();
-        if (current != null) current.getPlayerHealthBar().render(10, 15, super.playerLayer);
-        this.playerController.getActMenu().render(this.playerLayer);
+        // Render player-related overlays outside of the groundLayer.
+        if (current != null) current.getPlayerHealthBar().render(10, 15, super.overlayLayer);
+        this.playerController.getActMenu().render(this.overlayLayer);
+        this.playerController.getInventoryMenu().render(super.overlayLayer);
+        super.overlayLayer.end();
 
-        super.playerLayer.setProjectionMatrix(this.camera.combined);
+        super.groundLayer.begin();
+        super.groundLayer.setProjectionMatrix(this.camera.combined);
         for (Player p : playerController.getPlayerManager().getPlayers())
-            p.render(super.playerLayer);
-
+            p.render(super.groundLayer);
+        for(Enemy e : enemyController.getEnemyManager().getEnemies())
+            e.render(super.groundLayer);
         // If we're in cursor-mode, render the cursor.
         if (this.playerController.isCursor()) {
-            this.playerController.getCursor().render(this.playerLayer);
+            this.playerController.getCursor().render(this.groundLayer);
         }
-        super.playerLayer.end();
+        super.groundLayer.end();
     }
 
     @Override
@@ -94,7 +85,6 @@ public class IntroLevelState extends LevelState {
         if (current != null) {
             current.tick();
             this.cameraController.set(current.x, current.y);
-            inventoryMenu.setInventory(current.getPlayerInventory());
 
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
@@ -103,21 +93,7 @@ public class IntroLevelState extends LevelState {
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
             Logger.debug("IntroLevelState::tick - 'SELECT' pressed.");
-            if (current == null) {
-                // Move cursor to the next available player.
-            } else {
-                Boolean isVis = false;
-                // Show the inventory.
-                if(playerController.getActMenu().isVisible())
-                {
-                    playerController.getActMenu().toggleVisible();
-                    isVis = true;
-                }
-                this.inventoryMenu.toggleVisible();
 
-                if(!this.inventoryMenu.isVisible() && isVis)
-                    playerController.getActMenu().toggleVisible();
-            }
         }
 
         /*

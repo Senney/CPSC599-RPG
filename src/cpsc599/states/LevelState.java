@@ -1,15 +1,10 @@
 package cpsc599.states;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.utils.Disposable;
-import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.assets.Level;
 import cpsc599.controller.CameraController;
@@ -27,16 +22,16 @@ public abstract class LevelState extends State {
     protected EnemyController enemyController;
     protected static float TRANSLATE_SPEED = 1f;
 
-    protected SpriteBatch playerLayer;
-    protected SpriteBatch enemyLayer;
+    protected SpriteBatch groundLayer;
+    protected SpriteBatch overlayLayer;
 
     protected LevelState(OrbGame game, PlayerController playerController, CameraController cameraController, EnemyController enemyController) {
         super.init(game);
         this.playerController = playerController;
         this.cameraController = cameraController;
         this.enemyController = enemyController;
-        this.enemyLayer = new SpriteBatch();
-        this.playerLayer = new SpriteBatch();
+        this.groundLayer = new SpriteBatch();
+        this.overlayLayer = new SpriteBatch();
     }
 
     protected void setLevel(Level level) {

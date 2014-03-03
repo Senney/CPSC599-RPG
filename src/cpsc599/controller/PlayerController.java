@@ -7,6 +7,7 @@ import cpsc599.assets.Cursor;
 import cpsc599.assets.Player;
 import cpsc599.managers.PlayerManager;
 import cpsc599.menus.ActionMenu;
+import cpsc599.menus.InventoryMenu;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 
@@ -21,6 +22,7 @@ public class PlayerController {
     private Cursor cursor;
 
     private ActionMenu actMenu;
+    private InventoryMenu inventoryMenu;
 
     private PlayerManager playerManager;
     private Vector2 selectorPosition;
@@ -38,11 +40,13 @@ public class PlayerController {
         cursor = new Cursor(new AnimatedSprite("assets/tilesets/cursor.png", 0, 0, 16, 16, 1, 0.1f));
     }
 
-    public void setupActionmenu(){
+    public void setupMenus(){
         actMenu = new ActionMenu(100,200);
+        inventoryMenu = new InventoryMenu(100, 200);
     }
 
     public ActionMenu getActMenu() {return this.actMenu;}
+    public InventoryMenu getInventoryMenu() { return this.inventoryMenu; }
 
     public Cursor getCursor() {
         return this.cursor;
@@ -52,11 +56,26 @@ public class PlayerController {
         Player p = this.playerManager.getCurrent();
 
         if (p != null) {
-            movePlayer(input, p);
+            if (this.actMenu.isVisible()) {
+                String action = actionMenuMode(input);
+                if (action.equals("End Turn")) {
+                    Logger.debug("PlayerController::control - Ending turn");
+                    releasePlayer();
+                }
+
+                if (action.equals("Inventory")) {
+                    Logger.debug("PlayerController::control - Opening inventory");
+                    this.actMenu.toggleVisible();
+                    this.inventoryMenu.setInventory(p.getPlayerInventory());
+                    this.inventoryMenu.toggleVisible();
+                }
+            } else {
+                movePlayer(input, p);
+            }
         } else {
             moveCursor(input);
         }
-
+        
         // Move the player.
         if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
             Logger.debug("PlayerController::control - 'A' button pressed.");
@@ -65,18 +84,8 @@ public class PlayerController {
                 // No player is selected, so we should check if a player is under the cursor.
                 selectPlayerOnCursor();
             } else {
-                /*actMenu.toggleVisible();
-                Logger.debug("PlayerController:: control - entering action menu");
-                //enter action menu mode
-                String action = actionMenuMode(input);
-                if(action.equals("End Turn"))
-                {
-                    actMenu.toggleVisible();
-                    releasePlayer();
-                }
-                else if(action.equals("Attack"));*/
-
-                releasePlayer();
+                actMenu.toggleVisible();
+                Logger.debug("PlayerController::control - entering action menu");
             }
         }
 
@@ -117,9 +126,25 @@ public class PlayerController {
     }
 
     private String actionMenuMode(Input input){
+        if (Controls.isKeyTapped(input, Controls.UP)) {
+            this.actMenu.movePointer(1);
+        } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
+            this.actMenu.movePointer(-1);
+        }
+
+        if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
+            String action = this.actMenu.getAction();
+            Logger.debug("PlayuerController::actionMenuMode - Returning action: " + action);
+            return action;
+        }
+
+        return null;
+
         /**
          * Ok so obviously I don't know how the library handles non blocking input so ill just comment this out for now
          */
+
+        /*
          if(Controls.isKeyTapped(input, Controls.LEFT)){
               Logger.debug("Action Menu - selected \'Attack\'");
          }
@@ -135,9 +160,7 @@ public class PlayerController {
             Logger.debug("PlayerController:: actionMenuMode - Attacking enemy");
             return "Attack";
         }
-        else
-            Logger.debug("PlayerController:: actionMenuMode - Cancelling menu");
-        return "Cancel";
+        */
     }
 
     private void moveCursor(Input input) {

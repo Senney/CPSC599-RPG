@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import cpsc599.OrbGame;
 import cpsc599.util.Logger;
 
@@ -42,6 +43,9 @@ public class AnimatedSprite {
         try {
             spriteSheet = new Texture(filename);
         } catch (NullPointerException ex) {
+            Logger.fatal("AnimatedSprite::loadSprite - Unable to load sprite at: " + filename);
+            return false;
+        } catch (GdxRuntimeException ex) {
             Logger.fatal("AnimatedSprite::loadSprite - Unable to load sprite at: " + filename);
             return false;
         }

@@ -36,7 +36,7 @@ public class HealthBar {
         this.renderer.setColor(this.HEALTH_COLOR);
         this.renderer.rect(10, 300, width, HEALTH_BAR_HEIGHT);
         this.renderer.setColor(Color.RED);
-        this.renderer.rect(10 + width, 230, rem_width, HEALTH_BAR_HEIGHT);
+        this.renderer.rect(10 + width, 300, rem_width, HEALTH_BAR_HEIGHT);
         this.renderer.end();
     }
 }
