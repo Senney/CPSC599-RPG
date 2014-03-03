@@ -63,6 +63,8 @@ public class PlayerController {
 
                     p.endTurn();
                     releasePlayer();
+                    this.actMenu.toggleVisible();
+                    return;
                 }
 
                 if (action.equals("Inventory")) {
@@ -102,11 +104,14 @@ public class PlayerController {
         if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
             Logger.debug("PlayerController::control - 'B' button pressed.");
             if (p != null) {
-                if (p.x == (int)this.selectorPosition.x && p.y == (int)this.selectorPosition.y) {
+                if (this.inventoryMenu.isVisible())
+                    this.inventoryMenu.toggleVisible();
+                else if (this.actMenu.isVisible())
+                    this.actMenu.toggleVisible();
+                else if (p.x == (int)this.selectorPosition.x && p.y == (int)this.selectorPosition.y)
                     releasePlayer();
-                } else {
+                else
                     resetPlayerToCursor(p);
-                }
             }
         }
     }

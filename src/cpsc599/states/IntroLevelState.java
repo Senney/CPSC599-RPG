@@ -27,7 +27,7 @@ public class IntroLevelState extends LevelState {
         super(game, playerController, cameraController, enemyController);
         super.setLevel(manager.setLevel(0));
 
-        sprite = new AnimatedSprite("assets/tilesets/cowcube.png", 0, 0, 16, 16, 1, 0.1f);
+        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
 
         Player p = new Player(sprite, 10, 10, 8);
         p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT));

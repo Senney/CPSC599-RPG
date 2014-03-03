@@ -32,5 +32,9 @@ public abstract class Menu {
         return visible;
     }
 
+    public boolean setVisible(boolean visible) {
+        return (this.visible = visible);
+    }
+
     public boolean isVisible() { return this.visible; }
 }
