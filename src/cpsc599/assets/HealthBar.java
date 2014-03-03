@@ -11,8 +11,7 @@ import cpsc599.util.Logger;
  */
 public class HealthBar {
     final int HEALTH_BAR_WIDTH = 60;
-    final int HEALTH_BAR_HEIGHT = 20;
-    final double INSIDE_BAR_SCALE = 0.8;
+    final int HEALTH_BAR_HEIGHT = 10;
 
     final Color HEALTH_COLOR = new Color(0.20f, 1.0f, 0.20f, 1.0f);
 
@@ -31,12 +30,13 @@ public class HealthBar {
 
         int width = (int)(HEALTH_BAR_WIDTH * pct);
         int rem_width = HEALTH_BAR_WIDTH - width;
+        int ypos = (int)(Main.GAME_HEIGHT * Main.GAME_SCALE) - HEALTH_BAR_HEIGHT - 20;
 
         this.renderer.begin(ShapeRenderer.ShapeType.Filled);
         this.renderer.setColor(this.HEALTH_COLOR);
-        this.renderer.rect(10, 300, width, HEALTH_BAR_HEIGHT);
+        this.renderer.rect(10, ypos, width, HEALTH_BAR_HEIGHT);
         this.renderer.setColor(Color.RED);
-        this.renderer.rect(10 + width, 300, rem_width, HEALTH_BAR_HEIGHT);
+        this.renderer.rect(10 + width, ypos, rem_width, HEALTH_BAR_HEIGHT);
         this.renderer.end();
     }
 }

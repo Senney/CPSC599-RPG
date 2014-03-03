@@ -65,10 +65,13 @@ public class IntroLevelState extends LevelState {
 
         super.groundLayer.begin();
         super.groundLayer.setProjectionMatrix(this.camera.combined);
+
+        // Render players and enemies.
         for (Player p : playerController.getPlayerManager().getPlayers())
             p.render(super.groundLayer);
         for(Enemy e : enemyController.getEnemyManager().getEnemies())
             e.render(super.groundLayer);
+
         // If we're in cursor-mode, render the cursor.
         if (this.playerController.isCursor()) {
             this.playerController.getCursor().render(this.groundLayer);

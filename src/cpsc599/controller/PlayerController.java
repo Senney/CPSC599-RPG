@@ -41,7 +41,7 @@ public class PlayerController {
     }
 
     public void setupMenus(){
-        actMenu = new ActionMenu(100,200);
+        actMenu = new ActionMenu(80,90);
         inventoryMenu = new InventoryMenu(100, 200);
     }
 
@@ -60,6 +60,8 @@ public class PlayerController {
                 String action = actionMenuMode(input);
                 if (action.equals("End Turn")) {
                     Logger.debug("PlayerController::control - Ending turn");
+
+                    p.endTurn();
                     releasePlayer();
                 }
 
@@ -68,14 +70,21 @@ public class PlayerController {
                     this.actMenu.toggleVisible();
                     this.inventoryMenu.setInventory(p.getPlayerInventory());
                     this.inventoryMenu.toggleVisible();
+
+                    return;
+                } else if (!action.equals("")) {
+                    this.actMenu.toggleVisible();
+                    releasePlayer();
                 }
+            } else if (this.inventoryMenu.isVisible()) {
+
             } else {
                 movePlayer(input, p);
             }
         } else {
             moveCursor(input);
         }
-        
+
         // Move the player.
         if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
             Logger.debug("PlayerController::control - 'A' button pressed.");
@@ -138,7 +147,7 @@ public class PlayerController {
             return action;
         }
 
-        return null;
+        return "";
 
         /**
          * Ok so obviously I don't know how the library handles non blocking input so ill just comment this out for now

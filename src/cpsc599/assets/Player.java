@@ -20,6 +20,7 @@ public class Player {
 
     public int maxMove;
     public int curMove;
+    public boolean turnOver;
 
     public int x, y;
     private int moveX, moveY;
@@ -56,7 +57,12 @@ public class Player {
         }
     }
 
+    public void endTurn() {
+        this.turnOver = true;
+    }
+
     public void resetMove() {
+        this.turnOver = false;
         this.curMove = maxMove;
     }
 

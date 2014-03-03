@@ -16,12 +16,12 @@ public class ActionMenu extends Menu {
     private ArrayList<String> options;
     private BitmapFont font;
 
-    int pointer;
+    int pointer, pointer_y;
+    float pointer_height;
 
     public ActionMenu(int width, int height) {
         super(width, height);
         this.visible = false;
-        this.pointer = 0;
 
         options = new ArrayList<String>();
 
@@ -31,8 +31,11 @@ public class ActionMenu extends Menu {
         options.add("Drop");
         options.add("Pickup");
         options.add("Inventory");
+        options.add("End Turn");
+
 
         font = new BitmapFont();
+        this.pointer_height = 14;
     }
 
     public void movePointer(int dir) {
@@ -43,6 +46,7 @@ public class ActionMenu extends Menu {
         } if (pointer < 0) {
             pointer = options.size() - 1;
         }
+        this.pointer_y = (int)(this.pointer_height * this.pointer);
 
         Logger.debug("ActionMenu::movePointer - Setting pointer to: " + this.options.get(pointer));
     }
@@ -60,12 +64,16 @@ public class ActionMenu extends Menu {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect(20, 20, super.width, super.height);
+
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.rect(22, 26 + this.pointer_y, 10, 5);
+
         shapeRenderer.end();
 
         int yv = 0;
         for (String s : options) {
             yv += font.getBounds(s).height + 2;
-            font.draw(batch, s, 22, 22 + yv);
+            font.draw(batch, s, 35, 22 + yv);
         }
     }
 
