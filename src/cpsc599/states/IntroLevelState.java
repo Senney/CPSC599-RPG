@@ -82,7 +82,7 @@ public class IntroLevelState extends LevelState {
     @Override
     public void tick(Input input) {
         time++;
-        playerController.control(input);
+        playerController.control(input, this.currentLevel);
 
         Player current = playerController.getPlayerManager().getCurrent();
         if (current != null) {

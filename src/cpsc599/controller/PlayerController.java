@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Cursor;
+import cpsc599.assets.Level;
 import cpsc599.assets.Player;
 import cpsc599.managers.PlayerManager;
 import cpsc599.menus.ActionMenu;
@@ -52,7 +53,7 @@ public class PlayerController {
         return this.cursor;
     }
 
-    public void control(Input input) {
+    public void control(Input input, Level currentLevel) {
         Player p = this.playerManager.getCurrent();
 
         if (p != null) {
