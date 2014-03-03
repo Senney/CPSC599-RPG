@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.assets.Level;
 import cpsc599.controller.CameraController;
@@ -54,7 +55,7 @@ public abstract class LevelState extends State {
 
         this.currentLevel = level;
         renderer = new OrthogonalTiledMapRenderer(currentLevel.tiledMap, 1.0f, super.spriteBatch);
-        renderer.setView(camera);
+        renderer.setView(camera.combined, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
     }
 
     @Override
@@ -68,7 +69,6 @@ public abstract class LevelState extends State {
     }
 
     protected void drawLevel() {
-        // TODO: Add the logic to draw a level here.
         renderer.render();
     }
 

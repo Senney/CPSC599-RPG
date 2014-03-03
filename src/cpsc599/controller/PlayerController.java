@@ -148,28 +148,6 @@ public class PlayerController {
         }
 
         return "";
-
-        /**
-         * Ok so obviously I don't know how the library handles non blocking input so ill just comment this out for now
-         */
-
-        /*
-         if(Controls.isKeyTapped(input, Controls.LEFT)){
-              Logger.debug("Action Menu - selected \'Attack\'");
-         }
-         if(Controls.isKeyTapped(input, Controls.START)) //my magic 'end turn button' wll be replaced by a menu selection
-         {
-             Logger.debug("PlayerController:: actionMenumode - ending turn");
-             return "End Turn";
-         }
-        if(Controls.isKeyTapped(input, Controls.A_BUTTON))
-        {
-            //add get option from menu and check to see which option they chose
-            //add conditions for attacking (must be near enemy)
-            Logger.debug("PlayerController:: actionMenuMode - Attacking enemy");
-            return "Attack";
-        }
-        */
     }
 
     private void moveCursor(Input input) {

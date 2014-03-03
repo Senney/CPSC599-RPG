@@ -82,7 +82,9 @@ public class LevelLoader {
             return null;
         }
 
-        TiledMap map = tmxLoader.load(mapName);
+        TmxMapLoader.Parameters params = new TmxMapLoader.Parameters();
+        params.yUp = false;
+        TiledMap map = tmxLoader.load(mapName, params);
 
         return map;
     }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 
+import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.util.Logger;
 
@@ -33,7 +34,7 @@ public abstract class State {
         this.orb = game;
 
         Matrix4 projection = new Matrix4();
-        projection.setToOrtho(0, 320, 240, 0, 1, -1);
+        projection.setToOrtho(0, Main.GAME_WIDTH, Main.GAME_HEIGHT, 0, 1, -1);
 
         this.spriteBatch = new SpriteBatch();
         this.spriteBatch.setProjectionMatrix(projection);
