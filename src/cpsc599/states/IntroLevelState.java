@@ -98,22 +98,5 @@ public class IntroLevelState extends LevelState {
             Logger.debug("IntroLevelState::tick - 'SELECT' pressed.");
 
         }
-
-        /*
-        if (input.isKeyPressed(Controls.UP)) {
-            super.camera.translate(0f, -TRANSLATE_SPEED);
-        }
-
-        if (input.isKeyPressed(Controls.DOWN)) {
-            super.camera.translate(0f, TRANSLATE_SPEED);
-        }
-
-        if (input.isKeyPressed(Controls.LEFT)) {
-            super.camera.translate(TRANSLATE_SPEED, 0f);
-        } else if (input.isKeyPressed(Controls.RIGHT)) {
-            super.camera.translate(-TRANSLATE_SPEED, 0f);
-        }
-        super.camera.update();
-        */
     }
 }
