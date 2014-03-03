@@ -6,6 +6,7 @@ import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Cursor;
 import cpsc599.assets.Player;
 import cpsc599.managers.PlayerManager;
+import cpsc599.menus.ActionMenu;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 
@@ -18,6 +19,8 @@ public class PlayerController {
     }
 
     private Cursor cursor;
+
+    private ActionMenu actMenu;
 
     private PlayerManager playerManager;
     private Vector2 selectorPosition;
@@ -34,6 +37,12 @@ public class PlayerController {
     public void setupCursor() {
         cursor = new Cursor(new AnimatedSprite("assets/tilesets/cursor.png", 0, 0, 16, 16, 1, 0.1f));
     }
+
+    public void setupActionmenu(){
+        actMenu = new ActionMenu(100,200);
+    }
+
+    public ActionMenu getActMenu() {return this.actMenu;}
 
     public Cursor getCursor() {
         return this.cursor;
@@ -56,6 +65,17 @@ public class PlayerController {
                 // No player is selected, so we should check if a player is under the cursor.
                 selectPlayerOnCursor();
             } else {
+                /*actMenu.toggleVisible();
+                Logger.debug("PlayerController:: control - entering action menu");
+                //enter action menu mode
+                String action = actionMenuMode(input);
+                if(action.equals("End Turn"))
+                {
+                    actMenu.toggleVisible();
+                    releasePlayer();
+                }
+                else if(action.equals("Attack"));*/
+
                 releasePlayer();
             }
         }
@@ -94,6 +114,30 @@ public class PlayerController {
         this.cursor.x = this.playerManager.getCurrent().x;
         this.cursor.y = this.playerManager.getCurrent().y;
         this.playerManager.setCurrent(null); // Nullify the current player.
+    }
+
+    private String actionMenuMode(Input input){
+        /**
+         * Ok so obviously I don't know how the library handles non blocking input so ill just comment this out for now
+         */
+         if(Controls.isKeyTapped(input, Controls.LEFT)){
+              Logger.debug("Action Menu - selected \'Attack\'");
+         }
+         if(Controls.isKeyTapped(input, Controls.START)) //my magic 'end turn button' wll be replaced by a menu selection
+         {
+             Logger.debug("PlayerController:: actionMenumode - ending turn");
+             return "End Turn";
+         }
+        if(Controls.isKeyTapped(input, Controls.A_BUTTON))
+        {
+            //add get option from menu and check to see which option they chose
+            //add conditions for attacking (must be near enemy)
+            Logger.debug("PlayerController:: actionMenuMode - Attacking enemy");
+            return "Attack";
+        }
+        else
+            Logger.debug("PlayerController:: actionMenuMode - Cancelling menu");
+        return "Cancel";
     }
 
     private void moveCursor(Input input) {

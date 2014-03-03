@@ -4,12 +4,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import cpsc599.OrbGame;
 import cpsc599.assets.AnimatedSprite;
+import cpsc599.assets.Enemy;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
+import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
 import cpsc599.items.Inventory;
 import cpsc599.items.Item;
 import cpsc599.managers.LevelManager;
+import cpsc599.menus.ActionMenu;
 import cpsc599.menus.InventoryMenu;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
@@ -24,16 +27,21 @@ public class IntroLevelState extends LevelState {
     private InventoryMenu inventoryMenu;
 
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
-                           CameraController cameraController) {
-        super(game, playerController, cameraController);
+                           CameraController cameraController, EnemyController enemyController) { //Need to add Enemy controller
+        super(game, playerController, cameraController, enemyController);
         super.setLevel(manager.setLevel(0));
 
-        sprite = new AnimatedSprite("assets/tilesets/testsquare.png", 0, 0, 16, 16, 1, 0.1f);
+        sprite = new AnimatedSprite("assets/tilesets/cowcube.png", 0, 0, 16, 16, 1, 0.1f);
 
         Player p = new Player(sprite, 10, 10, 8);
         p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT));
         p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT));
         Player p2 = new Player(sprite, 12, 12, 6);
+
+        sprite = new AnimatedSprite("assets/tilesets/Enemy.png", 0,0,16,16,1,0.1f);
+        Enemy e = new Enemy(sprite, 14, 14, 3);
+
+        enemyController.getEnemyManager().addEnemy(e);
 
         playerController.getPlayerManager().addPlayer(p);
         playerController.getPlayerManager().addPlayer(p2);
@@ -43,6 +51,8 @@ public class IntroLevelState extends LevelState {
         playerController.getCursor().x = (int)manager.getCurrentLevel().player_spawn.x;
         playerController.getCursor().y = (int)manager.getCurrentLevel().player_spawn.y;
 
+        playerController.setupActionmenu();
+
         inventoryMenu = new InventoryMenu(100, 200);
     }
 
@@ -51,10 +61,19 @@ public class IntroLevelState extends LevelState {
         super.renderer.setView(camera);
         super.drawLevel();
 
+        super.enemyLayer.begin();
+        super.enemyLayer.setProjectionMatrix(this.camera.combined);
+        for(Enemy e : enemyController.getEnemyManager().getEnemies())
+            e.render(super.enemyLayer);
+        super.enemyLayer.end();
+
         super.playerLayer.begin();
         inventoryMenu.render(super.playerLayer);
+
         Player current = playerController.getPlayerManager().getCurrent();
         if (current != null) current.getPlayerHealthBar().render(10, 15, super.playerLayer);
+        this.playerController.getActMenu().render(this.playerLayer);
+
         super.playerLayer.setProjectionMatrix(this.camera.combined);
         for (Player p : playerController.getPlayerManager().getPlayers())
             p.render(super.playerLayer);
@@ -87,8 +106,17 @@ public class IntroLevelState extends LevelState {
             if (current == null) {
                 // Move cursor to the next available player.
             } else {
+                Boolean isVis = false;
                 // Show the inventory.
+                if(playerController.getActMenu().isVisible())
+                {
+                    playerController.getActMenu().toggleVisible();
+                    isVis = true;
+                }
                 this.inventoryMenu.toggleVisible();
+
+                if(!this.inventoryMenu.isVisible() && isVis)
+                    playerController.getActMenu().toggleVisible();
             }
         }
 

@@ -13,6 +13,7 @@ import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.assets.Level;
 import cpsc599.controller.CameraController;
+import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
 import cpsc599.util.Logger;
 
@@ -23,14 +24,18 @@ public abstract class LevelState extends State {
     protected OrthographicCamera camera;
     protected PlayerController playerController;
     protected CameraController cameraController;
+    protected EnemyController enemyController;
     protected static float TRANSLATE_SPEED = 1f;
 
     protected SpriteBatch playerLayer;
+    protected SpriteBatch enemyLayer;
 
-    protected LevelState(OrbGame game, PlayerController playerController, CameraController cameraController) {
+    protected LevelState(OrbGame game, PlayerController playerController, CameraController cameraController, EnemyController enemyController) {
         super.init(game);
         this.playerController = playerController;
         this.cameraController = cameraController;
+        this.enemyController = enemyController;
+        this.enemyLayer = new SpriteBatch();
         this.playerLayer = new SpriteBatch();
     }
 

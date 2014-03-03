@@ -15,6 +15,9 @@ public class Enemy {
     public int defence;
     public int speed;
 
+    public int maxMove;
+    public int curMove;
+
     public int x, y;
     private int moveX, moveY;
     private boolean moving;
@@ -22,8 +25,12 @@ public class Enemy {
     // to be used for animation.
     //private float moveStart, moveEnd;
 
-    public Enemy(AnimatedSprite sprite) {
+    public Enemy(AnimatedSprite sprite, int x, int y, int moveDist) {
         this.enemySprite = sprite;
+        this.x = x;
+        this.y = y;
+        this.maxMove = moveDist;
+
         //this.moveStart = 0f;
     }
 
