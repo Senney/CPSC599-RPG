@@ -41,6 +41,7 @@ public class LevelLoader {
             return false;
         }
         level.collisionLayer = (TiledMapTileLayer)level.tiledMap.getLayers().get("Collision");
+        level.collisionLayer.setOpacity(0.0f); // Make the collision layer invisible.
 
         // Load the spawn point of the user
         MapProperties properties = level.tiledMap.getProperties();

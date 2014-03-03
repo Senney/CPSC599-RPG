@@ -82,7 +82,7 @@ public class PlayerController {
             } else if (this.inventoryMenu.isVisible()) {
 
             } else {
-                movePlayer(input, p);
+                movePlayer(input, p, currentLevel);
             }
         } else {
             moveCursor(input);
@@ -169,15 +169,15 @@ public class PlayerController {
         }
     }
 
-    private void movePlayer(Input input, Player p) {
+    private void movePlayer(Input input, Player p, Level l) {
         if (Controls.isKeyTapped(input, Controls.UP)) {
-            p.move(0, -1);
+            p.move(0, -1, l);
         } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
-            p.move(0, 1);
+            p.move(0, 1, l);
         } else if (Controls.isKeyTapped(input, Controls.RIGHT)) {
-            p.move(1, 0);
+            p.move(1, 0, l);
         } else if (Controls.isKeyTapped(input, Controls.LEFT)) {
-            p.move(-1, 0);
+            p.move(-1, 0, l);
         }
     }
 }

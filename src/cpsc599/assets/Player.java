@@ -78,13 +78,18 @@ public class Player {
         playerSprite.render(batch, CoordinateTranslator.translate(x), CoordinateTranslator.translate(y));
     }
 
-    public void move(int x, int y) {
+    public void move(int x, int y, Level level) {
         if (moving) {
             Logger.warn("Player::move - Player is already in motion. Some bug in the controller..");
         }
 
         if (curMove == 0 && maxMove != 0) {
             Logger.debug("Player::move - Player has 0 movement spaces available.");
+            return;
+        }
+
+        if (level.collide(this.x + x, this.y + y)) {
+            Logger.debug("Player::move - Player has collided with solid geometry.");
             return;
         }
 
