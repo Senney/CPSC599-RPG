@@ -55,7 +55,7 @@ public class Dialogue {
 		
 		loadDialogue(text);
 		
-		this.visible = true;
+		this.visible = false;
 	}
 	
 	public void loadDialogue(CharSequence dialogue) {
@@ -90,6 +90,10 @@ public class Dialogue {
 	
 	public boolean checkTextLeft() {
 		return textLeft;
+	}
+	
+	public boolean isVisible() {
+		return visible;
 	}
 	
 	public boolean toggleVisibility() {
