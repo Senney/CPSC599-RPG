@@ -37,9 +37,16 @@ public class IntroLevelState extends LevelState {
         
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_front.png", 0, 0, 16, 16, 1, 0.1f);
         Player p3 = new Player(sprite, 2, 7, 8);
+        p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT));
+        p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
         
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_front.png", 0, 0, 16, 16, 1, 0.1f);
         Player p2 = new Player(sprite, 2, 9, 8);
+        p2.getPlayerInventory().pickUp(new Item("Health Potion", false, Inventory.NONE));
+        p2.getPlayerInventory().pickUp(new Item("Wand", true, Inventory.RHAND_SLOT));
+
+        AnimatedSprite cowCube = new AnimatedSprite("assets/tilesets/cowcube.png", 0, 0, 16, 16, 1, 0f);
+        Player p4 = new Player(cowCube, 20, 27, 20);
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
         Enemy e = new Enemy(sprite, 12, 7, 8);
@@ -57,6 +64,7 @@ public class IntroLevelState extends LevelState {
         playerController.getPlayerManager().addPlayer(p);
         playerController.getPlayerManager().addPlayer(p2);
         playerController.getPlayerManager().addPlayer(p3);
+        playerController.getPlayerManager().addPlayer(p4);
 
         // TODO: Make this not stupid.
         playerController.setupCursor();

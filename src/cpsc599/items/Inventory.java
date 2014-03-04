@@ -14,7 +14,8 @@ public class Inventory {
 	
 	private Item[] equip;
 	private Item[] carry;
-	
+
+    public static final int NONE = -1;
 	public static final int HEAD_SLOT = 0;
 	public static final int CHEST_SLOT = 1;
 	public static final int RHAND_SLOT = 2;
