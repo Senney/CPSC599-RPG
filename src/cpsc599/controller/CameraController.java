@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxNativesLoader;
+import cpsc599.Main;
 import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
 import sun.net.www.content.text.plain;
@@ -103,8 +104,8 @@ public class CameraController {
         }
 
         // Check that the X and Y positions don't overflow the camera off of the map.
-        int realx = bound(CoordinateTranslator.translate(x), width);
-        int realy = bound(CoordinateTranslator.translate(y), height);
+        int realx = bound(CoordinateTranslator.translate(x), width, (int)(Main.GAME_WIDTH * Main.GAME_SCALE));
+        int realy = bound(CoordinateTranslator.translate(y), height, (int)(Main.GAME_HEIGHT * Main.GAME_SCALE));
 
         this.x = realx;
         this.y = realy;
@@ -116,8 +117,9 @@ public class CameraController {
         return this.camera;
     }
 
-    private int bound(int d, int v) {
+    private int bound(int d, int v, int m) {
         if (d - (v / 2) < 0) d = v / 2;
+        if (d + (v / 2) > m) d = m - (v / 2);
         return d;
     }
 
