@@ -101,7 +101,11 @@ public class IntroLevelState extends LevelState {
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
             Logger.debug("IntroLevelState::tick - 'SELECT' pressed.");
+        }
 
+        if (Controls.isKeyTapped(input, Input.Keys.D)) {
+            Logger.debug("IntroLevelState::tick - Dialogue show button.");
+            this.dialogue.toggleVisibility();
         }
     }
 }
