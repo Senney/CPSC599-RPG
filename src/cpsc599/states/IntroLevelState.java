@@ -59,15 +59,6 @@ public class IntroLevelState extends LevelState {
         super.renderer.setView(camera);
         super.drawLevel();
 
-        super.overlayLayer.begin();
-        Player current = playerController.getPlayerManager().getCurrent();
-        // Render player-related overlays outside of the groundLayer.
-        if (current != null) current.getPlayerHealthBar().render(10, 15, super.overlayLayer);
-        this.playerController.getActMenu().render(this.overlayLayer);
-        this.playerController.getInventoryMenu().render(super.overlayLayer);
-        dialogue.render(this.overlayLayer);
-        super.overlayLayer.end();
-
         super.groundLayer.begin();
         super.groundLayer.setProjectionMatrix(this.camera.combined);
 
@@ -82,12 +73,21 @@ public class IntroLevelState extends LevelState {
             this.playerController.getCursor().render(this.groundLayer);
         }
         super.groundLayer.end();
+        
+        super.overlayLayer.begin();
+        Player current = playerController.getPlayerManager().getCurrent();
+        // Render player-related overlays outside of the groundLayer.
+        if (current != null) current.getPlayerHealthBar().render(10, 15, super.overlayLayer);
+        this.playerController.getActMenu().render(this.overlayLayer);
+        this.playerController.getInventoryMenu().render(super.overlayLayer);
+        dialogue.render(this.overlayLayer);
+        super.overlayLayer.end();
     }
 
     @Override
     public void tick(Input input) {
         time++;
-        playerController.control(input);
+        playerController.control(input, this.currentLevel);
 
         Player current = playerController.getPlayerManager().getCurrent();
         if (current != null) {
