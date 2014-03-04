@@ -86,16 +86,15 @@ public class IntroLevelState extends LevelState {
         if (this.playerController.isCursor()) {
             this.playerController.getCursor().render(this.groundLayer);
         }
+
+
         super.groundLayer.end();
-        
-        super.overlayLayer.begin();
+
         Player current = playerController.getPlayerManager().getCurrent();
-        // Render player-related overlays outside of the groundLayer.
-        if (current != null) current.getPlayerHealthBar().render(10, 15, super.overlayLayer);
+        // These have to be rendered outside of the overlay batch.
         this.playerController.getActMenu().render(this.overlayLayer);
         this.playerController.getInventoryMenu().render(super.overlayLayer);
-        dialogue.render(this.overlayLayer);
-        super.overlayLayer.end();
+        this.dialogue.render(this.overlayLayer);
     }
 
     @Override

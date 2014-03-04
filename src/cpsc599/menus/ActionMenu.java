@@ -70,11 +70,13 @@ public class ActionMenu extends Menu {
 
         shapeRenderer.end();
 
+        batch.begin();
         int yv = 0;
         for (String s : options) {
             yv += font.getBounds(s).height + 2;
             font.draw(batch, s, 35, 22 + yv);
         }
+        batch.end();
     }
 
     @Override

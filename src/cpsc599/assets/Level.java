@@ -17,6 +17,8 @@ public class Level {
     public TiledMapTileLayer collisionLayer;
     public Vector2 player_spawn;
 
+    public Vector2 tile_bounds;
+
     public Level() {
         this.player_spawn = new Vector2(0, 0);
     }

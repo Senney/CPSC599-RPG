@@ -34,18 +34,19 @@ public class InventoryMenu extends Menu {
         if (!visible) return;
 
         ShapeRenderer shapeRenderer = new ShapeRenderer();
-
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect(20, 20, super.width, super.height);
         shapeRenderer.end();
 
+        batch.begin();
         int yv = 0;
         for (Item i : this.inventory.getCarry()) {
             if (i == null) continue;
             yv += font.getBounds(i.name).height + 2;
             font.draw(batch, i.name, 22, 22 + yv);
         }
+        batch.end();
     }
 
     @Override

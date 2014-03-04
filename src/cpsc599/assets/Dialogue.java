@@ -109,8 +109,10 @@ public class Dialogue {
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect(10, 10, boxWidth, boxHeight);
         shapeRenderer.end();
-        
-		font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+        batch.begin();
+        font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		font.drawWrapped(batch, text, 150, 120, lineWidth);
+        batch.end();
 	}
 }
