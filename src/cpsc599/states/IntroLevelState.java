@@ -105,7 +105,13 @@ public class IntroLevelState extends LevelState {
 
         if (Controls.isKeyTapped(input, Input.Keys.D)) {
             Logger.debug("IntroLevelState::tick - Dialogue show button.");
-            this.dialogue.toggleVisibility();
+            if (dialogue.checkTextLeft()) {
+            	Logger.debug("HIT");
+            	dialogue.loadTextRemains();
+            }
+            else {
+            	this.dialogue.toggleVisibility();
+            }
         }
     }
 }
