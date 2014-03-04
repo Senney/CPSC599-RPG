@@ -28,8 +28,6 @@ public class Level {
         }
 
         boolean collides = collisionLayer.getCell(x, y) != null;
-        Logger.debug("Checking collision at (" + x + ", " + y + "): " + collides);
-
         return collides;
     }
 }
