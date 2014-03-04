@@ -50,9 +50,17 @@ public class Dialogue {
 		
 		font = new BitmapFont();
 		
-		int bounds = text.length();
+		font.setScale((float) 1.1);
+		lineWidth = (int) (boxWidth/1.55);
 		
+		loadDialogue(text);
+		
+		this.visible = true;
+	}
+	
+	public void loadDialogue(CharSequence dialogue) {
 		String check;
+		int bounds = text.length();
 		int strEnd = 168;
 		if (bounds > 168) {
 			do {
@@ -65,21 +73,19 @@ public class Dialogue {
 				text = text.subSequence(0, 168);
 			else {
 				textLeft = true;
+				Logger.debug("Dialogue::Text Left? " + textLeft);
 				textRemains = text.subSequence((strEnd+1), bounds);
+				Logger.debug("Dialogue::Text Remains: " + textRemains);
 				text = text.subSequence(0, --strEnd);
 			}
 		}
 		else
 			textLeft = false;
-		
-		font.setScale((float) 1.1);
-		lineWidth = (int) (boxWidth/1.55);
-		
-		this.visible = false;
 	}
 	
-	public void loadDialogue(CharSequence dialogue) {
-		text = dialogue;
+	public void loadTextRemains() {
+		text = textRemains;
+		loadDialogue(text);
 	}
 	
 	public boolean checkTextLeft() {
