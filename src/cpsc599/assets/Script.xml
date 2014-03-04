@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<intro>
+	<testing>Welcome to The Tale of the Orb! This is an introduction to the game. This is a piece of dialogue for testing purposes. This introductory should display the next part if it has been separated. Otherwise, it should disappear once a button is pressed in order to advance through the game.</testing>
+	<testing2>Another piece of dialogue to do testing on. For each of these dialogues, the Dialogue asset should cut them such that it doesn't overflow ever. If it overflows, that means that there's something wrong with it. And that it should be fixed.</testing2>
+	<testing3>12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</testing3>
+</intro>

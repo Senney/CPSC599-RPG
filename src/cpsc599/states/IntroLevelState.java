@@ -3,6 +3,7 @@ package cpsc599.states;
 import com.badlogic.gdx.Input;
 import cpsc599.OrbGame;
 import cpsc599.assets.AnimatedSprite;
+import cpsc599.assets.Dialogue;
 import cpsc599.assets.Enemy;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
@@ -21,6 +22,7 @@ public class IntroLevelState extends LevelState {
     int time = 0;
 
     private AnimatedSprite sprite;
+    private Dialogue dialogue;
 
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
                            CameraController cameraController, EnemyController enemyController) { //Need to add Enemy controller
@@ -29,13 +31,13 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
 
-        Player p = new Player(sprite, 10, 10, 8);
+        Player p = new Player(sprite, 3, 3, 8);
         p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT));
         p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT));
-        Player p2 = new Player(sprite, 12, 12, 6);
+        Player p2 = new Player(sprite, 5, 5, 6);
 
         sprite = new AnimatedSprite("assets/tilesets/Enemy.png", 0,0,16,16,1,0.1f);
-        Enemy e = new Enemy(sprite, 14, 14, 3);
+        Enemy e = new Enemy(sprite, 1, 1, 3);
 
         enemyController.getEnemyManager().addEnemy(e);
 
@@ -48,20 +50,14 @@ public class IntroLevelState extends LevelState {
         playerController.getCursor().y = (int)manager.getCurrentLevel().player_spawn.y;
 
         playerController.setupMenus();
+        
+        dialogue = new Dialogue();
     }
 
     @Override
     public void render() {
         super.renderer.setView(camera);
         super.drawLevel();
-
-        super.overlayLayer.begin();
-        Player current = playerController.getPlayerManager().getCurrent();
-        // Render player-related overlays outside of the groundLayer.
-        if (current != null) current.getPlayerHealthBar().render(10, 15, super.overlayLayer);
-        this.playerController.getActMenu().render(this.overlayLayer);
-        this.playerController.getInventoryMenu().render(super.overlayLayer);
-        super.overlayLayer.end();
 
         super.groundLayer.begin();
         super.groundLayer.setProjectionMatrix(this.camera.combined);
@@ -77,6 +73,15 @@ public class IntroLevelState extends LevelState {
             this.playerController.getCursor().render(this.groundLayer);
         }
         super.groundLayer.end();
+        
+        super.overlayLayer.begin();
+        Player current = playerController.getPlayerManager().getCurrent();
+        // Render player-related overlays outside of the groundLayer.
+        if (current != null) current.getPlayerHealthBar().render(10, 15, super.overlayLayer);
+        this.playerController.getActMenu().render(this.overlayLayer);
+        this.playerController.getInventoryMenu().render(super.overlayLayer);
+        dialogue.render(this.overlayLayer);
+        super.overlayLayer.end();
     }
 
     @Override
