@@ -29,20 +29,34 @@ public class IntroLevelState extends LevelState {
         super(game, playerController, cameraController, enemyController);
         super.setLevel(manager.setLevel(0));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
+        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/prince/prince_front.png", 0, 0, 16, 16, 1, 0.1f);
 
-        Player p = new Player(sprite, 3, 3, 8);
+        Player p = new Player(sprite, 2, 5, 8);
         p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT));
         p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT));
-        Player p2 = new Player(sprite, 5, 5, 6);
+        
+        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_front.png", 0, 0, 16, 16, 1, 0.1f);
+        Player p3 = new Player(sprite, 2, 7, 8);
+        
+        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_front.png", 0, 0, 16, 16, 1, 0.1f);
+        Player p2 = new Player(sprite, 2, 9, 8);
 
-        sprite = new AnimatedSprite("assets/tilesets/Enemy.png", 0,0,16,16,1,0.1f);
-        Enemy e = new Enemy(sprite, 1, 1, 3);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
+        Enemy e = new Enemy(sprite, 12, 7, 8);
+        
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy14.png", 0,0,16,16,1,0.1f);
+        Enemy e2 = new Enemy(sprite, 10, 5, 8);
+        
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy5.png", 0,0,16,16,1,0.1f);
+        Enemy e3 = new Enemy(sprite, 10, 9, 8);
 
         enemyController.getEnemyManager().addEnemy(e);
+        enemyController.getEnemyManager().addEnemy(e2);
+        enemyController.getEnemyManager().addEnemy(e3);
 
         playerController.getPlayerManager().addPlayer(p);
         playerController.getPlayerManager().addPlayer(p2);
+        playerController.getPlayerManager().addPlayer(p3);
 
         // TODO: Make this not stupid.
         playerController.setupCursor();
