@@ -73,9 +73,7 @@ public class Dialogue {
 				text = text.subSequence(0, 168);
 			else {
 				textLeft = true;
-				Logger.debug("Dialogue::Text Left? " + textLeft);
 				textRemains = text.subSequence((strEnd+1), bounds);
-				Logger.debug("Dialogue::Text Remains: " + textRemains);
 				text = text.subSequence(0, --strEnd);
 			}
 		}
