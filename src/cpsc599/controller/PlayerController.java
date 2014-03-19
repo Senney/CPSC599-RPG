@@ -16,6 +16,8 @@ import cpsc599.util.Logger;
  * Acts as a controller for all players.
  */
 public class PlayerController {
+    private boolean turnComplete;
+
     public PlayerManager getPlayerManager() {
         return playerManager;
     }
@@ -65,6 +67,12 @@ public class PlayerController {
                     p.endTurn();
                     releasePlayer();
                     this.actMenu.toggleVisible();
+
+                    if (checkTurnOver()) {
+                        Logger.debug("PlayerController::control - Turn for player is over.");
+                        this.turnComplete = true;
+                    }
+
                     return;
                 }
 
@@ -117,6 +125,13 @@ public class PlayerController {
         }
     }
 
+    private boolean checkTurnOver() {
+        for (Player p : this.playerManager.getPlayers()) {
+            if (!p.turnOver) return false;
+        }
+        return true;
+    }
+
     private void resetPlayerToCursor(Player p) {
         p.x = (int)this.selectorPosition.x;
         p.y = (int)this.selectorPosition.y;
@@ -125,7 +140,7 @@ public class PlayerController {
 
     private void selectPlayerOnCursor() {
         for (Player player : this.playerManager.getPlayers()) {
-            if (player.x == cursor.x && player.y == cursor.y) {
+            if (player.x == cursor.x && player.y == cursor.y && !player.turnOver) {
                 this.playerManager.setCurrent(player);
                 this.selectorPosition.x = player.x;
                 this.selectorPosition.y = player.y;
@@ -149,7 +164,7 @@ public class PlayerController {
 
         if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
             String action = this.actMenu.getAction();
-            Logger.debug("PlayuerController::actionMenuMode - Returning action: " + action);
+            Logger.debug("PlayerController::actionMenuMode - Returning action: " + action);
             return action;
         }
 
@@ -179,5 +194,9 @@ public class PlayerController {
         } else if (Controls.isKeyTapped(input, Controls.LEFT)) {
             p.move(-1, 0, l);
         }
+    }
+
+    public boolean isTurnComplete() {
+        return turnComplete;
     }
 }
