@@ -199,4 +199,11 @@ public class PlayerController {
     public boolean isTurnComplete() {
         return turnComplete;
     }
+
+    public void resetTurn() {
+        for (Player p : this.playerManager.getPlayers()) {
+            p.turnOver = false;
+        }
+        this.turnComplete = false;
+    }
 }
