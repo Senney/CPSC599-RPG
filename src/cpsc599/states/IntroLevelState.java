@@ -20,6 +20,7 @@ import cpsc599.util.Logger;
  */
 public class IntroLevelState extends LevelState {
     int time = 0;
+    int tickCount = 0;
 
     private AnimatedSprite sprite;
     private Dialogue dialogue;
@@ -110,13 +111,25 @@ public class IntroLevelState extends LevelState {
     @Override
     public void tick(Input input) {
         time++;
-        playerController.control(input, this.currentLevel);
+        if (!playerController.isTurnComplete()) {
+            playerController.control(input, this.currentLevel);
+        } else {
+            if (tickCount == 0)
+                Logger.debug("IntroLevelState::tick - WAITING 400 ticks for a simulated enemy turn.");
+            // TODO: This is where we put some awesome enemy turn logic!!
+
+            // TODO: Remove this crap when we get some AI.
+            if (tickCount++ > 400) {
+                Logger.debug("IntroLevelState::tick - Enemy turn complete..");
+                playerController.resetTurn();
+                tickCount = 0;
+            }
+        }
 
         Player current = playerController.getPlayerManager().getCurrent();
         if (current != null) {
             current.tick();
             this.cameraController.set(current.x, current.y);
-
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
         }
