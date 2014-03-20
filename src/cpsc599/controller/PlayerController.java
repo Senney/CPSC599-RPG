@@ -80,7 +80,7 @@ public class PlayerController {
         }
         if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
             resetAttack();
-            //availableEnemies.clear();
+            //availableEnemies.clear(); might be neater to have this in but works otherwise
             return -1;
         }
 

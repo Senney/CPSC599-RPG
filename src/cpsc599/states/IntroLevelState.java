@@ -192,8 +192,13 @@ public class IntroLevelState extends LevelState {
         
         int selected;
         if ((selected = playerController.controlAttack(input, this.attackingList)) != -1) {
-            current.attack(this.attackingList.get(selected));
-            this.attackingList = null;
+            if(!this.attackingList.isEmpty()) {
+                current.attack(this.attackingList.get(selected));
+                this.attackingList = null;
+            }
+            else
+                //Logger.debug("Not allowed to attack nothing! ending your turn idiot...");
+                Logger.debug("The character swings and only hits thin air...");
         }
         else{
             attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
