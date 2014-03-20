@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import cpsc599.util.Logger;
+import cpsc599.util.SharedAssets;
 
 import java.util.ArrayList;
 
@@ -59,22 +60,15 @@ public class ActionMenu extends Menu {
     public void render(SpriteBatch batch) {
         if (!visible) return;
 
-        ShapeRenderer shapeRenderer = new ShapeRenderer();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect(20, 20, super.width, super.height);
-
-        shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.rect(22, 26 + this.pointer_y, 10, 5);
-
-        shapeRenderer.end();
-
         batch.begin();
+        this.drawMenu(batch, 20, 10, 128, 112);
+
+        batch.draw(SharedAssets.menu_pointer, )
+
         int yv = 0;
         for (String s : options) {
             yv += font.getBounds(s).height + 2;
-            font.draw(batch, s, 35, 22 + yv);
+            font.draw(batch, s, 45, 23 + yv);
         }
         batch.end();
     }
