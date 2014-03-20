@@ -99,18 +99,7 @@ public class IntroLevelState extends LevelState {
         super.groundLayer.begin();
         super.groundLayer.setProjectionMatrix(this.camera.combined);
 
-        if (this.playerController.isAttacking() && attackingList != null && attackingList.size() != 0) {
-            for (int i = 0; i < attackingList.size(); i++) {
-                Enemy e = attackingList.get(i);
-                if (i == playerController.getSelectedAttack()) {
-                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(e.x),
-                            CoordinateTranslator.translate(e.y));
-                } else {
-                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x),
-                            CoordinateTranslator.translate(e.y));
-                }
-            }
-        }
+        renderAttackables();
 
         // Render players and enemies.
         for (Player p : playerController.getPlayerManager().getPlayers())
@@ -133,25 +122,31 @@ public class IntroLevelState extends LevelState {
         this.dialogue.render(this.overlayLayer);
     }
 
+    private void renderAttackables() {
+        if (this.playerController.isAttacking() && attackingList != null && attackingList.size() != 0) {
+            for (int i = 0; i < attackingList.size(); i++) {
+                Enemy e = attackingList.get(i);
+                if (i == playerController.getSelectedAttack()) {
+                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(e.x),
+                            CoordinateTranslator.translate(e.y));
+                } else {
+                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x),
+                            CoordinateTranslator.translate(e.y));
+                }
+            }
+        }
+    }
+
     @Override
     public void tick(Input input) {
         time++;
 
         Player current = playerController.getPlayerManager().getCurrent();
         if (playerController.isAttacking()) {
-            // Wait until an enemy is selected.
-            int selected;
-            if ((selected = playerController.controlAttack(input, this.attackingList)) != -1) {
-                current.attack(this.attackingList.get(selected));
-                this.attackingList = null;
-            }
+            handleAttack(input, current);
         }
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
-            if (playerController.isAttacking() && attackingList == null) {
-                attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
-                        playerController.getAttackRange());
-            }
         } else {
             if (tickCount == 0)
                 Logger.debug("WAITING 400 ticks for a simulated enemy turn.");
@@ -185,6 +180,20 @@ public class IntroLevelState extends LevelState {
             else {
             	this.dialogue.toggleVisibility();
             }
+        }
+    }
+
+    private void handleAttack(Input input, Player current) {
+        // Wait until an enemy is selected.
+        if (attackingList == null) {
+            attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
+                    playerController.getAttackRange());
+        }
+        
+        int selected;
+        if ((selected = playerController.controlAttack(input, this.attackingList)) != -1) {
+            current.attack(this.attackingList.get(selected));
+            this.attackingList = null;
         }
     }
 }
