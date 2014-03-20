@@ -116,7 +116,7 @@ public class OrbGame implements ApplicationListener {
         enemyManager = new EnemyManager();
 
         enemyController = new EnemyController(enemyManager);
-        playerController = new PlayerController(playerManager);
+        playerController = new PlayerController(playerManager, enemyManager); //this might cause issues
         cameraController = new CameraController(new Vector2(0, 0), new Vector3(this.width, this.height, 1));
 
         try {

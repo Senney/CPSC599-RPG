@@ -2,7 +2,6 @@ package cpsc599.managers;
 
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Enemy;
-import cpsc599.assets.Enemy;
 import cpsc599.util.Logger;
 
 import java.util.ArrayList;

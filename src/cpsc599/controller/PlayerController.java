@@ -3,11 +3,9 @@ package cpsc599.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import cpsc599.assets.AnimatedSprite;
-import cpsc599.assets.Cursor;
-import cpsc599.assets.Level;
-import cpsc599.assets.Player;
+import cpsc599.assets.*;
 import cpsc599.items.Inventory;
+import cpsc599.managers.EnemyManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.menus.ActionMenu;
 import cpsc599.menus.InventoryMenu;
@@ -28,15 +26,21 @@ public class PlayerController {
     private Cursor cursor;
 
     private ActionMenu actMenu;
+    private StatsMenu statMenu;
     private InventoryMenu inventoryMenu;
 
     private PlayerManager playerManager;
+    private EnemyManager enemyManager;
     private Vector2 selectorPosition;
+
+    private Enemy selectedEnemy;
+    private int selected;
 
     ShapeRenderer shapeRenderer;
 
-    public PlayerController(PlayerManager manager) {
+    public PlayerController(PlayerManager manager, EnemyManager eManager) {
         this.playerManager = manager;
+        this.enemyManager = eManager;
         this.selectorPosition = new Vector2();
         shapeRenderer =  new ShapeRenderer();
     }
@@ -65,6 +69,9 @@ public class PlayerController {
         Player p = this.playerManager.getCurrent();
 
         if (p != null) {
+            if (this.statMenu.isVisible()) {
+
+            }
             if (this.actMenu.isVisible()) {
                 String action = actionMenuMode(input);
                 if (action.equals("End Turn")) {
@@ -120,13 +127,21 @@ public class PlayerController {
             moveCursor(input);
         }
 
-        // Move the player.
+        // Move the player or select an enemy.
         if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
             Logger.debug("'A' button pressed.");
             // Check to see if we're over a player with our cursor.
             if (p == null) {
                 // No player is selected, so we should check if a player is under the cursor.
-                selectPlayerOnCursor();
+                Boolean sel = selectPlayerOnCursor();
+                Boolean eSel = selectEnemyOnCursor();
+
+                if(sel == true)
+                    selected = 1;
+                else if(eSel == true)
+                    selected = 2;
+                else
+                    selected = 0;
             } else {
                 actMenu.toggleVisible();
                 Logger.debug("entering action menu");
@@ -147,6 +162,10 @@ public class PlayerController {
                     resetPlayerToCursor(p);
             }
         }
+        //Display enemy stats on screen
+        if(selected == 2){
+            Logger.debug("MaxHealth = " + selectedEnemy.maxHealth);
+        }
     }
 
     private boolean checkTurnOver() {
@@ -162,15 +181,28 @@ public class PlayerController {
         p.resetMove();
     }
 
-    private void selectPlayerOnCursor() {
+    private boolean selectPlayerOnCursor() {
         for (Player player : this.playerManager.getPlayers()) {
             if (player.x == cursor.x && player.y == cursor.y && !player.turnOver) {
                 this.playerManager.setCurrent(player);
                 this.selectorPosition.x = player.x;
                 this.selectorPosition.y = player.y;
                 player.resetMove();
+                return true;
             }
         }
+        return false;
+    }
+
+    private boolean selectEnemyOnCursor() {
+        for(Enemy enemy : this.enemyManager.getEnemies()){
+            if(enemy.x == cursor.x && enemy.y == cursor.y){
+                Logger.debug("Enemy selected");
+                selectedEnemy = enemy;
+                return true;
+            }
+        }
+        return false;
     }
 
     private void releasePlayer() {
