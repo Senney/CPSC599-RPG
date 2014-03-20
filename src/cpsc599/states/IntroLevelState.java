@@ -41,17 +41,19 @@ public class IntroLevelState extends LevelState {
         //p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT, 1));
         //p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 0));
 
-        Item sw = new Item("Sword", true, Inventory.RHAND_SLOT, 1, 5);
+        Item sw = new Item("Pike", true, Inventory.RHAND_SLOT, 3, 5);
         p.getPlayerInventory().pickUp(sw);
         p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1, 1));
         p.getPlayerInventory().equip(sw);
-        
-/*>>>>>>> Stashed changes
+
+
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_front.png", 0, 0, 16, 16, 1, 0.1f);
         Player p3 = new Player(sprite, 2, 7, 8);
-        p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2));
-        p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT, 0));
-        
+        p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 2));
+        p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);
+        p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
+
+        /*
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_front.png", 0, 0, 16, 16, 1, 0.1f);
         Player p2 = new Player(sprite, 2, 9, 8);
         p2.getPlayerInventory().pickUp(new Item("Health Potion", false, Inventory.NONE, 1));
@@ -76,7 +78,7 @@ public class IntroLevelState extends LevelState {
 
         playerController.getPlayerManager().addPlayer(p);
 //        playerController.getPlayerManager().addPlayer(p2);
-//        playerController.getPlayerManager().addPlayer(p3);
+        playerController.getPlayerManager().addPlayer(p3);
 //        playerController.getPlayerManager().addPlayer(p4);
 
         // TODO: Make this not stupid.
@@ -98,8 +100,15 @@ public class IntroLevelState extends LevelState {
         super.groundLayer.setProjectionMatrix(this.camera.combined);
 
         if (this.playerController.isAttacking() && attackingList != null && attackingList.size() != 0) {
-            for (Enemy e : attackingList) {
-                groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x), CoordinateTranslator.translate(e.y));
+            for (int i = 0; i < attackingList.size(); i++) {
+                Enemy e = attackingList.get(i);
+                if (i == playerController.getSelectedAttack()) {
+                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(e.x),
+                            CoordinateTranslator.translate(e.y));
+                } else {
+                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x),
+                            CoordinateTranslator.translate(e.y));
+                }
             }
         }
 
@@ -129,10 +138,19 @@ public class IntroLevelState extends LevelState {
         time++;
 
         Player current = playerController.getPlayerManager().getCurrent();
+        if (playerController.isAttacking()) {
+            // Wait until an enemy is selected.
+            int selected;
+            if ((selected = playerController.controlAttack(input, this.attackingList)) != -1) {
+                current.attack(this.attackingList.get(selected));
+                this.attackingList = null;
+            }
+        }
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
             if (playerController.isAttacking() && attackingList == null) {
-                attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y, 5);
+                attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
+                        playerController.getAttackRange());
             }
         } else {
             if (tickCount == 0)

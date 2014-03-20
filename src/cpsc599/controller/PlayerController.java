@@ -3,10 +3,7 @@ package cpsc599.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import cpsc599.assets.AnimatedSprite;
-import cpsc599.assets.Cursor;
-import cpsc599.assets.Level;
-import cpsc599.assets.Player;
+import cpsc599.assets.*;
 import cpsc599.items.Inventory;
 import cpsc599.managers.PlayerManager;
 import cpsc599.menus.ActionMenu;
@@ -14,12 +11,17 @@ import cpsc599.menus.InventoryMenu;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 
+import java.util.ArrayList;
+
 /**
  * Acts as a controller for all players.
  */
 public class PlayerController {
     private boolean turnComplete;
     private boolean attacking;
+    private int attackRange;
+
+    private int selectedAttack;
 
     public PlayerManager getPlayerManager() {
         return playerManager;
@@ -61,6 +63,36 @@ public class PlayerController {
         return this.cursor;
     }
 
+    public int controlAttack(Input input, ArrayList<Enemy> availableEnemies) {
+        if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
+            // Return the selected index.
+            int ret = this.selectedAttack;
+            resetAttack();
+            endTurn(this.playerManager.getCurrent());
+            return ret;
+        }
+        if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
+            resetAttack();
+            return -1;
+        }
+
+        int max = availableEnemies.size() - 1;
+        if (Controls.isKeyTapped(input, Controls.RIGHT)) {
+            this.selectedAttack = this.selectedAttack >= max ? 0 : ++this.selectedAttack;
+        }
+        if (Controls.isKeyTapped(input, Controls.LEFT)) {
+            this.selectedAttack = this.selectedAttack <= 0 ? max : --this.selectedAttack;
+        }
+
+        return -1;
+    }
+
+    private void resetAttack() {
+        this.selectedAttack = 0;
+        this.attacking = false;
+        this.attackRange = 0;
+    }
+
     public void control(Input input, Level currentLevel) {
         Player p = this.playerManager.getCurrent();
 
@@ -70,29 +102,24 @@ public class PlayerController {
                 if (action.equals("End Turn")) {
                     Logger.debug("Ending turn");
 
-                    p.endTurn();
-                    releasePlayer();
-                    this.actMenu.toggleVisible();
-
-                    if (checkTurnOver()) {
-                        Logger.debug("Turn for player is over.");
-                        this.turnComplete = true;
-                    }
+                    endTurn(p);
 
                     return;
                 }
                 if(action.equals("Attack")) {
-                    Logger.debug("PlayerController::control - Attacking");
+                    Logger.debug("Attacking");
                     int range = 0;
                     if(playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT) == null){
                         range = 1;      //sets default to fists if no weapon is equipped
-                        System.out.println("My fists are ready!");
+                        System.out.println("Defaulting to fists with 1 range.");
                     }
                     else
                         range = playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT).range;
 
                     this.attacking = true;
-                    System.out.println("range = "+ range);
+                    this.attackRange = range;
+                    this.selectedAttack = 0;
+
                     return;
                 }
                 /*else if(action.equals("Equip")) {
@@ -146,6 +173,17 @@ public class PlayerController {
                 else
                     resetPlayerToCursor(p);
             }
+        }
+    }
+
+    private void endTurn(Player p) {
+        p.endTurn();
+        releasePlayer();
+        closeAllMenus();
+
+        if (checkTurnOver()) {
+            Logger.debug("Turn for player is over.");
+            this.turnComplete = true;
         }
     }
 
@@ -220,6 +258,11 @@ public class PlayerController {
         }
     }
 
+    private void closeAllMenus() {
+        this.inventoryMenu.setVisible(false);
+        this.actMenu.setVisible(false);
+    }
+
     public boolean isTurnComplete() {
         return turnComplete;
     }
@@ -234,4 +277,10 @@ public class PlayerController {
     public boolean isAttacking() {
         return attacking;
     }
+
+    public int getAttackRange() {
+        return attackRange;
+    }
+
+    public int getSelectedAttack() { return this.selectedAttack; }
 }
