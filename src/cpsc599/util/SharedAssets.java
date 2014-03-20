@@ -16,6 +16,7 @@ public class SharedAssets {
 
     public static TextureRegion[][] menu_texture;
     public static Texture menu_pointer;
+    public static Texture highlight;
 
     public static void load() {
         if (loaded) return;
@@ -25,6 +26,7 @@ public class SharedAssets {
         menu_texture = TextureRegion.split(menu, 16, 16);
 
         menu_pointer = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Menus/pointer.png"));
+        highlight = new Texture(Gdx.files.internal("assets/tilesets/" + "Enemy.png"));
 
         loaded = true;
     }
