@@ -31,7 +31,7 @@ public class PlayerController {
     private Cursor cursor;
 
     private ActionMenu actMenu;
-    private StatsMenu statMenu;
+    //private StatsMenu statMenu;
     private InventoryMenu inventoryMenu;
 
     private PlayerManager playerManager;
@@ -80,6 +80,7 @@ public class PlayerController {
         }
         if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
             resetAttack();
+            //availableEnemies.clear();
             return -1;
         }
 
@@ -104,9 +105,9 @@ public class PlayerController {
         Player p = this.playerManager.getCurrent();
 
         if (p != null) {
-            if (this.statMenu.isVisible()) {
+            //if (this.statMenu.isVisible()) {
 
-            }
+            //}
             if (this.actMenu.isVisible()) {
                 String action = actionMenuMode(input);
                 if (action.equals("End Turn")) {
@@ -193,9 +194,9 @@ public class PlayerController {
             }
         }
         //Display enemy stats on screen
-        if(selected == 2){
+        /*if(selected == 2){
             Logger.debug("MaxHealth = " + selectedEnemy.maxHealth);
-        }
+        }*/
     }
 
     private void endTurn(Player p) {

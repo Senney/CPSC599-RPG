@@ -195,5 +195,9 @@ public class IntroLevelState extends LevelState {
             current.attack(this.attackingList.get(selected));
             this.attackingList = null;
         }
+        else{
+            attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
+            playerController.getAttackRange());
+        }
     }
 }
