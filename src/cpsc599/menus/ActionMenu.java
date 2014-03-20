@@ -63,7 +63,7 @@ public class ActionMenu extends Menu {
         batch.begin();
         this.drawMenu(batch, 20, 10, 128, 112);
 
-        batch.draw(SharedAssets.menu_pointer, )
+        batch.draw(SharedAssets.menu_pointer, 32, 26 + pointer_y);
 
         int yv = 0;
         for (String s : options) {
