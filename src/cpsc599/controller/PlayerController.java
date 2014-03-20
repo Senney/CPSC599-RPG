@@ -1,11 +1,13 @@
 package cpsc599.controller;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Cursor;
 import cpsc599.assets.Level;
 import cpsc599.assets.Player;
+import cpsc599.items.Inventory;
 import cpsc599.managers.PlayerManager;
 import cpsc599.menus.ActionMenu;
 import cpsc599.menus.InventoryMenu;
@@ -29,6 +31,8 @@ public class PlayerController {
 
     private PlayerManager playerManager;
     private Vector2 selectorPosition;
+
+    ShapeRenderer shapeRenderer = new ShapeRenderer();
 
     public PlayerController(PlayerManager manager) {
         this.playerManager = manager;
@@ -75,9 +79,25 @@ public class PlayerController {
 
                     return;
                 }
-
-                if (action.equals("Inventory")) {
-                    Logger.debug("Opening inventory");
+                if(action.equals("Attack")) {
+                    Logger.debug("PlayerController::control - Attacking");
+                    int range = playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT).range;
+                    /*camera.update();
+                    shapeRenderer.setProjectionMatrix(camera.combined);
+                    shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                    shapeRenderer.setColor(0, 0, 1, 1);
+                    //shapeRenderer.rect(playerManager.getCurrent().x, playerManager.getCurrent().y, width, height);
+                    shapeRenderer.circle(playerManager.getCurrent().x, playerManager.getCurrent().y, 100);
+                    shapeRenderer.end();*/
+                    return;
+                }
+                /*else if(action.equals("Equip")) {
+                    Logger.debug("PlayerController::control - Equiping");
+                    this.actMenu.toggleVisible();
+                    this.inventoryMenu.setInventory(p.getPlayerInventory());
+                    this.inventoryMenu.toggleVisible();
+                }*/
+                else if (action.equals("Inventory")) {
                     this.actMenu.toggleVisible();
                     this.inventoryMenu.setInventory(p.getPlayerInventory());
                     this.inventoryMenu.toggleVisible();
