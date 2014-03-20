@@ -102,6 +102,8 @@ public class Player {
     {
         Boolean isDead = false;
         int damage = (strength + playerInventory.getEquip(Inventory.RHAND_SLOT).damage) - (enemy.defence);
+
+        Logger.debug("Attacking enemy for " + damage + " damage.");
         enemy.currentHealth -= damage;
         if(enemy.currentHealth <= 0)
             isDead = true;
