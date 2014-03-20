@@ -1,5 +1,6 @@
 package cpsc599.managers;
 
+import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Enemy;
 import cpsc599.assets.Enemy;
 import cpsc599.util.Logger;
@@ -25,6 +26,22 @@ public class EnemyManager {
 
     public Enemy[] getEnemies() {
         return enemyList.toArray(new Enemy[enemyList.size()]);
+    }
+
+    public ArrayList<Enemy> getEnemiesInRange(int xpos, int ypos, int range) {
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+
+        for (Enemy e : enemyList) {
+            Vector2 userPos = new Vector2(xpos, ypos);
+            Vector2 enemyPos = new Vector2(e.x, e.y);
+
+            float dst = userPos.dst(enemyPos);
+            if (dst <= range) {
+                enemies.add(e);
+            }
+        }
+
+        return enemies;
     }
 
     public Enemy getEnemy(int index) {
