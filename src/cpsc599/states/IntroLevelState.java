@@ -41,17 +41,19 @@ public class IntroLevelState extends LevelState {
         //p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT, 1));
         //p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 0));
 
-        Item sw = new Item("Sword", true, Inventory.RHAND_SLOT, 1, 5);
+        Item sw = new Item("Pike", true, Inventory.RHAND_SLOT, 3, 5);
         p.getPlayerInventory().pickUp(sw);
         p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1, 1));
         p.getPlayerInventory().equip(sw);
-        
-/*>>>>>>> Stashed changes
+
+
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_front.png", 0, 0, 16, 16, 1, 0.1f);
         Player p3 = new Player(sprite, 2, 7, 8);
-        p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2));
-        p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT, 0));
-        
+        p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 2));
+        p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);
+        p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
+
+        /*
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_front.png", 0, 0, 16, 16, 1, 0.1f);
         Player p2 = new Player(sprite, 2, 9, 8);
         p2.getPlayerInventory().pickUp(new Item("Health Potion", false, Inventory.NONE, 1));
@@ -76,7 +78,7 @@ public class IntroLevelState extends LevelState {
 
         playerController.getPlayerManager().addPlayer(p);
 //        playerController.getPlayerManager().addPlayer(p2);
-//        playerController.getPlayerManager().addPlayer(p3);
+        playerController.getPlayerManager().addPlayer(p3);
 //        playerController.getPlayerManager().addPlayer(p4);
 
         // TODO: Make this not stupid.
@@ -97,11 +99,7 @@ public class IntroLevelState extends LevelState {
         super.groundLayer.begin();
         super.groundLayer.setProjectionMatrix(this.camera.combined);
 
-        if (this.playerController.isAttacking() && attackingList != null && attackingList.size() != 0) {
-            for (Enemy e : attackingList) {
-                groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x), CoordinateTranslator.translate(e.y));
-            }
-        }
+        renderAttackables();
 
         // Render players and enemies.
         for (Player p : playerController.getPlayerManager().getPlayers())
@@ -124,16 +122,31 @@ public class IntroLevelState extends LevelState {
         this.dialogue.render(this.overlayLayer);
     }
 
+    private void renderAttackables() {
+        if (this.playerController.isAttacking() && attackingList != null && attackingList.size() != 0) {
+            for (int i = 0; i < attackingList.size(); i++) {
+                Enemy e = attackingList.get(i);
+                if (i == playerController.getSelectedAttack()) {
+                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(e.x),
+                            CoordinateTranslator.translate(e.y));
+                } else {
+                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x),
+                            CoordinateTranslator.translate(e.y));
+                }
+            }
+        }
+    }
+
     @Override
     public void tick(Input input) {
         time++;
 
         Player current = playerController.getPlayerManager().getCurrent();
+        if (playerController.isAttacking()) {
+            handleAttack(input, current);
+        }
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
-            if (playerController.isAttacking() && attackingList == null) {
-                attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y, 5);
-            }
         } else {
             if (tickCount == 0)
                 Logger.debug("WAITING 400 ticks for a simulated enemy turn.");
@@ -167,6 +180,20 @@ public class IntroLevelState extends LevelState {
             else {
             	this.dialogue.toggleVisibility();
             }
+        }
+    }
+
+    private void handleAttack(Input input, Player current) {
+        // Wait until an enemy is selected.
+        if (attackingList == null) {
+            attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
+                    playerController.getAttackRange());
+        }
+        
+        int selected;
+        if ((selected = playerController.controlAttack(input, this.attackingList)) != -1) {
+            current.attack(this.attackingList.get(selected));
+            this.attackingList = null;
         }
     }
 }
