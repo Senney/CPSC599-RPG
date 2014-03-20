@@ -36,9 +36,9 @@ public class IntroLevelState extends LevelState {
         //p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT, 1));
         //p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 0));
 
-        Item sw = new Item("Sword", true, Inventory.RHAND_SLOT, 1);
+        Item sw = new Item("Sword", true, Inventory.RHAND_SLOT, 1, 5);
         p.getPlayerInventory().pickUp(sw);
-        p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1));
+        p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1, 1));
         p.getPlayerInventory().equip(sw);
         
 /*>>>>>>> Stashed changes

@@ -37,7 +37,7 @@ public class PlayerController {
     public PlayerController(PlayerManager manager) {
         this.playerManager = manager;
         this.selectorPosition = new Vector2();
-        //shapeRenderer =  new ShapeRenderer();
+        shapeRenderer =  new ShapeRenderer();
     }
 
     public boolean isCursor() {
@@ -90,13 +90,6 @@ public class PlayerController {
                     else
                         range = playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT).range;
                     System.out.println("range = "+ range);
-                    /*camera.update();
-                    shapeRenderer.setProjectionMatrix(camera.combined);
-                    shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                    shapeRenderer.setColor(0, 0, 1, 1);
-                    //shapeRenderer.rect(playerManager.getCurrent().x, playerManager.getCurrent().y, width, height);
-                    shapeRenderer.circle(playerManager.getCurrent().x, playerManager.getCurrent().y, 100);
-                    shapeRenderer.end();*/
                     return;
                 }
                 /*else if(action.equals("Equip")) {

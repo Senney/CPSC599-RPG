@@ -98,6 +98,22 @@ public class Player {
         moving = true;
         curMove--;
     }
+    public boolean attack(Enemy enemy)
+    {
+        Boolean isDead = false;
+        int damage = (strength + playerInventory.getEquip(Inventory.RHAND_SLOT).damage) - (enemy.defence);
+        enemy.currentHealth -= damage;
+        if(enemy.currentHealth <= 0)
+            isDead = true;
+        return isDead;
+    }
+
+    public void heal(int amount)
+    {
+        currentHealth += amount;
+        if(currentHealth > maxHealth)
+            currentHealth = maxHealth;
+    }
 
     public Inventory getPlayerInventory() {
         return playerInventory;

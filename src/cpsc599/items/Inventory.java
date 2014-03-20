@@ -117,8 +117,8 @@ public class Inventory {
 	
 	public static void main(String[] args)
 	{
-		Item sword = new Item("sword", true, RHAND_SLOT, 1);
-		Item potion = new Item("potion", false, -1, 1);
+		Item sword = new Item("sword", true, RHAND_SLOT, 1, 5);
+		Item potion = new Item("potion", false, -1, 1, 10);
 		
 		Inventory inventory = new Inventory(new Player(null));
 		

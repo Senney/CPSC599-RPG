@@ -6,12 +6,14 @@ public class Item {
 	public boolean equipable;
 	public int equipSlot;
     public int range;
+    public int damage;
 	
-	public Item(String nm, boolean equip, int slot, int range)
+	public Item(String nm, boolean equip, int slot, int range, int damage)
 	{
 		name = nm;
 		equipable = equip;
 		equipSlot = slot;
         this.range = range;
+        this.damage = damage;
 	}
 }

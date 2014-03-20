@@ -3,6 +3,7 @@ package cpsc599.assets;
 //The class for a CPU controlled entity
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import cpsc599.items.Inventory;
 import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
 
@@ -22,6 +23,8 @@ public class Enemy {
     private int moveX, moveY;
     private boolean moving;
 
+    private Inventory enemyInventory;
+
     // to be used for animation.
     //private float moveStart, moveEnd;
 
@@ -36,6 +39,23 @@ public class Enemy {
 
     public void tick() {
 
+    }
+
+    public boolean attack(Player player)
+    {
+        Boolean isDead = false;
+        int damage = (strength + enemyInventory.getEquip(Inventory.RHAND_SLOT).damage) - (player.defence);
+        player.currentHealth -= damage;
+        if(player.currentHealth <= 0)
+            isDead = true;
+        return isDead;
+    }
+
+    public void heal(int amount)
+    {
+        currentHealth += amount;
+        if(currentHealth > maxHealth)
+            currentHealth = maxHealth;
     }
 
     /**
