@@ -15,12 +15,16 @@ public class SharedAssets {
     public static boolean loaded = false;
 
     public static TextureRegion[][] menu_texture;
+    public static Texture menu_pointer;
+
     public static void load() {
         if (loaded) return;
 
         Logger.debug("Loading shared assets...");
         Texture menu = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Menus/menu_empty.png"));
         menu_texture = TextureRegion.split(menu, 16, 16);
+
+        menu_pointer = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Menus/pointer.png"));
 
         loaded = true;
     }
