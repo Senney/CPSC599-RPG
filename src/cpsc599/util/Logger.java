@@ -35,10 +35,14 @@ public class Logger {
 	public static void log(int level, String message) {
 		if (level < logLevel) return;
 		
-		final String fmt = "%s\t- [%s]\t- %s\n";
+		final String fmt = "%s\t- [%s]\t- %s - %s\n";
 		
 		String dateString = df.format(Calendar.getInstance().getTime());
-		String outstring = String.format(fmt, dateString, getLevelDescriptor(level), message);
+        StackTraceElement trace = Thread.currentThread().getStackTrace()[3];
+
+        String className = trace.getClassName().substring(trace.getClassName().lastIndexOf('.')+1);
+        String callerString = className + "::" + trace.getMethodName();
+		String outstring = String.format(fmt, dateString, getLevelDescriptor(level), callerString, message);
 		
 		try {
 			ostream.write(outstring.getBytes());
