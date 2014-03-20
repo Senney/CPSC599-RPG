@@ -50,21 +50,6 @@ public class OrbGame implements ApplicationListener {
         this.height = h;
         this.scale = scale;
 
-		assetManager = new AssetManager();
-        stateManager = new StateManager();
-        playerManager = new PlayerManager();
-        enemyManager = new EnemyManager();
-
-        enemyController = new EnemyController(enemyManager);
-        playerController = new PlayerController(playerManager);
-        cameraController = new CameraController(new Vector2(0, 0), new Vector3(w, h, 1));
-
-        try {
-            levelManager = new LevelManager("assets/levels", assetManager);
-        } catch (IOException ex) {
-            Logger.fatal("LevelManager creation failed... Exiting.");
-            System.exit(1);
-        }
 	}
 
 	@Override
@@ -124,6 +109,22 @@ public class OrbGame implements ApplicationListener {
 		Logger.debug("OrbGame class create method run.");
         Logger.debug("Window created with size: (" + this.width + ", " + this.height + "), " +
                 "Scale: " + this.scale);
+
+        assetManager = new AssetManager();
+        stateManager = new StateManager();
+        playerManager = new PlayerManager();
+        enemyManager = new EnemyManager();
+
+        enemyController = new EnemyController(enemyManager);
+        playerController = new PlayerController(playerManager);
+        cameraController = new CameraController(new Vector2(0, 0), new Vector3(this.width, this.height, 1));
+
+        try {
+            levelManager = new LevelManager("assets/levels", assetManager);
+        } catch (IOException ex) {
+            Logger.fatal("LevelManager creation failed... Exiting.");
+            System.exit(1);
+        }
 
         SharedAssets.load();
 
