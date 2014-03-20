@@ -19,6 +19,7 @@ import cpsc599.util.Logger;
  */
 public class PlayerController {
     private boolean turnComplete;
+    private boolean attacking;
 
     public PlayerManager getPlayerManager() {
         return playerManager;
@@ -89,6 +90,8 @@ public class PlayerController {
                     }
                     else
                         range = playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT).range;
+
+                    this.attacking = true;
                     System.out.println("range = "+ range);
                     return;
                 }
@@ -226,5 +229,9 @@ public class PlayerController {
             p.turnOver = false;
         }
         this.turnComplete = false;
+    }
+
+    public boolean isAttacking() {
+        return attacking;
     }
 }

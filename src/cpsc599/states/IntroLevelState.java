@@ -13,7 +13,11 @@ import cpsc599.items.Inventory;
 import cpsc599.items.Item;
 import cpsc599.managers.LevelManager;
 import cpsc599.util.Controls;
+import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
+import cpsc599.util.SharedAssets;
+
+import java.util.ArrayList;
 
 /**
  * Basic testing state.
@@ -24,6 +28,7 @@ public class IntroLevelState extends LevelState {
 
     private AnimatedSprite sprite;
     private Dialogue dialogue;
+    private ArrayList<Enemy> attackingList;
 
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
                            CameraController cameraController, EnemyController enemyController) { //Need to add Enemy controller
@@ -92,6 +97,12 @@ public class IntroLevelState extends LevelState {
         super.groundLayer.begin();
         super.groundLayer.setProjectionMatrix(this.camera.combined);
 
+        if (this.playerController.isAttacking() && attackingList != null && attackingList.size() != 0) {
+            for (Enemy e : attackingList) {
+                groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x), CoordinateTranslator.translate(e.y));
+            }
+        }
+
         // Render players and enemies.
         for (Player p : playerController.getPlayerManager().getPlayers())
             p.render(super.groundLayer);
@@ -116,8 +127,13 @@ public class IntroLevelState extends LevelState {
     @Override
     public void tick(Input input) {
         time++;
+
+        Player current = playerController.getPlayerManager().getCurrent();
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
+            if (playerController.isAttacking() && attackingList == null) {
+                attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y, 5);
+            }
         } else {
             if (tickCount == 0)
                 Logger.debug("WAITING 400 ticks for a simulated enemy turn.");
@@ -131,7 +147,6 @@ public class IntroLevelState extends LevelState {
             }
         }
 
-        Player current = playerController.getPlayerManager().getCurrent();
         if (current != null) {
             current.tick();
             this.cameraController.set(current.x, current.y);
