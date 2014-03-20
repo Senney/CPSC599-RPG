@@ -18,6 +18,7 @@ import cpsc599.states.IntroLevelState;
 import cpsc599.states.LevelState;
 import cpsc599.states.MainMenuState;
 import cpsc599.util.Logger;
+import cpsc599.util.SharedAssets;
 
 import java.io.IOException;
 
@@ -123,6 +124,8 @@ public class OrbGame implements ApplicationListener {
 		Logger.debug("OrbGame class create method run.");
         Logger.debug("Window created with size: (" + this.width + ", " + this.height + "), " +
                 "Scale: " + this.scale);
+
+        SharedAssets.load();
 
         // TODO: Fill this in with the proper state.
         stateManager.addState("MAIN_MENU", new MainMenuState());
