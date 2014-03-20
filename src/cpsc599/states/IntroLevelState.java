@@ -33,17 +33,15 @@ public class IntroLevelState extends LevelState {
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/prince/prince_front.png", 0, 0, 16, 16, 1, 0.1f);
 
         Player p = new Player(sprite, 2, 5, 8);
-        p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT, 1));
-        p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 0));
+        //p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT, 1));
+        //p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 0));
 
-        /*
-=======
         Item sw = new Item("Sword", true, Inventory.RHAND_SLOT, 1);
         p.getPlayerInventory().pickUp(sw);
         p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1));
         p.getPlayerInventory().equip(sw);
         
->>>>>>> Stashed changes
+/*>>>>>>> Stashed changes
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_front.png", 0, 0, 16, 16, 1, 0.1f);
         Player p3 = new Player(sprite, 2, 7, 8);
         p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2));

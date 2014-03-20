@@ -32,11 +32,12 @@ public class PlayerController {
     private PlayerManager playerManager;
     private Vector2 selectorPosition;
 
-    ShapeRenderer shapeRenderer = new ShapeRenderer();
+    ShapeRenderer shapeRenderer;
 
     public PlayerController(PlayerManager manager) {
         this.playerManager = manager;
         this.selectorPosition = new Vector2();
+        //shapeRenderer =  new ShapeRenderer();
     }
 
     public boolean isCursor() {
@@ -81,7 +82,14 @@ public class PlayerController {
                 }
                 if(action.equals("Attack")) {
                     Logger.debug("PlayerController::control - Attacking");
-                    int range = playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT).range;
+                    int range = 0;
+                    if(playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT) == null){
+                        range = 1;      //sets default to fists if no weapon is equipped
+                        System.out.println("My fists are ready!");
+                    }
+                    else
+                        range = playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT).range;
+                    System.out.println("range = "+ range);
                     /*camera.update();
                     shapeRenderer.setProjectionMatrix(camera.combined);
                     shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
