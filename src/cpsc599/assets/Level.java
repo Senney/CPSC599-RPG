@@ -25,7 +25,7 @@ public class Level {
 
     public boolean collide(int x, int y) {
         if (collisionLayer == null) {
-            Logger.error("Level::collide - Level has not yet been loaded, or collision layer was not assigned.");
+            Logger.error("Level has not yet been loaded, or collision layer was not assigned.");
             return false;
         }
 

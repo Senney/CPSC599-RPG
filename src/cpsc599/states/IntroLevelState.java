@@ -115,7 +115,7 @@ public class IntroLevelState extends LevelState {
             playerController.control(input, this.currentLevel);
         } else {
             if (tickCount == 0)
-                Logger.debug("IntroLevelState::tick - WAITING 400 ticks for a simulated enemy turn.");
+                Logger.debug("WAITING 400 ticks for a simulated enemy turn.");
             // TODO: This is where we put some awesome enemy turn logic!!
 
             // TODO: Remove this crap when we get some AI.
@@ -136,11 +136,11 @@ public class IntroLevelState extends LevelState {
 
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
-            Logger.debug("IntroLevelState::tick - 'SELECT' pressed.");
+            Logger.debug("'SELECT' pressed.");
         }
 
         if (Controls.isKeyTapped(input, Input.Keys.D)) {
-            Logger.debug("IntroLevelState::tick - Dialogue show button.");
+            Logger.debug("Dialogue show button.");
             if (this.dialogue.checkTextLeft() && this.dialogue.isVisible()) {
             	this.dialogue.loadTextRemains();
             }

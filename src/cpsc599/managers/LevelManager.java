@@ -54,12 +54,12 @@ public class LevelManager {
 	public void update() throws IOException {
 		File levels = new File(this.levelDir);
 		if (!levels.isDirectory()) {
-			Logger.error("LevelManager::update : Expected " + levels.getAbsoluteFile().toString() + " to be a directory.");
+			Logger.error("Expected " + levels.getAbsoluteFile().toString() + " to be a directory.");
 			throw new IOException("Expected levelDir to be a directory.");
 		}
 		
 		File[] levelList = levels.listFiles();
-		if (levelList.length == 0) Logger.warn("LevelManager::update : No levels found in " + this.levelDir);
+		if (levelList.length == 0) Logger.warn("No levels found in " + this.levelDir);
 		
 		for (File level : levelList) {
 			Level l = new Level();

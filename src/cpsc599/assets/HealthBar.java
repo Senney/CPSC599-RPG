@@ -24,7 +24,7 @@ public class HealthBar {
     public void render(int health, int maxHealth, SpriteBatch batch) {
         double pct = (double)health / (double)maxHealth;
         if (pct > 1) {
-            Logger.error("HealthBar::render - Player had over 100% health.");
+            Logger.error("Player had over 100% health.");
             return;
         }
 

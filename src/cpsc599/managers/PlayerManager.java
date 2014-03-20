@@ -17,7 +17,7 @@ public class PlayerManager {
     }
 
     public void addPlayer(Player p) {
-        Logger.debug("PlayerManager::addPlayer - Adding player '" + p + "'.");
+        Logger.debug("Adding player '" + p + "'.");
         playerList.add(p);
         //if (currentPlayer == null) setCurrent(0); // Commented to allow for cursor selection.
     }
@@ -28,7 +28,7 @@ public class PlayerManager {
 
     public Player getPlayer(int index) {
         if (playerList.size() < index) {
-            Logger.error("Player::setCurrent - index was out of range.");
+            Logger.error("index was out of range.");
             return null;
         }
 
@@ -37,7 +37,7 @@ public class PlayerManager {
 
     public Player setCurrent(int index) {
         currentPlayer = this.getPlayer(index);
-        Logger.debug("PlayerManager::setCurrent - Current player set to " + currentPlayer);
+        Logger.debug("Current player set to " + currentPlayer);
         return currentPlayer;
     }
 
@@ -47,11 +47,11 @@ public class PlayerManager {
 
     public void setCurrent(Player p) {
         if (p != null && !this.playerList.contains(p)) {
-            Logger.error("PlayerManager::setCurrent - Attempted to set current player to player that did not exist.");
+            Logger.error("Attempted to set current player to player that did not exist.");
             return;
         }
 
-        Logger.debug("PlayerManager::setCurrent - Current player set to " + p);
+        Logger.debug("Current player set to " + p);
         this.currentPlayer = p;
     }
 }

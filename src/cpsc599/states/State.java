@@ -28,7 +28,7 @@ public abstract class State {
      */
     public void init(OrbGame game) {
         if (this.orb == null) {
-            Logger.debug("State::init - State has already been initialized.");
+            Logger.debug("State has already been initialized.");
         }
 
         this.orb = game;

@@ -25,12 +25,12 @@ public class StateManager {
      */
     public boolean addState(String stateName, State state) {
         if (stateList.containsKey(stateName)) {
-            Logger.warn("StateManager::addState - Unable to add state: " +
+            Logger.warn("Unable to add state: " +
                     stateName + " as that state already exists.");
             return false;
         }
 
-        Logger.debug("StateManager::addState - Adding state: " + stateName);
+        Logger.debug("Adding state: " + stateName);
         stateList.put(stateName, state);
         return true;
     }
@@ -42,11 +42,11 @@ public class StateManager {
      */
     public State setState(String stateName) {
         if (!stateList.containsKey(stateName)) {
-            Logger.warn("StateManager::setState - Unable to get state as it does not exist: " + stateName);
+            Logger.warn("Unable to get state as it does not exist: " + stateName);
             return null;
         }
 
-        Logger.debug("StateManager::setState - Setting state to: " + stateName);
+        Logger.debug("Setting state to: " + stateName);
         this.current = stateList.get(stateName);
         return this.current;
     }

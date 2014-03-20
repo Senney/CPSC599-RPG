@@ -21,7 +21,7 @@ public class LevelLoader {
     private TmxMapLoader tmxLoader;
 
 	public LevelLoader(AssetManager assetManager) {
-        Logger.debug("LevelLoader - Creating LevelLoader.");
+        Logger.debug("Creating LevelLoader.");
 		this.assetManager = assetManager;
         this.tmxLoader = new TmxMapLoader();
 	}
@@ -32,12 +32,12 @@ public class LevelLoader {
         String mapName = "assets/maps/" + level.name + ".tmx";
         level.tiledMap = loadMap(mapName);
         if (level.tiledMap == null) {
-            Logger.fatal("LevelLoader::load - Unable to load requested Tiled Map: " + mapName);
+            Logger.fatal("Unable to load requested Tiled Map: " + mapName);
             return false;
         }
 
         if (level.tiledMap.getLayers().get("Collision") == null) {
-            Logger.fatal("LevelLoader::loadMap - The map *must* have a layer named 'Collision'.");
+            Logger.fatal("The map *must* have a layer named 'Collision'.");
             return false;
         }
         level.collisionLayer = (TiledMapTileLayer)level.tiledMap.getLayers().get("Collision");
@@ -66,10 +66,10 @@ public class LevelLoader {
             try {
                 level.player_spawn.x = Integer.parseInt(val.split(" ")[0]);
                 level.player_spawn.y = Integer.parseInt(val.split(" ")[1]);
-                Logger.debug("LevelLoader::loadMap - Set player spawn point to (" + level.player_spawn.x + ", " +
+                Logger.debug("Set player spawn point to (" + level.player_spawn.x + ", " +
                     level.player_spawn.y + ").");
             } catch (NumberFormatException ex) {
-                Logger.fatal("LevelLoader::loadMap - Player spawn point contained invalid values.");
+                Logger.fatal("Player spawn point contained invalid values.");
                 return false;
             }
         }
@@ -77,7 +77,7 @@ public class LevelLoader {
     }
 
     private TiledMap loadMap(String mapName) {
-        Logger.info("LevelLoader::loadMap - Loading Tiled map: " + mapName);
+        Logger.info("Loading Tiled map: " + mapName);
         File file = new File(mapName);
         if (!file.exists()) {
             return null;

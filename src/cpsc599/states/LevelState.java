@@ -37,16 +37,16 @@ public abstract class LevelState extends State {
 
     protected void setLevel(Level level) {
         if (this.spriteBatch == null) {
-            Logger.fatal("LevelState::setLevel - Hey developer! Call init(OrbGame) first!");
+            Logger.fatal("Hey developer! Call init(OrbGame) first!");
         }
 
         if (level == null) {
-            Logger.fatal("LevelState::setLevel - level was NULL!");
+            Logger.fatal("level was NULL!");
             return;
         }
 
         if (level.tiledMap == null) {
-            Logger.fatal("LevelState::setLevel - Level manager ");
+            Logger.fatal("Level manager ");
             return;
         }
 

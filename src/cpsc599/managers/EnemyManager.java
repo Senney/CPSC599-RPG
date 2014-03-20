@@ -19,7 +19,7 @@ public class EnemyManager {
     }
 
     public void addEnemy(Enemy e) {
-        Logger.debug("EnemyManager::addEnemy - Adding Enemy '" + e + "'.");
+        Logger.debug("Adding Enemy '" + e + "'.");
         enemyList.add(e);
     }
 
@@ -29,7 +29,7 @@ public class EnemyManager {
 
     public Enemy getEnemy(int index) {
         if (enemyList.size() < index) {
-            Logger.error("Enemy::setCurrent - index was out of range.");
+            Logger.error("index was out of range.");
             return null;
         }
 

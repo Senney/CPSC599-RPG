@@ -62,14 +62,14 @@ public class PlayerController {
             if (this.actMenu.isVisible()) {
                 String action = actionMenuMode(input);
                 if (action.equals("End Turn")) {
-                    Logger.debug("PlayerController::control - Ending turn");
+                    Logger.debug("Ending turn");
 
                     p.endTurn();
                     releasePlayer();
                     this.actMenu.toggleVisible();
 
                     if (checkTurnOver()) {
-                        Logger.debug("PlayerController::control - Turn for player is over.");
+                        Logger.debug("Turn for player is over.");
                         this.turnComplete = true;
                     }
 
@@ -77,7 +77,7 @@ public class PlayerController {
                 }
 
                 if (action.equals("Inventory")) {
-                    Logger.debug("PlayerController::control - Opening inventory");
+                    Logger.debug("Opening inventory");
                     this.actMenu.toggleVisible();
                     this.inventoryMenu.setInventory(p.getPlayerInventory());
                     this.inventoryMenu.toggleVisible();
@@ -98,20 +98,20 @@ public class PlayerController {
 
         // Move the player.
         if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
-            Logger.debug("PlayerController::control - 'A' button pressed.");
+            Logger.debug("'A' button pressed.");
             // Check to see if we're over a player with our cursor.
             if (p == null) {
                 // No player is selected, so we should check if a player is under the cursor.
                 selectPlayerOnCursor();
             } else {
                 actMenu.toggleVisible();
-                Logger.debug("PlayerController::control - entering action menu");
+                Logger.debug("entering action menu");
             }
         }
 
         // Reset the selector position.
         if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
-            Logger.debug("PlayerController::control - 'B' button pressed.");
+            Logger.debug("'B' button pressed.");
             if (p != null) {
                 if (this.inventoryMenu.isVisible())
                     this.inventoryMenu.toggleVisible();
@@ -164,7 +164,7 @@ public class PlayerController {
 
         if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
             String action = this.actMenu.getAction();
-            Logger.debug("PlayerController::actionMenuMode - Returning action: " + action);
+            Logger.debug("Returning action: " + action);
             return action;
         }
 

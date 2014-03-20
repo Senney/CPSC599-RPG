@@ -28,7 +28,7 @@ public class Inventory {
 
 	public Inventory(Player p)
 	{
-		Logger.debug("Inventory::contruc - Creating inventory.");
+		Logger.debug("Creating inventory.");
 		equip = new Item[EQUIP_SIZE];
 		carry = new Item[CARRY_SIZE];
         this.owner = p;
@@ -45,7 +45,7 @@ public class Inventory {
 		carryIndex++;
 		Logger.debug("Inventory::pickUp - you just picked up a " + item.name);
 		return true;*/
-		Logger.debug("Inventory::pickUp - you just picked up a " + item.name);
+		Logger.debug("you just picked up a " + item.name);
 		return addItem(item);
 	}
 	
@@ -60,14 +60,14 @@ public class Inventory {
 		}
 		equip[item.equipSlot] = item;
 		removeItem(item);
-		Logger.debug("Inventory::pickUp - you just equipped a " + item.name);
+		Logger.debug("you just equipped a " + item.name);
 		return true;
 	}
 	
 	public boolean use(Item item)
 	{
 		removeItem(item);
-		Logger.debug("Inventory::pickUp - you just used a " + item.name);
+		Logger.debug("you just used a " + item.name);
 		return true;
 	}
 	
@@ -75,7 +75,7 @@ public class Inventory {
 	{
 		if(carryIndex == CARRY_SIZE)
 		{
-			Logger.debug("Inventory::addItem - pickup failed, Inventory full");
+			Logger.debug("pickup failed, Inventory full");
 			return false;
 		}
 		carry[carryIndex] = item;
@@ -93,7 +93,7 @@ public class Inventory {
 		}
 		if(carryIndex == 0)
 		{
-			Logger.debug("Inventory::removeItem - remove failed, Inventory empty");
+			Logger.debug("remove failed, Inventory empty");
 			return false;
 		}
 		carry[index] = null;

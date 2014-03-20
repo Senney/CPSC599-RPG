@@ -79,7 +79,7 @@ public class OrbGame implements ApplicationListener {
 
     public void setState(String stateName) {
         if (this.stateManager.setState(stateName) == null) {
-            Logger.fatal("OrbGame::setState - Unable to set state to " + stateName);
+            Logger.fatal("Unable to set state to " + stateName);
             System.exit(1);
         }
         this.stateManager.current.init(this);

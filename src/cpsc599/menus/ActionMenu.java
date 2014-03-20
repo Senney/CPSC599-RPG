@@ -48,7 +48,7 @@ public class ActionMenu extends Menu {
         }
         this.pointer_y = (int)(this.pointer_height * this.pointer);
 
-        Logger.debug("ActionMenu::movePointer - Setting pointer to: " + this.options.get(pointer));
+        Logger.debug("Setting pointer to: " + this.options.get(pointer));
     }
 
     public String getAction() {

@@ -27,13 +27,13 @@ public class Dialogue {
 	private boolean textLeft = false;
 	
 	public Dialogue() {
-		Logger.debug("Dialogue::setUp - Setting up text");
+		Logger.debug("Setting up text");
 		
 		boxHeight = Gdx.graphics.getHeight() - 325;
 		boxWidth = Gdx.graphics.getWidth() - 20;	// Adds 10px padding on left/right
 		
 		try {
-			Logger.debug("Dialogue::XML Parsing");
+			Logger.debug("XML Parsing");
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = docFactory.newDocumentBuilder();
 			Document doc = db.parse(new File("src/cpsc599/assets/Script.xml"));
@@ -45,7 +45,7 @@ public class Dialogue {
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			Logger.debug("Dialogue::Failed to parse XML");
+			Logger.debug("Failed to parse XML");
 		}
 		
 		font = new BitmapFont();

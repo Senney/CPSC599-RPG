@@ -35,7 +35,7 @@ public class CameraController {
      * @param size (w, h, scale) the parameters that specify the size the camera should view.
      */
     public CameraController(Vector2 position, Vector3 size) {
-        Logger.info("CameraController - Constructing");
+        Logger.info("Constructing");
         this.width = (int)size.x;
         this.height = (int)size.y;
         this.scale = (double)size.z;
@@ -60,7 +60,7 @@ public class CameraController {
      */
     public void move(int x, int y) {
         if (this.camera == null) {
-            Logger.fatal("CameraController::move - Camera must be initialized before it can be used");
+            Logger.fatal("Camera must be initialized before it can be used");
             return;
         }
 
@@ -99,7 +99,7 @@ public class CameraController {
      */
     public void set(int x, int y) {
         if (this.camera == null) {
-            Logger.fatal("CameraController::set - Camera must be instantiated before it can be set.");
+            Logger.fatal("Camera must be instantiated before it can be set.");
             return;
         }
 

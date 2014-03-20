@@ -39,14 +39,14 @@ public class AnimatedSprite {
      * @return True if the sprite was loaded successfully.
      */
     public boolean loadSprite(String filename, int xoff, int yoff, int xsize, int ysize, int frames, float frameTime) {
-        Logger.debug("AnimatedSprite::loadSprite - Loading sprite: " + filename);
+        Logger.debug("Loading sprite: " + filename);
         try {
             spriteSheet = new Texture(filename);
         } catch (NullPointerException ex) {
-            Logger.fatal("AnimatedSprite::loadSprite - Unable to load sprite at: " + filename);
+            Logger.fatal("Unable to load sprite at: " + filename);
             return false;
         } catch (GdxRuntimeException ex) {
-            Logger.fatal("AnimatedSprite::loadSprite - Unable to load sprite at: " + filename);
+            Logger.fatal("Unable to load sprite at: " + filename);
             return false;
         }
         TextureRegion[][] tempRegion = TextureRegion.split(spriteSheet, xsize, ysize);

@@ -16,7 +16,7 @@ public class MainMenuState extends State {
     @Override
     public void render() {
         if (this.spriteBatch == null) {
-            Logger.error("MainMenuState::render - init() must be called first.");
+            Logger.error("init() must be called first.");
             return;
         }
 
