@@ -119,6 +119,7 @@ public class IntroLevelState extends LevelState {
         // These have to be rendered outside of the overlay batch.
         this.playerController.getActMenu().render(this.overlayLayer);
         this.playerController.getInventoryMenu().render(super.overlayLayer);
+        this.playerController.getStatsMenu().render(this.overlayLayer);
         this.dialogue.render(this.overlayLayer);
     }
 

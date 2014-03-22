@@ -7,21 +7,8 @@ import cpsc599.items.Inventory;
 import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
 
-public class Enemy {
+public class Enemy extends Actor{
     private AnimatedSprite enemySprite;
-
-    public int maxHealth;
-    public int currentHealth;
-    public int strength;
-    public int defence;
-    public int speed;
-
-    public int maxMove;
-    public int curMove;
-
-    public int x, y;
-    private int moveX, moveY;
-    private boolean moving;
 
     private Inventory enemyInventory;
 
@@ -33,6 +20,9 @@ public class Enemy {
         this.x = x;
         this.y = y;
         this.maxMove = moveDist;
+
+        this.maxHealth = 10;
+        this.currentHealth = 7;
 
         //this.moveStart = 0f;
     }

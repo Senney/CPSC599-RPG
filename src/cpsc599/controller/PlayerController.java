@@ -9,6 +9,7 @@ import cpsc599.managers.EnemyManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.menus.ActionMenu;
 import cpsc599.menus.InventoryMenu;
+import cpsc599.menus.StatsMenu;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 
@@ -31,7 +32,7 @@ public class PlayerController {
     private Cursor cursor;
 
     private ActionMenu actMenu;
-    //private StatsMenu statMenu;
+    private StatsMenu statsMenu;
     private InventoryMenu inventoryMenu;
 
     private PlayerManager playerManager;
@@ -61,9 +62,11 @@ public class PlayerController {
     public void setupMenus(){
         actMenu = new ActionMenu(80,90);
         inventoryMenu = new InventoryMenu(100, 200);
+        statsMenu = new StatsMenu(80, 90, null);
     }
 
     public ActionMenu getActMenu() {return this.actMenu;}
+    public StatsMenu getStatsMenu() {return  this.statsMenu;}
     public InventoryMenu getInventoryMenu() { return this.inventoryMenu; }
 
     public Cursor getCursor() {
@@ -105,9 +108,6 @@ public class PlayerController {
         Player p = this.playerManager.getCurrent();
 
         if (p != null) {
-            //if (this.statMenu.isVisible()) {
-
-            //}
             if (this.actMenu.isVisible()) {
                 String action = actionMenuMode(input);
                 if (action.equals("End Turn")) {
@@ -154,7 +154,14 @@ public class PlayerController {
             } else {
                 movePlayer(input, p, currentLevel);
             }
-        } else {
+        }
+        else if(selectedEnemy != null){
+            if (this.statsMenu.isVisible()) {
+                //Logger.debug("Stats page open");
+                String action = statsMenuMode(input);
+            }
+        }
+        else {
             moveCursor(input);
         }
 
@@ -167,9 +174,9 @@ public class PlayerController {
                 Boolean sel = selectPlayerOnCursor();
                 Boolean eSel = selectEnemyOnCursor();
 
-                if(sel == true)
+                if(sel)
                     selected = 1;
-                else if(eSel == true)
+                else if(eSel)
                     selected = 2;
                 else
                     selected = 0;
@@ -240,6 +247,8 @@ public class PlayerController {
         for(Enemy enemy : this.enemyManager.getEnemies()){
             if(enemy.x == cursor.x && enemy.y == cursor.y){
                 Logger.debug("Enemy selected");
+                statsMenu.setActor(enemy);
+                statsMenu.setVisible(true);
                 selectedEnemy = enemy;
                 return true;
             }
@@ -264,6 +273,16 @@ public class PlayerController {
             String action = this.actMenu.getAction();
             Logger.debug("Returning action: " + action);
             return action;
+        }
+
+        return "";
+    }
+
+    private String statsMenuMode(Input input){
+        if(Controls.isKeyTapped(input, Controls.B_BUTTON)){
+            statsMenu.toggleVisible();
+            selectedEnemy = null;
+            return "close";
         }
 
         return "";
@@ -297,6 +316,7 @@ public class PlayerController {
     private void closeAllMenus() {
         this.inventoryMenu.setVisible(false);
         this.actMenu.setVisible(false);
+        this.statsMenu.setVisible(false);
     }
 
     public boolean isTurnComplete() {

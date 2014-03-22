@@ -9,22 +9,8 @@ import cpsc599.util.Logger;
 /**
  * Base class for a Player controlled entity.
  */
-public class Player {
+public class Player extends Actor{
     private AnimatedSprite playerSprite;
-
-    public int maxHealth;
-    public int currentHealth;
-    public int strength;
-    public int defence;
-    public int speed;
-
-    public int maxMove;
-    public int curMove;
-    public boolean turnOver;
-
-    public int x, y;
-    private int moveX, moveY;
-    private boolean moving;
 
     private Inventory playerInventory;
 
