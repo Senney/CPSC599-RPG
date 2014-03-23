@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="grass" tilewidth="16" tileheight="16">
+  <image source="../../Environment/grass.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="17" name="mountain" tilewidth="16" tileheight="16">
+  <image source="../../Environment/mountain.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="33" name="trees" tilewidth="16" tileheight="16">
+  <image source="../../Environment/trees.png" width="64" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyVk0kKwDAIRbMrcZdAC+0uuf8hq6AgwSFZPLTVfAdwllIGMhNLNKYjN/Ko2MWA8i06a7zIx/o6XoNvMHSimlkvLYlHVJ67Lv9ONEaiv/Zv6YPj77Cbn+VFO/B6Pt2VlW/tb3cmetvZglOjOppyA2TlPk5moXdyP1MxDH+1Ulvu5wc7swtd
+  </data>
+ </layer>
+</map>
