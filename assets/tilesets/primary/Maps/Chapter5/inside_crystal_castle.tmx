@@ -45,19 +45,20 @@
  <tileset firstgid="714" name="walls" tilewidth="16" tileheight="16">
   <image source="../../Town/walls.png" width="128" height="128"/>
  </tileset>
- <layer name="main bgd" width="16" height="15">
+ <tileset firstgid="778" name="inside_castle" tilewidth="16" tileheight="16">
+  <image source="../../Castle/inside_castle.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="842" name="snowman" tilewidth="16" tileheight="16">
+  <image source="../../Enemy/Monsters/snowman.png" width="16" height="16"/>
+ </tileset>
+ <layer name="Tile Layer 2" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJw7w8DAcAoPPkOkHD51pKghRy29zKfEHGzqiBUj115q+ZHUtEDtdEMv/+EyH52mhjuINYtQWAEADQO9mQ==
+   eJzjZ2ZgECATCwKxOBBLkIklR/WP6h/h+qWxYCkoLQPEskAsB6WxYQDffxkS
   </data>
  </layer>
- <layer name="castle" width="16" height="15">
+ <layer name="Tile Layer 2" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJzly0lXznEYx+H/8xAbjVQbmqg20syGJg2bQqON0GijWbVJKqo3meayaaCSDelqZdHvHbjPuTbf+3yi6N+txKLoK6ussc4Gm2yxzQ67fItFl27Pts8Bh3znB0ccc8JPTvkV6H/b/nDG34t/PIpixLnCVRK4xvX45f6GLZEkkkkhlTRucot0MsgM9Ldtd8gimxxyyeMu98ingMJAf99WxAOKKaGUMsqpoJKHPAr0j21PqKKaGmqp4yn1NNBIU6BvtrXwjOe8oJU22umgky5eBvpXtm5e84a39NBLH/0MMMi7QP/eNsQwI4wyxjgTfGCSKaYD/YztI7N8Yo55FvjMFxZZYjnQ/493DlXyNnM=
-  </data>
- </layer>
- <layer name="characters" width="16" height="15">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU4AKiFOgVh9Jq1HAIDgAAJ4QAUw==
+   eJxjYBgFtARezAPtAgggxx3UcvtgCYPhCAAvqgE1
   </data>
  </layer>
 </map>
