@@ -22,27 +22,27 @@
   <image source="../../Environment/beach.png" width="256" height="128"/>
  </tileset>
  <tileset firstgid="202" name="snow" tilewidth="16" tileheight="16">
-  <image source="../../Environment/snow.png" width="64" height="64"/>
+  <image source="../../Environment/snow.png" width="128" height="64"/>
  </tileset>
- <tileset firstgid="218" name="river" tilewidth="16" tileheight="16">
+ <tileset firstgid="234" name="river" tilewidth="16" tileheight="16">
   <image source="../../Environment/river.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="282" name="ocean" tilewidth="16" tileheight="16">
+ <tileset firstgid="298" name="ocean" tilewidth="16" tileheight="16">
   <image source="../../Environment/ocean.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="298" name="hill" tilewidth="16" tileheight="16">
+ <tileset firstgid="314" name="hill" tilewidth="16" tileheight="16">
   <image source="../../Environment/hill.png" width="64" height="128"/>
  </tileset>
- <tileset firstgid="330" name="desert" tilewidth="16" tileheight="16">
+ <tileset firstgid="346" name="desert" tilewidth="16" tileheight="16">
   <image source="../../Environment/desert.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="346" name="beach" tilewidth="16" tileheight="16">
+ <tileset firstgid="362" name="beach" tilewidth="16" tileheight="16">
   <image source="../../Environment/beach.png" width="256" height="128"/>
  </tileset>
- <tileset firstgid="474" name="castle" tilewidth="16" tileheight="16">
+ <tileset firstgid="490" name="castle" tilewidth="16" tileheight="16">
   <image source="../../Castle/castle.png" width="256" height="240"/>
  </tileset>
- <tileset firstgid="714" name="walls" tilewidth="16" tileheight="16">
+ <tileset firstgid="730" name="walls" tilewidth="16" tileheight="16">
   <image source="../../Town/walls.png" width="128" height="128"/>
  </tileset>
  <layer name="main bgd" width="16" height="15">
@@ -50,14 +50,19 @@
    eJw7w8DAcAoPPkOkHD51pKghRy29zKfEHGzqiBUj115q+ZHUtEDtdEMv/+EyH52mhjuINYtQWAEADQO9mQ==
   </data>
  </layer>
- <layer name="castle" width="16" height="15">
-  <data encoding="base64" compression="zlib">
-   eJzly0lXznEYx+H/8xAbjVQbmqg20syGJg2bQqON0GijWbVJKqo3meayaaCSDelqZdHvHbjPuTbf+3yi6N+txKLoK6ussc4Gm2yxzQ67fItFl27Pts8Bh3znB0ccc8JPTvkV6H/b/nDG34t/PIpixLnCVRK4xvX45f6GLZEkkkkhlTRucot0MsgM9Ldtd8gimxxyyeMu98ingMJAf99WxAOKKaGUMsqpoJKHPAr0j21PqKKaGmqp4yn1NNBIU6BvtrXwjOe8oJU22umgky5eBvpXtm5e84a39NBLH/0MMMi7QP/eNsQwI4wyxjgTfGCSKaYD/YztI7N8Yo55FvjMFxZZYjnQ/493DlXyNnM=
-  </data>
- </layer>
  <layer name="characters" width="16" height="15">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AU4AKiFOgVh9Jq1HAIDgAAJ4QAUw==
+  </data>
+ </layer>
+ <layer name="trees" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJx7xMDA8IgKGAbO4GAzoIlj00tIHzrAZzcp+knVh8v+gdI/EO5HjkMYqGFiYLhFhv0gs24xIPwBMwMmfgtNDYwN038LSR8hNrI5yPrR1WMD6Oahp2Fs+tHFYDSh/IRNHzZ1ALJ0WR0=
+  </data>
+ </layer>
+ <layer name="castle" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt0jdPQzEUBlDnZQcR2kJvEy20KUCoE71NQOgTvW308oNhZeAMGXECO1c6svT5Xr8n2SGUr49UCJ+p8n1fkZ4kCSGd/OJDxarQW1nsr7JmqKaGWuqo/+G8BlkjTTTTQitttNNBJ12Rf+mW99BLH/1kGWCQIYYZiczn5KOMMU6eCSaZYpoZZiPzc/J5FlhkiWVWWGWNdTYi85vyLbYpsMMue+xzwCFHkflj+QmnnHHOBZdccc0NtyXu8s7ePQ888sQzL7zyxvsf3sJ/la5vJBMcIg==
   </data>
  </layer>
 </map>

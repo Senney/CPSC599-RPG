@@ -48,17 +48,9 @@
  <tileset firstgid="778" name="inside_castle" tilewidth="16" tileheight="16">
   <image source="../../Castle/inside_castle.png" width="128" height="64"/>
  </tileset>
- <tileset firstgid="842" name="snowman" tilewidth="16" tileheight="16">
-  <image source="../../Enemy/Monsters/snowman.png" width="16" height="16"/>
- </tileset>
  <layer name="Tile Layer 2" width="16" height="15">
   <data encoding="base64" compression="zlib">
    eJzjZ2ZgECATCwKxOBBLkIklR/WP6h/h+qWxYCkoLQPEskAsB6WxYQDffxkS
-  </data>
- </layer>
- <layer name="Tile Layer 2" width="16" height="15">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFtARezAPtAgggxx3UcvtgCYPhCAAvqgE1
   </data>
  </layer>
 </map>

@@ -19,25 +19,25 @@
   <image source="../../Environment/mountain.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="74" name="beach" tilewidth="16" tileheight="16">
-  <image source="../../Environment/beach.png" width="128" height="64"/>
+  <image source="../../Environment/beach.png" width="256" height="128"/>
  </tileset>
- <tileset firstgid="106" name="snow" tilewidth="16" tileheight="16">
+ <tileset firstgid="202" name="snow" tilewidth="16" tileheight="16">
   <image source="../../Environment/snow.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="122" name="river" tilewidth="16" tileheight="16">
+ <tileset firstgid="218" name="river" tilewidth="16" tileheight="16">
   <image source="../../Environment/river.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="186" name="ocean" tilewidth="16" tileheight="16">
+ <tileset firstgid="282" name="ocean" tilewidth="16" tileheight="16">
   <image source="../../Environment/ocean.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="202" name="hill" tilewidth="16" tileheight="16">
+ <tileset firstgid="298" name="hill" tilewidth="16" tileheight="16">
   <image source="../../Environment/hill.png" width="64" height="128"/>
  </tileset>
- <tileset firstgid="234" name="desert" tilewidth="16" tileheight="16">
+ <tileset firstgid="330" name="desert" tilewidth="16" tileheight="16">
   <image source="../../Environment/desert.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="250" name="beach" tilewidth="16" tileheight="16">
-  <image source="../../Environment/beach.png" width="128" height="64"/>
+ <tileset firstgid="362" name="beach" tilewidth="16" tileheight="16">
+  <image source="../../Environment/beach.png" width="256" height="128"/>
  </tileset>
  <layer name="bgd" width="16" height="15">
   <data encoding="base64" compression="zlib">
