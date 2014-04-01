@@ -50,6 +50,12 @@ public class CameraController {
 
     }
 
+    public void setCameraBounds(Vector2 size) {
+        this.width = CoordinateTranslator.translate((int)size.x);
+        this.height = CoordinateTranslator.translate((int)size.y);
+        Logger.debug("Setting camera bounds to (" + this.width + ", " + this.height + ")");
+    }
+
     /**
      * Moves the camera to the noted position, in game-units. This method revolves around a rectangle which
      * represents the camera. Once the x, y position has reached a threshold (CAMERA_SIDE_THRESH) from the edge
@@ -104,9 +110,11 @@ public class CameraController {
         }
 
         // Check that the X and Y positions don't overflow the camera off of the map.
-        int realx = bound(CoordinateTranslator.translate(x), width, (int)(Main.GAME_WIDTH * Main.GAME_SCALE));
-        int realy = bound(CoordinateTranslator.translate(y), height, (int)(Main.GAME_HEIGHT * Main.GAME_SCALE));
+        int realx = bound(CoordinateTranslator.translate(x), width, width);
+        int realy = bound(CoordinateTranslator.translate(y), height, height);
 
+        if (this.x == realx && this.y == realy) return; // Don't do unnecessary work.
+        Logger.debug("Setting camera position to (" + realx + ", " + realy + ")");
         this.x = realx;
         this.y = realy;
 
@@ -118,8 +126,8 @@ public class CameraController {
     }
 
     private int bound(int d, int v, int m) {
-        if (d - (v / 2) < 0) d = v / 2;
-        if (d + (v / 2) > m) d = m - (v / 2);
+        if (d - (v / 2) < 0) return v / 2;
+        if (d + (v / 2) > m) return m - (v / 2);
         return d;
     }
 

@@ -56,6 +56,8 @@ public abstract class LevelState extends State {
         this.currentLevel = level;
         renderer = new OrthogonalTiledMapRenderer(currentLevel.tiledMap, 1.0f, super.spriteBatch);
         renderer.setView(camera.combined, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
+
+        this.cameraController.setCameraBounds(this.currentLevel.getMapDimensions());
     }
 
     @Override
