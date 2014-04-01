@@ -108,6 +108,13 @@ public class PlayerController {
         Player p = this.playerManager.getCurrent();
 
         if (p != null) {
+            if(this.statsMenu.isVisible()) {
+                if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
+                    statsMenu.setVisible(false);
+                    Logger.debug("Closing stat menu");
+                }
+                return;
+            }
             if (this.actMenu.isVisible()) {
                 String action = actionMenuMode(input);
                 if (action.equals("End Turn")) {
@@ -117,7 +124,7 @@ public class PlayerController {
 
                     return;
                 }
-                if(action.equals("Attack")) {
+               else if(action.equals("Attack")) {
                     Logger.debug("Attacking");
                     int range = 0;
                     if(playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT) == null){
@@ -132,6 +139,11 @@ public class PlayerController {
                     this.selectedAttack = 0;
 
                     return;
+                }
+                else if(action.equals("Stats"))
+                {
+                    statsMenu.setActor(p);
+                    statsMenu.setVisible(true);
                 }
                 /*else if(action.equals("Equip")) {
                     Logger.debug("PlayerController::control - Equiping");
