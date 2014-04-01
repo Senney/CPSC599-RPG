@@ -30,6 +30,10 @@ public class Level {
             return false;
         }
 
+        // Don't let the players leave the map.
+        if (x < 0 || y < 0) return true;
+        if (x > tile_bounds.x || y > tile_bounds.y) return true;
+
         boolean collides = collisionLayer.getCell(x, y) != null;
         return collides;
     }
