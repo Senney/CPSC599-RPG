@@ -35,7 +35,7 @@ public class IntroLevelState extends LevelState {
         super(game, playerController, cameraController, enemyController);
         super.setLevel(manager.setLevel(0));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/prince/prince_front.png", 0, 0, 16, 16, 1, 0.1f);
+        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
 
         Player p = new Player(sprite, 2, 5, 8);
         //p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT, 1));
@@ -47,7 +47,7 @@ public class IntroLevelState extends LevelState {
         p.getPlayerInventory().equip(sw);
 
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_front.png", 0, 0, 16, 16, 1, 0.1f);
+        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_right.png", 0, 0, 16, 16, 1, 0.1f);
         Player p3 = new Player(sprite, 2, 7, 8);
         p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 2));
         p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);

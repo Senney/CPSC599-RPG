@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="grass" tilewidth="16" tileheight="16">
+  <image source="../../Environment/grass.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="17" name="female" tilewidth="16" tileheight="16">
+  <image source="../../CharacterDesign/female.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="33" name="male" tilewidth="16" tileheight="16">
+  <image source="../../CharacterDesign/male.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="49" name="cow_cube" tilewidth="16" tileheight="16">
+  <image source="../../Enemy/Monsters/cow_cube.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="50" name="trees" tilewidth="16" tileheight="16">
+  <image source="../../Environment/trees.png" width="64" height="32"/>
+ </tileset>
+ <tileset firstgid="58" name="mountain" tilewidth="16" tileheight="16">
+  <image source="../../Environment/mountain.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="74" name="beach" tilewidth="16" tileheight="16">
+  <image source="../../Environment/beach.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="106" name="snow" tilewidth="16" tileheight="16">
+  <image source="../../Environment/snow.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="122" name="river" tilewidth="16" tileheight="16">
+  <image source="../../Environment/river.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="186" name="ocean" tilewidth="16" tileheight="16">
+  <image source="../../Environment/ocean.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="202" name="hill" tilewidth="16" tileheight="16">
+  <image source="../../Environment/hill.png" width="64" height="128"/>
+ </tileset>
+ <tileset firstgid="234" name="desert" tilewidth="16" tileheight="16">
+  <image source="../../Environment/desert.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="250" name="beach" tilewidth="16" tileheight="16">
+  <image source="../../Environment/beach.png" width="128" height="64"/>
+ </tileset>
+ <layer name="bgd" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwzZ2BgMB9AbAbE7EDMCaWRMTYxZGyBxOaC0nxoanjR5KmJOcl0N6mYC4u5MDFeAvK0xLxIbPRwRw8LbPIwOWzuJxab4ZEjFAag9GOOxQxePHo40fQONAYAol8UbA==
+  </data>
+ </layer>
+</map>

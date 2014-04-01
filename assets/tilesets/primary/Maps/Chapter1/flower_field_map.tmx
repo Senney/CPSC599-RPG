@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="grass" tilewidth="16" tileheight="16">
+  <image source="../../Environment/grass.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="17" name="river" tilewidth="16" tileheight="16">
+  <image source="../../Environment/river.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="81" name="female" tilewidth="16" tileheight="16">
+  <image source="../../CharacterDesign/female.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="97" name="male" tilewidth="16" tileheight="16">
+  <image source="../../CharacterDesign/male.png" width="64" height="64"/>
+ </tileset>
+ <layer name="field" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyVkLEKwDAIRLOVDnHqWOjinjFD//+/qmDhEBOT4aHoecZwKaUJj8DCbVFr3SJbX/PL6VDfwMvPRzr0ZvBuMI+7UfPPvBN60ldIOIRqUTkhxx65esaqntzemujPTX9/T9TDnSPfOshnjHS+nt2y+/fZ3TPfqOa9KNmzsnvlr6K3oO4DsP4QWg==
+  </data>
+ </layer>
+ <layer name="characters" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFww1EAnHuQDtiFNAFAAB+owDH
+  </data>
+ </layer>
+</map>

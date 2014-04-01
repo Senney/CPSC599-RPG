@@ -1,17 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="16" height="15" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="grass" tilewidth="16" tileheight="16">
-  <image source="Environment/grass.png" width="64" height="64"/>
+  <image source="../../Environment/grass.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="17" name="mountain" tilewidth="16" tileheight="16">
-  <image source="Environment/mountain.png" width="64" height="64"/>
+  <image source="../../Environment/mountain.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="33" name="river" tilewidth="16" tileheight="16">
-  <image source="Environment/river.png" width="128" height="128"/>
+ <tileset firstgid="33" name="trees" tilewidth="16" tileheight="16">
+  <image source="../../Environment/trees.png" width="64" height="32"/>
  </tileset>
- <layer name="Tile Layer 1" width="16" height="15">
+ <tileset firstgid="41" name="house" tilewidth="16" tileheight="16">
+  <image source="../../Town/house.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="105" name="male" tilewidth="16" tileheight="16">
+  <image source="../../CharacterDesign/male.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="121" name="path" tilewidth="16" tileheight="16">
+  <image source="../../Town/path.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="185" name="cow_cube" tilewidth="16" tileheight="16">
+  <image source="../../Enemy/Monsters/cow_cube.png" width="16" height="16"/>
+ </tileset>
+ <layer name="background" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJzN08EKgCAMBmBvYWCQYFDnjoGX3qCDh97/fZrwD4ZMI+rQ4UNzW6i1YIyZiCcj+OJZWwuom8lCHLGkx5gNYs6xHrlcd1SkRkyKsJMNY0T9LuS1tcjJzorUiEkdztbBIOZfcuL9TonZSv5faPdilZh2lrs7eYP/69aetf1wHffB0+9Y9k+r/7Re5LoL39kT4w==
+   eJy9k7EKgDAMRLtJSidBQbf0/z/SCAbCcW3QweEhlrzkiHUrpezG+tATFJ6HcQb/Pm/GQtCA98g8mfTqwc2cSs5ayFHBZfUzP6sdoS99zOXzBWpGe8M9/ZmfZYrzZ98AXSH+F9xnPUYz4zu709l9FMjP/ivsi57v5wJ/ug1T
+  </data>
+ </layer>
+ <layer name="path" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg+YCWRGJ9+UuwgRz8utcS6nRh/kGM/OfopNWMUUA4Ab2oVIQ==
+  </data>
+ </layer>
+ <layer name="houses" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhcwAaIdaBsSyB2gbJBYiZUtMOGSmYhmwkCIDdbQdkuaGp00OhRMAooBQBnBAMJ
+  </data>
+ </layer>
+ <layer name="characters" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowATVABx+UA7YhQQBACNywDw
+  </data>
+ </layer>
+ <layer name="cow cubes" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAN2EmAT02zqW0+Lc2klfk7qWwePcBOHOxRQDwAAGszBzs=
   </data>
  </layer>
 </map>

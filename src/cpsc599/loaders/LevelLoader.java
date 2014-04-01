@@ -29,7 +29,9 @@ public class LevelLoader {
 	public boolean load(Level level) {
         Logger.info("Loading level: " + level.name);
 
-        String mapName = "assets/maps/" + level.name + ".tmx";
+        //String mapName = "assets/maps/" + level.name + ".tmx"; //old version
+        // I placed each map in the proper chapter folder
+        String mapName = "assets/tilesets/primary/Maps/Chapter1/" + level.name + ".tmx";
         level.tiledMap = loadMap(mapName);
         if (level.tiledMap == null) {
             Logger.fatal("Unable to load requested Tiled Map: " + mapName);
