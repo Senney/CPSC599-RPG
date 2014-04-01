@@ -26,6 +26,7 @@ public class ActionMenu extends Menu {
 
         //These are temporary right now
         options.add("Attack");
+        options.add("Stats");
         options.add("Equip");
         options.add("Drop");
         options.add("Pickup");
