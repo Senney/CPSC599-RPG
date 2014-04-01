@@ -51,4 +51,12 @@ public class EnemyManager {
 
         return enemyList.get(index);
     }
+
+    public Enemy getEnemyAtPosition(int x, int y) {
+        for (Enemy e : enemyList) {
+            if (e.x == x && e.y == y) return e;
+        }
+
+        return null;
+    }
 }
