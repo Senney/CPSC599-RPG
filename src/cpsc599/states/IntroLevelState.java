@@ -194,7 +194,10 @@ public class IntroLevelState extends LevelState {
         int selected;
         if ((selected = playerController.controlAttack(input, this.attackingList)) != -1) {
             if(!this.attackingList.isEmpty()) {
-                current.attack(this.attackingList.get(selected));
+                boolean isDead = current.attack(this.attackingList.get(selected));
+                if(isDead){
+                    enemyController.getEnemyManager().removeEnemy(this.attackingList.get(selected));
+                }
                 this.attackingList = null;
             }
             else
