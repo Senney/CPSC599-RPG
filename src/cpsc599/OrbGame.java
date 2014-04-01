@@ -132,7 +132,7 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("MAIN_MENU", new MainMenuState());
         stateManager.addState("LEVEL0", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
 
-        setState("LEVEL0");
+        setState("MAIN_MENU");
         //levelManager.setLevel(0);
 	}
 	

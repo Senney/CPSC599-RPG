@@ -51,4 +51,9 @@ public class EnemyManager {
 
         return enemyList.get(index);
     }
+
+    public void removeEnemy(Enemy enemy)
+    {
+        enemyList.remove(enemy);
+    }
 }
