@@ -20,7 +20,7 @@ public class ActionMenu extends Menu {
 
     public ActionMenu(int width, int height) {
         super(width, height);
-        this.visible = false;
+        setVisible(false);
 
         options = new ArrayList<String>();
 
