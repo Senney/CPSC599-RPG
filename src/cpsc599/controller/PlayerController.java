@@ -169,8 +169,8 @@ public class PlayerController {
         }
         else if(selectedEnemy != null){
             if (this.statsMenu.isVisible()) {
-                //Logger.debug("Stats page open");
-                String action = statsMenuMode(input);
+                controlStatsMenu(input);
+                return;
             }
         }
         else {
@@ -290,14 +290,11 @@ public class PlayerController {
         return "";
     }
 
-    private String statsMenuMode(Input input){
+    private void controlStatsMenu(Input input){
         if(Controls.isKeyTapped(input, Controls.B_BUTTON)){
             statsMenu.toggleVisible();
             selectedEnemy = null;
-            return "close";
         }
-
-        return "";
     }
 
     private void moveCursor(Input input) {
@@ -314,14 +311,21 @@ public class PlayerController {
     }
 
     private void movePlayer(Input input, Player p, Level l) {
+        int movex = 0;
+        int movey = 0;
         if (Controls.isKeyTapped(input, Controls.UP)) {
-            p.move(0, -1, l);
+            movex = 0; movey = -1;
         } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
-            p.move(0, 1, l);
+            movex = 0; movey = 1;
         } else if (Controls.isKeyTapped(input, Controls.RIGHT)) {
-            p.move(1, 0, l);
+            movex = 1; movey = 0;
         } else if (Controls.isKeyTapped(input, Controls.LEFT)) {
-            p.move(-1, 0, l);
+            movex = -1; movey = 0;
+        }
+
+        // If we have a move and there's no enemy in our space, we can move.
+        if ((movex != 0 || movey != 0) && enemyManager.getEnemyAtPosition(p.x + movex, p.y + movey) == null) {
+            p.move(movex, movey, l);
         }
     }
 

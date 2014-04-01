@@ -1,6 +1,7 @@
 package cpsc599.assets;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import cpsc599.OrbGame;
 import cpsc599.items.Inventory;
 import cpsc599.util.CoordinateTranslator;
@@ -64,25 +65,27 @@ public class Player extends Actor{
         playerSprite.render(batch, CoordinateTranslator.translate(x), CoordinateTranslator.translate(y));
     }
 
-    public void move(int x, int y, Level level) {
+    public Vector2 move(int x, int y, Level level) {
         if (moving) {
             Logger.warn("Player is already in motion. Some bug in the controller..");
         }
 
         if (curMove == 0 && maxMove != 0) {
             Logger.debug("Player has 0 movement spaces available.");
-            return;
+            return new Vector2(this.x, this.y);
         }
 
         if (level.collide(this.x + x, this.y + y)) {
             Logger.debug("Player has collided with solid geometry.");
-            return;
+            return new Vector2(this.x, this.y);
         }
 
         moveX = this.x + x;
         moveY = this.y + y;
         moving = true;
         curMove--;
+
+        return new Vector2(this.x, this.y);
     }
     public boolean attack(Enemy enemy)
     {

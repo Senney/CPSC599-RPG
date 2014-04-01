@@ -18,6 +18,7 @@ public class CameraController {
     private int x, y;
     private double scale;
     private int width, height;
+    private int screen_width, screen_height;
 
     private OrthographicCamera camera;
     private Rectangle cameraRect;
@@ -39,6 +40,10 @@ public class CameraController {
         this.width = (int)size.x;
         this.height = (int)size.y;
         this.scale = (double)size.z;
+
+        screen_width = (int)(Main.GAME_WIDTH * Main.GAME_SCALE);
+        screen_height = (int)(Main.GAME_HEIGHT * Main.GAME_SCALE);
+
         this.cameraRect = new Rectangle(CoordinateTranslator.translate((int)position.x),
                 CoordinateTranslator.translate((int)position.y), size.x, size.y);
 
@@ -48,6 +53,12 @@ public class CameraController {
 
         this.camera.zoom = (float)this.scale;
 
+    }
+
+    public void setCameraBounds(Vector2 size) {
+        this.width = CoordinateTranslator.translate((int)size.x);
+        this.height = CoordinateTranslator.translate((int)size.y);
+        Logger.debug("Setting camera bounds to (" + this.width + ", " + this.height + ")");
     }
 
     /**
@@ -104,9 +115,10 @@ public class CameraController {
         }
 
         // Check that the X and Y positions don't overflow the camera off of the map.
-        int realx = bound(CoordinateTranslator.translate(x), width, (int)(Main.GAME_WIDTH * Main.GAME_SCALE));
-        int realy = bound(CoordinateTranslator.translate(y), height, (int)(Main.GAME_HEIGHT * Main.GAME_SCALE));
+        int realx = bound(CoordinateTranslator.translate(x), Main.GAME_WIDTH, width);
+        int realy = bound(CoordinateTranslator.translate(y), Main.GAME_HEIGHT, height);
 
+        if (this.x == realx && this.y == realy) return; // Don't do unnecessary work.
         this.x = realx;
         this.y = realy;
 

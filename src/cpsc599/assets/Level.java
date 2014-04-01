@@ -2,6 +2,7 @@ package cpsc599.assets;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
@@ -31,5 +32,19 @@ public class Level {
 
         boolean collides = collisionLayer.getCell(x, y) != null;
         return collides;
+    }
+
+    public Vector2 getMapDimensions() {
+        if (tiledMap == null) {
+            Logger.error("Level has not been set, unable to get dimensions.");
+            return null;
+        }
+
+        if (tile_bounds == null) {
+            MapProperties prop = tiledMap.getProperties();
+            tile_bounds =  new Vector2((int)prop.get("width", Integer.class), (int)prop.get("height", Integer.class));
+        }
+
+        return tile_bounds;
     }
 }
