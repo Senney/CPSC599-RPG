@@ -18,6 +18,7 @@ public class CameraController {
     private int x, y;
     private double scale;
     private int width, height;
+    private int screen_width, screen_height;
 
     private OrthographicCamera camera;
     private Rectangle cameraRect;
@@ -39,6 +40,10 @@ public class CameraController {
         this.width = (int)size.x;
         this.height = (int)size.y;
         this.scale = (double)size.z;
+
+        screen_width = (int)(Main.GAME_WIDTH * Main.GAME_SCALE);
+        screen_height = (int)(Main.GAME_HEIGHT * Main.GAME_SCALE);
+
         this.cameraRect = new Rectangle(CoordinateTranslator.translate((int)position.x),
                 CoordinateTranslator.translate((int)position.y), size.x, size.y);
 
@@ -110,11 +115,10 @@ public class CameraController {
         }
 
         // Check that the X and Y positions don't overflow the camera off of the map.
-        int realx = bound(CoordinateTranslator.translate(x), width, width);
-        int realy = bound(CoordinateTranslator.translate(y), height, height);
+        int realx = bound(CoordinateTranslator.translate(x), Main.GAME_WIDTH, width);
+        int realy = bound(CoordinateTranslator.translate(y), Main.GAME_HEIGHT, height);
 
         if (this.x == realx && this.y == realy) return; // Don't do unnecessary work.
-        Logger.debug("Setting camera position to (" + realx + ", " + realy + ")");
         this.x = realx;
         this.y = realy;
 
@@ -126,8 +130,8 @@ public class CameraController {
     }
 
     private int bound(int d, int v, int m) {
-        if (d - (v / 2) < 0) return v / 2;
-        if (d + (v / 2) > m) return m - (v / 2);
+        if (d - (v / 2) < 0) d = v / 2;
+        if (d + (v / 2) > m) d = m - (v / 2);
         return d;
     }
 
