@@ -1,12 +1,45 @@
 package cpsc599.ai;
 
+import com.badlogic.gdx.math.Vector2;
+import cpsc599.assets.Actor;
+import cpsc599.managers.PlayerManager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public abstract class AIActor {
     public static float STEP_TIME = 500; // 500 ms per step.
+
+    protected static class AIAction {
+        static String MOVE = "move";
+        static String ATTACK = "attack";
+
+        String action;
+        Object obj;
+
+        public AIAction(String action, Object obj) {
+            this.action = action;
+            this.obj = obj;
+        }
+    }
+
+    protected List<AIAction> actionList;
 
     /**
      * The time at which the next step should take place.
      */
-    private float nextStep;
+    protected float nextStep;
+    protected PlayerManager playerManager;
+    protected AStarPathfinder pathfinder;
+    protected Actor actor;
+
+    public AIActor(PlayerManager playerManager, AStarPathfinder pathfinder, Actor actor) {
+        this.playerManager = playerManager;
+        this.pathfinder = pathfinder;
+        this.actor = actor;
+        this.actionList = new ArrayList<AIAction>();
+    }
 
     /**
      * Attempt to step the actor through their turn.
@@ -32,7 +65,7 @@ public abstract class AIActor {
 
     /**
      * Determines what actions to take this turn.
-     * @return
+     * @return <code>true</code> if the decision making process was successful.
      */
-    public abstract boolean decideTurn();
+    public abstract boolean decideTurn(Vector2 position);
 }
