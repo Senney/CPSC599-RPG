@@ -52,6 +52,12 @@ public class EnemyManager {
         return enemyList.get(index);
     }
 
+    public void resetTurn() {
+        for (Enemy e : enemyList) {
+            e.resetMove();
+        }
+    }
+
     public void removeEnemy(Enemy enemy)
     {
         enemyList.remove(enemy);
