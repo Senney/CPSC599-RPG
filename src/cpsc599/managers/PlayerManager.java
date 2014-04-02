@@ -1,5 +1,6 @@
 package cpsc599.managers;
 
+import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Player;
 import cpsc599.util.Logger;
 
@@ -53,5 +54,20 @@ public class PlayerManager {
 
         Logger.debug("Current player set to " + p);
         this.currentPlayer = p;
+    }
+
+    public Player getNearest(Vector2 position) {
+        float minDist = 10000f;
+        Player minPlayer = null;
+        for (Player p : playerList) {
+            Vector2 pos = new Vector2(p.x, p.y);
+            float dist = pos.dst(position);
+
+            if (minDist < dist) {
+                minPlayer = p;
+            }
+        }
+
+        return minPlayer;
     }
 }
