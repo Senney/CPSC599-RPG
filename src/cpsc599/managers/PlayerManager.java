@@ -64,6 +64,7 @@ public class PlayerManager {
             float dist = pos.dst(position);
 
             if (dist < minDist) {
+                minDist = dist;
                 minPlayer = p;
             }
         }
