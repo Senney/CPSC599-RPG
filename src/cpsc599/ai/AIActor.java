@@ -41,6 +41,10 @@ public abstract class AIActor {
         this.actionList = new ArrayList<AIAction>();
     }
 
+    public boolean inTurn() {
+        return actionList.size() > 0;
+    }
+
     /**
      * Attempt to step the actor through their turn.
      * @param time
@@ -67,5 +71,5 @@ public abstract class AIActor {
      * Determines what actions to take this turn.
      * @return <code>true</code> if the decision making process was successful.
      */
-    public abstract boolean decideTurn(Vector2 position);
+    public abstract boolean decideTurn();
 }

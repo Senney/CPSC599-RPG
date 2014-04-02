@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Actor;
 import cpsc599.assets.Player;
 import cpsc599.managers.PlayerManager;
+import cpsc599.util.Logger;
 
 import java.util.List;
 
@@ -14,23 +15,33 @@ public class BasicWarrior extends AIActor {
 
     @Override
     public boolean step(float time) {
+        if (actionList.size() == 0) return true;
+
         if (time >= nextStep) {
             AIAction action = actionList.get(0);
             if (action.action == AIAction.MOVE) {
                 List<AStarMove> movementList = (List<AStarMove>)action.obj;
+                if (movementList.size() == 0) {
+                    actionList.remove(action);
+                    return false;
+                }
                 AStarMove top = movementList.get(movementList.size() - 1);
+
+                Logger.debug("Moving actor " + this.actor + " in direction (" + top.x_move + ", " + top.y_move + ")");
+                this.actor.move(top.x_move, top.y_move, this.pathfinder.getLevel());
 
                 movementList.remove(top);
                 action.obj = movementList;
             } else if (action.action == AIAction.ATTACK) {
                 Vector2 position = (Vector2)action.obj;
-                // this.actor.attack(playerManager.getNearest(position));
+                this.actor.attack(playerManager.getNearest(position));
+                actionList.remove(action);
             }
 
             nextStep += STEP_TIME;
         }
 
-        return true;
+        return false;
     }
 
     @Override
@@ -52,7 +63,10 @@ public class BasicWarrior extends AIActor {
     }
 
     @Override
-    public boolean decideTurn(Vector2 position) {
+    public boolean decideTurn() {
+        Logger.debug("Deciding turn for BasicWarrior: " + this.actor);
+
+        Vector2 position = new Vector2(this.actor.x, this.actor.y);
         Player nearest = playerManager.getNearest(position);
 
         // Move to the nearest player.

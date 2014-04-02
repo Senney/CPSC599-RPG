@@ -63,7 +63,7 @@ public class PlayerManager {
             Vector2 pos = new Vector2(p.x, p.y);
             float dist = pos.dst(position);
 
-            if (minDist < dist) {
+            if (dist < minDist) {
                 minPlayer = p;
             }
         }

@@ -1,7 +1,10 @@
 package cpsc599.states;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import cpsc599.OrbGame;
+import cpsc599.ai.AStarPathfinder;
+import cpsc599.ai.BasicWarrior;
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Dialogue;
 import cpsc599.assets.Enemy;
@@ -24,7 +27,9 @@ import java.util.ArrayList;
  */
 public class IntroLevelState extends LevelState {
     int time = 0;
-    int tickCount = 0;
+
+    int currentEnemy = 0;
+    float currentTime = 0f;
 
     private AnimatedSprite sprite;
     private Dialogue dialogue;
@@ -68,6 +73,7 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
         Enemy e = new Enemy(sprite, 12, 7, 8);
+        e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), new AStarPathfinder(this.currentLevel), e));
         
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy14.png", 0,0,16,16,1,0.1f);
         Enemy e2 = new Enemy(sprite, 10, 5, 8);
@@ -152,16 +158,35 @@ public class IntroLevelState extends LevelState {
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
         } else {
-            if (tickCount == 0)
-                Logger.debug("WAITING 400 ticks for a simulated enemy turn.");
             // TODO: This is where we put some awesome enemy turn logic!!
+            Enemy[] enemies = this.enemyController.getEnemyManager().getEnemies();
+            if (currentEnemy > enemies.length) playerController.resetTurn();
+            Enemy e = enemies[currentEnemy];
+
+            if (e.getAiActor() != null) {
+                if (e.getAiActor().inTurn()) {
+                    if (e.getAiActor().step(currentTime)) {
+                        currentEnemy++;
+                    }
+
+                    e.tick();
+                    currentTime += Gdx.graphics.getDeltaTime();
+                } else {
+                    e.getAiActor().decideTurn();
+                    currentTime = 0f;
+                }
+            } else {
+                currentEnemy++;
+            }
 
             // TODO: Remove this crap when we get some AI.
+            /*
             if (tickCount++ > 400) {
                 Logger.debug("IntroLevelState::tick - Enemy turn complete..");
                 playerController.resetTurn();
                 tickCount = 0;
             }
+            */
         }
 
         if (current != null) {
