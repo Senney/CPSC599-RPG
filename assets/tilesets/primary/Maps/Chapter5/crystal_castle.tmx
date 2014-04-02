@@ -47,7 +47,7 @@
  </tileset>
  <layer name="main bgd" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJw7w8DAcAoPPkOkHD51pKghRy29zKfEHGzqiBUj115q+ZHUtEDtdEMv/+EyH52mhjuINYtQWAEADQO9mQ==
+   eJw7w8DAcBoPPkOkHD51pKghRy29zKfEHGzqiBUj115q+ZHUtEDtdEMv/+EyH52mhjuINYtQWAEAnia+bQ==
   </data>
  </layer>
  <layer name="characters" width="16" height="15">
