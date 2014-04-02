@@ -25,10 +25,14 @@ public class BasicWarrior extends AIActor {
                     AStarMove top = movementList.get(movementList.size() - 1);
 
                     Logger.debug("Moving actor " + this.actor + " in direction (" + top.x_move + ", " + top.y_move + ")");
-                    this.actor.move(top.x_move, top.y_move, this.pathfinder.getLevel());
+                    if (!this.actor.canMove()) {
+                        actionList.remove(action);
+                    } else {
+                        this.actor.move(top.x_move, top.y_move, this.pathfinder.getLevel());
 
-                    movementList.remove(top);
-                    action.obj = movementList;
+                        movementList.remove(top);
+                        action.obj = movementList;
+                    }
                 }
             } else if (action.action == AIAction.ATTACK) {
                 Vector2 position = (Vector2)action.obj;

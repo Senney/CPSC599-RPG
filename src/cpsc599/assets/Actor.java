@@ -94,4 +94,8 @@ public class Actor {
         this.turnOver = false;
         this.curMove = maxMove;
     }
+
+    public boolean canMove() {
+        return this.curMove != 0;
+    }
 }

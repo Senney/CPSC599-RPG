@@ -56,6 +56,26 @@ public class PlayerManager {
         this.currentPlayer = p;
     }
 
+    /**
+     * Gets the player at the specified (x, y) coordinates.
+     * @param position Coordinate value on the map.
+     * @return The player at the specified position.
+     *         <code>null</code> if no player was found.
+     */
+    public Player getPlayerAtPosition(Vector2 position) {
+        for (Player p : playerList) {
+            if (p.x == (int)position.x && p.y == (int)position.y) return p;
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the nearest player to the specified position, based on vector distances (no pathfinding).
+     * @param position The position from which to check the nearest player ((x, y))
+     * @return The nearest player.
+     *         <code>null</code> if no players exist.
+     */
     public Player getNearest(Vector2 position) {
         float minDist = 10000f;
         Player minPlayer = null;
