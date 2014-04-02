@@ -69,6 +69,7 @@ public class AStarPathfinder {
 
     private Level level;
     private AStarNode[][] levelNodes;
+    private int h, w;
 
     public AStarPathfinder(Level level) {
         Logger.debug("Constructing AStar for level: " + level.name);
@@ -83,7 +84,7 @@ public class AStarPathfinder {
     private void setup() {
         Logger.debug("Setting up values required for A-Star.");
 
-        int h = (int)level.getMapDimensions().y, w = (int)level.getMapDimensions().x;
+        h = (int)level.getMapDimensions().y; w = (int)level.getMapDimensions().x;
         levelNodes = new AStarNode[h][w];
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
