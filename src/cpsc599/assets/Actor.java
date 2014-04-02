@@ -29,6 +29,15 @@ public class Actor {
     public int moveX, moveY;
     public boolean moving;
 
+    public void tick() {
+        // TODO: Find a way to animate this.
+        if (moving) {
+            this.x = moveX;
+            this.y = moveY;
+            moving = false;
+        }
+    }
+
     public Vector2 move(int x, int y, Level level) {
         if (moving) {
             Logger.warn("Actor is already in motion. Some bug in the controller..");

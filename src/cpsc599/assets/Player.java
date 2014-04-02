@@ -62,15 +62,6 @@ public class Player extends Actor{
         dodge = evade - playerInventory.getEquip(Inventory.RHAND_SLOT).weight;
     }
 
-    public void tick() {
-        // TODO: Find a way to animate this.
-        if (moving) {
-            this.x = moveX;
-            this.y = moveY;
-            moving = false;
-        }
-    }
-
     public void endTurn() {
         this.turnOver = true;
     }
