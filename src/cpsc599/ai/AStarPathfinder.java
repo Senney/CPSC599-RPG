@@ -18,6 +18,11 @@ public class AStarPathfinder {
             position = new Vector2(x, y);
         }
 
+        public void reset() {
+            this.gscore = this.hscore = this.fscore = 0;
+            this.parent = null;
+        }
+
         public void computeScores(AStarNode parent, AStarNode end) {
             this.gscore = getGScore(parent);
             this.hscore = getHScore(end);
@@ -93,6 +98,14 @@ public class AStarPathfinder {
         }
     }
 
+    private void reset() {
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                levelNodes[y][x].reset();
+            }
+        }
+    }
+
     private AStarNode getLevelNode(Vector2 position) {
         return levelNodes[(int)position.y][(int)position.x];
     }
@@ -119,6 +132,8 @@ public class AStarPathfinder {
     }
 
     public List<AStarMove> getPath(Vector2 start, Vector2 end) {
+        reset();
+
         Logger.debug("Getting path to: (" + end.x + ", " + end.y + ")");
 
         List<AStarNode> openNodes = new ArrayList<AStarNode>();
@@ -192,6 +207,7 @@ public class AStarPathfinder {
 
             totalIterations++;
             if (totalIterations > 1000) {
+                Logger.debug("Maxed out the back-stepping process for pathfinding.");
                 return null;
             }
         }
