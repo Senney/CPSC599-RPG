@@ -168,6 +168,7 @@ public class IntroLevelState extends LevelState {
             // TODO: This is where we put some awesome enemy turn logic!!
             Enemy[] enemies = this.enemyController.getEnemyManager().getEnemies();
             if (currentEnemy > enemies.length - 1) {
+                Logger.debug("Ending enemy turn.");
                 playerController.resetTurn();
                 this.currentEnemy = 0;
             } else {
