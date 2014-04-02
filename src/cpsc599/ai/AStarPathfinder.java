@@ -119,6 +119,8 @@ public class AStarPathfinder {
     }
 
     public List<AStarMove> getPath(Vector2 start, Vector2 end) {
+        Logger.debug("Getting path to: (" + end.x + ", " + end.y + ")");
+
         List<AStarNode> openNodes = new ArrayList<AStarNode>();
         List<AStarNode> closedNodes = new ArrayList<AStarNode>();
         List<AStarNode> adjacentNodes = new ArrayList<AStarNode>();
@@ -172,6 +174,7 @@ public class AStarPathfinder {
         List<AStarMove> moves = new ArrayList<AStarMove>();
         AStarNode curNode = endNode;
 
+        int totalIterations = 0;
         while(curNode != null) {
             AStarNode prev = curNode;
             curNode = curNode.getParent();
@@ -181,11 +184,16 @@ public class AStarPathfinder {
             }
 
             AStarMove move = new AStarMove();
-            Vector2 movement = new Vector2(curNode.position.x - prev.position.x, curNode.position.y - prev.position.y);
+            Vector2 movement = new Vector2(prev.position.x - curNode.position.x, prev.position.y - curNode.position.y);
             move.x_move = (int)movement.x;
             move.y_move = (int)movement.y;
             move.position = curNode.position;
             moves.add(move);
+
+            totalIterations++;
+            if (totalIterations > 1000) {
+                return null;
+            }
         }
 
         Logger.debug("Specified end-node did not have a path to the start node.");
