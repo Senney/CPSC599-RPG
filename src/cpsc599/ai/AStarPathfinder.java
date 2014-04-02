@@ -70,7 +70,7 @@ public class AStarPathfinder {
     private Level level;
     private AStarNode[][] levelNodes;
 
-    public void AStarPathfinder(Level level) {
+    public AStarPathfinder(Level level) {
         Logger.debug("Constructing AStar for level: " + level.name);
         this.level = level;
         setup();
@@ -117,7 +117,7 @@ public class AStarPathfinder {
         }
     }
 
-    List<AStarMove> getPath(Vector2 start, Vector2 end) {
+    public List<AStarMove> getPath(Vector2 start, Vector2 end) {
         List<AStarNode> openNodes = new ArrayList<AStarNode>();
         List<AStarNode> closedNodes = new ArrayList<AStarNode>();
         List<AStarNode> adjacentNodes = new ArrayList<AStarNode>();
@@ -147,7 +147,7 @@ public class AStarPathfinder {
             adjacentNodes.clear();
             getSurroundingNodes(adjacentNodes, current);
 
-            for (AStarNode node : openNodes) {
+            for (AStarNode node : adjacentNodes) {
                 if (closedNodes.contains(node))
                     continue;
 
@@ -163,6 +163,7 @@ public class AStarPathfinder {
             }
         }
 
+        Logger.debug("No path was found to the specified end location.");
         return null;
     }
 
@@ -179,12 +180,14 @@ public class AStarPathfinder {
             }
 
             AStarMove move = new AStarMove();
-            Vector2 movement = curNode.position.sub(prev.position);
+            Vector2 movement = new Vector2(curNode.position.x - prev.position.x, curNode.position.y - prev.position.y);
             move.x_move = (int)movement.x;
             move.y_move = (int)movement.y;
+            move.position = curNode.position;
             moves.add(move);
         }
 
+        Logger.debug("Specified end-node did not have a path to the start node.");
         return null;
     }
 }
