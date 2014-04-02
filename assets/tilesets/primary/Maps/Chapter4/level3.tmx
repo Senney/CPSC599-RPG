@@ -22,26 +22,40 @@
   <image source="../../Environment/beach.png" width="256" height="128"/>
  </tileset>
  <tileset firstgid="202" name="snow" tilewidth="16" tileheight="16">
-  <image source="../../Environment/snow.png" width="64" height="64"/>
+  <image source="../../Environment/snow.png" width="128" height="64"/>
  </tileset>
- <tileset firstgid="218" name="river" tilewidth="16" tileheight="16">
+ <tileset firstgid="234" name="river" tilewidth="16" tileheight="16">
   <image source="../../Environment/river.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="282" name="ocean" tilewidth="16" tileheight="16">
+ <tileset firstgid="298" name="ocean" tilewidth="16" tileheight="16">
   <image source="../../Environment/ocean.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="298" name="hill" tilewidth="16" tileheight="16">
+ <tileset firstgid="314" name="hill" tilewidth="16" tileheight="16">
   <image source="../../Environment/hill.png" width="64" height="128"/>
  </tileset>
- <tileset firstgid="330" name="desert" tilewidth="16" tileheight="16">
+ <tileset firstgid="346" name="desert" tilewidth="16" tileheight="16">
   <image source="../../Environment/desert.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="346" name="beach" tilewidth="16" tileheight="16">
+ <tileset firstgid="362" name="beach" tilewidth="16" tileheight="16">
   <image source="../../Environment/beach.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="490" name="snow" tilewidth="16" tileheight="16">
+  <image source="../../Environment/snow.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="522" name="castle(32x32)" tilewidth="16" tileheight="16">
+  <image source="../../Castle/castle(32x32).png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="526" name="castle(64x64)" tilewidth="16" tileheight="16">
+  <image source="../../Castle/castle(64x64).png" width="64" height="64"/>
  </tileset>
  <layer name="main bgd" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJydUkEOwCAI0+8NkP//ZppAQpxVx6ExIq21yLUU7pCO5wC2lax/oHWo1QjwYj32+70zTy+8IP1Mr4JzveSs9FvI6+RzVecfc0EQwJ+9o/dn8s32Iw7K2bNtFftHmjOHN5yVN67f2SIvBHTjjHaaUdf/g9h+rC+3y0cK
+   eJytkV0OgyAQhFcuYKu2WrX3Pwz7xBF47SUcEkkI7gImffgSf2bGGfFE5E8csAoMft2V1McFf55lzzwn5OY6m+g1bbxOn2va1m25V9pX80k9I0zl97WsdPedLi3dtN2Shm/+y1rev8m/0xuiB3iath3xPjDAM4IJvMz1HEvnE3jDM4MFfIzemYUOgRWeDezgCw6EV8V8
+  </data>
+ </layer>
+ <layer name="Collision" width="16" height="15" opacity="0">
+  <data encoding="base64" compression="zlib">
+   eJzjYGBg4IBiQoADjY2MiQXI6nHpJcU8agBc9uFzByE3khouuPRTwwxs4vj4gwkQihtywghdD6X6CYkTMouQXvS8howBjF4BcQ==
   </data>
  </layer>
 </map>
