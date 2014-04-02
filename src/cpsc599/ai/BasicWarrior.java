@@ -29,6 +29,8 @@ public class BasicWarrior extends AIActor {
 
             nextStep += STEP_TIME;
         }
+
+        return true;
     }
 
     @Override
