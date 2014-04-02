@@ -62,15 +62,6 @@ public class Player extends Actor{
         dodge = evade - playerInventory.getEquip(Inventory.RHAND_SLOT).weight;
     }
 
-    public void endTurn() {
-        this.turnOver = true;
-    }
-
-    public void resetMove() {
-        this.turnOver = false;
-        this.curMove = maxMove;
-    }
-
     public HealthBar getPlayerHealthBar() {
         return playerHealthBar;
     }

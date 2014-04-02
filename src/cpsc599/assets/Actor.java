@@ -85,4 +85,13 @@ public class Actor {
         if(currentHealth > maxHealth)
             currentHealth = maxHealth;
     }
+
+    public void endTurn() {
+        this.turnOver = true;
+    }
+
+    public void resetMove() {
+        this.turnOver = false;
+        this.curMove = maxMove;
+    }
 }
