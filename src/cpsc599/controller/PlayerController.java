@@ -94,6 +94,12 @@ public class PlayerController {
         if (Controls.isKeyTapped(input, Controls.LEFT)) {
             this.selectedAttack = this.selectedAttack <= 0 ? max : --this.selectedAttack;
         }
+        if (Controls.isKeyTapped(input, Controls.UP)) {
+
+        }
+        if (Controls.isKeyTapped(input, Controls.DOWN)) {
+
+        }
 
         return -1;
     }
