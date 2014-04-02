@@ -37,21 +37,24 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
 
-        Player p = new Player(sprite, 2, 5, 8);
+        Player p = new Player(sprite, 2, 5, 8, 14, 1, 3, 70, 80);
         //p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT, 1));
         //p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 0));
 
-        Item sw = new Item("Pike", true, Inventory.RHAND_SLOT, 3, 5);
+        Item sw = new Item("Pike", true, Inventory.RHAND_SLOT, 3, 5, 10);
         p.getPlayerInventory().pickUp(sw);
-        p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1, 1));
+        p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1, 1, 5));
         p.getPlayerInventory().equip(sw);
 
+        p.updateStats();
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_right.png", 0, 0, 16, 16, 1, 0.1f);
-        Player p3 = new Player(sprite, 2, 7, 8);
-        p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 2));
+        Player p3 = new Player(sprite, 2, 7, 8, 10, 1, 2, 60, 70);
+        p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 2, 3));
         p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);
         p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
+
+        p3.updateStats();
 
         /*
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_front.png", 0, 0, 16, 16, 1, 0.1f);
