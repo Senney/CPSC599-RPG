@@ -71,7 +71,9 @@ public class IntroLevelState extends LevelState {
         Player p4 = new Player(cowCube, 20, 27, 20);
         */
 
-        AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel);
+        // Set up the pathfinder for this level.
+        AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
+                enemyController.getEnemyManager());
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
         Enemy e = new Enemy(sprite, 12, 7, 8);
@@ -183,6 +185,7 @@ public class IntroLevelState extends LevelState {
                         currentTime += Gdx.graphics.getDeltaTime();
                     } else {
                         Logger.debug("Deciding turn for actor: " + e);
+                        e.resetMove();
                         e.getAiActor().decideTurn();
                         currentTime = 0f;
                     }
