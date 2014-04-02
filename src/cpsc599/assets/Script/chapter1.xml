@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter1>
+	<!-- Location: Some field -->
+	
+	<unknown>Moo.</unknown>
+	<Villager1>Hey, have you noticed? There’s been an increase in cows lately.</Villager1>
+	<Villager2>You’ve noticed, too? It seems that no matter where I look these days, there’s always a cow there, staring strangely at me. Like it’s trying to consume my soul or something.</Villager2>
+	<Villager1>Yeah, I know what you mean. It kind of feels like they’re slowly starting to take over our land.</Villager1>
+	<Cow>Mooooo.</Cow>
+	<Villager2>Look, there comes one now.</Villager2>
+	<Cow>Moo moooo.</Cow>
+	<Villager1>They’re coming closer! Let’s leave.</Villager1>
+
+	<!-- Villagers leave -->
+
+	<Cow>Mooooooooooo.</Cow>
+
+	<!-- Location: Field of Flowers -->
+	
+	<Ren>Here, I want you to have this.</Ren>
+
+	<!-- Hands over orb necklace, face red -->
+
+	<Hikari>…? What’s this for?</Hikari>
+	<Ren>N-Nothing, really. I… I just wanted to say t-thanks.</Ren>
+	<Hikari>Thanks for what?</Hikari>
+	<Ren>Just. ...You know? Helping me out for all these years and stuff.</Ren>
+	<Hikari>*laughs* You don’t need to say thanks for that. We’re friends! It’s normal for friends to help each other out.</Hikari>
+	<Ren>Yeah, but… I just… You’ve really helped me out a lot. Before, when I had nobody to talk to, I was really lonely. But after I met you, it felt as though a light suddenly shone onto my world and brightened everything up. Things that I had hated before didn’t look so bad anymore once you were there. So, that’s why… Thank you.</Ren>
+	<Hikari>………</Hikari>
+	<Hikari>You’re welcome.</Hikari>
+	<Hikari>If there’s ever a time when you’re in trouble or something, just come to me. I’ll be there for you. I promised didn’t I? That I’d become your knight and protect you.</Hikari>
+	<Ren>Hikari...</Ren>
+
+	<!-- General shininess and brightness -->
+
+	<unknown>There he is! Capture him!</unknown>
+	<HikariRen>!!!?</HikariRen>
+
+	<!-- 2+ enemies surround Ren -->
+
+	<Ren>H-Hey! What are you doing!?</Ren>
+
+	<!-- The enemies knock Ren out -->
+
+	<Hikari>Ren!</Hikari>
+	<Enemy1>We’ve got the prince! Let’s go!</Enemy1>
+
+	<!-- The enemies start to drag/carry Ren away -->
+	<!-- Hikari draws a weapon and starts to chase after them -->
+
+	<Hikari>Hey! Let Ren go!</Hikari>
+	<Enemy2>Uh oh. Someone's coming after us!</Enemy2>
+	<Enemy1>I'll slow her down! You move on!</Enemy1>
+
+	<!-- Enemy 1 releases Ren and confronts Hikari -->
+	<!-- Battle: Hikari vs. Enemy 1 -->
+	<!-- Once the battle ends, Enemy 2 is halfway or more across the map. -->
+	<!-- Hikari chases after Enemy 2, but is confronted with incoming enemies. Enemy 2 escapes with Ren. -->
+
+	<!-- Main battle map: Other characters hear the commotion and come to help out Hikari -->
+	<!-- After the map is cleared of enemies... -->
+
+	<Hikari>They got away... I won’t let them get away with this!</Hikari>
+
+	<!-- Chases after where the enemy was heading -->
+</chapter1>

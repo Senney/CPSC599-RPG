@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter2>
+	<!-- Location: Relatively empty field -->
+	
+	<Friend1>Hikari! Who were those guys who took Ren?</Friend1>
+	<Hikari>I don’t know, but they’re not going to get away with kidnapping Ren.</Hikari>
+	<Friend2>How will we find them, though? Do we have any clues about where they’d go?</Friend2>
+	<Hikari>No. They didn’t say anything about where they were taking him, and they were already out of sight by the time we dealt with those guys that got in our way.</Hikari>
+	<Friend1>Do we even know why they kidnapped Ren in the first place?</Friend1>
+	<Hikari>…</Hikari>
+	<Friend2>… Why don’t we ask anyone we meet alone the way if they’ve seen anything that could help us?</Friend2>
+
+	<!-- After agreeing to the suggestion, the party progresses forward in silence. On the right side of the map, cow (cubes) slowly start appearing. -->
+
+	<Friend1>…?</Friend1>
+	<Friend2>What’s with the cows these days? It seems like they’re everywhere.</Friend2>
+	<Hikari>Shh! I think they’re speaking to each other!</Hikari>
+	<Friend1>…</Friend1>
+	<Friend2>…</Friend2>
+
+	<Cow1>Hey, what do you think they want with that princeling?</Cow1>
+	<Cow2>It must have something to do with -that-, don’t you think?</Cow2>
+	<Cow1>-That-?</Cow1>
+	<Cow2>Yeah. You know… that legendary orb?</Cow2>
+	<Cow1>Oh that… but what does that orb have to do with kidnapping a prince?</Cow1>
+	<Cow3>I heard a rumor that the royal family’s been keeping it in hiding all these years, and that recently, the prince himself was seen holding it in his hands!</Cow3>
+	<Cow1>What!? You mean, it actually exists?</Cow1>
+	<Cow2>Of course it exists! I mean, our boss has been talking about taking precautions against that orb for a while now. It’s probably why he kidnapped that prince in the first place. If someone were to discover our plans and try and stop it, that orb would be the key.</Cow2>
+	<Cow1>Why’s that?</Cow2>
+	<Cow3>That orb’s got special properties. It’s said that anyone who wields it will possess enough power to conquer the entire world! The barriers around our headquarters are practically nothing compared to that kind of power. So by kidnapping the prince and the orb along with him, it’ll prevent anyone from interfering with our plans.</Cow3>
+
+	<Hikari>Where’s this headquarters of yours?</Hikari>
+
+	<Cows>!?</Cows>
+	<Cow2>Who are you!?</Cow2>
+	<Cow3>Wait. Look at that necklace around the girl’s neck. Could that be…?</Cow3>
+	<Cow2>…! That’s…!</Cow2>
+
+	<Hikari>…? What?</Hikari>
+
+	<Cow3>That’s the orb we were just talking about! Why’s it around the neck of a girl!?</Cow3>
+	<Cow2>That doesn’t matter right now! Let’s take it and give it to the boss!</Cow2>
+
+	<Hikari>What!? This necklace? This is the necklace that Ren gave me… I won’t let you lay your hands on it!</Hikari>
+
+	<!-- Battle between Cow Cube minions and party starts. -->
+	<!-- Either at the beginning or after a round of combat, the orb starts to glow and envelops Hikari, granting her additional powers. -->
+	<!-- Cow Cube minions are defeated. -->
+
+	<Hikari>Now, tell us where Ren is! And what this orb you’ve been talking about does!</Hikari>
+
+	<Cow3>You’re too late! The princeling’s already been taken to our headquarters! Even if you hold the orb, the ritual will already be underway by now.</Cow3>
+	<Friend1>What ritual?</Friend1>
+	<Cow2>Ah, that’s right. Allow us to introduce ourselves. We’re called the Evil League of Cow Cube Worshippers!</Cow2>
+	<Cow1>Our boss had this vision one day about the almighty cow cube! It descended into his dreams and showed him the path to world domination! He shared this dream with us and we’ve been following him ever since.</Cow1>
+	<Cow2>Our boss dedicated his life to building a suitable structure to summon the almighty cow cube and we’ve made that place our headquarters.</Cow2>
+	<Hikari>And that’s where they’ve taken Ren? So where is this headquarters of yours?</Hikari>
+	<Cow1>As if we’ll tell you that!</Cow1>
+	<Hikari>… What was that? Want me to break all your bones!?</Hikari>
+	<Cows>!?</Cows>
+	<Cow2>U-Uh… N-No need for that… We’ll tell you. … Right guys?</Cow2>
+	<Cow1>Huh? Uh… Y-Yeah, I guess. Fine… Just head straight and eventually you’ll hit a mountain range. Our headquarters are just behind that.</Cow1>
+	<Cow3>But you’ll never be able to get past the security!</Cow3>
+	<Cow2>Y-Yeah! That’s right! It was built by pouring years of our magic into it. It’d take something with immense power to break it!</Cow2>
+	<Hikari>… Huh. Alright, so all we have to do is find this headquarters of yours and smash down the magic surrounding it. Got it. Let’s go, guys!</Hikari>
+	<Cows>!? W-Wait!!</Cows>
+
+	<!-- Hikari and the others walk off the map. -->
+
+	<Cows>Moooo… we need to report this to the boss.</Cows>
+</chapter2>
