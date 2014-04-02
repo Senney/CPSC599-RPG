@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public abstract class AIActor {
-    public static float STEP_TIME = 500; // 500 ms per step.
+    public static float STEP_TIME = 0.5f; // 500 ms per step.
 
     protected static class AIAction {
         static String MOVE = "move";
