@@ -9,7 +9,12 @@ public class Actor {
     public int currentHealth;
     public int strength;
     public int defence;
-    public int speed;
+    public int speed;  //hit
+    public int evade;
+
+    public int damage;
+    public int hit;
+    public int dodge;
 
     public int maxMove;
     public int curMove;

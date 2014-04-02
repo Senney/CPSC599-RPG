@@ -7,6 +7,8 @@ import cpsc599.items.Inventory;
 import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
 
+import java.util.Random;
+
 /**
  * Base class for a Player controlled entity.
  */
@@ -33,6 +35,31 @@ public class Player extends Actor{
 
         this.playerInventory = new Inventory(this);
         this.playerHealthBar = new HealthBar();
+    }
+
+    public Player(AnimatedSprite sprite, int x, int y, int moveDist, int hp, int str, int def, int spe, int ev) {
+        //this.moveStart = 0f;
+        this.playerSprite = sprite;
+        this.x = x;
+        this.y = y;
+        this.maxMove = moveDist;
+
+        this.playerInventory = new Inventory(this);
+        this.playerHealthBar = new HealthBar();
+
+        currentHealth = hp;
+        maxHealth = hp;
+        strength = str;
+        defence = def;
+        speed = spe;
+        evade = ev;
+    }
+
+    public void updateStats()
+    {
+        damage = strength + playerInventory.getEquip(Inventory.RHAND_SLOT).damage;
+        hit = speed - playerInventory.getEquip(Inventory.RHAND_SLOT).weight;
+        dodge = evade - playerInventory.getEquip(Inventory.RHAND_SLOT).weight;
     }
 
     public void tick() {
@@ -90,13 +117,21 @@ public class Player extends Actor{
     public boolean attack(Enemy enemy)
     {
         Boolean isDead = false;
-        int damage = (strength + playerInventory.getEquip(Inventory.RHAND_SLOT).damage) - (enemy.defence);
+        int dmg = (damage - enemy.defence);
+        int hitChance = (hit - enemy.dodge);
 
-        Logger.debug("Attacking enemy for " + damage + " damage.");
-        enemy.currentHealth -= damage;
-        if(enemy.currentHealth <= 0)
-            isDead = true;
-        return isDead;
+        Random rand = new Random(101);
+
+        int chance = rand.nextInt();
+        if(chance <= hit) {
+            Logger.debug("Attacking enemy for " + damage + " damage.");
+            enemy.currentHealth -= damage;
+            if(enemy.currentHealth <= 0)
+                isDead = true;
+            return isDead;
+        }
+        Logger.debug("You missed");
+        return false;
     }
 
     public void heal(int amount)
