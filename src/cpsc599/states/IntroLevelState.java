@@ -83,7 +83,7 @@ public class IntroLevelState extends LevelState {
         
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy5.png", 0,0,16,16,1,0.1f);
         Enemy e3 = new Enemy(sprite, 10, 9, 8);
-        e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
+        e3.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
 
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
@@ -159,6 +159,7 @@ public class IntroLevelState extends LevelState {
         if (playerController.isAttacking()) {
             handleAttack(input, current);
         }
+
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
         } else {
@@ -173,6 +174,8 @@ public class IntroLevelState extends LevelState {
                 if (e.getAiActor() != null) {
                     if (e.getAiActor().inTurn()) {
                         if (e.getAiActor().step(currentTime)) {
+                            Logger.debug("Finishing turn for enemy[" + currentEnemy + "] - " + e);
+                            e.tick();
                             currentEnemy++;
                         }
 
