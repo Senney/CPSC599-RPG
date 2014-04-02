@@ -57,9 +57,8 @@ public class Actor {
         int dmg = (damage - enemy.defence);
         int hitChance = (hit - enemy.dodge);
 
-        Random rand = new Random(101);
-
-        int chance = rand.nextInt();
+        Random rand = new Random();
+        int chance = rand.nextInt(101);
         if(chance <= hit) {
             Logger.debug("Attacking Actor for " + damage + " damage.");
             enemy.currentHealth -= damage;
