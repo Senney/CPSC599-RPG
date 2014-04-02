@@ -71,15 +71,19 @@ public class IntroLevelState extends LevelState {
         Player p4 = new Player(cowCube, 20, 27, 20);
         */
 
+        AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel);
+
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
         Enemy e = new Enemy(sprite, 12, 7, 8);
-        e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), new AStarPathfinder(this.currentLevel), e));
+        e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e));
         
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy14.png", 0,0,16,16,1,0.1f);
         Enemy e2 = new Enemy(sprite, 10, 5, 8);
+        e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e2));
         
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy5.png", 0,0,16,16,1,0.1f);
         Enemy e3 = new Enemy(sprite, 10, 9, 8);
+        e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
 
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
@@ -160,33 +164,29 @@ public class IntroLevelState extends LevelState {
         } else {
             // TODO: This is where we put some awesome enemy turn logic!!
             Enemy[] enemies = this.enemyController.getEnemyManager().getEnemies();
-            if (currentEnemy > enemies.length) playerController.resetTurn();
-            Enemy e = enemies[currentEnemy];
-
-            if (e.getAiActor() != null) {
-                if (e.getAiActor().inTurn()) {
-                    if (e.getAiActor().step(currentTime)) {
-                        currentEnemy++;
-                    }
-
-                    e.tick();
-                    currentTime += Gdx.graphics.getDeltaTime();
-                } else {
-                    e.getAiActor().decideTurn();
-                    currentTime = 0f;
-                }
-            } else {
-                currentEnemy++;
-            }
-
-            // TODO: Remove this crap when we get some AI.
-            /*
-            if (tickCount++ > 400) {
-                Logger.debug("IntroLevelState::tick - Enemy turn complete..");
+            if (currentEnemy > enemies.length - 1) {
                 playerController.resetTurn();
-                tickCount = 0;
+                this.currentEnemy = 0;
+            } else {
+                Enemy e = enemies[currentEnemy];
+
+                if (e.getAiActor() != null) {
+                    if (e.getAiActor().inTurn()) {
+                        if (e.getAiActor().step(currentTime)) {
+                            currentEnemy++;
+                        }
+
+                        e.tick();
+                        currentTime += Gdx.graphics.getDeltaTime();
+                    } else {
+                        Logger.debug("Deciding turn for actor: " + e);
+                        e.getAiActor().decideTurn();
+                        currentTime = 0f;
+                    }
+                } else {
+                    currentEnemy++;
+                }
             }
-            */
         }
 
         if (current != null) {
