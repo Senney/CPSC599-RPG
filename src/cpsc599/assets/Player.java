@@ -120,9 +120,10 @@ public class Player extends Actor{
         int dmg = (damage - enemy.defence);
         int hitChance = (hit - enemy.dodge);
 
-        Random rand = new Random(101);
+        Random rand = new Random();
 
-        int chance = rand.nextInt();
+        int chance = rand.nextInt(101);
+        Logger.debug("chance = " + chance);
         if(chance <= hit) {
             Logger.debug("Attacking enemy for " + damage + " damage.");
             enemy.currentHealth -= damage;
