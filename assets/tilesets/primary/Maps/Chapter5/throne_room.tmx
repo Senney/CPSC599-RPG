@@ -48,17 +48,37 @@
  <tileset firstgid="794" name="inside_castle" tilewidth="16" tileheight="16">
   <image source="../../Castle/inside_castle.png" width="128" height="64"/>
  </tileset>
- <tileset firstgid="826" name="inside_castle" tilewidth="16" tileheight="16">
-  <image source="../../Castle/inside_castle.png" width="128" height="64"/>
+ <tileset firstgid="826" name="throne_room" tilewidth="16" tileheight="16">
+  <image source="../../Castle/throne_room.png" width="256" height="256"/>
  </tileset>
  <layer name="Tile Layer 2" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJyTZ2ZgUCATKwKxOhBrkIk1R/UPqP7TDEPb/cNBvzYWrAWldYBYF4j1oDQ2DAA4ACix
+   eJyTZ2ZgUCATKwKxOhBrkIk1R/VTrB8EhrL7R7p+bSxYC0rrAbEuEo0NAwDLbifq
+  </data>
+ </layer>
+ <layer name="floor tiles" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAceDKTR1PLDGLMJ9d+YuRH7R+1n1L7yQUAs4gV+Q==
+  </data>
+ </layer>
+ <layer name="carpet" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYKANcGFmYHCFYjcgdmcmTX8IUH0oEAsC2WFAOpxE/S5IdlNifxjzyLR/OLl/oOynxP/EAgDGMBPH
+  </data>
+ </layer>
+ <layer name="candles" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAK2YGBmsgtoFiZAATg6nBBryA4t445EhRMwpGwSggDgAAJ7kDKQ==
+  </data>
+ </layer>
+ <layer name="throne" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYMANHJkZGJyA2JkZjyI8IBCoLwiIg8nUnwjUlwTEyWTqHwWjYLgDAAIDAv4=
   </data>
  </layer>
  <layer name="Collision" width="16" height="15" opacity="0">
   <data encoding="base64" compression="zlib">
-   eJzjYGBg4KAQkwtG9Y/qH9VPGQYAbY0B0Q==
+   eJzjYGBg4KAQwwAuPi416HLoAJt+bPLkglH9o/oHg35KMAB1nAIh
   </data>
  </layer>
 </map>
