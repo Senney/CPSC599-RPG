@@ -2,6 +2,7 @@ package cpsc599.ai;
 
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Actor;
+import cpsc599.assets.Dialogue;
 import cpsc599.assets.Player;
 import cpsc599.managers.PlayerManager;
 import cpsc599.util.Logger;
@@ -14,7 +15,7 @@ public class BasicWarrior extends AIActor {
     }
 
     @Override
-    public boolean step(float time) {
+    public boolean step(float time, Dialogue dialogue) {
         if (time >= nextStep) {
             AIAction action = actionList.get(0);
             if (action.action == AIAction.MOVE) {
@@ -24,7 +25,6 @@ public class BasicWarrior extends AIActor {
                 } else {
                     AStarMove top = movementList.get(movementList.size() - 1);
 
-                    //Logger.debug("Moving actor " + this.actor + " in direction (" + top.x_move + ", " + top.y_move + ")");
                     if (!this.actor.canMove()) {
                         actionList.remove(action);
                     } else {
@@ -36,11 +36,16 @@ public class BasicWarrior extends AIActor {
                 }
             } else if (action.action == AIAction.ATTACK) {
                 Vector2 position = (Vector2)action.obj;
-                this.actor.attack(playerManager.getNearest(position));
+                int dmg = this.actor.attack(playerManager.getNearest(position));
+                if (dmg < 0) {
+                    showMessage("Enemy attacks player, but misses!", dialogue);
+                } else {
+                    showMessage("Enemy attacks player for " + dmg + " damage!", dialogue);
+                }
                 actionList.remove(action);
             }
 
-            nextStep += STEP_TIME;
+            nextStep = time + STEP_TIME;
         }
         if (actionList.size() == 0) return true;
 
@@ -81,7 +86,7 @@ public class BasicWarrior extends AIActor {
         Player nearest = playerManager.getNearest(position);
 
         // Move to the nearest player.
-        this.moveTo(nearest.x, nearest.y);
+        this.attackTo(nearest.x, nearest.y);
 
         return true;
     }

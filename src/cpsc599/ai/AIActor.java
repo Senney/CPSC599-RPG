@@ -2,6 +2,7 @@ package cpsc599.ai;
 
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Actor;
+import cpsc599.assets.Dialogue;
 import cpsc599.managers.PlayerManager;
 
 import java.util.ArrayList;
@@ -45,13 +46,22 @@ public abstract class AIActor {
         return actionList.size() > 0;
     }
 
+    public void showMessage(String text, Dialogue dialogue) {
+        if (dialogue != null) {
+            dialogue.setDialogueText(text);
+            dialogue.setVisibility(true);
+        }
+    }
+
     /**
      * Attempt to step the actor through their turn.
+     *
      * @param time
+     * @param dialogue
      * @return <code>true</code> if the turn is over;
      *         <code>false</code> if the turn still has steps left to take.
      */
-    public abstract boolean step(float time);
+    public abstract boolean step(float time, Dialogue dialogue);
 
     /**
      * Sets up a move to a specified location on the level.

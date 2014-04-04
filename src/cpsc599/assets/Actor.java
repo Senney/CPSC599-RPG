@@ -60,7 +60,7 @@ public class Actor {
 
         return new Vector2(this.x, this.y);
     }
-    public boolean attack(Actor enemy)
+    public int attack(Actor enemy)
     {
         Boolean isDead = false;
         int dmg = (damage - enemy.defence);
@@ -73,11 +73,13 @@ public class Actor {
             enemy.currentHealth -= damage;
             if(enemy.currentHealth <= 0)
                 isDead = true;
-            return isDead;
+            return damage;
         }
         Logger.debug("You missed");
-        return false;
+        return -1;
     }
+
+    public boolean isDead() { return this.currentHealth <= 0; }
 
     public void heal(int amount)
     {

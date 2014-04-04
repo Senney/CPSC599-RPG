@@ -26,14 +26,13 @@ import java.util.ArrayList;
  * Basic testing state.
  */
 public class IntroLevelState extends LevelState {
-    int time = 0;
-
     int currentEnemy = 0;
     float currentTime = 0f;
 
     private AnimatedSprite sprite;
     private Dialogue dialogue;
     private ArrayList<Enemy> attackingList;
+    private boolean enemyStartTurn;
 
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
                            CameraController cameraController, EnemyController enemyController) { //Need to add Enemy controller
@@ -104,6 +103,11 @@ public class IntroLevelState extends LevelState {
         playerController.setupMenus();
         
         dialogue = new Dialogue();
+        dialogue.loadDialogueXML("src/cpsc599/assets/Script.xml");
+        dialogue.setDialogueTag("testing");
+        dialogue.toggleVisibility();
+
+        this.enemyStartTurn = true;
     }
 
     @Override
@@ -117,10 +121,16 @@ public class IntroLevelState extends LevelState {
         renderAttackables();
 
         // Render players and enemies.
+        if (playerController.getPlayerManager().getCurrent() != null) {
+            Player current = playerController.getPlayerManager().getCurrent();
+            groundLayer.draw(SharedAssets.highlight3, CoordinateTranslator.translate(current.x),
+                    CoordinateTranslator.translate(current.y));
+        }
         for (Player p : playerController.getPlayerManager().getPlayers())
             p.render(super.groundLayer);
         for(Enemy e : enemyController.getEnemyManager().getEnemies())
             e.render(super.groundLayer);
+
 
         // If we're in cursor-mode, render the cursor.
         if (this.playerController.isCursor()) {
@@ -155,28 +165,51 @@ public class IntroLevelState extends LevelState {
 
     @Override
     public void tick(Input input) {
-        time++;
+        currentTime += Gdx.graphics.getDeltaTime();
+
+        if (this.dialogue.isVisible()) {
+            if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
+                if (this.dialogue.checkTextLeft() && this.dialogue.isVisible()) {
+                    this.dialogue.loadTextRemains();
+                }
+                else {
+                    this.dialogue.toggleVisibility();
+                }
+            }
+            return;
+        }
 
         Player current = playerController.getPlayerManager().getCurrent();
         if (playerController.isAttacking()) {
+            // Handle the attack and then return out.
             handleAttack(input, current);
+            return;
         }
 
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
         } else {
+            if (enemyStartTurn) {
+                this.dialogue.setDialogueText("Opponent's Turn");
+                this.dialogue.toggleVisibility();
+                this.enemyStartTurn = false;
+                return;
+            }
+
+
             // TODO: This is where we put some awesome enemy turn logic!!
             Enemy[] enemies = this.enemyController.getEnemyManager().getEnemies();
             if (currentEnemy > enemies.length - 1) {
                 Logger.debug("Ending enemy turn.");
                 playerController.resetTurn();
                 this.currentEnemy = 0;
+                enemyStartTurn = true;
             } else {
                 Enemy e = enemies[currentEnemy];
 
                 if (e.getAiActor() != null) {
                     if (e.getAiActor().inTurn()) {
-                        if (e.getAiActor().step(currentTime)) {
+                        if (e.getAiActor().step(currentTime, dialogue)) {
                             Logger.debug("Finishing turn for enemy[" + currentEnemy + "] - " + e);
                             e.tick();
                             currentEnemy++;
@@ -188,7 +221,6 @@ public class IntroLevelState extends LevelState {
                         Logger.debug("Deciding turn for actor: " + e);
                         e.resetMove();
                         e.getAiActor().decideTurn();
-                        currentTime = 0f;
                     }
                 } else {
                     currentEnemy++;
@@ -207,16 +239,6 @@ public class IntroLevelState extends LevelState {
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
             Logger.debug("'SELECT' pressed.");
         }
-
-        if (Controls.isKeyTapped(input, Input.Keys.D)) {
-            Logger.debug("Dialogue show button.");
-            if (this.dialogue.checkTextLeft() && this.dialogue.isVisible()) {
-            	this.dialogue.loadTextRemains();
-            }
-            else {
-            	this.dialogue.toggleVisibility();
-            }
-        }
     }
 
     private void handleAttack(Input input, Player current) {
@@ -229,10 +251,22 @@ public class IntroLevelState extends LevelState {
         int selected;
         if ((selected = playerController.controlAttack(input, this.attackingList)) != -1) {
             if(!this.attackingList.isEmpty()) {
-                boolean isDead = current.attack(this.attackingList.get(selected));
+                int dmg = current.attack(this.attackingList.get(selected));
+                boolean isDead = this.attackingList.get(selected).isDead();
+                String dmgText = null;
+
+                if (dmg < 0) {
+                    dmgText = "Player attacks enemy and misses!";
+                } else {
+                    dmgText = "Player attacks enemy for " + dmg + " damage.";
+                }
                 if(isDead){
                     enemyController.getEnemyManager().removeEnemy(this.attackingList.get(selected));
+                    dmgText += " The enemy is slain!";
                 }
+                this.dialogue.setDialogueText(dmgText);
+                this.dialogue.setVisibility(true);
+
                 this.attackingList = null;
             }
             else
