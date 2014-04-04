@@ -130,10 +130,14 @@ public class Dialogue {
 	}
 	
 	public boolean toggleVisibility() {
-		visible = !visible;
-		Logger.debug("Setting visibility of Dialogue to: " + visible);
-        return visible;
+		return setVisibility(!this.visible);
 	}
+
+    public boolean setVisibility(boolean b) {
+        this.visible = b;
+        Logger.debug("Setting visibility of Dialogue to " + visible);
+        return visible;
+    }
 	
 	public void render(SpriteBatch batch) {
 		if (!visible) return;
