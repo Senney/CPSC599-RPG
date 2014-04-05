@@ -1,9 +1,12 @@
 package cpsc599.assets;
 
 import com.badlogic.gdx.math.Vector2;
+import cpsc599.ai.AStarMove;
 import cpsc599.ai.AStarPathfinder;
-import cpsc599.managers.CinematicActorManager;
+import cpsc599.managers.PlayerManager;
 import cpsc599.util.Logger;
+
+import java.util.List;
 
 public class CinematicAction {
     public static float DEFUALT_ACTION_TIME = 0.25f; // 1/4 second.
@@ -17,6 +20,8 @@ public class CinematicAction {
     public Object obj;
     public float time;
 
+    private float nextTime;
+
     /**
      * Constructs a cinematic action with an available arbitrary object as a property.
      * @param type
@@ -29,10 +34,15 @@ public class CinematicAction {
         this.actor = a;
         this.obj = o;
         this.time = time;
+        this.nextTime = 0f;
     }
 
     public static CinematicAction moveTo(Actor a, Vector2 destination) {
         return new CinematicAction(ActionType.MOVE, a, destination, DEFUALT_ACTION_TIME);
+    }
+
+    public static CinematicAction moveTo(Actor a, Vector2 destination, float stepTime) {
+        return new CinematicAction(ActionType.MOVE, a, destination, stepTime);
     }
 
     public static CinematicAction spawnActor(Actor a, Vector2 position) {
@@ -51,14 +61,32 @@ public class CinematicAction {
         return new CinematicAction(ActionType.WAIT, null, null, time);
     }
 
-    public boolean act(CinematicActorManager manager, AStarPathfinder pathfinder, float deltaTime) {
+    public boolean act(PlayerManager manager, AStarPathfinder pathfinder, float deltaTime) {
         if (actionType == null) {
             Logger.error("actionType must be set before a CinematicAction can act.");
             return false;
         }
 
+        if (this.nextTime > deltaTime) {
+            return false;
+        }
+
         switch (actionType) {
             case MOVE:
+                if (this.obj instanceof Vector2) {
+                    Vector2 dst = (Vector2)this.obj;
+                    this.obj = pathfinder.getPath(new Vector2(this.actor.x, this.actor.y), dst);
+                } else {
+                    List<AStarMove> moves = (List<AStarMove>)this.obj;
+                    if (moves.size() == 0) return true;
+
+                    AStarMove top = moves.get(moves.size() - 1);
+
+                    this.actor.move(top.x_move, top.y_move, pathfinder.getLevel());
+
+                    moves.remove(top);
+                    this.obj = moves;
+                }
 
                 break;
             case SPAWN:
@@ -71,8 +99,12 @@ public class CinematicAction {
 
                 break;
             case WAIT:
-
+                if (nextTime == 0f) nextTime = deltaTime + time;
+                if (deltaTime > nextTime) return true;
+                return false; // We return false here to maintain the nextTime counter which is automatically
+                              // set at the final return point of the function.
         }
+        this.nextTime = deltaTime + this.time;
 
         return false;
     }
