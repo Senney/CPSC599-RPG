@@ -119,8 +119,13 @@ public class OrbGame implements ApplicationListener {
         playerController = new PlayerController(playerManager, enemyManager); //this might cause issues
         cameraController = new CameraController(new Vector2(0, 0), new Vector3(this.width, this.height, 1));
 
+        levelManager = new LevelManager(assetManager);
         try {
-            levelManager = new LevelManager("assets/levels", assetManager);
+            levelManager.addLevelDir("assets/tilesets/primary/Maps/Chapter1");
+            levelManager.addLevelDir("assets/tilesets/primary/Maps/Chapter2");
+            levelManager.addLevelDir("assets/tilesets/primary/Maps/Chapter3");
+            levelManager.addLevelDir("assets/tilesets/primary/Maps/Chapter4");
+            levelManager.addLevelDir("assets/tilesets/primary/Maps/Chapter5");
         } catch (IOException ex) {
             Logger.fatal("LevelManager creation failed... Exiting.");
             System.exit(1);
@@ -133,7 +138,7 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL0", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
 
         setState("MAIN_MENU");
-        //levelManager.setLevel(0);
+        levelManager.setLevel(6);
 	}
 	
 }

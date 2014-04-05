@@ -3,6 +3,7 @@ package cpsc599.managers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.badlogic.gdx.assets.AssetManager;
@@ -17,28 +18,34 @@ import cpsc599.util.Logger;
 public class LevelManager {
 	private String levelDir;
 	private LevelLoader loader;
-	private AssetManager assetManager;
 	private List<Level> levelList;
+    private List<String> levelDirs;
 
     private Level current;
 
     /**
      * Sets up the Level Manager with default parameters.
-     * @param levelsDir The directory in which levels are stored.
      * @param assetManager Global asset manager
      * @throws IOException levelsDir did not exist, or was not a directory.
      */
-	public LevelManager(String levelsDir, AssetManager assetManager) throws IOException {
+	public LevelManager(AssetManager assetManager) {
         Logger.debug("Creating LevelManager.");
 
-		this.assetManager = assetManager;
 		this.loader = new LevelLoader(assetManager);
 		this.levelList = new ArrayList<Level>();
+        this.levelDirs = new ArrayList<String>();
 
         this.current = null;
-		
-		setLevelDir(levelsDir);
 	}
+
+    public void addLevelDir(String levelDir) throws IOException {
+        if (levelDirs.contains(levelDir)) {
+            throw new IOException("Level directory " + levelDir + " was already loaded.");
+        }
+
+        levelDirs.add(levelDir);
+        update();
+    }
 
     /**
      * Sets the level directory and updates the directory listing.
@@ -52,15 +59,20 @@ public class LevelManager {
 	 * @throws IOException
 	 */
 	public void update() throws IOException {
-		File levels = new File(this.levelDir);
-		if (!levels.isDirectory()) {
-			Logger.error("Expected " + levels.getAbsoluteFile().toString() + " to be a directory.");
-			throw new IOException("Expected levelDir to be a directory.");
-		}
-		
-		File[] levelList = levels.listFiles();
-		if (levelList.length == 0) Logger.warn("No levels found in " + this.levelDir);
-		
+        List<File> levelList = new ArrayList<File>();
+        for (String dir : levelDirs) {
+            File levels = new File(dir);
+            if (!levels.isDirectory()) {
+                Logger.error("Expected " + levels.getAbsoluteFile().toString() + " to be a directory.");
+                throw new IOException("Expected levelDir to be a directory.");
+            }
+
+            levelList.addAll(Arrays.asList(levels.listFiles()));
+        }
+
+		if (levelList.size() == 0) Logger.warn("No levels found in " + this.levelDir);
+
+        this.levelList.clear();
 		for (File level : levelList) {
 			Level l = new Level();
 			l.file = level;

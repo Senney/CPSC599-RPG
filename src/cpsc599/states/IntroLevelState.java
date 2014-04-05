@@ -37,19 +37,16 @@ public class IntroLevelState extends LevelState {
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
                            CameraController cameraController, EnemyController enemyController) { //Need to add Enemy controller
         super(game, playerController, cameraController, enemyController);
-        super.setLevel(manager.setLevel(0));
+        super.setLevel(manager.setLevel(3));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
 
         Player p = new Player(sprite, 2, 5, 8, 14, 1, 3, 70, 80);
-        //p.getPlayerInventory().pickUp(new Item("Sword", true, Inventory.RHAND_SLOT, 1));
-        //p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 0));
 
         Item sw = new Item("Pike", true, Inventory.RHAND_SLOT, 3, 5, 10);
         p.getPlayerInventory().pickUp(sw);
         p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1, 1, 5));
         p.getPlayerInventory().equip(sw);
-
         p.updateStats();
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_right.png", 0, 0, 16, 16, 1, 0.1f);
@@ -57,18 +54,7 @@ public class IntroLevelState extends LevelState {
         p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 2, 3));
         p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);
         p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
-
         p3.updateStats();
-
-        /*
-        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_front.png", 0, 0, 16, 16, 1, 0.1f);
-        Player p2 = new Player(sprite, 2, 9, 8);
-        p2.getPlayerInventory().pickUp(new Item("Health Potion", false, Inventory.NONE, 1));
-        p2.getPlayerInventory().pickUp(new Item("Wand", true, Inventory.RHAND_SLOT, 2));
-
-        AnimatedSprite cowCube = new AnimatedSprite("assets/tilesets/cowcube.png", 0, 0, 16, 16, 1, 0f);
-        Player p4 = new Player(cowCube, 20, 27, 20);
-        */
 
         // Set up the pathfinder for this level.
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
@@ -77,11 +63,11 @@ public class IntroLevelState extends LevelState {
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
         Enemy e = new Enemy(sprite, 12, 7, 8);
         e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e));
-        
+
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy14.png", 0,0,16,16,1,0.1f);
         Enemy e2 = new Enemy(sprite, 10, 5, 8);
         e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e2));
-        
+
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy5.png", 0,0,16,16,1,0.1f);
         Enemy e3 = new Enemy(sprite, 10, 9, 8);
         e3.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
@@ -91,9 +77,7 @@ public class IntroLevelState extends LevelState {
         enemyController.getEnemyManager().addEnemy(e3);
 
         playerController.getPlayerManager().addPlayer(p);
-//        playerController.getPlayerManager().addPlayer(p2);
         playerController.getPlayerManager().addPlayer(p3);
-//        playerController.getPlayerManager().addPlayer(p4);
 
         // TODO: Make this not stupid.
         playerController.setupCursor();
@@ -101,7 +85,7 @@ public class IntroLevelState extends LevelState {
         playerController.getCursor().y = (int)manager.getCurrentLevel().player_spawn.y;
 
         playerController.setupMenus();
-        
+
         dialogue = new Dialogue();
         dialogue.loadDialogueXML("src/cpsc599/assets/Script.xml");
         dialogue.setDialogueTag("testing");
@@ -269,9 +253,12 @@ public class IntroLevelState extends LevelState {
 
                 this.attackingList = null;
             }
-            else
+            else {
                 //Logger.debug("Not allowed to attack nothing! ending your turn idiot...");
                 Logger.debug("The character swings and only hits thin air...");
+                this.dialogue.setDialogueText("Player swings and hits only thin air.");
+                this.dialogue.setVisibility(true);
+            }
         }
         else{
             attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
