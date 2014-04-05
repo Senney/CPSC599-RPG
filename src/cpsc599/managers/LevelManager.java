@@ -93,7 +93,7 @@ public class LevelManager {
      */
     public Level setLevel(String levelName) {
         for (Level level : this.levelList) {
-            if (level.name == levelName) {
+            if (level.name.equals(levelName)) {
                 this.loader.load(level);
                 this.current = level;
                 return level;
