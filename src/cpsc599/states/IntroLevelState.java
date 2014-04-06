@@ -160,10 +160,10 @@ public class IntroLevelState extends LevelState {
     public void tick(Input input) {
         currentTime += Gdx.graphics.getDeltaTime();
 
-        /*if(enemyController.getEnemyManager().getEnemies().length == 0){
+        if(enemyController.getEnemyManager().getEnemies().length == 0){
             orb.setState("PROLOGUE_CINEMATIC");
             //levelManager.setLevel(6);
-        }*/
+        }
 
         //you will probably hate me for this...
         for(int i =0; i<playerController.getPlayerManager().getPlayers().length; i++)
@@ -173,6 +173,13 @@ public class IntroLevelState extends LevelState {
                 //add cool death scene here!
                 playerController.getPlayerManager().removePlayer(i);
             }
+        }
+
+        if(playerController.getPlayerManager().getPlayers().length == 0)
+        {
+            //Game over!
+            //add game over state
+            Logger.debug("Game Over...");
         }
 
         if (this.dialogue.isVisible()) {
