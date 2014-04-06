@@ -35,9 +35,9 @@ public class IntroLevelState extends LevelState {
     private boolean enemyStartTurn;
 
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
-                           CameraController cameraController, EnemyController enemyController) { //Need to add Enemy controller
+                           CameraController cameraController, EnemyController enemyController) {
         super(game, playerController, cameraController, enemyController);
-        super.setLevel(manager.setLevel(3));
+        super.setLevel(manager.setLevel(0));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
 

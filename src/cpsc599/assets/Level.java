@@ -25,13 +25,13 @@ public class Level {
     }
 
     public boolean collide(int x, int y) {
+        if (x < 0 || y < 0) return true;
         if (collisionLayer == null) {
             Logger.error("Level has not yet been loaded, or collision layer was not assigned.");
             return false;
         }
 
         // Don't let the players leave the map.
-        if (x < 0 || y < 0) return true;
         if (x >= tile_bounds.x || y >= tile_bounds.y) return true;
 
         boolean collides = collisionLayer.getCell(x, y) != null;
