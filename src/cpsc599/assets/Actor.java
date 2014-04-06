@@ -68,12 +68,12 @@ public class Actor {
 
         Random rand = new Random();
         int chance = rand.nextInt(101);
-        if(chance <= hit) {
-            Logger.debug("Attacking Actor for " + damage + " damage.");
-            enemy.currentHealth -= damage;
+        if(chance <= hitChance) {
+            Logger.debug("Attacking Actor for " + dmg + " damage.");
+            enemy.currentHealth -= dmg;
             if(enemy.currentHealth <= 0)
                 isDead = true;
-            return damage;
+            return dmg;
         }
         Logger.debug("You missed");
         return -1;

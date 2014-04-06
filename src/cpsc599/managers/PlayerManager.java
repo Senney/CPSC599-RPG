@@ -23,6 +23,11 @@ public class PlayerManager {
         //if (currentPlayer == null) setCurrent(0); // Commented to allow for cursor selection.
     }
 
+    public void removePlayer(int i) {
+        Logger.debug("Player " + i +" has died...");
+        playerList.remove(i);
+    }
+
     public Player[] getPlayers() {
         return playerList.toArray(new Player[playerList.size()]);
     }

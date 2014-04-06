@@ -69,10 +69,16 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy14.png", 0,0,16,16,1,0.1f);
         Enemy e2 = new Enemy(sprite, 10, 5, 8);
+        e2.evade = 10;
+        e2.damage = 6;
+        e2.hit = 120;
         e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e2));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy5.png", 0,0,16,16,1,0.1f);
         Enemy e3 = new Enemy(sprite, 10, 9, 8);
+        e3.evade = 10;
+        e3.damage = 6;
+        e3.hit = 120;
         e3.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
 
         enemyController.getEnemyManager().addEnemy(e);
@@ -153,6 +159,21 @@ public class IntroLevelState extends LevelState {
     @Override
     public void tick(Input input) {
         currentTime += Gdx.graphics.getDeltaTime();
+
+        /*if(enemyController.getEnemyManager().getEnemies().length == 0){
+            orb.setState("PROLOGUE_CINEMATIC");
+            //levelManager.setLevel(6);
+        }*/
+
+        //you will probably hate me for this...
+        for(int i =0; i<playerController.getPlayerManager().getPlayers().length; i++)
+        {
+            if(playerController.getPlayerManager().getPlayer(i).isDead())
+            {
+                //add cool death scene here!
+                playerController.getPlayerManager().removePlayer(i);
+            }
+        }
 
         if (this.dialogue.isVisible()) {
             if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {

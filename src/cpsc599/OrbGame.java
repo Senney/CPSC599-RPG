@@ -15,6 +15,8 @@ import cpsc599.managers.LevelManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.managers.StateManager;
 import cpsc599.states.CinematicState;
+import cpsc599.states.IntroLevelState;
+import cpsc599.states.MainMenuState;
 import cpsc599.states.PrologueCinematicState;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
@@ -133,12 +135,12 @@ public class OrbGame implements ApplicationListener {
         SharedAssets.load();
 
         // TODO: Fill this in with the proper state.
-        //stateManager.addState("MAIN_MENU", new MainMenuState());
-        //stateManager.addState("LEVEL0", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
+        stateManager.addState("MAIN_MENU", new MainMenuState());
+        stateManager.addState("LEVEL0", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("PROLOGUE_CINEMATIC", new PrologueCinematicState(this, levelManager.setLevel("flower_field_map"), cameraController));
 
-        setState("PROLOGUE_CINEMATIC");
-        levelManager.setLevel(6);
+        setState("MAIN_MENU");
+        //levelManager.setLevel(6);
 	}
 	
 }
