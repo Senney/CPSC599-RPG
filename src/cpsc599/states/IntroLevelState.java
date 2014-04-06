@@ -62,6 +62,9 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
         Enemy e = new Enemy(sprite, 12, 7, 8);
+        e.evade = 10;
+        e.damage = 6;
+        e.hit = 120;
         e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy14.png", 0,0,16,16,1,0.1f);
