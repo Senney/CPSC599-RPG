@@ -3,6 +3,7 @@ package cpsc599.assets;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import cpsc599.states.State;
 
 /**
  * Class for representing interactive and dynamic entities within the game.
@@ -21,7 +22,7 @@ public abstract class GameEntity {
         this.position = new Vector2(-1, -1);
     }
 
-    public abstract boolean tick(float time);
+    public abstract boolean tick(float time, State gameState);
     public abstract void render(SpriteBatch batch);
     public abstract void onUse();
 

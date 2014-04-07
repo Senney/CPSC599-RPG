@@ -3,6 +3,7 @@ package cpsc599.managers;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.GameEntity;
+import cpsc599.states.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,11 @@ public class GameEntityManager {
     private List<GameEntity> entities;
     private GameEntity[][] entityMap;
 
+    /**
+     * Constructs the GameEntityManager. Takes in width and height of the map for quick lookup for interactions.
+     * @param width Map height (in tiles)
+     * @param height Map width (in tiles)
+     */
     public GameEntityManager(int width, int height) {
         this.width = width;
         this.height = height;
@@ -28,6 +34,13 @@ public class GameEntityManager {
     }
 
     public List<GameEntity> getEntities() { return entities; }
+    public List<GameEntity> getEntitiesByIdentifier(String id) {
+        List<GameEntity> idEntities = new ArrayList<GameEntity>();
+        for (GameEntity e : entities) {
+            if (e.getIdentifier().equals(entities)) idEntities.add(e);
+        }
+        return idEntities;
+    }
 
     public GameEntity getEntityAtPosition(int x, int y) {
         if (x >= width || y >= height || x < 0 || y < 0) {
@@ -47,9 +60,9 @@ public class GameEntityManager {
         entityMap[(int)position.y][(int)position.x] = entity;
     }
 
-    public void tick(float gameTime) {
+    public void tick(float gameTime, State gameState) {
         for (GameEntity e : entities) {
-            e.tick(gameTime);
+            e.tick(gameTime, gameState);
         }
     }
 
