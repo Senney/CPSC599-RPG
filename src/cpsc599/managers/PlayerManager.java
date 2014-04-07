@@ -100,4 +100,9 @@ public class PlayerManager {
     public Player getPlayerAtPosition(int x, int y) {
         return getPlayerAtPosition(new Vector2(x, y));
     }
+
+    public void reset() {
+        playerList.clear();
+        currentPlayer = null;
+    }
 }

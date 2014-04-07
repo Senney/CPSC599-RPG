@@ -70,4 +70,8 @@ public class EnemyManager {
 
         return null;
     }
+
+    public void reset() {
+        enemyList.clear();
+    }
 }
