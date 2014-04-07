@@ -43,7 +43,7 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
 
-        Player p = new Player(sprite, 2, 5, 8, 14, 1, 3, 70, 80);
+        Player p = new Player("Ren", sprite, 2, 5, 8, 14, 1, 3, 70, 80);
 
         Item sw = new Item("Pike", true, Inventory.RHAND_SLOT, 3, 5, 10);
         p.getPlayerInventory().pickUp(sw);
@@ -52,7 +52,7 @@ public class IntroLevelState extends LevelState {
         p.updateStats();
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_right.png", 0, 0, 16, 16, 1, 0.1f);
-        Player p3 = new Player(sprite, 2, 7, 8, 10, 1, 2, 60, 70);
+        Player p3 = new Player("Hikari", sprite, 2, 7, 8, 10, 1, 2, 60, 70);
         p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 2, 3));
         p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);
         p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
