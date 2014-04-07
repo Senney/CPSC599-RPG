@@ -60,7 +60,7 @@ public class IntroLevelState extends LevelState {
 
         // Set up the pathfinder for this level.
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
-                enemyController.getEnemyManager());
+                enemyController.getEnemyManager(), this.gameEntityManager);
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
         Enemy e = new Enemy(sprite, 12, 7, 8);
@@ -245,6 +245,8 @@ public class IntroLevelState extends LevelState {
             Enemy[] enemies = this.enemyController.getEnemyManager().getEnemies();
             if (currentEnemy > enemies.length - 1) {
                 Logger.debug("Ending enemy turn.");
+                this.dialogue.setDialogueText("Enemy turn complete. Player turn.");
+                this.dialogue.setVisibility(true);
                 playerController.resetTurn();
                 this.currentEnemy = 0;
                 enemyStartTurn = true;
