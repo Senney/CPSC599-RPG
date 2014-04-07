@@ -48,6 +48,9 @@ public class IntroLevelState extends LevelState {
         super.init(game);
         super.setLevel(levelManager.setLevel(0));
 
+        playerController.getPlayerManager().reset();
+        enemyController.getEnemyManager().reset();
+
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
 
         Player p = new Player("Ren", sprite, 2, 5, 8, 14, 1, 3, 70, 80);
