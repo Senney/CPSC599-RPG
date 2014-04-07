@@ -115,8 +115,10 @@ public class CameraController {
         }
 
         // Check that the X and Y positions don't overflow the camera off of the map.
-        int realx = bound(CoordinateTranslator.translate(x), Main.GAME_WIDTH, width);
-        int realy = bound(CoordinateTranslator.translate(y), Main.GAME_HEIGHT, height);
+        int newx = CoordinateTranslator.translate(x);
+        int newy = CoordinateTranslator.translate(y);
+        int realx = bound(newx, Main.GAME_WIDTH, width);
+        int realy = bound(newy, Main.GAME_HEIGHT, height);
 
         if (this.x == realx && this.y == realy) return; // Don't do unnecessary work.
         this.x = realx;
