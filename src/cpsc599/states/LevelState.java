@@ -63,6 +63,7 @@ public abstract class LevelState extends State {
         Vector2 dimensions = this.currentLevel.getMapDimensions();
         this.cameraController.setCameraBounds(dimensions);
         this.gameEntityManager = new GameEntityManager((int)dimensions.x, (int)dimensions.y);
+        this.playerController.setGameEntityManager(this.gameEntityManager);
     }
 
     @Override
