@@ -190,7 +190,9 @@ public class PlayerController {
                     return;
 
                 } else if (action.equals("Use")) {
-
+                    this.using = true;
+                    this.selected = 0;
+                    return;
                 } else if (!action.equals("")) {
                     this.actMenu.toggleVisible();
                     releasePlayer();
@@ -252,7 +254,7 @@ public class PlayerController {
         }*/
     }
 
-    private void endTurn(Player p) {
+    public void endTurn(Player p) {
         p.endTurn();
         releasePlayer();
         closeAllMenus();
@@ -358,7 +360,9 @@ public class PlayerController {
         }
 
         // If we have a move and there's no enemy in our space, we can move.
-        if ((movex != 0 || movey != 0) && enemyManager.getEnemyAtPosition(p.x + movex, p.y + movey) == null) {
+        int newx = p.x + movex, newy = p.y + movey;
+        if ((movex != 0 || movey != 0) && enemyManager.getEnemyAtPosition(newx, newy) == null &&
+                !gameEntityManager.checkCollision(newx, newy)) {
             p.move(movex, movey, l);
         }
     }

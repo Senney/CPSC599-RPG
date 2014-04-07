@@ -2,10 +2,13 @@ package cpsc599.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
 import cpsc599.ai.AStarPathfinder;
 import cpsc599.ai.BasicWarrior;
 import cpsc599.assets.*;
+import cpsc599.assets.Entities.DoorGameEntity;
+import cpsc599.assets.Entities.SwitchGameEntity;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
@@ -94,6 +97,10 @@ public class IntroLevelState extends LevelState {
 
         playerController.setupMenus();
 
+        this.gameEntityManager.addEntity(new SwitchGameEntity(new Sprite(SharedAssets.doorSwitch), "door1", 5, 5));
+        this.gameEntityManager.addEntity(new DoorGameEntity("door1", new Sprite(SharedAssets.highlight),
+                new Sprite(SharedAssets.highlight2), 5, 6, false));
+
         dialogue = new Dialogue();
         dialogue.loadDialogueXML("src/cpsc599/assets/Script.xml");
         dialogue.setDialogueTag("testing");
@@ -114,6 +121,7 @@ public class IntroLevelState extends LevelState {
         renderUsables();
 
         // Render players and enemies.
+        this.gameEntityManager.render(super.groundLayer);
         if (playerController.getPlayerManager().getCurrent() != null) {
             Player current = playerController.getPlayerManager().getCurrent();
             groundLayer.draw(SharedAssets.highlight3, CoordinateTranslator.translate(current.x),
@@ -141,7 +149,7 @@ public class IntroLevelState extends LevelState {
     }
 
     private void renderUsables() {
-        if ((this.playerController.isInspecting() || this.playerController.isInspecting()) && this.entityList != null) {
+        if ((this.playerController.isInspecting() || this.playerController.isUsing()) && this.entityList != null) {
             for (int i = 0; i < entityList.size(); i++) {
                 GameEntity e = entityList.get(i);
                 int x = (int)e.getPosition().x, y = (int)e.getPosition().y;
@@ -209,6 +217,8 @@ public class IntroLevelState extends LevelState {
             return;
         }
 
+        this.gameEntityManager.tick(this.currentTime, this);
+
         Player current = playerController.getPlayerManager().getCurrent();
         if (playerController.isAttacking()) {
             // Handle the attack and then return out.
@@ -217,6 +227,7 @@ public class IntroLevelState extends LevelState {
         } else if (playerController.isInspecting() || playerController.isUsing()) {
             // Handle item inspection and so-on.
             handleSelect(input, current);
+            return;
         }
 
         if (!playerController.isTurnComplete()) {
@@ -278,13 +289,15 @@ public class IntroLevelState extends LevelState {
         entityList = gameEntityManager.getEntitiesInRange(current.x, current.y);
         int selected;
 
+        boolean inspecting = playerController.isInspecting(), using = playerController.isUsing();
         if ((selected = playerController.controlSelect(input, entityList)) != -1) {
             GameEntity e = entityList.get(selected);
-            if (playerController.isUsing()) {
+            if (using) {
                 String response = e.onUse(this);
                 dialogue.setDialogueText(response);
                 dialogue.setVisibility(true);
-            } else if (playerController.isInspecting()) {
+                this.playerController.endTurn(current);
+            } else if (inspecting) {
                 String value = e.onInspect();
                 dialogue.setDialogueText(value);
                 dialogue.setVisibility(true);
