@@ -10,6 +10,8 @@ import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.util.Logger;
 
+import java.util.HashMap;
+
 /**
  * Super-class for all states. Contains base functions to control drawing, and defines basic abstract functions
  * that must be defined for a state to draw properly.
@@ -19,6 +21,8 @@ public abstract class State {
     protected static BitmapFont font = new BitmapFont(true);
     public SpriteBatch spriteBatch;
 
+    protected HashMap<String, Object> flags;
+
     abstract public void render();
     abstract public void tick(Input input);
 
@@ -27,8 +31,14 @@ public abstract class State {
      * @param game
      */
     public void init(OrbGame game) {
+        Logger.debug("Initializing game state");
+
         if (this.orb == null) {
             Logger.debug("State has already been initialized.");
+        }
+
+        if (flags == null) {
+            flags = new HashMap<String, Object>();
         }
 
         this.orb = game;
@@ -66,6 +76,14 @@ public abstract class State {
      */
     public void drawString(String string, int x, int y) {
         font.draw(this.spriteBatch, string, x, y);
+    }
+
+    public void setFlag(String key, Object value) {
+        this.flags.put(key, value);
+    }
+
+    public Object getFlag(String key) {
+        return this.flags.get(key);
     }
 
     /**
