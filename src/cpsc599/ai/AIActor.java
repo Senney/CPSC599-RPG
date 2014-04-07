@@ -15,6 +15,8 @@ public abstract class AIActor {
     protected static class AIAction {
         static String MOVE = "move";
         static String ATTACK = "attack";
+        static String SAY = "say";
+        static String SKIP = "skip";
 
         String action;
         Object obj;

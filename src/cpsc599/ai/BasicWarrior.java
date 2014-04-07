@@ -8,6 +8,7 @@ import cpsc599.managers.PlayerManager;
 import cpsc599.util.Logger;
 
 import java.util.List;
+import java.util.Random;
 
 public class BasicWarrior extends AIActor {
     public BasicWarrior(PlayerManager playerManager, AStarPathfinder pathfinder, Actor actor) {
@@ -16,6 +17,7 @@ public class BasicWarrior extends AIActor {
 
     @Override
     public boolean step(float time, Dialogue dialogue) {
+        if (actionList.size() == 0) return true;
         if (time >= nextStep) {
             AIAction action = actionList.get(0);
             if (action.action == AIAction.MOVE) {
@@ -43,6 +45,11 @@ public class BasicWarrior extends AIActor {
                     showMessage("Enemy attacks player for " + dmg + " damage!", dialogue);
                 }
                 actionList.remove(action);
+            } else if (action.action == AIAction.SKIP) {
+                actionList.remove(action);
+            } else if (action.action == AIAction.SAY) {
+                showMessage((String)action.obj, dialogue);
+                actionList.remove(action);
             }
 
             nextStep = time + STEP_TIME;
@@ -58,6 +65,7 @@ public class BasicWarrior extends AIActor {
                 end = new Vector2(x, y);
         List<AStarMove> movements = pathfinder.getPath(start, end);
         if (movements == null) {
+            actionList.add(new AIAction(AIAction.SKIP, null));
             return;
         }
 
@@ -70,6 +78,7 @@ public class BasicWarrior extends AIActor {
                 end = new Vector2(x, y);
         List<AStarMove> movements = pathfinder.getPath(start, end);
         if (movements == null) {
+            actionList.add(new AIAction(AIAction.SKIP, null));
             return;
         }
 
