@@ -18,10 +18,10 @@ public class GameOverState extends State{
             Logger.error("init() must be called first.");
             return;
         }
-        //this.spriteBatch.begin();
-        //this.drawString("Game Over", (int)(this.orb.width / 2), 20 + (int)(Math.sin(time * 0.07) * 10), StringAlign.CENTER);
-        //this.drawString("You have died", this.orb.width/2, this.orb.height/2, StringAlign.CENTER);
-        //this.spriteBatch.end();
+        this.spriteBatch.begin();
+        this.drawString("Game Over", (int)(this.orb.width / 2), 20 + (int)(Math.sin(time * 0.07) * 10), StringAlign.CENTER);
+        this.drawString("You have died", this.orb.width/2, this.orb.height/2, StringAlign.CENTER);
+        this.spriteBatch.end();
     }
 
     @Override

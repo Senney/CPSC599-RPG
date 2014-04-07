@@ -41,7 +41,7 @@ public class CinematicState extends LevelState {
 
         this.setLevel(level);
         this.pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
-                enemyController.getEnemyManager());
+                enemyController.getEnemyManager(), this.gameEntityManager);
 
         actions = new LinkedList<CinematicAction>();
         b_initialized = false;

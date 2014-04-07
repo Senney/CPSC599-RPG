@@ -21,6 +21,11 @@ public class SharedAssets {
     public static Texture highlight3;
 
     public static Texture doorSwitch;
+    public static Texture defaultPortrait;
+
+    public static Texture hikariPortrait;
+    public static Texture princePortrait;
+
 
     public static void load() {
         if (loaded) return;
@@ -35,6 +40,10 @@ public class SharedAssets {
         highlight3 = new Texture(Gdx.files.internal("assets/tilesets/" + "highlight-player.png"));
 
         doorSwitch = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Buttons/A_button3.png"));
+        defaultPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/enemy/Monster/cow_cube.png"));
+
+        hikariPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/hikari.png"));
+        princePortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/prince.png"));
 
         loaded = true;
     }

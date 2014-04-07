@@ -13,6 +13,7 @@ import java.util.Random;
  * Base class for a Player controlled entity.
  */
 public class Player extends Actor{
+    private String name;
     private AnimatedSprite playerSprite;
 
     private Inventory playerInventory;
@@ -22,11 +23,12 @@ public class Player extends Actor{
     // to be used for animation.
     //private float moveStart, moveEnd;
 
-    public Player(AnimatedSprite sprite) {
-        this(sprite, 0, 0, 0);
+    public Player(String name, AnimatedSprite sprite) {
+        this(name, sprite, 0, 0, 0);
     }
 
-    public Player(AnimatedSprite sprite, int x, int y, int moveDist) {
+    public Player(String name, AnimatedSprite sprite, int x, int y, int moveDist) {
+        this.name = name;
         //this.moveStart = 0f;
         this.playerSprite = sprite;
         this.x = x;
@@ -37,7 +39,8 @@ public class Player extends Actor{
         this.playerHealthBar = new HealthBar();
     }
 
-    public Player(AnimatedSprite sprite, int x, int y, int moveDist, int hp, int str, int def, int spe, int ev) {
+    public Player(String name, AnimatedSprite sprite, int x, int y, int moveDist, int hp, int str, int def, int spe, int ev) {
+        this.name = name;
         //this.moveStart = 0f;
         this.playerSprite = sprite;
         this.x = x;
@@ -76,6 +79,14 @@ public class Player extends Actor{
 
     public Inventory getPlayerInventory() {
         return playerInventory;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

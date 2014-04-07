@@ -43,7 +43,7 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
 
-        Player p = new Player(sprite, 2, 5, 8, 1, 1, 3, 70, 80);
+        Player p = new Player("Ren", sprite, 2, 5, 8, 14, 1, 3, 70, 80);
 
         Item sw = new Item("Pike", true, Inventory.RHAND_SLOT, 3, 5, 10);
         p.getPlayerInventory().pickUp(sw);
@@ -52,7 +52,8 @@ public class IntroLevelState extends LevelState {
         p.updateStats();
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_right.png", 0, 0, 16, 16, 1, 0.1f);
-        Player p3 = new Player(sprite, 2, 7, 8, 1, 1, 2, 60, 70);
+
+        Player p3 = new Player("Hikari", sprite, 2, 7, 8, 10, 1, 2, 60, 70);
         p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 2, 3));
         p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);
         p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
@@ -60,7 +61,7 @@ public class IntroLevelState extends LevelState {
 
         // Set up the pathfinder for this level.
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
-                enemyController.getEnemyManager());
+                enemyController.getEnemyManager(), this.gameEntityManager);
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
         Enemy e = new Enemy(sprite, 12, 7, 8);
@@ -102,8 +103,8 @@ public class IntroLevelState extends LevelState {
                 new Sprite(SharedAssets.highlight2), 5, 6, false));
 
         dialogue = new Dialogue();
-        dialogue.loadDialogueXML("src/cpsc599/assets/Script.xml");
-        dialogue.setDialogueTag("testing");
+        dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
+        dialogue.setDialogueTag("p1");
         dialogue.toggleVisibility();
 
         this.enemyStartTurn = true;
@@ -216,7 +217,8 @@ public class IntroLevelState extends LevelState {
                     this.dialogue.loadTextRemains();
                 }
                 else {
-                    this.dialogue.toggleVisibility();
+                    if (!this.dialogue.stepDialogue())
+                        this.dialogue.toggleVisibility();
                 }
             }
             return;
@@ -239,8 +241,7 @@ public class IntroLevelState extends LevelState {
             playerController.control(input, this.currentLevel);
         } else {
             if (enemyStartTurn) {
-                this.dialogue.setDialogueText("Opponent's Turn");
-                this.dialogue.toggleVisibility();
+                this.dialogue.display("Opponent's turn");
                 this.enemyStartTurn = false;
                 return;
             }
@@ -250,6 +251,7 @@ public class IntroLevelState extends LevelState {
             Enemy[] enemies = this.enemyController.getEnemyManager().getEnemies();
             if (currentEnemy > enemies.length - 1) {
                 Logger.debug("Ending enemy turn.");
+                this.dialogue.display("Enemy turn complete. Player turn begins.");
                 playerController.resetTurn();
                 this.currentEnemy = 0;
                 enemyStartTurn = true;
@@ -299,13 +301,11 @@ public class IntroLevelState extends LevelState {
             GameEntity e = entityList.get(selected);
             if (using) {
                 String response = e.onUse(this);
-                dialogue.setDialogueText(response);
-                dialogue.setVisibility(true);
+                dialogue.display(response);
                 this.playerController.endTurn(current);
             } else if (inspecting) {
                 String value = e.onInspect();
-                dialogue.setDialogueText(value);
-                dialogue.setVisibility(true);
+                dialogue.display(value);
             }
         }
     }
@@ -333,16 +333,14 @@ public class IntroLevelState extends LevelState {
                     enemyController.getEnemyManager().removeEnemy(this.attackingList.get(selected));
                     dmgText += " The enemy is slain!";
                 }
-                this.dialogue.setDialogueText(dmgText);
-                this.dialogue.setVisibility(true);
+                this.dialogue.display(dmgText);
 
                 this.attackingList = null;
             }
             else {
                 //Logger.debug("Not allowed to attack nothing! ending your turn idiot...");
                 Logger.debug("The character swings and only hits thin air...");
-                this.dialogue.setDialogueText("Player swings and hits only thin air.");
-                this.dialogue.setVisibility(true);
+                this.dialogue.display("Player swings and hits only thin air");
             }
         }
         else{

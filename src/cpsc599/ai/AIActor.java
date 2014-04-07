@@ -15,6 +15,8 @@ public abstract class AIActor {
     protected static class AIAction {
         static String MOVE = "move";
         static String ATTACK = "attack";
+        static String SAY = "say";
+        static String SKIP = "skip";
 
         String action;
         Object obj;
@@ -44,13 +46,6 @@ public abstract class AIActor {
 
     public boolean inTurn() {
         return actionList.size() > 0;
-    }
-
-    public void showMessage(String text, Dialogue dialogue) {
-        if (dialogue != null) {
-            dialogue.setDialogueText(text);
-            dialogue.setVisibility(true);
-        }
     }
 
     /**

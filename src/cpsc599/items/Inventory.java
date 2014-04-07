@@ -114,17 +114,4 @@ public class Inventory {
 	{
 		return carry;
 	}
-	
-	public static void main(String[] args)
-	{
-		Item sword = new Item("sword", true, RHAND_SLOT, 1, 5, 4);
-		Item potion = new Item("potion", false, -1, 1, 10, 0);
-		
-		Inventory inventory = new Inventory(new Player(null));
-		
-		inventory.pickUp(sword);
-		inventory.pickUp(potion);
-		
-		inventory.equip(sword);
-	}
 }

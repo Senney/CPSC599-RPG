@@ -8,6 +8,7 @@ import cpsc599.managers.PlayerManager;
 import cpsc599.util.Logger;
 
 import java.util.List;
+import java.util.Random;
 
 public class BasicWarrior extends AIActor {
     public BasicWarrior(PlayerManager playerManager, AStarPathfinder pathfinder, Actor actor) {
@@ -16,6 +17,7 @@ public class BasicWarrior extends AIActor {
 
     @Override
     public boolean step(float time, Dialogue dialogue) {
+        if (actionList.size() == 0) return true;
         if (time >= nextStep) {
             AIAction action = actionList.get(0);
             if (action.action == AIAction.MOVE) {
@@ -36,12 +38,21 @@ public class BasicWarrior extends AIActor {
                 }
             } else if (action.action == AIAction.ATTACK) {
                 Vector2 position = (Vector2)action.obj;
-                int dmg = this.actor.attack(playerManager.getNearest(position));
-                if (dmg < 0) {
-                    showMessage("Enemy attacks player, but misses!", dialogue);
-                } else {
-                    showMessage("Enemy attacks player for " + dmg + " damage!", dialogue);
+                if ((new Vector2(actor.x, actor.y)).dst(position) <= 1.5f) {
+                    Player target = playerManager.getNearest(position);
+
+                    int dmg = this.actor.attack(target);
+                    if (dmg < 0) {
+                        dialogue.display("Enemy attacks player, but misses!");
+                    } else {
+                        dialogue.display("Enemy attacks player for " + dmg + " damage!");
+                    }
                 }
+                actionList.remove(action);
+            } else if (action.action == AIAction.SKIP) {
+                actionList.remove(action);
+            } else if (action.action == AIAction.SAY) {
+                dialogue.display((String)action.obj);
                 actionList.remove(action);
             }
 
@@ -58,6 +69,7 @@ public class BasicWarrior extends AIActor {
                 end = new Vector2(x, y);
         List<AStarMove> movements = pathfinder.getPath(start, end);
         if (movements == null) {
+            actionList.add(new AIAction(AIAction.SKIP, null));
             return;
         }
 
@@ -70,6 +82,7 @@ public class BasicWarrior extends AIActor {
                 end = new Vector2(x, y);
         List<AStarMove> movements = pathfinder.getPath(start, end);
         if (movements == null) {
+            actionList.add(new AIAction(AIAction.SKIP, null));
             return;
         }
 

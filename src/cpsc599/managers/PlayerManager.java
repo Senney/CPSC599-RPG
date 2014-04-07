@@ -96,4 +96,8 @@ public class PlayerManager {
 
         return minPlayer;
     }
+
+    public Player getPlayerAtPosition(int x, int y) {
+        return getPlayerAtPosition(new Vector2(x, y));
+    }
 }

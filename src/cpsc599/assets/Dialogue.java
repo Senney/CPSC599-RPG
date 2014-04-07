@@ -2,6 +2,8 @@ package cpsc599.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -15,6 +17,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import cpsc599.util.Logger;
 
@@ -23,6 +27,8 @@ public class Dialogue {
 	private int boxHeight;
 	private int lineWidth;
 	private BitmapFont font;
+    private List<String> strings;
+    private int dialogueStep;
 	private CharSequence text;
 	private CharSequence textRemains;
 	private boolean visible;
@@ -31,8 +37,9 @@ public class Dialogue {
     private Document doc;
 
     private float displayTime;
-	
-	public Dialogue() {
+    private Texture portrait;
+
+    public Dialogue() {
 		Logger.debug("Setting up text");
 		
 		boxHeight = (int)round16(Gdx.graphics.getHeight() - 325);
@@ -41,11 +48,15 @@ public class Dialogue {
 		font = new BitmapFont();
 		
 		font.setScale((float) 1.1);
-		lineWidth = (int) (boxWidth/1.55);
+		lineWidth = (int) (boxWidth/1.2);
 
         displayTime = 0.f;
 
+        strings = new ArrayList<String>();
+        dialogueStep = 0;
+
 		this.visible = false;
+        this.portrait = SharedAssets.defaultPortrait;
 	}
 
     public boolean loadDialogueXML(String xmlFile) {
@@ -77,18 +88,45 @@ public class Dialogue {
         }
     }
 
+    public void display(String text, Texture portrait) {
+        this.setDialogueText(text);
+        this.setVisibility(true);
+        this.setPortrait(portrait);
+    }
+
+    public void display(String text) {
+        display(text, SharedAssets.defaultPortrait);
+    }
+
     public void setDialogueText(String text) {
         this.text = text;
         loadDialogue();
     }
 
     public void setDialogueTag(String tagName) {
+        strings.clear();
+        dialogueStep = 0;
+
         NodeList list = doc.getElementsByTagName(tagName);
         Node node = list.item(0);
-        Element elem = (Element) node;
-        text = elem.getTextContent();
+        NodeList children = node.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            String text = children.item(i).getTextContent().trim();
+            if (text.length() == 0) continue;
+            strings.add(children.item(i).getTextContent());
+        }
+
+        stepDialogue();
 
         loadDialogue();
+    }
+
+    public boolean stepDialogue() {
+        if (dialogueStep == strings.size()) return false;
+
+        this.text = strings.get(dialogueStep++);
+        loadDialogue();
+        return true;
     }
 	
 	public void loadDialogue() {
@@ -146,7 +184,8 @@ public class Dialogue {
         drawTextBackdrop(batch, 10, 10, boxWidth, boxHeight);
         font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         BitmapFont.TextBounds bounds = font.getWrappedBounds(this.text, this.lineWidth);
-		font.drawWrapped(batch, text, 150, 32 + bounds.height, lineWidth);
+        batch.draw(this.portrait, 20, 24 + bounds.height);
+		font.drawWrapped(batch, text, 64, 32 + bounds.height, lineWidth);
         batch.end();
 	}
 
@@ -186,5 +225,9 @@ public class Dialogue {
             }
             batch.draw(SharedAssets.menu_texture[1][2], xpos + (16 * (width_iter - 1)), ypos + (16*i));
         }
+    }
+
+    public void setPortrait(Texture portrait) {
+        this.portrait = portrait;
     }
 }
