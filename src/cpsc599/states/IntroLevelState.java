@@ -5,10 +5,7 @@ import com.badlogic.gdx.Input;
 import cpsc599.OrbGame;
 import cpsc599.ai.AStarPathfinder;
 import cpsc599.ai.BasicWarrior;
-import cpsc599.assets.AnimatedSprite;
-import cpsc599.assets.Dialogue;
-import cpsc599.assets.Enemy;
-import cpsc599.assets.Player;
+import cpsc599.assets.*;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
@@ -21,6 +18,7 @@ import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Basic testing state.
@@ -32,6 +30,7 @@ public class IntroLevelState extends LevelState {
     private AnimatedSprite sprite;
     private Dialogue dialogue;
     private ArrayList<Enemy> attackingList;
+    private List<GameEntity> entityList;
     private boolean enemyStartTurn;
 
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
@@ -112,6 +111,7 @@ public class IntroLevelState extends LevelState {
         super.groundLayer.setProjectionMatrix(this.camera.combined);
 
         renderAttackables();
+        renderUsables();
 
         // Render players and enemies.
         if (playerController.getPlayerManager().getCurrent() != null) {
@@ -130,7 +130,6 @@ public class IntroLevelState extends LevelState {
             this.playerController.getCursor().render(this.groundLayer);
         }
 
-
         super.groundLayer.end();
 
         Player current = playerController.getPlayerManager().getCurrent();
@@ -141,11 +140,27 @@ public class IntroLevelState extends LevelState {
         this.dialogue.render(this.overlayLayer);
     }
 
+    private void renderUsables() {
+        if ((this.playerController.isInspecting() || this.playerController.isInspecting()) && this.entityList != null) {
+            for (int i = 0; i < entityList.size(); i++) {
+                GameEntity e = entityList.get(i);
+                int x = (int)e.getPosition().x, y = (int)e.getPosition().y;
+                if (i == playerController.getSelectedUnit()) {
+                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(x),
+                            CoordinateTranslator.translate(y));
+                } else {
+                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(x),
+                            CoordinateTranslator.translate(y));
+                }
+            }
+        }
+    }
+
     private void renderAttackables() {
         if (this.playerController.isAttacking() && attackingList != null && attackingList.size() != 0) {
             for (int i = 0; i < attackingList.size(); i++) {
                 Enemy e = attackingList.get(i);
-                if (i == playerController.getSelectedAttack()) {
+                if (i == playerController.getSelectedUnit()) {
                     groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(e.x),
                             CoordinateTranslator.translate(e.y));
                 } else {
@@ -199,6 +214,9 @@ public class IntroLevelState extends LevelState {
             // Handle the attack and then return out.
             handleAttack(input, current);
             return;
+        } else if (playerController.isInspecting() || playerController.isUsing()) {
+            // Handle item inspection and so-on.
+            handleSelect(input, current);
         }
 
         if (!playerController.isTurnComplete()) {
@@ -253,6 +271,24 @@ public class IntroLevelState extends LevelState {
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
             Logger.debug("'SELECT' pressed.");
+        }
+    }
+
+    private void handleSelect(Input input, Player current) {
+        entityList = gameEntityManager.getEntitiesInRange(current.x, current.y);
+        int selected;
+
+        if ((selected = playerController.controlSelect(input, entityList)) != -1) {
+            GameEntity e = entityList.get(selected);
+            if (playerController.isUsing()) {
+                String response = e.onUse(this);
+                dialogue.setDialogueText(response);
+                dialogue.setVisibility(true);
+            } else if (playerController.isInspecting()) {
+                String value = e.onInspect();
+                dialogue.setDialogueText(value);
+                dialogue.setVisibility(true);
+            }
         }
     }
 
