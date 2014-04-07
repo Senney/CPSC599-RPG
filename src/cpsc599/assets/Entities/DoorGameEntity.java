@@ -44,7 +44,8 @@ public class DoorGameEntity extends GameEntity {
 
     @Override
     public void onUse(State gameState) {
-
+        this.open = !open;
+        gameState.setFlag(flagName, open);
     }
 
     public boolean isOpen() {
