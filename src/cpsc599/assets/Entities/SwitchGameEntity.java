@@ -26,12 +26,13 @@ public class SwitchGameEntity extends GameEntity {
     }
 
     @Override
-    public void onUse(State gameState) {
+    public String onUse(State gameState) {
         boolean lastState = false;
         if (gameState.getFlag(flag_value) != null) {
             lastState = (Boolean)gameState.getFlag(flag_value);
         }
 
         gameState.setFlag(flag_value, !lastState);
+        return "Activated the switch...";
     }
 }

@@ -23,7 +23,7 @@ public abstract class GameEntity {
     }
 
     public abstract boolean tick(float time, State gameState);
-    public abstract void onUse(State gameState);
+    public abstract String onUse(State gameState);
     public void render(SpriteBatch batch) {
         if (objSprite != null) {
             batch.draw(objSprite, position.x, position.y);
