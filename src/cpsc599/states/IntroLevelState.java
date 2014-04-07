@@ -102,8 +102,8 @@ public class IntroLevelState extends LevelState {
                 new Sprite(SharedAssets.highlight2), 5, 6, false));
 
         dialogue = new Dialogue();
-        dialogue.loadDialogueXML("src/cpsc599/assets/Script.xml");
-        dialogue.setDialogueTag("testing");
+        dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
+        dialogue.setDialogueTag("p1");
         dialogue.toggleVisibility();
 
         this.enemyStartTurn = true;
@@ -211,7 +211,8 @@ public class IntroLevelState extends LevelState {
                     this.dialogue.loadTextRemains();
                 }
                 else {
-                    this.dialogue.toggleVisibility();
+                    if (!this.dialogue.stepDialogue())
+                        this.dialogue.toggleVisibility();
                 }
             }
             return;
