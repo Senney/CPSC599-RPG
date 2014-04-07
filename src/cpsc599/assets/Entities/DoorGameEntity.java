@@ -40,6 +40,8 @@ public class DoorGameEntity extends GameEntity {
                 return true;
             }
         }
+
+        return false;
     }
 
     @Override
