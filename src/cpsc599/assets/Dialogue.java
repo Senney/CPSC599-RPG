@@ -45,7 +45,7 @@ public class Dialogue {
 		boxHeight = (int)round16(Gdx.graphics.getHeight() - 325);
 		boxWidth = (int)round16(Gdx.graphics.getWidth() - 20);	// Adds 10px padding on left/right
 		
-		font = new BitmapFont();
+		font = SharedAssets.font;
 		
 		font.setScale((float) 1.1);
 		lineWidth = (int) (boxWidth/1.2);

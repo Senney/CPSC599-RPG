@@ -2,7 +2,10 @@ package cpsc599.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import sun.font.TrueTypeFont;
 
 import static cpsc599.util.Logger.*;
 
@@ -26,6 +29,8 @@ public class SharedAssets {
     public static Texture hikariPortrait;
     public static Texture princePortrait;
 
+    public static BitmapFont font;
+
 
     public static void load() {
         if (loaded) return;
@@ -45,7 +50,13 @@ public class SharedAssets {
         hikariPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/hikari.png"));
         princePortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/prince.png"));
 
+        loadFont();
+
         loaded = true;
     }
 
+    private static void loadFont() {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("assets/prstartk.ttf"));
+        font = generator.generateFont(14);
+    }
 }

@@ -108,6 +108,8 @@ public class OrbGame implements ApplicationListener {
         Logger.debug("Window created with size: (" + this.width + ", " + this.height + "), " +
                 "Scale: " + this.scale);
 
+        SharedAssets.load();
+
         assetManager = new AssetManager();
         stateManager = new StateManager();
         playerManager = new PlayerManager();
@@ -128,8 +130,6 @@ public class OrbGame implements ApplicationListener {
             Logger.fatal("LevelManager creation failed... Exiting.");
             System.exit(1);
         }
-
-        SharedAssets.load();
 
         // TODO: Fill this in with the proper state.
         stateManager.addState("MAIN_MENU", new MainMenuState());
