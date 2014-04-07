@@ -29,7 +29,8 @@ public class SharedAssets {
     public static Texture hikariPortrait;
     public static Texture princePortrait;
 
-    public static BitmapFont font;
+    public static BitmapFont font_14;
+    public static BitmapFont font_12;
 
 
     public static void load() {
@@ -57,6 +58,7 @@ public class SharedAssets {
 
     private static void loadFont() {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("assets/prstartk.ttf"));
-        font = generator.generateFont(14);
+        font_14 = generator.generateFont(14);
+        font_12 = generator.generateFont(12);
     }
 }

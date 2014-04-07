@@ -36,7 +36,7 @@ public class ActionMenu extends Menu {
         options.add("End Turn");
 
 
-        font = new BitmapFont();
+        font = SharedAssets.font_12;
         this.pointer_height = 14;
     }
 

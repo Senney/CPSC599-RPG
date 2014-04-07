@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import cpsc599.items.Inventory;
 import cpsc599.items.Item;
 import cpsc599.util.Logger;
+import cpsc599.util.SharedAssets;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class InventoryMenu extends Menu {
         super(width, height);
         this.visible = false;
 
-        font = new BitmapFont();
+        font = SharedAssets.font_12;
     }
 
     public void setInventory(Inventory inventory) {

@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import cpsc599.assets.Actor;
+import cpsc599.util.SharedAssets;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class StatsMenu extends Menu {
         stats.add("Dodge: ");
         stats.add("Move: ");
 
-        font = new BitmapFont();
+        font = SharedAssets.font_12;
     }
 
     @Override

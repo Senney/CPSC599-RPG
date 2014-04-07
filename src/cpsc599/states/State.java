@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Matrix4;
 import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.util.Logger;
+import cpsc599.util.SharedAssets;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ import java.util.HashMap;
  */
 public abstract class State {
     protected OrbGame orb;
-    protected static BitmapFont font = new BitmapFont(true);
+    protected static BitmapFont font = SharedAssets.font_14;
     public SpriteBatch spriteBatch;
 
     protected HashMap<String, Object> flags;
