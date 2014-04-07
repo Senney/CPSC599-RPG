@@ -18,6 +18,8 @@ public class SwitchGameEntity extends GameEntity {
         this.flag_value = id;
         this.objSprite = sprite;
         setPosition(new Vector2(x, y));
+
+        this.inspect = "This switch looks like it activates something.";
     }
 
     @Override
@@ -26,12 +28,13 @@ public class SwitchGameEntity extends GameEntity {
     }
 
     @Override
-    public void onUse(State gameState) {
+    public String onUse(State gameState) {
         boolean lastState = false;
         if (gameState.getFlag(flag_value) != null) {
             lastState = (Boolean)gameState.getFlag(flag_value);
         }
 
         gameState.setFlag(flag_value, !lastState);
+        return "Activated the switch...";
     }
 }

@@ -41,6 +41,18 @@ public class GameEntityManager {
         }
         return idEntities;
     }
+    public List<GameEntity> getEntitiesInRange(int x, int y) {
+        List<GameEntity> entities = new ArrayList<GameEntity>();
+        for (GameEntity e : this.entities) {
+            Vector2 player = new Vector2(x, y);
+            // Check if entities are around 1 square away.
+            if (player.dst(e.getPosition()) <= 1.5f) {
+                entities.add(e);
+            }
+        }
+
+        return entities;
+    }
 
     public GameEntity getEntityAtPosition(int x, int y) {
         if (x >= width || y >= height || x < 0 || y < 0) {
@@ -48,6 +60,11 @@ public class GameEntityManager {
         }
 
         return entityMap[y][x];
+    }
+
+    public boolean checkCollision(int x, int y) {
+        GameEntity e = getEntityAtPosition(x, y);
+        return (e != null && e.collides());
     }
 
     public void addEntity(GameEntity entity) {

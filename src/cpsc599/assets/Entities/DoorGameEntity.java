@@ -22,6 +22,9 @@ public class DoorGameEntity extends GameEntity {
 
         this.identifier = this.IDENTIFIER;
         setPosition(new Vector2(x, y));
+        setDoorSprite();
+
+        this.inspect = "A door, it looks like it's opened elsewhere!";
     }
 
     private void setDoorSprite() {
@@ -45,9 +48,16 @@ public class DoorGameEntity extends GameEntity {
     }
 
     @Override
-    public void onUse(State gameState) {
+    public boolean collides() {
+        if (this.open) return false;
+        return true;
+    }
+
+    @Override
+    public String onUse(State gameState) {
         this.open = !open;
         gameState.setFlag(flagName, open);
+        return "Used the door!";
     }
 
     public boolean isOpen() {

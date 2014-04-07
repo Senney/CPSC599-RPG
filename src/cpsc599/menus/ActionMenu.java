@@ -27,6 +27,8 @@ public class ActionMenu extends Menu {
         //These are temporary right now
         options.add("Attack");
         options.add("Stats");
+        options.add("Inspect");
+        options.add("Use");
         //options.add("Equip");
         //options.add("Drop");
         //options.add("Pickup");
@@ -60,7 +62,7 @@ public class ActionMenu extends Menu {
         if (!visible) return;
 
         batch.begin();
-        this.drawMenu(batch, 20, 10, 128, 64);
+        this.drawMenu(batch, 20, 10, 128, 96);
 
         batch.draw(SharedAssets.menu_pointer, 32, 26 + pointer_y);
 

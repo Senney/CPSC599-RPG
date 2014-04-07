@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.*;
 import cpsc599.items.Inventory;
 import cpsc599.managers.EnemyManager;
+import cpsc599.managers.GameEntityManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.menus.ActionMenu;
 import cpsc599.menus.InventoryMenu;
@@ -14,6 +15,7 @@ import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Acts as a controller for all players.
@@ -21,9 +23,12 @@ import java.util.ArrayList;
 public class PlayerController {
     private boolean turnComplete;
     private boolean attacking;
+    private boolean inspecting;
+    private boolean using;
+
     private int attackRange;
 
-    private int selectedAttack;
+    private int selectedUnit;
 
     public PlayerManager getPlayerManager() {
         return playerManager;
@@ -37,6 +42,7 @@ public class PlayerController {
 
     private PlayerManager playerManager;
     private EnemyManager enemyManager;
+    private GameEntityManager gameEntityManager;
     private Vector2 selectorPosition;
 
     private Enemy selectedEnemy;
@@ -49,6 +55,9 @@ public class PlayerController {
         this.enemyManager = eManager;
         this.selectorPosition = new Vector2();
         shapeRenderer =  new ShapeRenderer();
+
+        this.inspecting = false;
+        this.using = false;
     }
 
     public boolean isCursor() {
@@ -76,7 +85,7 @@ public class PlayerController {
     public int controlAttack(Input input, ArrayList<Enemy> availableEnemies) {
         if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
             // Return the selected index.
-            int ret = this.selectedAttack;
+            int ret = this.selectedUnit;
             resetAttack();
             endTurn(this.playerManager.getCurrent());
             return ret;
@@ -89,10 +98,10 @@ public class PlayerController {
 
         int max = availableEnemies.size() - 1;
         if (Controls.isKeyTapped(input, Controls.RIGHT)) {
-            this.selectedAttack = this.selectedAttack >= max ? 0 : ++this.selectedAttack;
+            this.selectedUnit = this.selectedUnit >= max ? 0 : ++this.selectedUnit;
         }
         if (Controls.isKeyTapped(input, Controls.LEFT)) {
-            this.selectedAttack = this.selectedAttack <= 0 ? max : --this.selectedAttack;
+            this.selectedUnit = this.selectedUnit <= 0 ? max : --this.selectedUnit;
         }
         if (Controls.isKeyTapped(input, Controls.UP)) {
 
@@ -104,8 +113,33 @@ public class PlayerController {
         return -1;
     }
 
+    public int controlSelect(Input input, List<GameEntity> entities) {
+        if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
+            // Return the selected index.
+            int ret = this.selectedUnit;
+            this.selectedUnit = 0;
+            this.using = false; this.inspecting = false;
+            return ret;
+        }
+        if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
+
+            this.selectedUnit = 0;
+            this.using = false; this.inspecting = false;
+            return -1;
+        }
+
+        int max = entities.size() - 1;
+        if (Controls.isKeyTapped(input, Controls.RIGHT)) {
+            this.selectedUnit = this.selectedUnit >= max ? 0 : ++this.selectedUnit;
+        }
+        if (Controls.isKeyTapped(input, Controls.LEFT)) {
+            this.selectedUnit = this.selectedUnit <= 0 ? max : --this.selectedUnit;
+        }
+        return -1;
+    }
+
     private void resetAttack() {
-        this.selectedAttack = 0;
+        this.selectedUnit = 0;
         this.attacking = false;
         this.attackRange = 0;
     }
@@ -142,26 +176,22 @@ public class PlayerController {
 
                     this.attacking = true;
                     this.attackRange = range;
-                    this.selectedAttack = 0;
+                    this.selectedUnit = 0;
 
                     return;
                 }
-                else if(action.equals("Stats"))
-                {
+                else if(action.equals("Stats")) {
                     statsMenu.setActor(p);
                     statsMenu.setVisible(true);
-                }
-                /*else if(action.equals("Equip")) {
-                    Logger.debug("PlayerController::control - Equiping");
-                    this.actMenu.toggleVisible();
-                    this.inventoryMenu.setInventory(p.getPlayerInventory());
-                    this.inventoryMenu.toggleVisible();
-                }*/
-                else if (action.equals("Inventory")) {
-                    this.actMenu.toggleVisible();
-                    this.inventoryMenu.setInventory(p.getPlayerInventory());
-                    this.inventoryMenu.toggleVisible();
+                }else if (action.equals("Inspect")) {
+                    Logger.debug("Inspecting");
+                    this.inspecting = true;
+                    this.selectedUnit = 0;
+                    return;
 
+                } else if (action.equals("Use")) {
+                    this.using = true;
+                    this.selected = 0;
                     return;
                 } else if (!action.equals("")) {
                     this.actMenu.toggleVisible();
@@ -224,7 +254,7 @@ public class PlayerController {
         }*/
     }
 
-    private void endTurn(Player p) {
+    public void endTurn(Player p) {
         p.endTurn();
         releasePlayer();
         closeAllMenus();
@@ -330,7 +360,9 @@ public class PlayerController {
         }
 
         // If we have a move and there's no enemy in our space, we can move.
-        if ((movex != 0 || movey != 0) && enemyManager.getEnemyAtPosition(p.x + movex, p.y + movey) == null) {
+        int newx = p.x + movex, newy = p.y + movey;
+        if ((movex != 0 || movey != 0) && enemyManager.getEnemyAtPosition(newx, newy) == null &&
+                !gameEntityManager.checkCollision(newx, newy)) {
             p.move(movex, movey, l);
         }
     }
@@ -360,5 +392,17 @@ public class PlayerController {
         return attackRange;
     }
 
-    public int getSelectedAttack() { return this.selectedAttack; }
+    public int getSelectedUnit() { return this.selectedUnit; }
+
+    public void setGameEntityManager(GameEntityManager gameEntityManager) {
+        this.gameEntityManager = gameEntityManager;
+    }
+
+    public boolean isInspecting() {
+        return inspecting;
+    }
+
+    public boolean isUsing() {
+        return using;
+    }
 }

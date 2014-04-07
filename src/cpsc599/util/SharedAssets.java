@@ -20,6 +20,8 @@ public class SharedAssets {
     public static Texture highlight2;
     public static Texture highlight3;
 
+    public static Texture doorSwitch;
+
     public static void load() {
         if (loaded) return;
 
@@ -31,6 +33,8 @@ public class SharedAssets {
         highlight = new Texture(Gdx.files.internal("assets/tilesets/" + "Enemy.png"));
         highlight2 = new Texture(Gdx.files.internal("assets/tilesets/" + "testsquare.png"));
         highlight3 = new Texture(Gdx.files.internal("assets/tilesets/" + "highlight-player.png"));
+
+        doorSwitch = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Buttons/A_button3.png"));
 
         loaded = true;
     }
