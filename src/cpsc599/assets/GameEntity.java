@@ -12,7 +12,7 @@ public abstract class GameEntity {
     protected String identifier;
     protected String inspect;
 
-    private Sprite objSprite;
+    protected Sprite objSprite;
     protected Vector2 position;
 
     public GameEntity() {
@@ -23,8 +23,12 @@ public abstract class GameEntity {
     }
 
     public abstract boolean tick(float time, State gameState);
-    public abstract void render(SpriteBatch batch);
-    public abstract void onUse();
+    public abstract void onUse(State gameState);
+    public void render(SpriteBatch batch) {
+        if (objSprite != null) {
+            batch.draw(objSprite, position.x, position.y);
+        }
+    }
 
     public Vector2 getPosition() { return this.position; }
     public void setPosition(Vector2 pos) { this.position = pos; }
