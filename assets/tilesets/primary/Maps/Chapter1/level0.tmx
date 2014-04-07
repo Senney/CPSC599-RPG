@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="16" height="15" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="20" height="19" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="grass" tilewidth="16" tileheight="16">
   <image source="../../Environment/grass.png" width="64" height="64"/>
  </tileset>
@@ -9,14 +9,14 @@
  <tileset firstgid="33" name="trees" tilewidth="16" tileheight="16">
   <image source="../../Environment/trees.png" width="64" height="32"/>
  </tileset>
- <layer name="Tile Layer 1" width="16" height="15">
+ <layer name="Tile Layer 1" width="20" height="19">
   <data encoding="base64" compression="zlib">
-   eJyVk0kKwDAIRbMrcZdAC+0uuf8hq6AgwSFZPLTVfAdwllIGMhNLNKYjN/Ko2MWA8i06a7zIx/o6XoNvMHSimlkvLYlHVJ67Lv9ONEaiv/Zv6YPj77Cbn+VFO/B6Pt2VlW/tb3cmetvZglOjOppyA2TlPk5moXdyP1MxDH+1Ulvu5wc7swtd
+   eJzNlMEKxCAMRL0telthC+2twm7//w8boQEZJibe9vCwRplkYrWllE6hOWPn/VCFj7AJL0D36ryQPSP10dyFg6w3mOfJvBBdltOqyavV0ptxCV8Sz9An5ge9ejA9i0z8RvIV4xt9Mt9efyM5o96iNan+aq9n57ZyHlFvXasacdVgd4N51jvM/me97yveu471HrQBfU8w1zhqbdZ70P38APR3GXFGRA/3RXT/lRvrRhK2
   </data>
  </layer>
- <layer name="Collision" width="16" height="15" opacity="0">
+ <layer name="Collision" width="20" height="19" opacity="0">
   <data encoding="base64" compression="zlib">
-   eJzjYGBg4KACJhZQohebOZSAoa5/pANKwo+S9EdpGqZGfoNhAEOtAcE=
+   eJzjYGBg4KAAowNc4rgAMeaRA0h1B7FmjiTzRgFlgJrxQc38Qc38S6x51CpfRgFlAABVigHB
   </data>
  </layer>
 </map>
