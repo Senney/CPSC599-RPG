@@ -179,7 +179,8 @@ public class IntroLevelState extends LevelState {
         {
             //Game over!
             //add game over state
-            Logger.debug("Game Over...");
+            orb.setState("GAME_OVER");
+            //Logger.debug("Game Over...");
         }
 
         if (this.dialogue.isVisible()) {
