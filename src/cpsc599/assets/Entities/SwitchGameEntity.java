@@ -18,6 +18,8 @@ public class SwitchGameEntity extends GameEntity {
         this.flag_value = id;
         this.objSprite = sprite;
         setPosition(new Vector2(x, y));
+
+        this.inspect = "This switch looks like it activates something.";
     }
 
     @Override

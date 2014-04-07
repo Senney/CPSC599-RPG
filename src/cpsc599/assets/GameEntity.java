@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.states.State;
+import cpsc599.util.CoordinateTranslator;
 
 /**
  * Class for representing interactive and dynamic entities within the game.
@@ -26,7 +27,8 @@ public abstract class GameEntity {
     public abstract String onUse(State gameState);
     public void render(SpriteBatch batch) {
         if (objSprite != null) {
-            batch.draw(objSprite, position.x, position.y);
+            batch.draw(objSprite, CoordinateTranslator.translate((int)position.x),
+                    CoordinateTranslator.translate((int)position.y));
         }
     }
 
