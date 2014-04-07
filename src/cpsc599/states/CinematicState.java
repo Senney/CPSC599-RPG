@@ -28,6 +28,7 @@ public class CinematicState extends LevelState {
     protected Queue<CinematicAction> actions;
     protected AStarPathfinder pathfinder;
     protected Dialogue dialogue;
+    protected Level level;
 
     public CinematicState(OrbGame game, Level level, CameraController cameraController) {
         super(
@@ -37,6 +38,11 @@ public class CinematicState extends LevelState {
                 new EnemyController(new EnemyManager())
         );
 
+        this.level = level;
+    }
+
+    @Override
+    public void init(OrbGame game) {
         this.runtime = 0f;
 
         this.setLevel(level);
