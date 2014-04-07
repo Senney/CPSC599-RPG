@@ -44,7 +44,7 @@ public class Dialogue {
 		font = new BitmapFont();
 		
 		font.setScale((float) 1.1);
-		lineWidth = (int) (boxWidth/1.55);
+		lineWidth = (int) (boxWidth/1.2);
 
         displayTime = 0.f;
 
@@ -161,7 +161,7 @@ public class Dialogue {
         font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         BitmapFont.TextBounds bounds = font.getWrappedBounds(this.text, this.lineWidth);
         batch.draw(this.portrait, 20, 24 + bounds.height);
-		font.drawWrapped(batch, text, 150, 32 + bounds.height, lineWidth);
+		font.drawWrapped(batch, text, 64, 32 + bounds.height, lineWidth);
         batch.end();
 	}
 
