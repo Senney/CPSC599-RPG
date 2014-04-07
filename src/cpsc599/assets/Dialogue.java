@@ -2,6 +2,8 @@ package cpsc599.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -31,8 +33,9 @@ public class Dialogue {
     private Document doc;
 
     private float displayTime;
-	
-	public Dialogue() {
+    private Texture portrait;
+
+    public Dialogue() {
 		Logger.debug("Setting up text");
 		
 		boxHeight = (int)round16(Gdx.graphics.getHeight() - 325);
@@ -46,6 +49,7 @@ public class Dialogue {
         displayTime = 0.f;
 
 		this.visible = false;
+        this.portrait = SharedAssets.defaultPortrait;
 	}
 
     public boolean loadDialogueXML(String xmlFile) {
@@ -75,6 +79,16 @@ public class Dialogue {
         if (curTime > this.displayTime) {
             this.visible = false;
         }
+    }
+
+    public void display(String text, Texture portrait) {
+        this.setDialogueText(text);
+        this.setVisibility(true);
+        this.setPortrait(portrait);
+    }
+
+    public void display(String text) {
+        display(text, SharedAssets.defaultPortrait);
     }
 
     public void setDialogueText(String text) {
@@ -146,6 +160,7 @@ public class Dialogue {
         drawTextBackdrop(batch, 10, 10, boxWidth, boxHeight);
         font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         BitmapFont.TextBounds bounds = font.getWrappedBounds(this.text, this.lineWidth);
+        batch.draw(this.portrait, 20, 24 + bounds.height);
 		font.drawWrapped(batch, text, 150, 32 + bounds.height, lineWidth);
         batch.end();
 	}
@@ -186,5 +201,9 @@ public class Dialogue {
             }
             batch.draw(SharedAssets.menu_texture[1][2], xpos + (16 * (width_iter - 1)), ypos + (16*i));
         }
+    }
+
+    public void setPortrait(Texture portrait) {
+        this.portrait = portrait;
     }
 }

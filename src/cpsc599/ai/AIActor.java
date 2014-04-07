@@ -48,13 +48,6 @@ public abstract class AIActor {
         return actionList.size() > 0;
     }
 
-    public void showMessage(String text, Dialogue dialogue) {
-        if (dialogue != null) {
-            dialogue.setDialogueText(text);
-            dialogue.setVisibility(true);
-        }
-    }
-
     /**
      * Attempt to step the actor through their turn.
      *

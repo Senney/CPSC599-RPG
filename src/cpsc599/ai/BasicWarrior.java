@@ -43,16 +43,16 @@ public class BasicWarrior extends AIActor {
 
                     int dmg = this.actor.attack(target);
                     if (dmg < 0) {
-                        showMessage("Enemy attacks player, but misses!", dialogue);
+                        dialogue.display("Enemy attacks player, but misses!");
                     } else {
-                        showMessage("Enemy attacks player for " + dmg + " damage!", dialogue);
+                        dialogue.display("Enemy attacks player for " + dmg + " damage!");
                     }
                 }
                 actionList.remove(action);
             } else if (action.action == AIAction.SKIP) {
                 actionList.remove(action);
             } else if (action.action == AIAction.SAY) {
-                showMessage((String)action.obj, dialogue);
+                dialogue.display((String)action.obj);
                 actionList.remove(action);
             }
 

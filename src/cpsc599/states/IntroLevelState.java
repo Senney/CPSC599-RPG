@@ -234,8 +234,7 @@ public class IntroLevelState extends LevelState {
             playerController.control(input, this.currentLevel);
         } else {
             if (enemyStartTurn) {
-                this.dialogue.setDialogueText("Opponent's Turn");
-                this.dialogue.toggleVisibility();
+                this.dialogue.display("Opponent's turn");
                 this.enemyStartTurn = false;
                 return;
             }
@@ -245,8 +244,7 @@ public class IntroLevelState extends LevelState {
             Enemy[] enemies = this.enemyController.getEnemyManager().getEnemies();
             if (currentEnemy > enemies.length - 1) {
                 Logger.debug("Ending enemy turn.");
-                this.dialogue.setDialogueText("Enemy turn complete. Player turn.");
-                this.dialogue.setVisibility(true);
+                this.dialogue.display("Enemy turn complete. Player turn begins.");
                 playerController.resetTurn();
                 this.currentEnemy = 0;
                 enemyStartTurn = true;
@@ -296,13 +294,11 @@ public class IntroLevelState extends LevelState {
             GameEntity e = entityList.get(selected);
             if (using) {
                 String response = e.onUse(this);
-                dialogue.setDialogueText(response);
-                dialogue.setVisibility(true);
+                dialogue.display(response);
                 this.playerController.endTurn(current);
             } else if (inspecting) {
                 String value = e.onInspect();
-                dialogue.setDialogueText(value);
-                dialogue.setVisibility(true);
+                dialogue.display(value);
             }
         }
     }
@@ -330,16 +326,14 @@ public class IntroLevelState extends LevelState {
                     enemyController.getEnemyManager().removeEnemy(this.attackingList.get(selected));
                     dmgText += " The enemy is slain!";
                 }
-                this.dialogue.setDialogueText(dmgText);
-                this.dialogue.setVisibility(true);
+                this.dialogue.display(dmgText);
 
                 this.attackingList = null;
             }
             else {
                 //Logger.debug("Not allowed to attack nothing! ending your turn idiot...");
                 Logger.debug("The character swings and only hits thin air...");
-                this.dialogue.setDialogueText("Player swings and hits only thin air.");
-                this.dialogue.setVisibility(true);
+                this.dialogue.display("Player swings and hits only thin air");
             }
         }
         else{
