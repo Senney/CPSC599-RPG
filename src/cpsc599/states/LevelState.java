@@ -5,12 +5,14 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.assets.Level;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
+import cpsc599.managers.GameEntityManager;
 import cpsc599.util.Logger;
 
 public abstract class LevelState extends State {
@@ -20,6 +22,7 @@ public abstract class LevelState extends State {
     protected OrthographicCamera camera;
     protected PlayerController playerController;
     protected CameraController cameraController;
+    protected GameEntityManager gameEntityManager;
     protected EnemyController enemyController;
     protected static float TRANSLATE_SPEED = 1f;
 
@@ -57,7 +60,9 @@ public abstract class LevelState extends State {
         renderer = new OrthogonalTiledMapRenderer(currentLevel.tiledMap, 1.0f, super.spriteBatch);
         renderer.setView(camera.combined, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
 
-        this.cameraController.setCameraBounds(this.currentLevel.getMapDimensions());
+        Vector2 dimensions = this.currentLevel.getMapDimensions();
+        this.cameraController.setCameraBounds(dimensions);
+        this.gameEntityManager = new GameEntityManager((int)dimensions.x, (int)dimensions.y);
     }
 
     @Override
