@@ -11,12 +11,12 @@
  </tileset>
  <layer name="Tile Layer 1" width="20" height="19">
   <data encoding="base64" compression="zlib">
-   eJzNlMEKxCAMRL0telthC+2twm7//w8boQEZJibe9vCwRplkYrWllE6hOWPn/VCFj7AJL0D36ryQPSP10dyFg6w3mOfJvBBdltOqyavV0ptxCV8Sz9An5ge9ejA9i0z8RvIV4xt9Mt9efyM5o96iNan+aq9n57ZyHlFvXasacdVgd4N51jvM/me97yveu471HrQBfU8w1zhqbdZ70P38APR3GXFGRA/3RXT/lRvrRhK2
+   eJyVVMsKwzAMy22ke8ACG2y3pLT7/z9cAjZoQnHZQdRuXdmS27SUUu1odM2UD9wNpePR8bR47TgZvNbzBWKFYpyvjrflBTga1ecgXwRvET1nMx3Neg/mQFwg/nRsosb9VfdnPdgLRhX9o1rWG2lSHmHMOpXuI39nWv095Vf0TRzNVIE/U90u5mf/m+ip9hHpr4KviXdHPr7la7BH5YPag/8X43oWmmY+zzB48DwoxJfT7/nC8+Mznw3PA6z33ezmhdoT7w9n8niB2lF3C/bOfTfiYz2uZWC13M/If/+xDJzZeKIdKX7U9QWr/xZA
   </data>
  </layer>
  <layer name="Collision" width="20" height="19" opacity="0">
   <data encoding="base64" compression="zlib">
-   eJzjYGBg4KAAowNc4rgAMeaRA0h1B7FmjiTzRgFlgJrxQc38Qc38S6x51CpfRgFlAABVigHB
+   eJzjYGBg4KAChgF0PiFAyExSzMJlLrUAsWZRWx2x6kkJM2qGC70Atd1MafgTGx/EqkGOP2x2YTOPnDDBlXfx2UOKefj8hMs+YsoWcgF6eUItM5FpdLuo6Q9s7ifXPADlqALh
   </data>
  </layer>
 </map>
