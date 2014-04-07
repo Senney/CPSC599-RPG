@@ -3,6 +3,7 @@ package cpsc599.ai;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Level;
 import cpsc599.managers.EnemyManager;
+import cpsc599.managers.GameEntityManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.util.Logger;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public class AStarPathfinder {
     private final PlayerManager playerManager;
     private final EnemyManager enemyManager;
+    private GameEntityManager gameEntityManager;
 
     private class AStarNode implements Comparable<AStarNode> {
         Vector2 position;
@@ -81,9 +83,10 @@ public class AStarPathfinder {
     private AStarNode[][] levelNodes;
     private int h, w;
 
-    public AStarPathfinder(Level level, PlayerManager playerManager, EnemyManager enemyManager) {
+    public AStarPathfinder(Level level, PlayerManager playerManager, EnemyManager enemyManager, GameEntityManager gameEntityManager) {
         this.playerManager = playerManager;
         this.enemyManager = enemyManager;
+        this.gameEntityManager = gameEntityManager;
         Logger.debug("Constructing AStar for level: " + level.name);
         this.level = level;
         setup();
@@ -117,27 +120,29 @@ public class AStarPathfinder {
         return levelNodes[(int)position.y][(int)position.x];
     }
 
-    private boolean isMovable(int x, int y) {
-        return (!level.collide(x, y) && enemyManager.getEnemyAtPosition(x, y) == null);
+    private boolean isMovable(int x, int y, Vector2 end) {
+        return (!level.collide(x, y) && enemyManager.getEnemyAtPosition(x, y) == null &&
+                (((int)end.x == x && (int)end.y == y) || playerManager.getPlayerAtPosition(x, y) == null) &&
+                !gameEntityManager.checkCollision(x, y));
     }
 
-    private void getSurroundingNodes(List<AStarNode> open, AStarNode pos) {
+    private void getSurroundingNodes(List<AStarNode> open, AStarNode pos, Vector2 end) {
         int xp = (int)pos.position.x, yp = (int)pos.position.y;
 
         // Look in the 4 cardinal directions for open nodes.
-        if (isMovable(xp, yp - 1)) {
+        if (isMovable(xp, yp - 1, end)) {
             open.add(levelNodes[yp-1][xp]);
         }
 
-        if (isMovable(xp, yp + 1)) {
+        if (isMovable(xp, yp + 1, end)) {
             open.add(levelNodes[yp+1][xp]);
         }
 
-        if (isMovable(xp-1, yp))  {
+        if (isMovable(xp-1, yp, end))  {
             open.add(levelNodes[yp][xp-1]);
         }
 
-        if (isMovable(xp+1, yp)) {
+        if (isMovable(xp+1, yp, end)) {
             open.add(levelNodes[yp][xp+1]);
         }
     }
@@ -174,7 +179,7 @@ public class AStarPathfinder {
             }
 
             adjacentNodes.clear();
-            getSurroundingNodes(adjacentNodes, current);
+            getSurroundingNodes(adjacentNodes, current, end);
 
             for (AStarNode node : adjacentNodes) {
                 if (closedNodes.contains(node))

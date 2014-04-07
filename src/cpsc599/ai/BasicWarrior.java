@@ -38,11 +38,15 @@ public class BasicWarrior extends AIActor {
                 }
             } else if (action.action == AIAction.ATTACK) {
                 Vector2 position = (Vector2)action.obj;
-                int dmg = this.actor.attack(playerManager.getNearest(position));
-                if (dmg < 0) {
-                    showMessage("Enemy attacks player, but misses!", dialogue);
-                } else {
-                    showMessage("Enemy attacks player for " + dmg + " damage!", dialogue);
+                if ((new Vector2(actor.x, actor.y)).dst(position) <= 1.5f) {
+                    Player target = playerManager.getNearest(position);
+
+                    int dmg = this.actor.attack(target);
+                    if (dmg < 0) {
+                        showMessage("Enemy attacks player, but misses!", dialogue);
+                    } else {
+                        showMessage("Enemy attacks player for " + dmg + " damage!", dialogue);
+                    }
                 }
                 actionList.remove(action);
             } else if (action.action == AIAction.SKIP) {
