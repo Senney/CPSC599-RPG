@@ -97,15 +97,23 @@ public class BasicWarrior extends AIActor {
         this.nextStep = 0f;
         Vector2 position = new Vector2(this.actor.x, this.actor.y);
         Player nearest = playerManager.getNearest(position);
+        if (nearest == null) {
+            return skipTurn();
+        }
+
         Vector2 ppos = new Vector2(nearest.x, nearest.y);
         if (position.dst(ppos) > (this.actor.maxMove * 2)) {
-            actionList.add(new AIAction(AIAction.SKIP, null));
-            return true;
+            return skipTurn();
         }
 
         // Move to the nearest player.
         this.attackTo(nearest.x, nearest.y);
 
+        return true;
+    }
+
+    public boolean skipTurn() {
+        actionList.add(new AIAction(AIAction.SKIP, null));
         return true;
     }
 }
