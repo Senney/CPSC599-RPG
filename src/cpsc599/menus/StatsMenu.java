@@ -26,13 +26,13 @@ public class StatsMenu extends Menu {
 
         stats = new ArrayList<String>();
 
-        stats.add("   STATS");
+        stats.add("  STATS");
         stats.add("HP: ");
-        stats.add("Strength: ");
-        stats.add("Defence: ");
+        stats.add("Str: ");
+        stats.add("Def: ");
         stats.add("Speed: ");
-        stats.add("Evasion: ");
-        stats.add("Damage: ");
+        stats.add("Agi: ");
+        stats.add("Dmg: ");
         stats.add("Hit: ");
         stats.add("Dodge: ");
         stats.add("Move: ");
@@ -57,23 +57,23 @@ public class StatsMenu extends Menu {
             //System.out.println("String s = " + s);
             font.draw(batch, s, 385, 458 - yv);
             if(s.equals("HP: "))
-                font.draw(batch, actor.currentHealth + "/" + actor.maxHealth, 450, 458 - yv);
-            else if(s.equals("Strength: "))
-                font.draw(batch, Integer.toString(actor.strength), 470, 458 - yv);
-            else if(s.equals("Defence: "))
-                font.draw(batch, Integer.toString(actor.defence), 470, 458 - yv);
+                font.draw(batch, actor.currentHealth + "/" + actor.maxHealth, 435, 458 - yv);
+            else if(s.equals("Str: "))
+                font.draw(batch, Integer.toString(actor.strength), 460, 458 - yv);
+            else if(s.equals("Def: "))
+                font.draw(batch, Integer.toString(actor.defence), 460, 458 - yv);
             else if(s.equals("Speed: "))
-                font.draw(batch, Integer.toString(actor.speed), 470, 458 - yv);
-            else if(s.equals("Evasion: "))
-                font.draw(batch, Integer.toString(actor.evade), 470, 458 - yv);
-            else if(s.equals("Damage: "))
-                font.draw(batch, Integer.toString(actor.damage), 470, 458 - yv);
+                font.draw(batch, Integer.toString(actor.speed), 460, 458 - yv);
+            else if(s.equals("Agi: "))
+                font.draw(batch, Integer.toString(actor.evade), 460, 458 - yv);
+            else if(s.equals("Dmg: "))
+                font.draw(batch, Integer.toString(actor.damage), 460, 458 - yv);
             else if(s.equals("Hit: "))
-                font.draw(batch, Integer.toString(actor.hit), 470, 458 - yv);
+                font.draw(batch, Integer.toString(actor.hit), 460, 458 - yv);
             else if(s.equals("Dodge: "))
-                font.draw(batch, Integer.toString(actor.dodge), 470, 458 - yv);
+                font.draw(batch, Integer.toString(actor.dodge), 460, 458 - yv);
             else if(s.equals("Move: "))
-                font.draw(batch, Integer.toString(actor.maxMove), 470, 458 - yv);
+                font.draw(batch, Integer.toString(actor.maxMove), 460, 458 - yv);
             count++;
         }
         //yv = 0;

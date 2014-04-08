@@ -51,9 +51,9 @@ public class GlobalMenu extends Menu{
         if (!visible) return;
 
         batch.begin();
-        this.drawMenu(batch, 375, 250, 128, 208);
+        this.drawMenu(batch, 359, 250, 144, 208);
 
-        batch.draw(SharedAssets.menu_pointer, 32, 26 + pointer_y);
+        batch.draw(SharedAssets.menu_pointer, 370, 250 + pointer_y + 185);
 
         int yv = 0;
         for (String s : options) {
