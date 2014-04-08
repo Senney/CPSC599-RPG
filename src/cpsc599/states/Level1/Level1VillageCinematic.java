@@ -1,4 +1,4 @@
-package cpsc599.states;
+package cpsc599.states.Level1;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
@@ -8,13 +8,14 @@ import cpsc599.assets.CinematicAction;
 import cpsc599.assets.Level;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
+import cpsc599.states.CinematicState;
 import cpsc599.util.Controls;
 
-public class PrologueCinematicState extends CinematicState {
+public class Level1VillageCinematic extends CinematicState {
     private Player cc1,cc2,p1,p2;
 
-    public PrologueCinematicState(OrbGame game, Level level, CameraController cameraController) {
-        super(game, level, cameraController);
+    public Level1VillageCinematic(OrbGame game, Level level, CameraController cameraController, String nextState) {
+        super(game, level, cameraController, nextState);
     }
 
     @Override
@@ -44,32 +45,18 @@ public class PrologueCinematicState extends CinematicState {
     @Override
     public void render() {
         super.render();
-
-        this.dialogue.render(this.overlayLayer);
     }
 
     @Override
     public void tick(Input input) {
         if (Controls.isKeyTapped(input, Controls.START)) {
-            this.orb.setState("LEVEL0");
-        }
-
-        if (this.dialogue.isVisible()) {
-            if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
-                if (this.dialogue.checkTextLeft() && this.dialogue.isVisible()) {
-                    this.dialogue.loadTextRemains();
-                }
-                else {
-                    this.dialogue.setVisibility(false);
-                }
-            }
-            return;
+            goToNextState();
         }
 
         super.tick(input);
 
         if (actions.size() == 0) {
-            this.orb.setState("LEVEL0");
+            goToNextState();
         }
     }
 
@@ -80,12 +67,12 @@ public class PrologueCinematicState extends CinematicState {
         actions.add(CinematicAction.stepDialogue(dialogue));
         actions.add(CinematicAction.stepDialogue(dialogue));
         actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.moveTo(cc1, new Vector2(9, 10), 0.5f));
-        actions.add(CinematicAction.moveTo(cc2, new Vector2(7, 10), 0.5f));
+        actions.add(CinematicAction.moveToConcurrent(cc1, new Vector2(9, 10), 0.5f));
+        actions.add(CinematicAction.moveToConcurrent(cc2, new Vector2(6, 10), 0.5f));
         actions.add(CinematicAction.stepDialogue(dialogue));
         actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.moveTo(p1, new Vector2(11, 6), 0.25f));
-        actions.add(CinematicAction.moveTo(p2, new Vector2(13, 6), 0.25f));
+        actions.add(CinematicAction.moveToConcurrent(p1, new Vector2(11, 6), 0.25f));
+        actions.add(CinematicAction.moveToConcurrent(p2, new Vector2(13, 6), 0.25f));
         actions.add(CinematicAction.despawnActor(p1));
         actions.add(CinematicAction.despawnActor(p2));
         actions.add(CinematicAction.stepDialogue(dialogue));

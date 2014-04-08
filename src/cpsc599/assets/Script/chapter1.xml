@@ -15,21 +15,23 @@
     </p1>
 
 	<!-- Location: Field of Flowers -->
-	
-	<Ren>Here, I want you to have this.</Ren>
 
-	<!-- Hands over orb necklace, face red -->
+    <p2>
+        <System>Elsewhere, in a flowery field...</System>
+        <Ren>Here, I want you to have this.</Ren>
+        <System>Hikari received Orb Necklace!</System>
+        <Hikari>...? What’s this for?</Hikari>
+        <Ren>N-Nothing, really. I... I just wanted to say t-thanks.</Ren>
+        <Hikari>Thanks for what?</Hikari>
+        <Ren>Just. ...You know? Helping me out for all these years and stuff.</Ren>
+        <Hikari>*laughs* You don’t need to say thanks for that. We’re friends! It’s normal for friends to help each other out.</Hikari>
+        <Ren>Yeah, but... I just... You’ve really helped me out a lot. Before, when I had nobody to talk to, I was really lonely. But after I met you, it felt as though a light suddenly shone onto my world and brightened everything up. Things that I had hated before didn’t look so bad anymore once you were there. So, that’s why... Thank you.</Ren>
+        <Hikari>.........</Hikari>
+        <Hikari>You’re welcome.</Hikari>
+        <Hikari>If there’s ever a time when you’re in trouble or something, just come to me. I’ll be there for you. I promised didn’t I? That I’d become your knight and protect you.</Hikari>
+        <Ren>Hikari...</Ren>
+    </p2>
 
-	<Hikari>…? What’s this for?</Hikari>
-	<Ren>N-Nothing, really. I… I just wanted to say t-thanks.</Ren>
-	<Hikari>Thanks for what?</Hikari>
-	<Ren>Just. ...You know? Helping me out for all these years and stuff.</Ren>
-	<Hikari>*laughs* You don’t need to say thanks for that. We’re friends! It’s normal for friends to help each other out.</Hikari>
-	<Ren>Yeah, but… I just… You’ve really helped me out a lot. Before, when I had nobody to talk to, I was really lonely. But after I met you, it felt as though a light suddenly shone onto my world and brightened everything up. Things that I had hated before didn’t look so bad anymore once you were there. So, that’s why… Thank you.</Ren>
-	<Hikari>………</Hikari>
-	<Hikari>You’re welcome.</Hikari>
-	<Hikari>If there’s ever a time when you’re in trouble or something, just come to me. I’ll be there for you. I promised didn’t I? That I’d become your knight and protect you.</Hikari>
-	<Ren>Hikari...</Ren>
 
 	<!-- General shininess and brightness -->
 

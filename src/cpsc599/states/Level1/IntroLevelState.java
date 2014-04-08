@@ -1,4 +1,4 @@
-package cpsc599.states;
+package cpsc599.states.Level1;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,6 +15,7 @@ import cpsc599.controller.PlayerController;
 import cpsc599.items.Inventory;
 import cpsc599.items.Item;
 import cpsc599.managers.LevelManager;
+import cpsc599.states.LevelState;
 import cpsc599.util.Controls;
 import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
@@ -107,10 +108,6 @@ public class IntroLevelState extends LevelState {
         playerController.getCursor().y = 7;
 
         playerController.setupMenus();
-
-        this.gameEntityManager.addEntity(new SwitchGameEntity(new Sprite(SharedAssets.doorSwitch), "door1", 5, 5));
-        this.gameEntityManager.addEntity(new DoorGameEntity("door1", new Sprite(SharedAssets.highlight),
-                new Sprite(SharedAssets.highlight2), 5, 6, false));
 
         dialogue = new Dialogue();
         dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");

@@ -113,7 +113,7 @@ public class Dialogue {
         for (int i = 0; i < children.getLength(); i++) {
             String text = children.item(i).getTextContent().trim();
             if (text.length() == 0) continue;
-            strings.add(children.item(i).getTextContent());
+            strings.add(children.item(i).getNodeName() + ": \n" + children.item(i).getTextContent());
         }
 
         stepDialogue();
@@ -144,8 +144,8 @@ public class Dialogue {
 				text = text.subSequence(0, 168);
 			else {
 				textLeft = true;
-				textRemains = text.subSequence((strEnd+1), bounds);
-				text = text.subSequence(0, --strEnd);
+				textRemains = text.subSequence(strEnd - 1, bounds);
+				text = text.subSequence(0, strEnd - 2);
 			}
 		}
 		else
