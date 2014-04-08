@@ -1,4 +1,4 @@
-package cpsc599.states;
+package cpsc599.states.Level1;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -15,6 +15,7 @@ import cpsc599.controller.PlayerController;
 import cpsc599.items.Inventory;
 import cpsc599.items.Item;
 import cpsc599.managers.LevelManager;
+import cpsc599.states.LevelState;
 import cpsc599.util.Controls;
 import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;

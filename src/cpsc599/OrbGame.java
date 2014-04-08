@@ -15,6 +15,8 @@ import cpsc599.managers.LevelManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.managers.StateManager;
 import cpsc599.states.*;
+import cpsc599.states.Level1.IntroLevelState;
+import cpsc599.states.Level1.Level1VillageCinematic;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
 
@@ -134,7 +136,7 @@ public class OrbGame implements ApplicationListener {
         // TODO: Fill this in with the proper state.
         stateManager.addState("MAIN_MENU", new MainMenuState());
         stateManager.addState("GAME_OVER", new GameOverState());
-        stateManager.addState("PROLOGUE_CINEMATIC", new PrologueCinematicState(this, levelManager.setLevel("field_map"), cameraController));
+        stateManager.addState("PROLOGUE_CINEMATIC", new Level1VillageCinematic(this, levelManager.setLevel("field_map"), cameraController));
         stateManager.addState("LEVEL0", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
 
         setState("MAIN_MENU");

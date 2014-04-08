@@ -1,4 +1,4 @@
-package cpsc599.states;
+package cpsc599.states.Level1;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
@@ -8,12 +8,13 @@ import cpsc599.assets.CinematicAction;
 import cpsc599.assets.Level;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
+import cpsc599.states.CinematicState;
 import cpsc599.util.Controls;
 
-public class PrologueCinematicState extends CinematicState {
+public class Level1VillageCinematic extends CinematicState {
     private Player cc1,cc2,p1,p2;
 
-    public PrologueCinematicState(OrbGame game, Level level, CameraController cameraController) {
+    public Level1VillageCinematic(OrbGame game, Level level, CameraController cameraController) {
         super(game, level, cameraController);
     }
 
