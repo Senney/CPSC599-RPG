@@ -143,6 +143,7 @@ public class CinematicState extends LevelState {
     }
 
     protected void goToNextState() {
-        this.orb.setState(this.nextState);
+        if (this.nextState != null)
+            this.orb.setState(this.nextState);
     }
 }
