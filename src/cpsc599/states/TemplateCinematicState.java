@@ -6,8 +6,8 @@ import cpsc599.assets.Level;
 import cpsc599.controller.CameraController;
 
 public class TemplateCinematicState extends CinematicState {
-    public TemplateCinematicState(OrbGame game, Level level, CameraController cameraController) {
-        super(game, level, cameraController);
+    public TemplateCinematicState(OrbGame game, Level level, CameraController cameraController, String nextState) {
+        super(game, level, cameraController, nextState);
     }
 
     @Override

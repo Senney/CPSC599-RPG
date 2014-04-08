@@ -7,8 +7,8 @@ import cpsc599.controller.CameraController;
 import cpsc599.states.CinematicState;
 
 public class PrologueCinematicState extends CinematicState {
-    public PrologueCinematicState(OrbGame game, Level level, CameraController cameraController) {
-        super(game, level, cameraController);
+    public PrologueCinematicState(OrbGame game, Level level, CameraController cameraController, String nextState) {
+        super(game, level, cameraController, nextState);
     }
 
     @Override
