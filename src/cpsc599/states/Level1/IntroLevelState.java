@@ -308,10 +308,10 @@ public class IntroLevelState extends LevelState {
         boolean inspecting = playerController.isInspecting(), using = playerController.isUsing();
         if ((selected = playerController.controlSelect(input, entityList)) != -1) {
             GameEntity e = null;
-            if(entityList.get(selected) == null)
+            if((e = entityList.get(selected)) == null) {
                 dialogue.display("Professor Oak's words echo in your head: It is not the time to use this.");
-            else
-                e = entityList.get(selected);
+                return;
+            }
             if (using) {
                 String response = e.onUse(this);
                 dialogue.display(response);
