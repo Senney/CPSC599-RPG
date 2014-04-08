@@ -36,19 +36,14 @@
    eJxjYBhcwAaIdaBsSyB2gbJBYiZUtMOGSmYhmwkCIDdbQdkuaGp00OhRMAooBQBnBAMJ
   </data>
  </layer>
- <layer name="characters" width="16" height="15">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFowATVABx+UA7YhQQBACNywDw
-  </data>
- </layer>
  <layer name="cow cubes" width="16" height="15">
   <data encoding="base64" compression="zlib">
    eJxjYKAN2EmAT02zqW0+Lc2klfk7qWwePcBOHOxRQDwAAGszBzs=
   </data>
  </layer>
- <layer name="Collision" width="16" height="15" opacity="0">
+ <layer name="Collision" width="16" height="15" opacity="0.73">
   <data encoding="base64" compression="zlib">
-   eJxjYBg8gJEEjE0vqfZg00+qvaTqZ0RTSwlgRGOTGn7k2k8NdxMKz1FAHAAAgqAANg==
+   eJxjYBg8gJEEjE0vqfZg00+qvaToR3cnLvPI8TMxbsTmVnIAufqQ9RPr1lGAHwAAe9wAMg==
   </data>
  </layer>
 </map>
