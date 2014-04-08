@@ -146,7 +146,7 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL1_FLOWER_FIELD", new Level1FlowerFieldCinematic(this, levelManager.setLevel("flower_field_map"), cameraController, "LEVEL1"));
         stateManager.addState("LEVEL1", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
 
-        setState("LEVEL1");
+        setState("MAIN_MENU");
 	}
 	
 }
