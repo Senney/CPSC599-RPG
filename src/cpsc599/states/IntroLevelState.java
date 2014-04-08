@@ -108,10 +108,6 @@ public class IntroLevelState extends LevelState {
 
         playerController.setupMenus();
 
-        this.gameEntityManager.addEntity(new SwitchGameEntity(new Sprite(SharedAssets.doorSwitch), "door1", 5, 5));
-        this.gameEntityManager.addEntity(new DoorGameEntity("door1", new Sprite(SharedAssets.highlight),
-                new Sprite(SharedAssets.highlight2), 5, 6, false));
-
         dialogue = new Dialogue();
         dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
 
