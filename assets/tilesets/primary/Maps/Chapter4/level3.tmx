@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="16" height="15" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="20" height="24" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="grass" tilewidth="16" tileheight="16">
   <image source="../../Environment/grass.png" width="64" height="64"/>
  </tileset>
@@ -48,14 +48,14 @@
  <tileset firstgid="526" name="castle(64x64)" tilewidth="16" tileheight="16">
   <image source="../../Castle/castle(64x64).png" width="64" height="64"/>
  </tileset>
- <layer name="main bgd" width="16" height="15">
+ <layer name="main bgd" width="20" height="24">
   <data encoding="base64" compression="zlib">
-   eJyVk1sOgjAQRYe6AN9v3UmbaKKrhy+XwC+uwPDhbeiEyyigHyeFtmc600cpImXiAfLExIkEtB5cwBVUmcgTTDE2A3PX9QrylejfwD35CzhLsAJr17ixn8kpXpA2jzi2gbMFO7B37Vz1OIZ+a4wa3wc4R3ACZ9euY3NgPOXxyhrq1A55jNYQ22fW7qWt2fZXX+ZyTtb9BW/2dMi356o+r8/jY3vJ5xH+yLkv/3hPx+bb2vgsHPl9deh/IV1X/QjnkcvnvVT0LXnjMzGWrsfvMNBb0r4319Kc2g==
+   eJztlFsOgjAQRQdcgO+37gQSTHT18MUS+JUVGD68DZ1w07RF/TRMctIW2pPpsxGRxlKD0jJLRXKUGSjADTwTkRbM8W8BlsAN9lTkU4zvDh7Wt4JjDTZg6/HVth9Tkj+XIU/zbwfHHhzA0ePTsephp9bV2aF+guMMLuAa8FWeHJmM8nwlPZ0t3Yh5GJ2zKdtk2JuQj+fdenzuN3X7fOz6BHVlP/jcc6S+WH7cf2xveL9Dvm+Jzdfcq7Hx7lrwXruRki80b23rfeHz6PMZOE++v267kP5tiOXnYtyaD78zptS3IbR+U0zxT/EGzbmc2g==
   </data>
  </layer>
- <layer name="Collision" width="16" height="15" opacity="0.01">
+ <layer name="Collision" width="20" height="24" opacity="0.01">
   <data encoding="base64" compression="zlib">
-   eJzjYGBg4EDCMMCBBeMSR9aHDojRjw8Q0k8MoJZ+YtXTygxs5g2EWwaTfnLMoEQ/rvRPTloixixC6gAvCwKx
+   eJzjYGBg4EDCMMCBBWMTRwe4xLGZS6x5+ACp5hEDaGUeufrpZSY286lp1qh55NlBTfOIzb/EmkuKecSWM7RO26NgFAwWAAAn0gKx
   </data>
  </layer>
 </map>
