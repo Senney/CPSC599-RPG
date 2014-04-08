@@ -35,11 +35,21 @@ public class IntroLevelState extends LevelState {
     private ArrayList<Enemy> attackingList;
     private List<GameEntity> entityList;
     private boolean enemyStartTurn;
+    private LevelManager levelManager;
 
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
                            CameraController cameraController, EnemyController enemyController) {
         super(game, playerController, cameraController, enemyController);
-        super.setLevel(manager.setLevel("level1"));
+        this.levelManager = manager;
+    }
+
+    @Override
+    public void init(OrbGame game) {
+        super.init(game);
+        super.setLevel(levelManager.setLevel(0));
+
+        playerController.getPlayerManager().reset();
+        enemyController.getEnemyManager().reset();
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
 
@@ -93,8 +103,8 @@ public class IntroLevelState extends LevelState {
 
         // TODO: Make this not stupid.
         playerController.setupCursor();
-        playerController.getCursor().x = (int)manager.getCurrentLevel().player_spawn.x;
-        playerController.getCursor().y = (int)manager.getCurrentLevel().player_spawn.y;
+        playerController.getCursor().x = 2;
+        playerController.getCursor().y = 7;
 
         playerController.setupMenus();
 
@@ -104,8 +114,6 @@ public class IntroLevelState extends LevelState {
 
         dialogue = new Dialogue();
         dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
-        dialogue.setDialogueTag("p1");
-        dialogue.toggleVisibility();
 
         this.enemyStartTurn = true;
     }

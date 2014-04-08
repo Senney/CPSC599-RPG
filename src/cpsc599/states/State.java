@@ -45,7 +45,7 @@ public abstract class State {
         this.orb = game;
 
         Matrix4 projection = new Matrix4();
-        projection.setToOrtho(0, Main.GAME_WIDTH, Main.GAME_HEIGHT, 0, 1, -1);
+        projection.setToOrtho(0, Main.GAME_WIDTH, 0, Main.GAME_HEIGHT, 1, -1);
 
         this.spriteBatch = new SpriteBatch();
         this.spriteBatch.setProjectionMatrix(projection);

@@ -125,6 +125,7 @@ public class PlayerController {
 
             this.selectedUnit = 0;
             this.using = false; this.inspecting = false;
+            endTurn(this.playerManager.getCurrent());
             return -1;
         }
 

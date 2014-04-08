@@ -76,6 +76,10 @@ public class CinematicAction {
                 if (this.obj instanceof Vector2) {
                     Vector2 dst = (Vector2)this.obj;
                     this.obj = pathfinder.getPath(new Vector2(this.actor.x, this.actor.y), dst);
+                    if (this.obj == null) {
+                        Logger.error("Unable to generate path for cinematic movement.");
+                        return true;
+                    }
                 } else {
                     List<AStarMove> moves = (List<AStarMove>)this.obj;
                     if (moves.size() == 0) return true;
@@ -90,14 +94,17 @@ public class CinematicAction {
 
                 break;
             case SPAWN:
-
-                break;
+                manager.addPlayer((Player)this.actor);
+                return true;
             case DESPAWN:
-
-                break;
+                manager.removePlayer((Player)this.actor);
+                return true;
             case STEP_DIALOGUE:
+                Dialogue d = (Dialogue)this.obj;
+                d.stepDialogue();
+                d.setVisibility(true);
 
-                break;
+                return true;
             case WAIT:
                 if (nextTime == 0f) nextTime = deltaTime + time;
                 if (deltaTime > nextTime) return true;

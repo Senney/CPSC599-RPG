@@ -1,6 +1,9 @@
 package cpsc599.states;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import cpsc599.Main;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 
@@ -22,8 +25,8 @@ public class MainMenuState extends State {
         }
 
         this.spriteBatch.begin();
-        this.drawString("Tale of the Orb", (int)(this.orb.width / 2), 20 + (int)(Math.sin(time * 0.07) * 10), StringAlign.CENTER);
-        this.drawString("Press start", this.orb.width/2, this.orb.height/2, StringAlign.CENTER);
+        this.drawString("Tale of the Orb", (int)(this.orb.width / 2), 200, StringAlign.CENTER);
+        this.drawString("Press start", this.orb.width/2, (this.orb.height/2) + (int)(Math.sin(time * 0.05) * 6), StringAlign.CENTER);
         this.spriteBatch.end();
     }
 
@@ -31,7 +34,7 @@ public class MainMenuState extends State {
     public void tick(Input input) {
         time++; // Increment the time value.
         if (Controls.isKeyTapped(input, Controls.START)) {
-            orb.setState("LEVEL0");
+            orb.setState("PROLOGUE_CINEMATIC");
         }
     }
 }

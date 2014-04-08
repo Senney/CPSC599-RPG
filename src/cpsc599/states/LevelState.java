@@ -30,7 +30,7 @@ public abstract class LevelState extends State {
     protected SpriteBatch overlayLayer;
 
     protected LevelState(OrbGame game, PlayerController playerController, CameraController cameraController, EnemyController enemyController) {
-        super.init(game);
+        //super.init(game);
         this.playerController = playerController;
         this.cameraController = cameraController;
         this.enemyController = enemyController;
