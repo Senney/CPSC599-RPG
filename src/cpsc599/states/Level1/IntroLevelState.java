@@ -270,12 +270,11 @@ public class IntroLevelState extends LevelState {
                     if (e.getAiActor().inTurn()) {
                         if (e.getAiActor().step(currentTime, dialogue)) {
                             Logger.debug("Finishing turn for enemy[" + currentEnemy + "] - " + e);
-                            e.tick();
                             currentEnemy++;
                         }
 
-                        this.cameraController.set(e.x, e.y);
                         e.tick();
+                        this.cameraController.set(e.x, e.y);
                         currentTime += Gdx.graphics.getDeltaTime();
                     } else {
                         Logger.debug("Deciding turn for actor: " + e);
