@@ -9,9 +9,12 @@
  <tileset firstgid="33" name="trees" tilewidth="16" tileheight="16">
   <image source="../../Environment/trees.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="41" name="beach" tilewidth="16" tileheight="16">
+  <image source="../../Environment/beach.png" width="256" height="128"/>
+ </tileset>
  <layer name="Tile Layer 1" width="20" height="19">
   <data encoding="base64" compression="zlib">
-   eJyVVMsKwzAMy22ke8ACG2y3pLT7/z9cAjZoQnHZQdRuXdmS27SUUu1odM2UD9wNpePR8bR47TgZvNbzBWKFYpyvjrflBTga1ecgXwRvET1nMx3Neg/mQFwg/nRsosb9VfdnPdgLRhX9o1rWG2lSHmHMOpXuI39nWv095Vf0TRzNVIE/U90u5mf/m+ip9hHpr4KviXdHPr7la7BH5YPag/8X43oWmmY+zzB48DwoxJfT7/nC8+Mznw3PA6z33ezmhdoT7w9n8niB2lF3C/bOfTfiYz2uZWC13M/If/+xDJzZeKIdKX7U9QWr/xZA
+   eJyFVFsKwzAMy19J94AGNtj+ktIOxo7Qm+z+91gMNmjCST5E41aRLTtNCSHkikLPSLFgUaSKW8Vd12vFVHEAd1LMsPaQVPNR8dQ4qcah+ZEfO/Hs6CZ4dwxqGtW6kNa7wTvD+lWxORzrL+p9yA975V4wMuQ3vR6X/XI+xpf24Jp9er5H/W15tX25wW2diVFNGfQj8Xanfu5/cXJ68+j5z45ecfZKLGf50pmj1wdvDvZfyPPkeGr1uQXRwfsgkV4M//cL14/frDa8D5Bvs9m1F96ceH5Yk61n4Arv2pk7591Ij/2YF8Gqsd2Ro3+Mz0kEzag6vRl5+ujrB8keGD0=
   </data>
  </layer>
  <layer name="Collision" width="20" height="19" opacity="0">
