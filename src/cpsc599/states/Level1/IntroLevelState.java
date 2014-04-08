@@ -38,6 +38,9 @@ public class IntroLevelState extends LevelState {
     private boolean enemyStartTurn;
     private LevelManager levelManager;
 
+    public int turnNum;
+    public boolean isShown;
+
     public IntroLevelState(OrbGame game, LevelManager manager, PlayerController playerController,
                            CameraController cameraController, EnemyController enemyController) {
         super(game, playerController, cameraController, enemyController);
@@ -48,6 +51,9 @@ public class IntroLevelState extends LevelState {
     public void init(OrbGame game) {
         super.init(game);
         super.setLevel(levelManager.setLevel("level0"));
+
+        turnNum = 0;
+        isShown = false;
 
         playerController.getPlayerManager().reset();
         enemyController.getEnemyManager().reset();
@@ -208,7 +214,7 @@ public class IntroLevelState extends LevelState {
 
 
         if(enemyController.getEnemyManager().getEnemies().length == 0){
-            orb.setState("PROLOGUE_CINEMATIC");
+            orb.setState("LEVEL2_EMPTY_FIELD");
         }
 
         //you will probably hate me for this...
@@ -251,6 +257,7 @@ public class IntroLevelState extends LevelState {
             if (enemyStartTurn) {
                 this.dialogue.display("Opponent's turn");
                 //counter increment here
+                turnNum++;
                 this.enemyStartTurn = false;
                 return;
             }
@@ -293,6 +300,10 @@ public class IntroLevelState extends LevelState {
             this.cameraController.set(current.x, current.y);
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
+        }
+        if(turnNum == 2 && !isShown) {
+            this.dialogue.display("Sean: Hey what's going on here!?");
+            isShown = true;
         }
 
         // TODO: Find a way to abstract this into the PlayerController.
