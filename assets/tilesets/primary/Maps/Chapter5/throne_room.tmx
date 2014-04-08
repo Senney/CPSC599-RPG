@@ -51,6 +51,9 @@
  <tileset firstgid="826" name="throne_room" tilewidth="16" tileheight="16">
   <image source="../../Castle/throne_room.png" width="256" height="256"/>
  </tileset>
+ <tileset firstgid="1082" name="prince_birdcage" tilewidth="16" tileheight="16">
+  <image source="../../Castle/prince_birdcage.png" width="64" height="64"/>
+ </tileset>
  <layer name="Tile Layer 2" width="16" height="15">
   <data encoding="base64" compression="zlib">
    eJyTZ2ZgUCATKwKxOhBrkIk1R/VTrB8EhrL7R7p+bSxYC0rrAbEuEo0NAwDLbifq
@@ -76,9 +79,14 @@
    eJxjYMANHJkZGJyA2JkZjyI8IBCoLwiIg8nUnwjUlwTEyWTqHwWjYLgDAAIDAv4=
   </data>
  </layer>
+ <layer name="birdcage" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAPsGJhYLAGYhsgtmUhXb8dUI89EDsAsSMZ+p2AepyB2AWIXcnQPwpGwWAEALLPAys=
+  </data>
+ </layer>
  <layer name="Collision" width="16" height="15" opacity="0">
   <data encoding="base64" compression="zlib">
-   eJzjYGBg4KAQwwAuPi416HLoAJt+bPLkglH9o/oHg35KMAB1nAIh
+   eJzjYGBg4KAQwwAuPgcBPi5ASD0h/bjMI1c/IfNG9Y/qJ0c/JRgA7nwCSQ==
   </data>
  </layer>
 </map>
