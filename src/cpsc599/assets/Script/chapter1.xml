@@ -30,30 +30,31 @@
         <Hikari>You’re welcome.</Hikari>
         <Hikari>If there’s ever a time when you’re in trouble or something, just come to me. I’ll be there for you. I promised didn’t I? That I’d become your knight and protect you.</Hikari>
         <Ren>Hikari...</Ren>
+        <unknown>There he is! Capture him!</unknown>
+        <Hikari>!!!?</Hikari>
+        <Ren>H-Hey! What are you doing!?</Ren>
+        <System>Thud!!</System>
+        <System>Ren is knocked unconscious.</System>
+        <Hikari>Ren!</Hikari>
+        <Enemy1>We’ve got the prince! Let’s go!</Enemy1>
+        <Hikari>Hey! Let Ren go!</Hikari>
+        <Enemy2>Uh oh. Someone's coming after us!</Enemy2>
     </p2>
 
 
 	<!-- General shininess and brightness -->
 
-	<unknown>There he is! Capture him!</unknown>
-	<HikariRen>!!!?</HikariRen>
-
 	<!-- 2+ enemies surround Ren -->
-
-	<Ren>H-Hey! What are you doing!?</Ren>
 
 	<!-- The enemies knock Ren out -->
 
-	<Hikari>Ren!</Hikari>
-	<Enemy1>We’ve got the prince! Let’s go!</Enemy1>
 
 	<!-- The enemies start to drag/carry Ren away -->
 	<!-- Hikari draws a weapon and starts to chase after them -->
 
-	<Hikari>Hey! Let Ren go!</Hikari>
-	<Enemy2>Uh oh. Someone's coming after us!</Enemy2>
-	<Enemy1>I'll slow her down! You move on!</Enemy1>
-
+    <p3>
+        <Enemy1>I'll slow her down! You move on!</Enemy1>
+    </p3>
 	<!-- Enemy 1 releases Ren and confronts Hikari -->
 	<!-- Battle: Hikari vs. Enemy 1 -->
 	<!-- Once the battle ends, Enemy 2 is halfway or more across the map. -->
