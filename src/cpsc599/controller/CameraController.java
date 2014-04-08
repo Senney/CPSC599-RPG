@@ -108,10 +108,10 @@ public class CameraController {
      * @param x the x position.
      * @param y the y position.
      */
-    public void set(int x, int y) {
+    public boolean set(int x, int y) {
         if (this.camera == null) {
             Logger.fatal("Camera must be instantiated before it can be set.");
-            return;
+            return false;
         }
 
         // Check that the X and Y positions don't overflow the camera off of the map.
@@ -120,11 +120,12 @@ public class CameraController {
         int realx = bound(newx, Main.GAME_WIDTH, width);
         int realy = bound(newy, Main.GAME_HEIGHT, height);
 
-        if (this.x == realx && this.y == realy) return; // Don't do unnecessary work.
+        if (this.x == realx && this.y == realy) return false; // Don't do unnecessary work.
         this.x = realx;
         this.y = realy;
 
         this.updateCamera();
+        return true;
     }
 
     public Camera getCamera() {
