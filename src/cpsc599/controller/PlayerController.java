@@ -123,13 +123,13 @@ public class PlayerController {
             int ret = this.selectedUnit;
             this.selectedUnit = 0;
             this.using = false; this.inspecting = false;
+            endTurn(this.playerManager.getCurrent());
             return ret;
         }
         if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
 
             this.selectedUnit = 0;
             this.using = false; this.inspecting = false;
-            endTurn(this.playerManager.getCurrent());
             return -1;
         }
 

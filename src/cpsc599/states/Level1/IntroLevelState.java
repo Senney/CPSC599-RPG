@@ -209,7 +209,6 @@ public class IntroLevelState extends LevelState {
 
         if(enemyController.getEnemyManager().getEnemies().length == 0){
             orb.setState("PROLOGUE_CINEMATIC");
-            //levelManager.setLevel(6);
         }
 
         //you will probably hate me for this...
@@ -275,6 +274,7 @@ public class IntroLevelState extends LevelState {
                             currentEnemy++;
                         }
 
+                        this.cameraController.set(e.x, e.y);
                         e.tick();
                         currentTime += Gdx.graphics.getDeltaTime();
                     } else {
