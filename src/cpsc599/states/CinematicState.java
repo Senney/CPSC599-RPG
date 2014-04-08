@@ -12,6 +12,7 @@ import cpsc599.controller.PlayerController;
 import cpsc599.managers.EnemyManager;
 import cpsc599.managers.LevelManager;
 import cpsc599.managers.PlayerManager;
+import cpsc599.util.Logger;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -37,12 +38,16 @@ public class CinematicState extends LevelState {
                 cameraController,
                 new EnemyController(new EnemyManager())
         );
+        Logger.debug("Constructing base cinematic state.");
 
         this.level = level;
     }
 
     @Override
     public void init(OrbGame game) {
+        Logger.debug("Initializing Cinematic State");
+
+        super.init(game);
         this.runtime = 0f;
 
         this.setLevel(level);
@@ -50,6 +55,9 @@ public class CinematicState extends LevelState {
                 enemyController.getEnemyManager(), this.gameEntityManager);
 
         actions = new LinkedList<CinematicAction>();
+
+        dialogue = new Dialogue();
+
         b_initialized = false;
     }
 
@@ -80,6 +88,7 @@ public class CinematicState extends LevelState {
 
         CinematicAction action = actions.peek();
         if (action != null && action.act(playerController.getPlayerManager(), this.pathfinder, this.runtime)) {
+            Logger.debug("Removing completed action.");
             actions.remove();
         }
     }
@@ -90,6 +99,7 @@ public class CinematicState extends LevelState {
      * (actions)
      */
     protected void loadCinematicActions() {
+        Logger.debug("Initializing cinematic actions in super class.");
         b_initialized = true;
     }
 }

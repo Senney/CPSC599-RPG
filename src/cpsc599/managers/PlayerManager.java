@@ -105,4 +105,8 @@ public class PlayerManager {
         playerList.clear();
         currentPlayer = null;
     }
+
+    public void removePlayer(Player obj) {
+        this.playerList.remove(obj);
+    }
 }

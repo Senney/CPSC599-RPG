@@ -103,8 +103,8 @@ public class IntroLevelState extends LevelState {
 
         // TODO: Make this not stupid.
         playerController.setupCursor();
-        playerController.getCursor().x = (int) levelManager.getCurrentLevel().player_spawn.x;
-        playerController.getCursor().y = (int) levelManager.getCurrentLevel().player_spawn.y;
+        playerController.getCursor().x = 2;
+        playerController.getCursor().y = 7;
 
         playerController.setupMenus();
 
