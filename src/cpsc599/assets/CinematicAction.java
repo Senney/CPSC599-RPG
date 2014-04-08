@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import cpsc599.ai.AStarMove;
 import cpsc599.ai.AStarPathfinder;
 import cpsc599.managers.PlayerManager;
+import cpsc599.states.CinematicState;
 import cpsc599.util.Logger;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class CinematicAction {
     public Actor actor;
     public Object obj;
     public float time;
+    public boolean concurrent;
 
     private float nextTime;
 
@@ -30,12 +32,26 @@ public class CinematicAction {
      * @param time The time to take to do the action.
      */
     public CinematicAction(ActionType type, Actor a, Object o, float time) {
+        this(type, a, o, time, false);
+    }
+
+    public CinematicAction(ActionType type, Actor a, Object o, float time, boolean concurrent) {
         this.actionType = type;
         this.actor = a;
         this.obj = o;
         this.time = time;
         this.nextTime = 0f;
+        this.concurrent = concurrent;
     }
+
+    public static CinematicAction moveToConcurrent(Actor a, Vector2 destination) {
+        return new CinematicAction(ActionType.MOVE, a, destination, DEFUALT_ACTION_TIME, true);
+    }
+
+    public static CinematicAction moveToConcurrent(Actor a, Vector2 destination, float time) {
+        return new CinematicAction(ActionType.MOVE, a, destination, time, true);
+    }
+
 
     public static CinematicAction moveTo(Actor a, Vector2 destination) {
         return new CinematicAction(ActionType.MOVE, a, destination, DEFUALT_ACTION_TIME);
