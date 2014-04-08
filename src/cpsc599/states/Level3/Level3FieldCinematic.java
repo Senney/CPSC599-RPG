@@ -16,12 +16,8 @@ public class Level3FieldCinematic extends CinematicState {
     Player hik, sean, sasha;
     Player cc1, cc2, cc3;
 
-    int pos;
-
     public Level3FieldCinematic(OrbGame game, Level level, CameraController cameraController, String nextState) {
         super(game, level, cameraController, nextState);
-
-        pos = 0;
     }
 
     @Override

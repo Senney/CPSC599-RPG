@@ -1,12 +1,9 @@
 package cpsc599.assets;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -15,9 +12,9 @@ import cpsc599.util.SharedAssets;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
-import org.w3c.dom.Element;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import cpsc599.util.Logger;
@@ -27,7 +24,7 @@ public class Dialogue {
 	private int boxHeight;
 	private int lineWidth;
 	private BitmapFont font;
-    private List<String> strings;
+    private List<DialogueElement> strings;
     private int dialogueStep;
 	private CharSequence text;
 	private CharSequence textRemains;
@@ -38,6 +35,24 @@ public class Dialogue {
 
     private float displayTime;
     private Texture portrait;
+
+    private HashMap<String, Texture> portraitMap;
+
+    private class DialogueElement {
+        Texture portrait;
+        String text;
+
+        public DialogueElement(String text) {
+            this.portrait = SharedAssets.defaultPortrait;
+            this.text = text;
+        }
+
+        public DialogueElement(String text, Texture portrait) {
+            if (portrait == null) portrait = SharedAssets.defaultPortrait;
+            this.portrait = portrait;
+            this.text = text;
+        }
+    }
 
     public Dialogue() {
 		Logger.debug("Setting up text");
@@ -52,11 +67,13 @@ public class Dialogue {
 
         displayTime = 0.f;
 
-        strings = new ArrayList<String>();
+        strings = new ArrayList<DialogueElement>();
         dialogueStep = 0;
 
 		this.visible = false;
         this.portrait = SharedAssets.defaultPortrait;
+
+        portraitMap = new HashMap<String, Texture>();
 	}
 
     public boolean loadDialogueXML(String xmlFile) {
@@ -103,6 +120,10 @@ public class Dialogue {
         loadDialogue();
     }
 
+    public void mapPortrait(String name, Texture portrait) {
+        portraitMap.put(name, portrait);
+    }
+
     public void setDialogueTag(String tagName) {
         strings.clear();
         dialogueStep = 0;
@@ -113,18 +134,25 @@ public class Dialogue {
         for (int i = 0; i < children.getLength(); i++) {
             String text = children.item(i).getTextContent().trim();
             if (text.length() == 0) continue;
-            strings.add(children.item(i).getNodeName() + ": \n" + children.item(i).getTextContent());
+            String speaker = children.item(i).getNodeName();
+            strings.add(new DialogueElement(
+                    speaker + ": \n" + children.item(i).getTextContent(),
+                    portraitMap.get(speaker)
+                )
+            );
         }
 
         stepDialogue();
-
         loadDialogue();
     }
 
     public boolean stepDialogue() {
         if (dialogueStep == strings.size()) return false;
 
-        this.text = strings.get(dialogueStep++);
+        DialogueElement elem = strings.get(dialogueStep++);
+        this.text = elem.text;
+        this.portrait = elem.portrait;
+
         loadDialogue();
         return true;
     }
