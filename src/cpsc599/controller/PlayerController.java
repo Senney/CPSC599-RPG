@@ -152,8 +152,6 @@ public class PlayerController {
     public void control(Input input, Level currentLevel) {
         Player p = this.playerManager.getCurrent();
 
-
-
         if (p != null) {
             if(this.statsMenu.isVisible()) {
                 if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
