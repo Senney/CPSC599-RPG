@@ -26,6 +26,8 @@ public class SharedAssets {
     public static Texture doorSwitch;
     public static Texture defaultPortrait;
 
+    public static Texture cowCube;
+
     public static Texture hikariPortrait;
     public static Texture princePortrait;
 
@@ -44,6 +46,8 @@ public class SharedAssets {
         highlight = new Texture(Gdx.files.internal("assets/tilesets/" + "Enemy.png"));
         highlight2 = new Texture(Gdx.files.internal("assets/tilesets/" + "testsquare.png"));
         highlight3 = new Texture(Gdx.files.internal("assets/tilesets/" + "highlight-player.png"));
+
+        cowCube = new Texture(Gdx.files.internal("assets/tilesets/cowcube.png"));
 
         doorSwitch = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Buttons/A_button3.png"));
         defaultPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/enemy/Monster/cow_cube.png"));
