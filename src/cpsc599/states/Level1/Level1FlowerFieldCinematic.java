@@ -25,13 +25,15 @@ public class Level1FlowerFieldCinematic extends CinematicState {
                 0, 3, 16, 16, 1, 0.1f);
         AnimatedSprite hikSprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/female.png",
                 0, 2, 16, 16, 1, 0.1f);
-        AnimatedSprite enemySprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png",
+        AnimatedSprite enemySprite1 = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png",
+                0, 0, 16, 16, 1, 0.1f);
+        AnimatedSprite enemySprite2 = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human1.png",
                 0, 0, 16, 16, 1, 0.1f);
 
         hik = new Player("Hikari", hikSprite, 5, 7, 0);
         ren = new Player("Ren", renSprite, 6, 7, 0);
-        e1 = new Player("Enemy1", enemySprite, 15, 6, 0);
-        e2 = new Player("Enemy2", enemySprite, 15, 8, 0);
+        e1 = new Player("Enemy1", enemySprite1, 15, 6, 0);
+        e2 = new Player("Enemy2", enemySprite2, 15, 8, 0);
 
         this.playerController.getPlayerManager().addPlayer(hik);
         this.playerController.getPlayerManager().addPlayer(ren);

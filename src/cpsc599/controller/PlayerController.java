@@ -9,6 +9,7 @@ import cpsc599.managers.EnemyManager;
 import cpsc599.managers.GameEntityManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.menus.ActionMenu;
+import cpsc599.menus.GlobalMenu;
 import cpsc599.menus.InventoryMenu;
 import cpsc599.menus.StatsMenu;
 import cpsc599.util.Controls;
@@ -39,6 +40,7 @@ public class PlayerController {
     private ActionMenu actMenu;
     private StatsMenu statsMenu;
     private InventoryMenu inventoryMenu;
+    private GlobalMenu globalMenu;
 
     private PlayerManager playerManager;
     private EnemyManager enemyManager;
@@ -72,11 +74,13 @@ public class PlayerController {
         actMenu = new ActionMenu(80,90);
         inventoryMenu = new InventoryMenu(100, 200);
         statsMenu = new StatsMenu(80, 90, null);
+        globalMenu = new GlobalMenu(80, 90);
     }
 
     public ActionMenu getActMenu() {return this.actMenu;}
     public StatsMenu getStatsMenu() {return  this.statsMenu;}
     public InventoryMenu getInventoryMenu() { return this.inventoryMenu; }
+    public GlobalMenu getGlobalMenu() {return this.globalMenu;}
 
     public Cursor getCursor() {
         return this.cursor;
@@ -148,6 +152,8 @@ public class PlayerController {
     public void control(Input input, Level currentLevel) {
         Player p = this.playerManager.getCurrent();
 
+
+
         if (p != null) {
             if(this.statsMenu.isVisible()) {
                 if (Controls.isKeyTapped(input, Controls.B_BUTTON)) {
@@ -211,6 +217,20 @@ public class PlayerController {
             }
         }
         else {
+            if(this.globalMenu.isVisible()) {
+                String action = globalMenuMode(input);
+                if(action.equals("End turn")) {
+                    Logger.debug("Ending turn for all players");
+
+                    for(int i = 0; i < playerManager.getPlayers().length; i++) {
+                        endTurn(playerManager.getPlayer(i));
+                    }
+                    this.globalMenu.setVisible(false);
+                }
+                else if(Controls.isKeyTapped(input, Controls.B_BUTTON))
+                    globalMenu.setVisible(false);
+                    return;
+            }
             moveCursor(input);
         }
 
@@ -227,8 +247,10 @@ public class PlayerController {
                     selected = 1;
                 else if(eSel)
                     selected = 2;
-                else
+                else {
                     selected = 0;
+                    globalMenu.setVisible(true);
+                }
             } else {
                 actMenu.toggleVisible();
                 Logger.debug("entering action menu");
@@ -243,6 +265,8 @@ public class PlayerController {
                     this.inventoryMenu.toggleVisible();
                 else if (this.actMenu.isVisible())
                     this.actMenu.toggleVisible();
+                else if(this.globalMenu.isVisible())
+                       this.globalMenu.toggleVisible();
                 else if (p.x == (int)this.selectorPosition.x && p.y == (int)this.selectorPosition.y)
                     releasePlayer();
                 else
@@ -306,6 +330,8 @@ public class PlayerController {
     }
 
     private void releasePlayer() {
+        if(this.playerManager.getCurrent() == null)
+            return;
         this.cursor.x = this.playerManager.getCurrent().x;
         this.cursor.y = this.playerManager.getCurrent().y;
         this.playerManager.setCurrent(null); // Nullify the current player.
@@ -325,6 +351,22 @@ public class PlayerController {
         }
 
         return "";
+    }
+
+    private String globalMenuMode(Input input){
+        if (Controls.isKeyTapped(input, Controls.UP)) {
+            this.globalMenu.movePointer(1);
+        } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
+            this.globalMenu.movePointer(-1);
+        }
+
+        if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
+            String action = this.globalMenu.getAction();
+            Logger.debug("Returning action: " + action);
+            return action;
+        }
+        else
+            return "";
     }
 
     private void controlStatsMenu(Input input){
