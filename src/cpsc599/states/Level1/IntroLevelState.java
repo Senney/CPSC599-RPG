@@ -47,7 +47,7 @@ public class IntroLevelState extends LevelState {
     @Override
     public void init(OrbGame game) {
         super.init(game);
-        super.setLevel(levelManager.setLevel(0));
+        super.setLevel(levelManager.setLevel("level0"));
 
         playerController.getPlayerManager().reset();
         enemyController.getEnemyManager().reset();
@@ -110,7 +110,7 @@ public class IntroLevelState extends LevelState {
         playerController.setupMenus();
 
         dialogue = new Dialogue();
-        dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
+        dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
 
         this.enemyStartTurn = true;
     }
@@ -193,30 +193,6 @@ public class IntroLevelState extends LevelState {
     public void tick(Input input) {
         currentTime += Gdx.graphics.getDeltaTime();
 
-        if(enemyController.getEnemyManager().getEnemies().length == 0){
-            orb.setState("PROLOGUE_CINEMATIC");
-            //levelManager.setLevel(6);
-        }
-
-        //you will probably hate me for this...
-        for(int i =0; i<playerController.getPlayerManager().getPlayers().length; i++)
-        {
-            if(playerController.getPlayerManager().getPlayer(i).isDead())
-            {
-                //add cool death scene here!
-                playerController.getPlayerManager().removePlayer(i);
-            }
-        }
-
-        if(playerController.getPlayerManager().getPlayers().length == 0)
-        {
-            //Game over!
-            //add game over state
-            transition(5);
-            orb.setState("GAME_OVER");
-            //Logger.debug("Game Over...");
-        }
-
         if (this.dialogue.isVisible()) {
             if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
                 if (this.dialogue.checkTextLeft() && this.dialogue.isVisible()) {
@@ -228,6 +204,32 @@ public class IntroLevelState extends LevelState {
                 }
             }
             return;
+        }
+
+
+        if(enemyController.getEnemyManager().getEnemies().length == 0){
+            orb.setState("PROLOGUE_CINEMATIC");
+        }
+
+        //you will probably hate me for this...
+        for(int i =0; i<playerController.getPlayerManager().getPlayers().length; i++)
+        {
+            Player p = playerController.getPlayerManager().getPlayer(i);
+            if(p.isDead())
+            {
+                //add cool death scene here!
+                this.dialogue.display(p.getName() + " was slain in combat!");
+                playerController.getPlayerManager().removePlayer(p);
+            }
+        }
+
+        if(playerController.getPlayerManager().getPlayers().length == 0)
+        {
+            //Game over!
+            //add game over state
+            transition(5);
+            orb.setState("GAME_OVER");
+            //Logger.debug("Game Over...");
         }
 
         this.gameEntityManager.tick(this.currentTime, this);
@@ -269,11 +271,11 @@ public class IntroLevelState extends LevelState {
                     if (e.getAiActor().inTurn()) {
                         if (e.getAiActor().step(currentTime, dialogue)) {
                             Logger.debug("Finishing turn for enemy[" + currentEnemy + "] - " + e);
-                            e.tick();
                             currentEnemy++;
                         }
 
                         e.tick();
+                        this.cameraController.set(e.x, e.y);
                         currentTime += Gdx.graphics.getDeltaTime();
                     } else {
                         Logger.debug("Deciding turn for actor: " + e);
@@ -306,10 +308,11 @@ public class IntroLevelState extends LevelState {
         boolean inspecting = playerController.isInspecting(), using = playerController.isUsing();
         if ((selected = playerController.controlSelect(input, entityList)) != -1) {
             GameEntity e = null;
-            //if(entityList.get(selected) == null)
-              //  dialogue.display("Professor Oak's words echo in your head: It is not the time to use this.");
-            //else
-                e = entityList.get(selected);
+
+            if((e = entityList.get(selected)) == null) {
+                dialogue.display("Professor Oak's words echo in your head: It is not the time to use this.");
+                return;
+            }
             if (using) {
                 String response = e.onUse(this);
                 dialogue.display(response);

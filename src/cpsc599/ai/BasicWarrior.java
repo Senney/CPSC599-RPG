@@ -43,9 +43,9 @@ public class BasicWarrior extends AIActor {
 
                     int dmg = this.actor.attack(target);
                     if (dmg < 0) {
-                        dialogue.display("Enemy attacks player, but misses!");
+                        dialogue.display("Enemy attacks " + target.getName() + ", but misses!");
                     } else {
-                        dialogue.display("Enemy attacks player for " + dmg + " damage!");
+                        dialogue.display("Enemy attacks " + target.getName() + " for " + dmg + " damage!");
                     }
                 }
                 actionList.remove(action);
@@ -97,6 +97,11 @@ public class BasicWarrior extends AIActor {
         this.nextStep = 0f;
         Vector2 position = new Vector2(this.actor.x, this.actor.y);
         Player nearest = playerManager.getNearest(position);
+        Vector2 ppos = new Vector2(nearest.x, nearest.y);
+        if (position.dst(ppos) > (this.actor.maxMove * 2)) {
+            actionList.add(new AIAction(AIAction.SKIP, null));
+            return true;
+        }
 
         // Move to the nearest player.
         this.attackTo(nearest.x, nearest.y);

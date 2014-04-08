@@ -10,6 +10,7 @@ import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.states.CinematicState;
 import cpsc599.util.Controls;
+import cpsc599.util.SharedAssets;
 
 public class Level1VillageCinematic extends CinematicState {
     private Player cc1,cc2,p1,p2;
@@ -22,7 +23,7 @@ public class Level1VillageCinematic extends CinematicState {
     public void init(OrbGame game) {
         super.init(game);
 
-        this.dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
+        this.dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
         this.dialogue.setDialogueTag("p1");
         this.dialogue.setVisibility(true);
 
@@ -49,9 +50,6 @@ public class Level1VillageCinematic extends CinematicState {
 
     @Override
     public void tick(Input input) {
-        if (Controls.isKeyTapped(input, Controls.START)) {
-            goToNextState();
-        }
 
         super.tick(input);
 

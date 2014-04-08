@@ -148,7 +148,7 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL1_CHASE", new Level1ChaseCinematic(this, levelManager.setLevel("level0"), cameraController, "LEVEL1"));
         stateManager.addState("LEVEL1", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
 
-        setState("LEVEL1_CHASE");
+        setState("MAIN_MENU");
 	}
 	
 }

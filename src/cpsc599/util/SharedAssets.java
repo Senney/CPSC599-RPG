@@ -14,6 +14,13 @@ public class SharedAssets {
         debug("Loading static shared assets in a very hacky manner.");
     }
 
+    public static String SCRIPT = "assets/Script/";
+    public static String CHAPTER_1 = SCRIPT + "chapter1.xml";
+    public static String CHAPTER_2 = SCRIPT + "chapter2.xml";
+    public static String CHAPTER_3 = SCRIPT + "chapter3.xml";
+    public static String CHAPTER_4 = SCRIPT + "chapter4.xml";
+    public static String CHAPTER_5 = SCRIPT + "chapter5.xml";
+
     public static String PRIMARY_ASSET_FOLDER = "assets/tilesets/primary/";
     public static boolean loaded = false;
 

@@ -9,6 +9,7 @@ import cpsc599.assets.Level;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.states.CinematicState;
+import cpsc599.util.SharedAssets;
 
 public class Level1ChaseCinematic extends CinematicState{
     Player hik, ren, e1, e2;
@@ -39,7 +40,7 @@ public class Level1ChaseCinematic extends CinematicState{
         //this.playerController.getPlayerManager().addPlayer(ren);
 
 
-        this.dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
+        this.dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
         this.dialogue.setDialogueTag("p3");
         //this.dialogue.setVisibility(true);
     }
@@ -79,11 +80,11 @@ public class Level1ChaseCinematic extends CinematicState{
 
         actions.add(CinematicAction.moveToConcurrent(e2, new Vector2(5, 15)));
         actions.add(CinematicAction.moveToConcurrent(ren, new Vector2(4, 15)));
+        actions.add(CinematicAction.moveToConcurrent(hik, new Vector2(2, 7)));
 
         actions.add(CinematicAction.despawnActor(e2));
         actions.add(CinematicAction.despawnActor(ren));
 
-        actions.add(CinematicAction.wait(1.2f));
         /*actions.add(CinematicAction.stepDialogue(dialogue));
         actions.add(CinematicAction.stepDialogue(dialogue));
         actions.add(CinematicAction.stepDialogue(dialogue));

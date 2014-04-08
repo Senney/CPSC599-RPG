@@ -9,6 +9,7 @@ import cpsc599.assets.Level;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.states.CinematicState;
+import cpsc599.util.SharedAssets;
 
 public class Level1FlowerFieldCinematic extends CinematicState {
     Player hik, ren, e1, e2;
@@ -39,7 +40,7 @@ public class Level1FlowerFieldCinematic extends CinematicState {
         this.playerController.getPlayerManager().addPlayer(ren);
 
 
-        this.dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
+        this.dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
         this.dialogue.setDialogueTag("p2");
         this.dialogue.setVisibility(true);
     }

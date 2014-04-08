@@ -4,9 +4,9 @@
 
 	<narrative>Hikari and the others have approached what looks to be the headquarters of an organization called the Evil League of Cow Cube Worshippers. But rather than a headquarters, it seems more befitting to call it a castle instead.</narrative>
 
-	<narrative>They walk up to the entrance and, as mentioned, there appears to be a strong magical barrier protecting the front entrance to the castle. An immense amount of power will be required to break through it… Hikari clutches her necklace tightly in her hands and wonders if it really is that legendary orb that their enemies had been talking about. If so, then she should be able to use its powers to break down the barrier easily. Tightening her grip on the orb, she pulls it off her neck and walks up to the barrier.</narrative>
+	<narrative>They walk up to the entrance and, as mentioned, there appears to be a strong magical barrier protecting the front entrance to the castle. An immense amount of power will be required to break through it... Hikari clutches her necklace tightly in her hands and wonders if it really is that legendary orb that their enemies had been talking about. If so, then she should be able to use its powers to break down the barrier easily. Tightening her grip on the orb, she pulls it off her neck and walks up to the barrier.</narrative>
 
-	<Hikari>…</Hikari> 
+	<Hikari>...</Hikari> 
 
 	<!-- (Narrative?) After a pause, the orb suddenly starts glowing. It glows brighter and brighter until, with a searing flash, the light from the orb erupts forwards and smashes directly into the barricade in front of them. The light, as though being soaked in, spreads from the point of impact towards the edges until it envelops it wholly. Time seems to stand still for a couple of seconds before the barrier slowly starts to disintegrate. -->
 
@@ -72,18 +72,18 @@
 	<!-- Hikari+Others VS Cow Cube Army -->
 	<!-- Hikari+Others defeat Cow Cube Army -->
 
-	<Hikari>It’s over… Ren!</Hikari>
+	<Hikari>It’s over... Ren!</Hikari>
 
 	<!-- Hikari rushes over to the bird cage -->
 	<!-- She can’t figure out how to unlock it, so she just breaks it open instead -->
 
 	<Hikari>Ren..!</Hikari>
-	<Ren>… Hikari?</Ren>
+	<Ren>... Hikari?</Ren>
 	<Hikari>I’m here. Are you alright?</Hikari>
-	<Ren>I… I think I’ll be okay. Why are you here?</Ren>
+	<Ren>I... I think I’ll be okay. Why are you here?</Ren>
 	<Hikari>I came to save you, of course. Didn’t I promise?</Hikari>
-	<Ren>You did… I thought that you were just kidding about that…</Ren>
+	<Ren>You did... I thought that you were just kidding about that...</Ren>
 	<Hikari>Of course not! Why would I ever joke about something like that? You’re my friend! How could I leave you alone?</Hikari>
-	<Ren>Hikari… Thank you. For coming to save me.</Ren>
+	<Ren>Hikari... Thank you. For coming to save me.</Ren>
 	<Hikari>No problem. Let’s go home.</Hikari>
 </chapter5>
