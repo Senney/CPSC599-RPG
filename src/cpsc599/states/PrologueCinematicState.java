@@ -67,6 +67,10 @@ public class PrologueCinematicState extends CinematicState {
         }
 
         super.tick(input);
+
+        if (actions.size() == 0) {
+            this.orb.setState("LEVEL0");
+        }
     }
 
     @Override
@@ -85,6 +89,7 @@ public class PrologueCinematicState extends CinematicState {
         actions.add(CinematicAction.despawnActor(p1));
         actions.add(CinematicAction.despawnActor(p2));
         actions.add(CinematicAction.stepDialogue(dialogue));
+        actions.add(CinematicAction.wait(1.0f));
 
         super.loadCinematicActions();
     }

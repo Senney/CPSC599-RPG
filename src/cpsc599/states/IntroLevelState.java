@@ -114,8 +114,6 @@ public class IntroLevelState extends LevelState {
 
         dialogue = new Dialogue();
         dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
-        dialogue.setDialogueTag("p1");
-        dialogue.toggleVisibility();
 
         this.enemyStartTurn = true;
     }
