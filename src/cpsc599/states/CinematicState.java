@@ -12,6 +12,7 @@ import cpsc599.controller.PlayerController;
 import cpsc599.managers.EnemyManager;
 import cpsc599.managers.LevelManager;
 import cpsc599.managers.PlayerManager;
+import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 
 import java.util.ArrayList;
@@ -30,14 +31,16 @@ public class CinematicState extends LevelState {
     protected AStarPathfinder pathfinder;
     protected Dialogue dialogue;
     protected Level level;
+    protected String nextState;
 
-    public CinematicState(OrbGame game, Level level, CameraController cameraController) {
+    public CinematicState(OrbGame game, Level level, CameraController cameraController, String nextState) {
         super(
                 game,
                 new PlayerController(new PlayerManager(), new EnemyManager()),
                 cameraController,
                 new EnemyController(new EnemyManager())
         );
+        this.nextState = nextState;
         Logger.debug("Constructing base cinematic state.");
 
         this.level = level;
@@ -71,6 +74,8 @@ public class CinematicState extends LevelState {
         for (Player p : playerController.getPlayerManager().getPlayers())
             p.render(super.groundLayer);
         super.groundLayer.end();
+
+        this.dialogue.render(this.overlayLayer);
     }
 
     @Override
@@ -81,16 +86,46 @@ public class CinematicState extends LevelState {
             loadCinematicActions();
         }
 
+        if (this.dialogue.isVisible()) {
+            if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
+                if (this.dialogue.checkTextLeft() && this.dialogue.isVisible()) {
+                    this.dialogue.loadTextRemains();
+                }
+                else {
+                    this.dialogue.setVisibility(false);
+                }
+            }
+            return;
+        }
+
+
         // Tick all of our players.
         for (Player player : playerController.getPlayerManager().getPlayers()) {
             player.tick();
         }
 
-        CinematicAction action = actions.peek();
-        if (action != null && action.act(playerController.getPlayerManager(), this.pathfinder, this.runtime)) {
-            Logger.debug("Removing completed action.");
-            actions.remove();
+        List<CinematicAction> actionList = getActions();
+        for (CinematicAction action : actionList) {
+            if (action != null && action.act(playerController.getPlayerManager(), this.pathfinder, this.runtime)) {
+                Logger.debug("Removing completed action.");
+                actions.remove(action);
+            }
         }
+    }
+
+    protected List<CinematicAction> getActions() {
+        List<CinematicAction> retActions = new ArrayList<CinematicAction>();
+        for (CinematicAction c : this.actions) {
+            if (!c.concurrent && retActions.isEmpty()) {
+                retActions.add(c);
+                break;
+            } else {
+                if (c.concurrent) retActions.add(c);
+                else break;
+            }
+        }
+
+        return retActions;
     }
 
     /**
@@ -101,5 +136,9 @@ public class CinematicState extends LevelState {
     protected void loadCinematicActions() {
         Logger.debug("Initializing cinematic actions in super class.");
         b_initialized = true;
+    }
+
+    protected void goToNextState() {
+        this.orb.setState(this.nextState);
     }
 }
