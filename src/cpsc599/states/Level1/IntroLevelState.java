@@ -110,7 +110,7 @@ public class IntroLevelState extends LevelState {
         playerController.setupMenus();
 
         dialogue = new Dialogue();
-        dialogue.loadDialogueXML("src/cpsc599/assets/Script/chapter1.xml");
+        dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
 
         this.enemyStartTurn = true;
     }
