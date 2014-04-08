@@ -86,6 +86,10 @@ public class CinematicState extends LevelState {
             loadCinematicActions();
         }
 
+        if (Controls.isKeyTapped(input, Controls.START)) {
+            goToNextState();
+        }
+
         if (this.dialogue.isVisible()) {
             if (Controls.isKeyTapped(input, Controls.A_BUTTON)) {
                 if (this.dialogue.checkTextLeft() && this.dialogue.isVisible()) {

@@ -47,7 +47,7 @@ public class IntroLevelState extends LevelState {
     @Override
     public void init(OrbGame game) {
         super.init(game);
-        super.setLevel(levelManager.setLevel("level1"));
+        super.setLevel(levelManager.setLevel("level0"));
 
         playerController.getPlayerManager().reset();
         enemyController.getEnemyManager().reset();

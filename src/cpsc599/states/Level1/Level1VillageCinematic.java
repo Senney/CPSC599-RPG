@@ -50,9 +50,6 @@ public class Level1VillageCinematic extends CinematicState {
 
     @Override
     public void tick(Input input) {
-        if (Controls.isKeyTapped(input, Controls.START)) {
-            goToNextState();
-        }
 
         super.tick(input);
 
