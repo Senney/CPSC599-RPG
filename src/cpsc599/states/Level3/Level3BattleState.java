@@ -2,13 +2,18 @@ package cpsc599.states.Level3;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
 import cpsc599.ai.AStarPathfinder;
 import cpsc599.ai.BasicWarrior;
 import cpsc599.assets.*;
+import cpsc599.assets.Entities.HouseGameEntity;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
+import cpsc599.items.Inventory;
+import cpsc599.items.Item;
 import cpsc599.managers.LevelManager;
 import cpsc599.states.LevelState;
 import cpsc599.util.Controls;
@@ -29,6 +34,9 @@ public class Level3BattleState extends LevelState {
     private List<GameEntity> entityList;
     private boolean enemyStartTurn;
     private LevelManager levelManager;
+
+    private Player jack;
+    private boolean b_jackJoined;
 
     public int turnNum;
     public boolean isShown;
@@ -52,6 +60,10 @@ public class Level3BattleState extends LevelState {
 
         //playerController.getPlayerManager().reset();
         enemyController.getEnemyManager().reset();
+
+        jack = new Player("Jack", SharedAssets.jackSprite, 7, 14, 7, 10, 4, 1, 120, 60);
+        jack.getPlayerInventory().pickUp(new Item("Pitchfork", true, Inventory.RHAND_SLOT, 1, 4, 1));
+        jack.getPlayerInventory().equip(jack.getPlayerInventory().getCarry()[0]);
 
         // Set up the pathfinder for this level.
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
@@ -120,15 +132,16 @@ public class Level3BattleState extends LevelState {
         e9.hit = 120;
         e9.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e9));
 
+
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
         enemyController.getEnemyManager().addEnemy(e3);
         enemyController.getEnemyManager().addEnemy(e4);
         enemyController.getEnemyManager().addEnemy(e5);
-        enemyController.getEnemyManager().addEnemy(e6);
+/*        enemyController.getEnemyManager().addEnemy(e6);
         enemyController.getEnemyManager().addEnemy(e7);
         enemyController.getEnemyManager().addEnemy(e8);
-        enemyController.getEnemyManager().addEnemy(e9);
+        enemyController.getEnemyManager().addEnemy(e9);*/
 
         // TODO: Make this not stupid.
         playerController.setupCursor();
@@ -140,14 +153,17 @@ public class Level3BattleState extends LevelState {
         dialogue = new Dialogue();
         dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
 
+        HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 7, 14, "house1",
+                "Looks like someone is home...", "A player wants to join your party!");
+        gameEntityManager.addEntity(houseEntity);
 
-
+        this.b_jackJoined = false;
         this.enemyStartTurn = true;
     }
 
     @Override
     public void render() {
-        super.renderer.setView(camera);
+        super.renderer.setView((OrthographicCamera)this.cameraController.getCamera());
         super.drawLevel();
 
         super.groundLayer.begin();
@@ -236,11 +252,6 @@ public class Level3BattleState extends LevelState {
             return;
         }
 
-
-        if(enemyController.getEnemyManager().getEnemies().length == 0){
-            orb.setState("LEVEL2_EMPTY_FIELD");
-        }
-
         //you will probably hate me for this...
         for(int i =0; i<playerController.getPlayerManager().getPlayers().length; i++)
         {
@@ -276,6 +287,16 @@ public class Level3BattleState extends LevelState {
             return;
         }
 
+        /**
+         * Handle the joining of Jack.
+         */
+        if (!this.b_jackJoined && this.getFlagBoolean("house1")) {
+            this.dialogue.display("Jack has joined your party!");
+            this.playerController.getPlayerManager().addPlayer(jack);
+            b_jackJoined = true;
+            return;
+        }
+
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
         } else {
@@ -287,8 +308,6 @@ public class Level3BattleState extends LevelState {
                 return;
             }
 
-
-            // TODO: This is where we put some awesome enemy turn logic!!
             Enemy[] enemies = this.enemyController.getEnemyManager().getEnemies();
             if (currentEnemy > enemies.length - 1) {
                 Logger.debug("Ending enemy turn.");
@@ -317,6 +336,8 @@ public class Level3BattleState extends LevelState {
                 } else {
                     currentEnemy++;
                 }
+
+                return;
             }
         }
 
@@ -325,10 +346,6 @@ public class Level3BattleState extends LevelState {
             this.cameraController.set(current.x, current.y);
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
-        }
-        if(turnNum == 2 && !isShown) {
-            this.dialogue.display("Sean: Hey what's going on here!?");
-            isShown = true;
         }
 
         // TODO: Find a way to abstract this into the PlayerController.
