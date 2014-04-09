@@ -17,6 +17,7 @@ public class Actor {
     public int speed;  //hit
     public int evade;
 
+    public int range;
     public int damage;
     public int hit;
     public int dodge;
@@ -83,6 +84,11 @@ public class Actor {
 
     public void heal(int amount)
     {
+        if (amount == -1) {
+            currentHealth = maxHealth;
+            return;
+        }
+
         currentHealth += amount;
         if(currentHealth > maxHealth)
             currentHealth = maxHealth;

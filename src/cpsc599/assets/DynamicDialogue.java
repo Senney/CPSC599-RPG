@@ -32,18 +32,20 @@ public class DynamicDialogue {
 
     public void render(SpriteBatch batch) {
         if (this.visible) {
+            batch.begin();
             // Draw box.
-            drawTextBackdrop(batch, (int)position.x, (int)position.y, (int)width, (int)height);
+            drawTextBackdrop(batch, (int) position.x, (int) position.y, (int) width, (int) height);
             // Render text.
-            font.draw(batch, text, this.position.x + 20, this.position.y + 16);
+            font.draw(batch, text, this.position.x + 8, this.position.y + this.height - 8);
+            batch.end();
         }
     }
 
     public void setText(String text) {
         this.text = text;
         bounds = font.getBounds(text);
-        this.width = round16(bounds.width);
-        this.height = round16(bounds.height) + 32;
+        this.width = round16(bounds.width) + 16;
+        this.height = round16(bounds.height) + 16;
     }
 
     public String getText() {
@@ -90,5 +92,10 @@ public class DynamicDialogue {
             }
             batch.draw(SharedAssets.menu_texture[1][2], xpos + (16 * (width_iter - 1)), ypos + (16*i));
         }
+    }
+
+    public void show(String text) {
+        this.setText(text);
+        this.setVisibility(true);
     }
 }
