@@ -189,6 +189,7 @@ public class Level3BattleState extends LevelState {
         this.playerController.getInventoryMenu().render(super.overlayLayer);
         this.playerController.getStatsMenu().render(this.overlayLayer);
         this.playerController.getGlobalMenu().render(this.overlayLayer);
+        this.playerController.getDynamicDialogue().render(this.overlayLayer);
         this.dialogue.render(this.overlayLayer);
     }
 
