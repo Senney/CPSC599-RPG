@@ -34,7 +34,7 @@ public class MainMenuState extends State {
     public void tick(Input input) {
         time++; // Increment the time value.
         if (Controls.isKeyTapped(input, Controls.START)) {
-            orb.setState("LEVEL1_VILLAGE");
+            orb.setState("PROLOGUE");
         }
     }
 }

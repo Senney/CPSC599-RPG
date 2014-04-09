@@ -26,6 +26,7 @@ import cpsc599.states.Level3.Level3Finale;
 import cpsc599.states.Level4.Level4BattleState;
 import cpsc599.states.Level4.Level4FieldCinematic;
 import cpsc599.states.Level4.Level4Finale;
+import cpsc599.states.Level5.Level5BlackoutCinematic;
 import cpsc599.states.Prologue.PrologueCinematicState;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
@@ -161,6 +162,7 @@ public class OrbGame implements ApplicationListener {
 
         // Chapter 2 states
         stateManager.addState("LEVEL2_EMPTY_FIELD", new Level2EmptyFieldCinematic(this, levelManager.setLevel("level1"), cameraController, "LEVEL2_AFTER_BATTLE"));
+        //stateManager.addState("LEVEL2", new Level2BattleState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL2_AFTER_BATTLE", new Level2AfterBattleCinematic(this, levelManager.setLevel("level1"), this.cameraController, "LEVEL3_FIELD"));
         
         // Chapter 3 states
@@ -171,8 +173,18 @@ public class OrbGame implements ApplicationListener {
         // Chapter 4 states
         stateManager.addState("LEVEL4_FIELD", new Level4FieldCinematic(this, levelManager.setLevel("level3"), this.cameraController, "LEVEL4"));
         stateManager.addState("LEVEL4", new Level4BattleState(this, levelManager, playerController, cameraController, enemyController));
-        stateManager.addState("LEVEL4_FINALE", new Level4Finale(this, levelManager.setLevel("level3"), this.cameraController, "LEVEL5"));
+        stateManager.addState("LEVEL4_FINALE", new Level4Finale(this, levelManager.setLevel("level3"), this.cameraController, "LEVEL5_CRYSTAL_CASTLE"));
 
+     // Chapter 5 states
+        //stateManager.addState("LEVEL5_CRYSTAL_CASTLE", new Level5CrystalCastleCinematic(this, levelManager.setLevel("crystal_castle"), this.cameraController, "LEVEL5_INSIDE_CASTLE"));
+        //stateManager.addState("LEVEL5_INSIDE_CASTLE", new Level5InsideCastleState(this, levelManager, playerController, cameraController, enemyController));
+        stateManager.addState("LEVEL5_BLACKOUT", new Level5BlackoutCinematic(this, levelManager.setLevel("blackout_castle"), this.cameraController, "LEVEL5_THRONE_ROOM"));
+        //stateManager.addState("LEVEL5_THRONE_ROOM", new Level5ThroneRoomCinematic(this, levelManager.setLevel("throne_room"), this.cameraController, "LEVEL5_ETIEN_BATTLE"));
+        //stateManager.addState("LEVEL5_ETIEN_BATTLE", new Level5EtienBattleState(this, levelManager, playerController, cameraController, enemyController));
+        //stateManager.addState("LEVEL5_ALMIGHTY", new Level5AlmightyCinematic(this, levelManager.setLevel("throne_room"), this.cameraController, "LEVEL5_ALMIGHTY_BATTLE"));
+        //stateManager.addState("LEVEL5_ALMIGHTY_BATTLE", new Level5AlmightyBattleState(this, levelManager, playerController, cameraController, enemyController));
+        //stateManager.addState("LEVEL5_FINALE", new Level5FinaleCinematic(this, levelmanager.setLevel("throne_room"), this.cameraController, ""));
+        
         setState("MAIN_MENU");
 	}
 	

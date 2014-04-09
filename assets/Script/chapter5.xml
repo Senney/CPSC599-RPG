@@ -2,15 +2,17 @@
 <chapter5>
 	<!-- Location: Castle Entrance -->
 
-	<narrative>Hikari and the others have approached what looks to be the headquarters of an organization called the Evil League of Cow Cube Worshippers. But rather than a headquarters, it seems more befitting to call it a castle instead.</narrative>
-
-	<narrative>They walk up to the entrance and, as mentioned, there appears to be a strong magical barrier protecting the front entrance to the castle. An immense amount of power will be required to break through it... Hikari clutches her necklace tightly in her hands and wonders if it really is that legendary orb that their enemies had been talking about. If so, then she should be able to use its powers to break down the barrier easily. Tightening her grip on the orb, she pulls it off her neck and walks up to the barrier.</narrative>
-
-	<Hikari>...</Hikari> 
-
-	<!-- (Narrative?) After a pause, the orb suddenly starts glowing. It glows brighter and brighter until, with a searing flash, the light from the orb erupts forwards and smashes directly into the barricade in front of them. The light, as though being soaked in, spreads from the point of impact towards the edges until it envelops it wholly. Time seems to stand still for a couple of seconds before the barrier slowly starts to disintegrate. -->
-
-	<!-- (Narrative?) Slowly, Hikari and the others approach forwards. As they pass through where the barrier once stood, Hikari realizes with a numbed sense of amazement that the orb that she holds within her hand truly is the legendary orb. -->
+	<p1>
+		<narrative>Hikari and the others have approached what looks to be the headquarters of an organization called the Evil League of Cow Cube Worshippers. But rather than a headquarters, it seems more befitting to call it a castle instead.</narrative>
+	
+		<narrative>They walk up to the entrance and, as mentioned, there appears to be a strong magical barrier protecting the front entrance to the castle. An immense amount of power will be required to break through it... Hikari clutches her necklace tightly in her hands and wonders if it really is that legendary orb that their enemies had been talking about. If so, then she should be able to use its powers to break down the barrier easily. Tightening her grip on the orb, she pulls it off her neck and walks up to the barrier.</narrative>
+	
+		<Hikari>...</Hikari> 
+	
+		<narrative>After a pause, the orb suddenly starts glowing. It glows brighter and brighter until, with a searing flash, the light from the orb erupts forwards and smashes directly into the barricade in front of them. The light, as though being soaked in, spreads from the point of impact towards the edges until it envelops it wholly. Time seems to stand still for a couple of seconds before the barrier slowly starts to disintegrate.</narrative>
+	
+		<narrative>Slowly, Hikari and the others approach forwards. As they pass through where the barrier once stood, Hikari realizes with a numbed sense of amazement that the orb that she holds within her hand truly is the legendary orb.</narrative>
+	</p1>
 
 	<!-- The party ventures through the castle and fights enemies in the way until they reach the door to the throne room. -->
 
@@ -19,43 +21,53 @@
 	<!-- They open to doors to the throne room. -->
 	<!-- The room is plunged in darkness. -->
 
-	<unknown>I see you’ve finally made it.</unknown>
-
-	<all>!!</all>
-
-	<Hikari>Who are you!? And where’s Ren!? What have you done to him!?</Hikari>
-
-	<unknown>Ren? Oh, you mean the little bird I captured? Why, he’s sleeping of course. When I first caught him and put him in his cage, he put up quite a struggle. But no worries. After I broke one of his wings, he quieted down right away. It’s a shame, too. I wanted to hear more of his screams. But he was useless anyways. No matter how many times I hit him, he kept on insisting that he didn’t have the legendary orb. And now look who shows up - the girl that he gave it to! Why, that means he suffered all that pain for no reason whatsoever in the end. How pitiful.</unknown>
-
-	<Hikari>You--!! Show yourself, you coward! I’ll kill you for what you’ve done to him!</Hikari>
-
-	<unknown>Oh? Playing the brave knight, are you? How sickening. This world has no need for fairytale knights. All that this world requires is the salvation that the almighty cow cube offers. Once it descends upon this world, it’ll bestow a miracle upon us all. No more shall there be the disgusting ideologies that humanity festers in daily, preaching arrogantly what they consider to be moral standards to others, but then letting their own actions show the rot that’s consumed their own minds. No. Once the almighty cow cube descends, all of humanity will be transmogrified into a likeness of its shape and thus be reborn anew. No more will our brains rot in hypocrisy and self-damnation, instead, our minds will be empty - free of thought. The world will be a utopia, populated only by the cow cubes. And I, Etien, will be the one to bring it about.</unknown>
-
-	<Hikari>You’re mad.</Hikari>
-
-	<Etien>That I am. But what was it that drove me towards this madness in the first place? Humans.</Etien>
-
+	<p2>
+		<unknown>I see you’ve finally made it.</unknown>
+	
+		<all>!!</all>
+	
+		<Hikari>Who are you!? And where’s Ren!? What have you done to him!?</Hikari>
+	
+		<unknown>Ren? Oh, you mean the little bird I captured? Why, he’s sleeping of course. When I first caught him and put him in his cage, he put up quite a struggle. But no worries. After I broke one of his wings, he quieted down right away. It’s a shame, too. I wanted to hear more of his screams. But he was useless anyways. No matter how many times I hit him, he kept on insisting that he didn’t have the legendary orb. And now look who shows up - the girl that he gave it to! Why, that means he suffered all that pain for no reason whatsoever in the end. How pitiful.</unknown>
+	
+		<Hikari>You--!! Show yourself, you coward! I’ll kill you for what you’ve done to him!</Hikari>
+	
+		<unknown>Oh? Playing the brave knight, are you? How sickening. This world has no need for fairytale knights. All that this world requires is the salvation that the almighty cow cube offers. Once it descends upon this world, it’ll bestow a miracle upon us all. No more shall there be the disgusting ideologies that humanity festers in daily, preaching arrogantly what they consider to be moral standards to others, but then letting their own actions show the rot that’s consumed their own minds. No. Once the almighty cow cube descends, all of humanity will be transmogrified into a likeness of its shape and thus be reborn anew. No more will our brains rot in hypocrisy and self-damnation, instead, our minds will be empty - free of thought. The world will be a utopia, populated only by the cow cubes. And I, Etien, will be the one to bring it about.</unknown>
+	
+		<Hikari>You’re mad.</Hikari>
+	
+		<Etien>That I am. But what was it that drove me towards this madness in the first place? Humans.</Etien>
+	</p2>
+	
 	<!-- The lights turn on. -->
 
 	<!-- Where the throne should be, a giant golden bird cage sits. Inside is Ren slumped over. -->
 	<!-- Standing in front of the cage is a human. -->
 
-	<Hikari>Ren!</Hikari>
-
-	<!-- Hikari rushes towards the bird cage but stops suddenly when the human standing in front of it intercepts her. -->
-
-	<Etien>I wouldn’t do that if I were you. Who knows what kind of traps I could set off if you get too close.</Etien>
-
-	<Hikari>You--! You’ll pay for this!</Hikari>
-
+	<p3>
+		<Hikari>Ren!</Hikari>
+	
+		<!-- Hikari rushes towards the bird cage but stops suddenly when the human standing in front of it intercepts her. -->
+	
+		<Etien>I wouldn’t do that if I were you. Who knows what kind of traps I could set off if you get too close.</Etien>
+	
+		<Hikari>You--! You’ll pay for this!</Hikari>
+	</p3>
+	
 	<!-- Hikari charges at Etien -->
 	<!-- Hikari VS Etien -->
 	<!-- Hikari defeats Etien -->
 
-	<Hikari>Now, release Ren from that cage!</Hikari>
-
-	<Etien>HAhAHahAHaHAhA!!! You’re too late! Even though you hold the legendary orb, it can’t prevent the descent of the almighty cow cube any longer! It’s time! All the conditions have been met. My death was the last one. You’ve brought about your own deaths! HAhAha--</Etien>
-
+	<p4>
+		<Hikari>Now, release Ren from that cage!</Hikari>
+	
+		<Etien>HAhAHahAHaHAhA!!! You’re too late! Even though you hold the legendary orb, it can’t prevent the descent of the almighty cow cube any longer! It’s time! All the conditions have been met. My death was the last one. You’ve brought about your own deaths! HAhAha--</Etien>
+	
+	
+		<Almighty>MOOOOOOOO!!!</Almighty>
+		<CowCubes>Moo!! Kill!!</CowCubes>
+	</p4>
+	
 	<!--
 		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
 		ALMIGHTY COW CUBE DESCENDS
@@ -66,24 +78,29 @@
 	<!-- Etien is transformed into a mini cow cube -->
 	<!-- Many mini cow cubes appear around the almighty cow cube -->
 
-	<Almighty>MOOOOOOOO!!!</Almighty>
-	<CowCubes>Moo!! Kill!!</CowCubes>
+	<!-- Comments above this occur before Almighty's first line -->
+	
 
 	<!-- Hikari+Others VS Cow Cube Army -->
 	<!-- Hikari+Others defeat Cow Cube Army -->
 
-	<Hikari>It’s over... Ren!</Hikari>
-
+	
+	<!-- Place the next two comments after Hikari's first line -->
 	<!-- Hikari rushes over to the bird cage -->
 	<!-- She can’t figure out how to unlock it, so she just breaks it open instead -->
 
-	<Hikari>Ren..!</Hikari>
-	<Ren>... Hikari?</Ren>
-	<Hikari>I’m here. Are you alright?</Hikari>
-	<Ren>I... I think I’ll be okay. Why are you here?</Ren>
-	<Hikari>I came to save you, of course. Didn’t I promise?</Hikari>
-	<Ren>You did... I thought that you were just kidding about that...</Ren>
-	<Hikari>Of course not! Why would I ever joke about something like that? You’re my friend! How could I leave you alone?</Hikari>
-	<Ren>Hikari... Thank you. For coming to save me.</Ren>
-	<Hikari>No problem. Let’s go home.</Hikari>
+	<p5>
+		<Hikari>It’s over... Ren!</Hikari>
+	
+	
+		<Hikari>Ren..!</Hikari>
+		<Ren>... Hikari?</Ren>
+		<Hikari>I’m here. Are you alright?</Hikari>
+		<Ren>I... I think I’ll be okay. Why are you here?</Ren>
+		<Hikari>I came to save you, of course. Didn’t I promise?</Hikari>
+		<Ren>You did... I thought that you were just kidding about that...</Ren>
+		<Hikari>Of course not! Why would I ever joke about something like that? You’re my friend! How could I leave you alone?</Hikari>
+		<Ren>Hikari... Thank you. For coming to save me.</Ren>
+		<Hikari>No problem. Let’s go home.</Hikari>
+	</p5>
 </chapter5>
