@@ -69,7 +69,7 @@ public abstract class AIActor {
 
                         // Check if we have to stop when we're in range.
                         if (action.stopInRange) {
-                            if (top.position.dst(movementList.get(0).position) < this.actor.range + 1) {
+                            if (top.position.dst(movementList.get(0).position) <= this.actor.range) {
                                 actionList.remove(action);
                                 return false;
                             }
@@ -90,7 +90,12 @@ public abstract class AIActor {
                     if (dmg < 0) {
                         dialogue.display("Enemy attacks " + target.getName() + ", but misses!");
                     } else {
-                        dialogue.display("Enemy attacks " + target.getName() + " for " + dmg + " damage!");
+                        if (this.actor.range > 2) {
+                            dialogue.display("Enemy attacks " + target.getName() + " from range for "
+                                    + dmg + " damage!");
+                        } else {
+                            dialogue.display("Enemy attacks " + target.getName() + " for " + dmg + " damage!");
+                        }
                     }
                 }
                 actionList.remove(action);
@@ -132,7 +137,7 @@ public abstract class AIActor {
         AIAction moveAction = new AIAction(AIAction.MOVE, movements);
         moveAction.stopInRange = true;
 
-        actionList.add(new AIAction(AIAction.MOVE, movements));
+        actionList.add(moveAction);
         actionList.add(new AIAction(AIAction.ATTACK, end));
     }
 
