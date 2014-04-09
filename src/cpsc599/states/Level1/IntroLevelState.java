@@ -193,7 +193,6 @@ public class IntroLevelState extends LevelState {
         for(Enemy e : enemyController.getEnemyManager().getEnemies())
             e.render(super.groundLayer);
 
-
         // If we're in cursor-mode, render the cursor.
         if (this.playerController.isCursor()) {
             this.playerController.getCursor().render(this.groundLayer);

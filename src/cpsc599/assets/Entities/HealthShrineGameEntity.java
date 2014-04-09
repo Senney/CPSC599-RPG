@@ -8,10 +8,12 @@ import cpsc599.util.SharedAssets;
 
 public class HealthShrineGameEntity extends GameEntity {
     private int heal;
+    private boolean used;
 
     public HealthShrineGameEntity(int x, int y, int heal) {
         super();
         this.heal = heal;
+        this.used = false;
 
         super.objSprite = new Sprite(SharedAssets.healthShrine);
         super.setPosition(x, y);
@@ -25,7 +27,10 @@ public class HealthShrineGameEntity extends GameEntity {
 
     @Override
     public String onUse(State gameState, Actor activator) {
+        if (this.used) return "The shrine has been drained of power.";
+
         activator.heal(this.heal);
+        this.used = true;
         return "Player was healed for " + this.heal + " health!";
     }
 
