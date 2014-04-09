@@ -337,6 +337,8 @@ public class IntroLevelState extends LevelState {
                 } else {
                     currentEnemy++;
                 }
+
+                return;
             }
         }
 
