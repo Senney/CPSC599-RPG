@@ -186,37 +186,6 @@ public class IntroLevelState extends LevelState {
         this.dialogue.render(this.overlayLayer);
     }
 
-    private void renderUsables() {
-        if ((this.playerController.isInspecting() || this.playerController.isUsing()) && this.entityList != null) {
-            for (int i = 0; i < entityList.size(); i++) {
-                GameEntity e = entityList.get(i);
-                int x = (int)e.getPosition().x, y = (int)e.getPosition().y;
-                if (i == playerController.getSelectedUnit()) {
-                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(x),
-                            CoordinateTranslator.translate(y));
-                } else {
-                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(x),
-                            CoordinateTranslator.translate(y));
-                }
-            }
-        }
-    }
-
-    private void renderAttackables() {
-        if (this.playerController.isAttacking() && attackingList != null && attackingList.size() != 0) {
-            for (int i = 0; i < attackingList.size(); i++) {
-                Enemy e = attackingList.get(i);
-                if (i == playerController.getSelectedUnit()) {
-                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(e.x),
-                            CoordinateTranslator.translate(e.y));
-                } else {
-                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x),
-                            CoordinateTranslator.translate(e.y));
-                }
-            }
-        }
-    }
-
     @Override
     public void tick(Input input) {
         currentTime += Gdx.graphics.getDeltaTime();
