@@ -53,10 +53,10 @@ public class Level3Finale extends CinematicState{
     @Override
     protected void loadCinematicActions() {
         // Initial dialogue interaction.
-        actions.add(CinematicAction.panCamera(new Vector2(1, 1), new Vector2(18, 10), this.cameraController));
         actions.add(CinematicAction.spawnActor(hik, new Vector2(19, 9)));
         actions.add(CinematicAction.spawnActor(seen, new Vector2(20,9)));
         actions.add(CinematicAction.spawnActor(sash, new Vector2(21,9)));
+        actions.add(CinematicAction.panCamera(new Vector2(1, 1), new Vector2(18, 10), this.cameraController));
 
         actions.add(CinematicAction.stepDialogue(dialogue));
         actions.add(CinematicAction.stepDialogue(dialogue));
