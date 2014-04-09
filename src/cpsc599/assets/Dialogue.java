@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import cpsc599.util.SharedAssets;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -34,12 +35,12 @@ public class Dialogue {
     private Document doc;
 
     private float displayTime;
-    private Texture portrait;
+    private TextureRegion portrait;
 
-    private HashMap<String, Texture> portraitMap;
+    private HashMap<String, TextureRegion> portraitMap;
 
     private class DialogueElement {
-        Texture portrait;
+        TextureRegion portrait;
         String text;
 
         public DialogueElement(String text) {
@@ -47,7 +48,7 @@ public class Dialogue {
             this.text = text;
         }
 
-        public DialogueElement(String text, Texture portrait) {
+        public DialogueElement(String text, TextureRegion portrait) {
             if (portrait == null) portrait = SharedAssets.defaultPortrait;
             this.portrait = portrait;
             this.text = text;
@@ -73,7 +74,7 @@ public class Dialogue {
 		this.visible = false;
         this.portrait = SharedAssets.defaultPortrait;
 
-        portraitMap = new HashMap<String, Texture>();
+        portraitMap = new HashMap<String, TextureRegion>();
 	}
 
     public boolean loadDialogueXML(String xmlFile) {
@@ -105,7 +106,7 @@ public class Dialogue {
         }
     }
 
-    public void display(String text, Texture portrait) {
+    public void display(String text, TextureRegion portrait) {
         this.setDialogueText(text);
         this.setVisibility(true);
         this.setPortrait(portrait);
@@ -120,7 +121,7 @@ public class Dialogue {
         loadDialogue();
     }
 
-    public void mapPortrait(String name, Texture portrait) {
+    public void mapPortrait(String name, TextureRegion portrait) {
         portraitMap.put(name, portrait);
     }
 
@@ -263,7 +264,7 @@ public class Dialogue {
         }
     }
 
-    public void setPortrait(Texture portrait) {
+    public void setPortrait(TextureRegion portrait) {
         this.portrait = portrait;
     }
 }

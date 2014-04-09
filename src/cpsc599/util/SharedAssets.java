@@ -29,25 +29,25 @@ public class SharedAssets {
     public static boolean loaded = false;
 
     public static TextureRegion[][] menu_texture;
-    public static Texture menu_pointer;
-    public static Texture highlight;
-    public static Texture highlight2;
-    public static Texture highlight3;
+    public static TextureRegion menu_pointer;
+    public static TextureRegion highlight;
+    public static TextureRegion highlight2;
+    public static TextureRegion highlight3;
 
-    public static Texture doorSwitch;
-    public static Texture defaultPortrait;
+    public static TextureRegion doorSwitch;
+    public static TextureRegion defaultPortrait;
 
     public static Texture cowCube;
 
-    public static Texture orangeHouse;
-    public static Texture greenHouse;
+    public static TextureRegion orangeHouse;
+    public static TextureRegion greenHouse;
 
-    public static Texture hikariPortrait;
-    public static Texture princePortrait;
-    public static Texture seanPortrait;
-    public static Texture sashaPortrait;
-    public static Texture cowCubePortrait;
-    public static Texture jackPortrait;
+    public static TextureRegion hikariPortrait;
+    public static TextureRegion princePortrait;
+    public static TextureRegion seanPortrait;
+    public static TextureRegion sashaPortrait;
+    public static TextureRegion cowCubePortrait;
+    public static TextureRegion jackPortrait;
 
     public static BitmapFont font_14;
     public static BitmapFont font_12;
@@ -72,21 +72,21 @@ public class SharedAssets {
         Texture menu = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Menus/menu_empty.png"));
         menu_texture = TextureRegion.split(menu, 16, 16);
 
-        menu_pointer = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Menus/pointer.png"));
-        highlight = new Texture(Gdx.files.internal("assets/tilesets/" + "Enemy.png"));
-        highlight2 = new Texture(Gdx.files.internal("assets/tilesets/" + "testsquare.png"));
-        highlight3 = new Texture(Gdx.files.internal("assets/tilesets/" + "highlight-player.png"));
+        menu_pointer = loadTexture(PRIMARY_ASSET_FOLDER + "Menus/pointer.png");
+        highlight = loadTexture("assets/tilesets/" + "Enemy.png");
+        highlight2 = loadTexture("assets/tilesets/" + "testsquare.png");
+        highlight3 = loadTexture("assets/tilesets/" + "highlight-player.png");
 
         cowCube = new Texture(Gdx.files.internal("assets/tilesets/cowcube.png"));
 
-        doorSwitch = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Buttons/A_button3.png"));
-        defaultPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/enemy/Monster/cow_cube.png"));
+        doorSwitch = loadTexture(PRIMARY_ASSET_FOLDER + "Buttons/A_button3.png");
+        defaultPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/enemy/Monster/cow_cube.png");
 
-        hikariPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/hikari.png"));
-        princePortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/prince.png"));
-        sashaPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/female2.png"));
-        seanPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male1.png"));
-        jackPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male3.png"));
+        hikariPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/hikari.png");
+        princePortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/prince.png");
+        sashaPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/female2.png");
+        seanPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male1.png");
+        jackPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male3.png");
 
         hikariSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 0, 0, 16, 16, 1, 0.1f);
         seanSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 3, 0, 16, 16, 1, 0.1f);
@@ -99,19 +99,21 @@ public class SharedAssets {
         loadEnemies();
 
         TextureRegion[][] houseRow = TextureRegion.split(new Texture(PRIMARY_ASSET_FOLDER + "Town/house.png"), 16, 16);
-        orangeHouse = houseRow[0][1].getTexture();
-        greenHouse = houseRow[0][3].getTexture();
+        orangeHouse = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/house.png", 16, 16, 0, 1, false);
+        greenHouse = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/house.png", 16, 16, 0, 3, false);
 
         loadFont();
 
         loaded = true;
     }
 
-    private static Texture loadTexture(String filename) {
+    private static Texture loadTextureFile(String filename) {
         Texture tex = null;
         if (textureCache.containsKey(filename)) {
+            Logger.debug("Retrieving texture from cache: " + filename);
             tex = textureCache.get(filename);
         } else {
+            Logger.debug("Caching Texture: " + filename);
             tex = new Texture(Gdx.files.internal(filename));
             textureCache.put(filename, tex);
         }
@@ -119,15 +121,19 @@ public class SharedAssets {
     }
 
     private static TextureRegion loadTextureRegion(String filename, int w, int h, int x, int y, boolean flip) {
-        Texture tex = loadTexture(filename);
+        Texture tex = loadTextureFile(filename);
         TextureRegion[][] region = TextureRegion.split(tex, w, h);
         TextureRegion target = region[x][y];
         target.flip(false, flip);
         return target;
     }
 
+    private static TextureRegion loadTexture(String filename) {
+        return loadTexture(filename, false);
+    }
+
     private static TextureRegion loadTexture(String filename, boolean flip) {
-        Texture tex = loadTexture(filename);
+        Texture tex = loadTextureFile(filename);
         TextureRegion region = new TextureRegion(tex);
         region.flip(false, flip);
         return region;
