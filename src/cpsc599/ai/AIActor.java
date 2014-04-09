@@ -3,6 +3,7 @@ package cpsc599.ai;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Actor;
 import cpsc599.assets.Dialogue;
+import cpsc599.assets.Player;
 import cpsc599.managers.PlayerManager;
 
 import java.util.ArrayList;
@@ -48,29 +49,84 @@ public abstract class AIActor {
         return actionList.size() > 0;
     }
 
-    /**
-     * Attempt to step the actor through their turn.
-     *
-     * @param time
-     * @param dialogue
-     * @return <code>true</code> if the turn is over;
-     *         <code>false</code> if the turn still has steps left to take.
-     */
-    public abstract boolean step(float time, Dialogue dialogue);
+    public boolean step(float time, Dialogue dialogue) {
+        if (actionList.size() == 0) return true;
+        if (time >= nextStep) {
+            AIAction action = actionList.get(0);
+            if (action.action == AIAction.MOVE) {
+                List<AStarMove> movementList = (List<AStarMove>)action.obj;
+                if (movementList.size() == 1) {
+                    actionList.remove(action);
+                } else {
+                    AStarMove top = movementList.get(movementList.size() - 1);
 
-    /**
-     * Sets up a move to a specified location on the level.
-     * @param x
-     * @param y
-     */
-    public abstract void moveTo(int x, int y);
+                    if (!this.actor.canMove()) {
+                        actionList.remove(action);
+                    } else {
+                        this.actor.move(top.x_move, top.y_move, this.pathfinder.getLevel());
 
-    /**
-     * Sets up an attack-move to a specified location.
-     * @param x
-     * @param y
-     */
-    public abstract void attackTo(int x, int y);
+                        movementList.remove(top);
+                        action.obj = movementList;
+                    }
+                }
+            } else if (action.action == AIAction.ATTACK) {
+                Vector2 position = (Vector2)action.obj;
+
+                // Range + 1 so that we can hit diagonal.
+                if ((new Vector2(actor.x, actor.y)).dst(position) < (this.actor.range + 1)) {
+                    Player target = playerManager.getNearest(position);
+
+                    int dmg = this.actor.attack(target);
+                    if (dmg < 0) {
+                        dialogue.display("Enemy attacks " + target.getName() + ", but misses!");
+                    } else {
+                        dialogue.display("Enemy attacks " + target.getName() + " for " + dmg + " damage!");
+                    }
+                }
+                actionList.remove(action);
+            } else if (action.action == AIAction.SKIP) {
+                actionList.remove(action);
+            } else if (action.action == AIAction.SAY) {
+                dialogue.display((String)action.obj);
+                actionList.remove(action);
+            }
+
+            nextStep = time + STEP_TIME;
+        }
+        if (actionList.size() == 0) return true;
+
+        return false;
+    }
+
+    public void moveTo(int x, int y) {
+        Vector2 start = new Vector2(this.actor.x, this.actor.y),
+                end = new Vector2(x, y);
+        List<AStarMove> movements = pathfinder.getPath(start, end);
+        if (movements == null) {
+            actionList.add(new AIAction(AIAction.SKIP, null));
+            return;
+        }
+
+        actionList.add(new AIAction(AIAction.MOVE, movements));
+    }
+
+    public void attackTo(int x, int y) {
+        Vector2 start = new Vector2(this.actor.x, this.actor.y),
+                end = new Vector2(x, y);
+        List<AStarMove> movements = pathfinder.getPath(start, end);
+        if (movements == null) {
+            actionList.add(new AIAction(AIAction.SKIP, null));
+            return;
+        }
+
+        actionList.add(new AIAction(AIAction.MOVE, movements));
+        actionList.add(new AIAction(AIAction.ATTACK, end));
+    }
+
+    public boolean skipTurn() {
+        actionList.add(new AIAction(AIAction.SKIP, null));
+        return true;
+    }
 
     /**
      * Determines what actions to take this turn.

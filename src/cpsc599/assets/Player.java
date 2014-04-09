@@ -37,6 +37,7 @@ public class Player extends Actor{
 
         this.playerInventory = new Inventory(this);
         this.playerHealthBar = new HealthBar();
+        this.range = 1;
     }
 
     public Player(String name, AnimatedSprite sprite, int x, int y, int moveDist, int hp, int str, int def, int spe, int ev) {
@@ -63,6 +64,7 @@ public class Player extends Actor{
         damage = strength + playerInventory.getEquip(Inventory.RHAND_SLOT).damage;
         hit = speed - playerInventory.getEquip(Inventory.RHAND_SLOT).weight;
         dodge = evade - playerInventory.getEquip(Inventory.RHAND_SLOT).weight;
+        range = playerInventory.getEquip(Inventory.RHAND_SLOT).range;
     }
 
     public HealthBar getPlayerHealthBar() {

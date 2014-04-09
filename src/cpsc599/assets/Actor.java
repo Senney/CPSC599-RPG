@@ -17,6 +17,7 @@ public class Actor {
     public int speed;  //hit
     public int evade;
 
+    public int range;
     public int damage;
     public int hit;
     public int dodge;

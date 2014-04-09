@@ -29,6 +29,7 @@ public class Enemy extends Actor{
         this.curMove = maxMove;
 
         this.aiActor = null;
+        this.range = 1;
 
         //this.moveStart = 0f;
     }
