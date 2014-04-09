@@ -28,4 +28,9 @@ public class HealthShrineGameEntity extends GameEntity {
         activator.heal(this.heal);
         return "Player was healed for " + this.heal + " health!";
     }
+
+    @Override
+    public boolean collides() {
+        return true;
+    }
 }

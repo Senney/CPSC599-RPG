@@ -57,7 +57,7 @@ public class SharedAssets {
     public static AnimatedSprite jackSprite;
 
     public static AnimatedSprite cowCubeSprite;
-    public static Texture healthShrine;
+    public static TextureRegion healthShrine;
 
 
     public static void load() {
@@ -89,7 +89,7 @@ public class SharedAssets {
         renSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
         jackSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
 
-        healthShrine = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Items/healthshrine.png"));
+        healthShrine = loadTexture(PRIMARY_ASSET_FOLDER + "Items/healthshrine.png", true);
 
         loadEnemies();
 
@@ -100,6 +100,13 @@ public class SharedAssets {
         loadFont();
 
         loaded = true;
+    }
+
+    private static TextureRegion loadTexture(String filename, boolean flip) {
+        Texture tex = new Texture(Gdx.files.internal(filename));
+        TextureRegion region = new TextureRegion(tex);
+        region.flip(false, flip);
+        return region;
     }
 
     private static void loadEnemies() {

@@ -24,7 +24,7 @@ public abstract class GameEntity {
     }
 
     public abstract boolean tick(float time, State gameState);
-    public abstract String onUse(State gameState);
+    public abstract String onUse(State gameState, Actor activator);
     public void render(SpriteBatch batch) {
         if (objSprite != null) {
             batch.draw(objSprite, CoordinateTranslator.translate((int)position.x),
@@ -33,6 +33,7 @@ public abstract class GameEntity {
     }
 
     public Vector2 getPosition() { return this.position; }
+    public void setPosition(int x, int y) { this.setPosition(new Vector2(x, y)); }
     public void setPosition(Vector2 pos) { this.position = pos; }
 
     public String onInspect() {
