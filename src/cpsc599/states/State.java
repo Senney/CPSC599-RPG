@@ -87,6 +87,14 @@ public abstract class State {
         return this.flags.get(key);
     }
 
+    public boolean getFlagBoolean(String key) {
+        if (this.flags.get(key) != null) {
+            return (Boolean)this.flags.get(key);
+        }
+
+        return false;
+    }
+
     /**
      * Draws a string on the screen in alignment.
      * @param string The string to draw.

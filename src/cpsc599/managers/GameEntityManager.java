@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.GameEntity;
 import cpsc599.states.State;
+import cpsc599.util.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,7 @@ public class GameEntityManager {
     }
 
     public void addEntity(GameEntity entity) {
+        Logger.debug("Adding GameEntity of type: " + entity.getIdentifier() + " at position " + entity.getPosition().toString());
         Vector2 position = entity.getPosition();
         if (position.x < 0 || position.x >= width || position.y < 0 || position.y >= height) {
             return;

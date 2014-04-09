@@ -101,6 +101,14 @@ public class PlayerManager {
         return getPlayerAtPosition(new Vector2(x, y));
     }
 
+    public Player getPlayerByName(String name) {
+        for (Player p : playerList) {
+            if (p.getName().equals(name)) return p;
+        }
+
+        return null;
+    }
+
     public void reset() {
         playerList.clear();
         currentPlayer = null;

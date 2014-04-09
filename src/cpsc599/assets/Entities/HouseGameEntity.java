@@ -13,6 +13,7 @@ public class HouseGameEntity extends GameEntity {
         this.objSprite = texture;
         this.setPosition(new Vector2(x, y));
 
+        this.identifier = "House";
         this.flag = flag;
         this.inspect = inspect;
         this.use = use;
