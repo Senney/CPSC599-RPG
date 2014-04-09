@@ -52,6 +52,8 @@ public class Level4BattleState extends LevelState{
         playerController.healAll();
         gameEntityManager.getEntities().clear();
 
+        cameraController.set(6, 23);
+
         turnNum = 0;
         isShown = false;
         seenCastle = false;
