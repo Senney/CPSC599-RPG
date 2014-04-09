@@ -45,24 +45,48 @@
  <tileset firstgid="746" name="walls" tilewidth="16" tileheight="16">
   <image source="../../Town/walls.png" width="128" height="128"/>
  </tileset>
- <layer name="main bgd" width="16" height="15">
+ <tileset firstgid="810" name="inside_castle" tilewidth="16" tileheight="16">
+  <image source="../../Castle/inside_castle.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="842" name="throne_room" tilewidth="16" tileheight="16">
+  <image source="../../Castle/throne_room.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="1098" name="prince_birdcage" tilewidth="16" tileheight="16">
+  <image source="../../Castle/prince_birdcage.png" width="64" height="64"/>
+ </tileset>
+ <layer name="Tile Layer 2" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJw7w8DAcBoPPkOkHD51pKghRy29zKfEHGzqiBUj115q+ZHUtEDtdEMv/+EyH52mhjuINYtQWAEAnia+bQ==
+   eJzTZ2ZgMCATGwKxORBbkIktR/VTrB8EhrL7R7p+ayzYCkrbAbEtEo0NAwDrEjba
   </data>
  </layer>
- <layer name="characters" width="16" height="15" visible="0">
+ <layer name="floor tiles" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU4AKiFOgVh9Jq1HAIDgAAJ4QAUw==
+   eJxjYKAcRDKTR1PLDGLMJ9d+YuRH7R+1n1L7yQUAsE8amQ==
   </data>
  </layer>
- <layer name="trees" width="16" height="15">
+ <layer name="carpet" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJx7xMDA8IgKGAbO4GAzoIlj00tIHzrAZzcp+knVh8v+gdI/EO5HjkMYqGFiYLhFhv0gs24xIPwBMwMmfgtNDYwN038LSR8hNrI5yPrR1WMD6Oahp2Fs+tHFYDSh/IRNHzZ1ALJ0WR0=
+   eJxjYKANCGFmYAiF4jAgDmcmTX8KUH0qEAsC2WlAOp1E/SFIdlNifxrzyLR/OLl/oOynxP/EAgAyqBfH
   </data>
  </layer>
- <layer name="castle" width="16" height="15">
+ <layer name="candles" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJzt0jdPQzEUBlDnZQcR2kJvEy20KUCoE71NQOgTvW308oNhZeAMGXECO1c6svT5Xr8n2SGUr49UCJ+p8n1fkZ4kCSGd/OJDxarQW1nsr7JmqKaGWuqo/+G8BlkjTTTTQitttNNBJ12Rf+mW99BLH/1kGWCQIYYZiczn5KOMMU6eCSaZYpoZZiPzc/J5FlhkiWVWWGWNdTYi85vyLbYpsMMue+xzwCFHkflj+QmnnHHOBZdccc0NtyXu8s7ePQ888sQzL7zyxvsf3sJ/la5vJBMcIg==
+   eJxjYEAAL2YGBm8g9oFiZAATg6nBBqKA4tE45EhRMwpGwSggDgAAz9cD6Q==
+  </data>
+ </layer>
+ <layer name="throne" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYMANApkZGIKAOJgZjyI8IBGoLwmIk8nUXwjUVwTExWTqHwWjYLgDAOgSA44=
+  </data>
+ </layer>
+ <layer name="birdcage" width="16" height="15" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAP8GJhYPAGYh8g9mUhXb8fUI8/EAcAcSAZ+oOAeoKBOASIQ8nQPwpGwWAEAAB8A+s=
+  </data>
+ </layer>
+ <layer name="Collision" width="16" height="15" opacity="0">
+  <data encoding="base64" compression="zlib">
+   eJzjYGBg4KAQwwAuPgcBPi5ASD0h/bjMI1c/IfNG9Y/qJ0c/JRgA7nwCSQ==
   </data>
  </layer>
 </map>
