@@ -13,7 +13,7 @@ public class SniperEnemy extends Enemy{
         super.defence = 0;
         super.hit = 150;
         super.dodge = 10;
-        super.range = 3;
+        super.range = 6;
 
         super.damage = baseDamage + super.strength;
 
