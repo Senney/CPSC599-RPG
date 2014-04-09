@@ -32,9 +32,6 @@ public class IntroLevelState extends LevelState {
     float currentTime = 0f;
 
     private AnimatedSprite sprite;
-    private Dialogue dialogue;
-    private ArrayList<Enemy> attackingList;
-    private List<GameEntity> entityList;
     private boolean enemyStartTurn;
     private LevelManager levelManager;
 

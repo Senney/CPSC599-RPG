@@ -30,7 +30,6 @@ public class Level3BattleState extends LevelState {
     float currentTime = 0f;
 
     private AnimatedSprite sprite;
-    private Dialogue dialogue;
     private boolean enemyStartTurn;
     private LevelManager levelManager;
 
@@ -70,6 +69,7 @@ public class Level3BattleState extends LevelState {
         jack = new Player("Jack", SharedAssets.jackSprite, 7, 14, 7, 10, 4, 1, 120, 60);
         jack.getPlayerInventory().pickUp(new Item("Pitchfork", true, Inventory.RHAND_SLOT, 1, 4, 1));
         jack.getPlayerInventory().equip(jack.getPlayerInventory().getCarry()[0]);
+        jack.updateStats();
 
         // Set up the pathfinder for this level.
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
@@ -85,7 +85,6 @@ public class Level3BattleState extends LevelState {
         playerController.setupMenus();
 
         dialogue = new Dialogue();
-        dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
         dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
 
         HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 7, 14, "house1",
