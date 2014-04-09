@@ -12,7 +12,7 @@ import cpsc599.states.CinematicState;
 import cpsc599.util.SharedAssets;
 
 public class Level4FieldCinematic extends CinematicState{
-    Player hik, seen, sash, e1;
+    Player hik, seen, sash, e1, e2;
 
     public Level4FieldCinematic(OrbGame game, Level level, CameraController cameraController, String nextState) {
         super(game, level, cameraController, nextState);
@@ -29,6 +29,7 @@ public class Level4FieldCinematic extends CinematicState{
         AnimatedSprite enemySprite1 = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png",
                 0, 0, 16, 16, 1, 0.1f);
         e1 = new Player("Snowy", enemySprite1,8, 8, 0);
+        e2 = new Player("Snowy", enemySprite1,9, 8, 0);
 
         //this.playerController.getPlayerManager().addPlayer(hik);
         //this.playerController.getPlayerManager().addPlayer(ren);
@@ -75,7 +76,10 @@ public class Level4FieldCinematic extends CinematicState{
         actions.add(CinematicAction.stepDialogue(dialogue));
         actions.add(CinematicAction.stepDialogue(dialogue));
 
-        actions.add(CinematicAction.moveToConcurrent(e1, new Vector2(8, 8)));
+        actions.add(CinematicAction.moveToConcurrent(e1, new Vector2(9, 8)));
+        actions.add(CinematicAction.spawnActor(e2, new Vector2(8, 8)));
+        actions.add(CinematicAction.moveToConcurrent(e1, new Vector2(4, 14)));
+        actions.add(CinematicAction.moveToConcurrent(e2, new Vector2(10, 14)));
 
         actions.add(CinematicAction.stepDialogue(dialogue));
 
