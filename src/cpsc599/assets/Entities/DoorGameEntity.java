@@ -57,6 +57,7 @@ public class DoorGameEntity extends GameEntity {
     public String onUse(State gameState, Actor activator) {
         this.open = !open;
         gameState.setFlag(flagName, open);
+        setDoorSprite();
         return "Used the door!";
     }
 
