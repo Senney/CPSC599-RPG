@@ -5,7 +5,11 @@ import com.badlogic.gdx.Input;
 import cpsc599.OrbGame;
 import cpsc599.ai.AStarPathfinder;
 import cpsc599.ai.BasicWarriorAI;
+import cpsc599.ai.OpportunistAI;
+import cpsc599.ai.WanderingAI;
 import cpsc599.assets.*;
+import cpsc599.assets.Enemies.BasicEnemy;
+import cpsc599.assets.Enemies.TankyEnemy;
 import cpsc599.assets.Entities.HealthShrineGameEntity;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
@@ -62,8 +66,8 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_right.png", 0, 0, 16, 16, 1, 0.1f);
 
-        Player p3 = new Player("Hikari", sprite, 2, 7, 8, 10, 1, 2, 60, 70);
-        p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 2, 3));
+        Player p3 = new Player("Hikari", sprite, 2, 7, 8, 22, 4, 2, 100, 70);
+        p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 3, 3));
         p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);
         p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
         p3.updateStats();
@@ -73,67 +77,40 @@ public class IntroLevelState extends LevelState {
                 enemyController.getEnemyManager(), this.gameEntityManager);
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e = new Enemy(sprite, 5, 6, 8);
-        e.evade = 10;
-        e.damage = 6;
-        e.hit = 120;
+        Enemy e = new BasicEnemy(sprite, 5, 6);
         e.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png", 0,0,16,16,1,0.1f);
-        Enemy e2 = new Enemy(sprite, 10, 8, 8);
-        e2.evade = 10;
-        e2.damage = 6;
-        e2.hit = 120;
+        Enemy e2 = new TankyEnemy(sprite, 10, 8);
         e2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e2));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
-        Enemy e3 = new Enemy(sprite, 13, 6, 8);
-        e3.evade = 10;
-        e3.damage = 6;
-        e3.hit = 120;
+        Enemy e3 = new BasicEnemy(sprite, 13, 6);
         e3.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e3));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy9.png", 0,0,16,16,1,0.1f);
-        Enemy e4 = new Enemy(sprite, 13, 2, 8);
-        e4.evade = 10;
-        e4.damage = 6;
-        e4.hit = 120;
-        e4.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e4));
+        Enemy e4 = new BasicEnemy(sprite, 13, 2);
+        e4.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e4));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e5 = new Enemy(sprite, 17, 4, 8);
-        e5.evade = 10;
-        e5.damage = 6;
-        e5.hit = 120;
+        Enemy e5 = new BasicEnemy(sprite, 17, 4);
         e5.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e5));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
-        Enemy e6 = new Enemy(sprite, 19, 12, 8);
-        e6.evade = 10;
-        e6.damage = 6;
-        e6.hit = 120;
-        e6.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e6));
+        Enemy e6 = new BasicEnemy(sprite, 19, 12);
+        e6.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e6));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e7 = new Enemy(sprite, 10, 18, 8);
-        e7.evade = 10;
-        e7.damage = 6;
-        e7.hit = 120;
-        e7.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e7));
+        Enemy e7 = new BasicEnemy(sprite, 10, 18);
+        e7.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e7));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e8 = new Enemy(sprite, 15, 15, 8);
-        e8.evade = 10;
-        e8.damage = 6;
-        e8.hit = 120;
-        e8.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e8));
+        Enemy e8 = new BasicEnemy(sprite, 15, 15);
+        e8.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
-        Enemy e9 = new Enemy(sprite, 19, 18, 8);
-        e9.evade = 10;
-        e9.damage = 6;
-        e9.hit = 120;
-        e9.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e9));
+        Enemy e9 = new BasicEnemy(sprite, 19, 18);
+        e9.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e9));
 
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
@@ -347,13 +324,13 @@ public class IntroLevelState extends LevelState {
             this.dialogue.addDialogue("Sean:\nHey what's going on here!?","Sean");
             this.dialogue.addDialogue("Sasha:\nWe're here to help! Hold on.", "Sasha");
             this.dialogue.setVisibility(true);
-            Player seen = new Player("Sean", SharedAssets.seanSprite, 0, 6, 16, 4, 80, 60, 50, 20);
-            seen.getPlayerInventory().pickUp(new Item("Sabre", true, Inventory.RHAND_SLOT, 3, 2, 3));
+            Player seen = new Player("Sean", SharedAssets.seanSprite, 0, 6, 7, 16, 3, 2, 100, 70);
+            seen.getPlayerInventory().pickUp(new Item("Sabre", true, Inventory.RHAND_SLOT, 1, 2, 3));
             seen.getPlayerInventory().equip(seen.getPlayerInventory().getCarry()[0]);
             seen.updateStats();
             playerController.getPlayerManager().addPlayer(seen);
-            Player sash = new Player("Sean", SharedAssets.sashaSprite, 0, 8, 16, 4, 80, 60, 50, 20);
-            sash.getPlayerInventory().pickUp(new Item("Pointy thruster", true, Inventory.RHAND_SLOT, 3, 2, 3));
+            Player sash = new Player("Sean", SharedAssets.sashaSprite, 0, 8, 9, 12, 3, 1, 100, 70);
+            sash.getPlayerInventory().pickUp(new Item("Pointy thruster", true, Inventory.RHAND_SLOT, 2, 2, 3));
             sash.getPlayerInventory().equip(sash.getPlayerInventory().getCarry()[0]);
             sash.updateStats();
             playerController.getPlayerManager().addPlayer(sash);

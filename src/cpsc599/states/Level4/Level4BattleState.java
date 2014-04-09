@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
 import cpsc599.ai.AStarPathfinder;
-import cpsc599.ai.BasicWarrior;
+import cpsc599.ai.BasicWarriorAI;
 import cpsc599.assets.*;
 import cpsc599.assets.Enemies.CowCubeEnemy;
 import cpsc599.assets.Entities.HouseGameEntity;
@@ -97,44 +97,44 @@ public class Level4BattleState extends LevelState{
 
     public void createEnemies(AStarPathfinder pathfinder) {
         Enemy e = new CowCubeEnemy(8, 8);
-        e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e));
+        e.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e));
 
         Enemy e2 = new CowCubeEnemy(11, 4);
-        e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e2));
+        e2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e2));
 
         Enemy e3 = new CowCubeEnemy(5, 3);
-        e3.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
+        e3.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e3));
 
         Enemy e4 = new CowCubeEnemy(1, 5);
-        e4.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e4));
+        e4.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e4));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
         Enemy e5 = new Enemy(sprite, 4, 14, 8);
         e5.evade = 10;
         e5.damage = 6;
         e5.hit = 120;
-        e5.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e5));
+        e5.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e5));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
         Enemy e6 = new Enemy(sprite, 10, 14, 8);
         e6.evade = 10;
         e6.damage = 6;
         e6.hit = 120;
-        e6.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e6));
+        e6.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e6));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
         Enemy e7 = new Enemy(sprite, 14, 11, 8);
         e7.evade = 10;
         e7.damage = 6;
         e7.hit = 120;
-        e7.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e7));
+        e7.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e7));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
         Enemy e8 = new Enemy(sprite, 14, 7, 8);
         e8.evade = 10;
         e8.damage = 6;
         e8.hit = 120;
-        e8.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e8));
+        e8.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
 
         enemyController.getEnemyManager().addEnemy(e);
