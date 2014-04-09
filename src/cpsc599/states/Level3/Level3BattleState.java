@@ -9,8 +9,6 @@ import cpsc599.assets.*;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
-import cpsc599.items.Inventory;
-import cpsc599.items.Item;
 import cpsc599.managers.LevelManager;
 import cpsc599.states.LevelState;
 import cpsc599.util.Controls;
@@ -21,9 +19,6 @@ import cpsc599.util.SharedAssets;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by srheintz on 4/8/14.
- */
 public class Level3BattleState extends LevelState {
     int currentEnemy = 0;
     float currentTime = 0f;
@@ -47,7 +42,10 @@ public class Level3BattleState extends LevelState {
     @Override
     public void init(OrbGame game) {
         super.init(game);
-        super.setLevel(levelManager.setLevel("level0"));
+        super.setLevel(levelManager.setLevel("level2"));
+
+        playerController.healAll();
+        gameEntityManager.getEntities().clear();
 
         turnNum = 0;
         isShown = false;
@@ -141,6 +139,8 @@ public class Level3BattleState extends LevelState {
 
         dialogue = new Dialogue();
         dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
+
+
 
         this.enemyStartTurn = true;
     }

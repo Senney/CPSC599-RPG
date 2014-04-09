@@ -277,6 +277,13 @@ public class PlayerController {
         }*/
     }
 
+    /** restore all players to maximum health **/
+    public void healAll() {
+        for (Player p : playerManager.getPlayers()) {
+            p.heal(1000);
+        }
+    }
+
     public void endTurn(Player p) {
         p.endTurn();
         releasePlayer();

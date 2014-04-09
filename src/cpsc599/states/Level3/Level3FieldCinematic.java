@@ -63,6 +63,7 @@ public class Level3FieldCinematic extends CinematicState {
         super.tick(input);
 
         // After AI actions.
+        if (actions.size() == 0) goToNextState();
 
     }
 
