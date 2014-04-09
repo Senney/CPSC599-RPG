@@ -41,6 +41,7 @@ public class PlayerController {
     private StatsMenu statsMenu;
     private InventoryMenu inventoryMenu;
     private GlobalMenu globalMenu;
+    private DynamicDialogue dynamicDialogue;
 
     private PlayerManager playerManager;
     private EnemyManager enemyManager;
@@ -75,6 +76,8 @@ public class PlayerController {
         inventoryMenu = new InventoryMenu(100, 200);
         statsMenu = new StatsMenu(80, 90, null);
         globalMenu = new GlobalMenu(80, 90);
+        dynamicDialogue = new DynamicDialogue();
+        dynamicDialogue.setPosition(new Vector2(390, 0));
     }
 
     public ActionMenu getActMenu() {return this.actMenu;}
@@ -151,6 +154,7 @@ public class PlayerController {
 
     public void control(Input input, Level currentLevel) {
         Player p = this.playerManager.getCurrent();
+        this.dynamicDialogue.setVisibility(false);
 
         if (p != null) {
             if(this.statsMenu.isVisible()) {
@@ -206,6 +210,8 @@ public class PlayerController {
 
             } else {
                 movePlayer(input, p, currentLevel);
+                dynamicDialogue.setText("Move " + p.curMove + "/" + p.maxMove);
+                dynamicDialogue.setVisibility(true);
             }
         }
         else if(selectedEnemy != null){
@@ -213,8 +219,10 @@ public class PlayerController {
                 controlStatsMenu(input);
                 return;
             }
+            dynamicDialogue.setVisibility(false);
         }
         else {
+            dynamicDialogue.setVisibility(false);
             if(this.globalMenu.isVisible()) {
                 String action = globalMenuMode(input);
                 if(action.equals("End turn")) {
@@ -453,4 +461,9 @@ public class PlayerController {
     public boolean isUsing() {
         return using;
     }
+
+    public DynamicDialogue getDynamicDialogue() {
+        return dynamicDialogue;
+    }
+
 }

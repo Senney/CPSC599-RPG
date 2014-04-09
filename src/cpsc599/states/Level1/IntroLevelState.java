@@ -2,14 +2,11 @@ package cpsc599.states.Level1;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
 import cpsc599.ai.AStarPathfinder;
-import cpsc599.ai.BasicWarrior;
+import cpsc599.ai.BasicWarriorAI;
 import cpsc599.assets.*;
-import cpsc599.assets.Entities.DoorGameEntity;
 import cpsc599.assets.Entities.HealthShrineGameEntity;
-import cpsc599.assets.Entities.SwitchGameEntity;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
@@ -21,9 +18,6 @@ import cpsc599.util.Controls;
 import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Basic testing state.
@@ -83,63 +77,63 @@ public class IntroLevelState extends LevelState {
         e.evade = 10;
         e.damage = 6;
         e.hit = 120;
-        e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e));
+        e.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png", 0,0,16,16,1,0.1f);
         Enemy e2 = new Enemy(sprite, 10, 8, 8);
         e2.evade = 10;
         e2.damage = 6;
         e2.hit = 120;
-        e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e2));
+        e2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e2));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
         Enemy e3 = new Enemy(sprite, 13, 6, 8);
         e3.evade = 10;
         e3.damage = 6;
         e3.hit = 120;
-        e3.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
+        e3.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e3));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy9.png", 0,0,16,16,1,0.1f);
         Enemy e4 = new Enemy(sprite, 13, 2, 8);
         e4.evade = 10;
         e4.damage = 6;
         e4.hit = 120;
-        e4.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e4));
+        e4.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e4));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
         Enemy e5 = new Enemy(sprite, 17, 4, 8);
         e5.evade = 10;
         e5.damage = 6;
         e5.hit = 120;
-        e5.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e5));
+        e5.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e5));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
         Enemy e6 = new Enemy(sprite, 19, 12, 8);
         e6.evade = 10;
         e6.damage = 6;
         e6.hit = 120;
-        e6.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e6));
+        e6.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e6));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
         Enemy e7 = new Enemy(sprite, 10, 18, 8);
         e7.evade = 10;
         e7.damage = 6;
         e7.hit = 120;
-        e7.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e7));
+        e7.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e7));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
         Enemy e8 = new Enemy(sprite, 15, 15, 8);
         e8.evade = 10;
         e8.damage = 6;
         e8.hit = 120;
-        e8.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e8));
+        e8.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
         Enemy e9 = new Enemy(sprite, 19, 18, 8);
         e9.evade = 10;
         e9.damage = 6;
         e9.hit = 120;
-        e9.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e9));
+        e9.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e9));
 
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
@@ -206,6 +200,7 @@ public class IntroLevelState extends LevelState {
         this.playerController.getInventoryMenu().render(super.overlayLayer);
         this.playerController.getStatsMenu().render(this.overlayLayer);
         this.playerController.getGlobalMenu().render(this.overlayLayer);
+        this.playerController.getDynamicDialogue().render(this.overlayLayer);
         this.dialogue.render(this.overlayLayer);
     }
 
