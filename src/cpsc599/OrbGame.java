@@ -7,6 +7,8 @@ import com.badlogic.gdx.assets.AssetManager;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import cpsc599.assets.AnimatedSprite;
+import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
@@ -19,6 +21,8 @@ import cpsc599.states.Level1.IntroLevelState;
 import cpsc599.states.Level1.Level1ChaseCinematic;
 import cpsc599.states.Level1.Level1FlowerFieldCinematic;
 import cpsc599.states.Level1.Level1VillageCinematic;
+import cpsc599.states.Level3.Level3BattleState;
+import cpsc599.states.Level3.Level3FieldCinematic;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
 
@@ -147,6 +151,12 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL1_FLOWER_FIELD", new Level1FlowerFieldCinematic(this, levelManager.setLevel("flower_field_map"), cameraController, "LEVEL1_CHASE"));
         stateManager.addState("LEVEL1_CHASE", new Level1ChaseCinematic(this, levelManager.setLevel("level0"), cameraController, "LEVEL1"));
         stateManager.addState("LEVEL1", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
+
+        // Chapter 2 states
+
+        // Chapter 3 states
+        stateManager.addState("LEVEL3_FIELD", new Level3FieldCinematic(this, levelManager.setLevel("level2"), this.cameraController, "LEVEL3"));
+        stateManager.addState("LEVEL3", new Level3BattleState(this, levelManager, playerController, cameraController, enemyController));
 
         setState("MAIN_MENU");
 	}
