@@ -105,55 +105,6 @@ public class Level1ChaseCinematic extends CinematicState{
         actions.add(CinematicAction.moveToConcurrent(e4, new Vector2(13, 2)));
         actions.add(CinematicAction.moveToConcurrent(e5, new Vector2(10, 8)));
 
-        /*actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.wait(1.2f));
-
-        // Spawn two enemies.
-        actions.add(CinematicAction.spawnActor(e1, new Vector2(15, 6)));
-        actions.add(CinematicAction.spawnActor(e2, new Vector2(15, 8)));
-        actions.add(CinematicAction.wait(0.4f));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.moveToConcurrent(e1, new Vector2(6, 6), 0.3f));
-        actions.add(CinematicAction.moveToConcurrent(e2, new Vector2(6, 8), 0.3f));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-
-        actions.add(CinematicAction.moveToConcurrent(e1, new Vector2(12, 6), 0.3f));
-        actions.add(CinematicAction.moveToConcurrent(e2, new Vector2(12, 8), 0.3f));
-        actions.add(CinematicAction.moveToConcurrent(ren, new Vector2(12, 7), 0.3f));
-
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.stepDialogue(dialogue));
-        actions.add(CinematicAction.moveToConcurrent(e1, new Vector2(15, 6), 0.3f));
-        actions.add(CinematicAction.moveToConcurrent(e2, new Vector2(15, 8), 0.3f));
-        actions.add(CinematicAction.moveToConcurrent(ren, new Vector2(15, 7), 0.3f));
-        actions.add(CinematicAction.moveToConcurrent(hik, new Vector2(9, 7), 0.3f));
-
-        actions.add(CinematicAction.despawnActor(e1));
-        actions.add(CinematicAction.despawnActor(e2));
-        actions.add(CinematicAction.despawnActor(ren));
-
-        actions.add(CinematicAction.moveToConcurrent(hik, new Vector2(15, 7), 0.3f));
-        actions.add(CinematicAction.despawnActor(hik));
-
-        actions.add(CinematicAction.wait(0.8f));*/
-
-
         super.loadCinematicActions();
     }
 }
