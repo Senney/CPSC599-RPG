@@ -19,6 +19,7 @@ import cpsc599.managers.StateManager;
 import cpsc599.states.*;
 import cpsc599.states.Level1.*;
 import cpsc599.states.Level2.Level2AfterBattleCinematic;
+import cpsc599.states.Level2.Level2BattleState;
 import cpsc599.states.Level2.Level2EmptyFieldCinematic;
 import cpsc599.states.Level3.Level3BattleState;
 import cpsc599.states.Level3.Level3FieldCinematic;
@@ -161,9 +162,10 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL1_FINALE", new Level1Finale(this, levelManager.setLevel("level0"), cameraController, "LEVEL2_EMPTY_FIELD"));
 
         // Chapter 2 states
-        stateManager.addState("LEVEL2_EMPTY_FIELD", new Level2EmptyFieldCinematic(this, levelManager.setLevel("level1"), cameraController, "LEVEL2_AFTER_BATTLE"));
+        stateManager.addState("LEVEL2_EMPTY_FIELD", new Level2EmptyFieldCinematic(this, levelManager.setLevel("level1"), cameraController, "LEVEL2"));
+        stateManager.addState("LEVEL2", new Level2BattleState(this, levelManager, playerController, cameraController, enemyController));
         //stateManager.addState("LEVEL2", new Level2BattleState(this, levelManager, playerController, cameraController, enemyController));
-        stateManager.addState("LEVEL2_AFTER_BATTLE", new Level2AfterBattleCinematic(this, levelManager.setLevel("level1"), this.cameraController, "LEVEL3_FIELD"));
+        stateManager.addState("LEVEL2_FINALE", new Level2AfterBattleCinematic(this, levelManager.setLevel("level1"), this.cameraController, "LEVEL3_FIELD"));
         
         // Chapter 3 states
         stateManager.addState("LEVEL3_FIELD", new Level3FieldCinematic(this, levelManager.setLevel("level2"), this.cameraController, "LEVEL3"));
