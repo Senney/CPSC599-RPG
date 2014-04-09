@@ -84,6 +84,11 @@ public class Actor {
 
     public void heal(int amount)
     {
+        if (amount == -1) {
+            currentHealth = maxHealth;
+            return;
+        }
+
         currentHealth += amount;
         if(currentHealth > maxHealth)
             currentHealth = maxHealth;
