@@ -99,8 +99,8 @@ public class SharedAssets {
         loadEnemies();
 
         TextureRegion[][] houseRow = TextureRegion.split(new Texture(PRIMARY_ASSET_FOLDER + "Town/house.png"), 16, 16);
-        orangeHouse = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/house.png", 16, 16, 0, 1, false);
-        greenHouse = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/house.png", 16, 16, 0, 3, false);
+        orangeHouse = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/house.png", 16, 16, 0, 1, true);
+        greenHouse = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/house.png", 16, 16, 0, 3, true);
 
         loadFont();
 
