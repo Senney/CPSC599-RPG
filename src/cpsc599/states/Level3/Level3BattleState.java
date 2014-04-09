@@ -8,6 +8,7 @@ import cpsc599.OrbGame;
 import cpsc599.ai.AStarPathfinder;
 import cpsc599.ai.BasicWarrior;
 import cpsc599.assets.*;
+import cpsc599.assets.Enemies.CowCubeEnemy;
 import cpsc599.assets.Entities.HouseGameEntity;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
@@ -30,8 +31,6 @@ public class Level3BattleState extends LevelState {
 
     private AnimatedSprite sprite;
     private Dialogue dialogue;
-    private ArrayList<Enemy> attackingList;
-    private List<GameEntity> entityList;
     private boolean enemyStartTurn;
     private LevelManager levelManager;
 
@@ -61,6 +60,13 @@ public class Level3BattleState extends LevelState {
         //playerController.getPlayerManager().reset();
         enemyController.getEnemyManager().reset();
 
+        // Reset the player positions
+        Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
+        for (int i = 0; i < currentPlayers.length; i++) {
+            currentPlayers[i].x = 1;
+            currentPlayers[i].y = 6 + i;
+        }
+
         jack = new Player("Jack", SharedAssets.jackSprite, 7, 14, 7, 10, 4, 1, 120, 60);
         jack.getPlayerInventory().pickUp(new Item("Pitchfork", true, Inventory.RHAND_SLOT, 1, 4, 1));
         jack.getPlayerInventory().equip(jack.getPlayerInventory().getCarry()[0]);
@@ -69,64 +75,48 @@ public class Level3BattleState extends LevelState {
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
                 enemyController.getEnemyManager(), this.gameEntityManager);
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e = new Enemy(sprite, 5, 6, 8);
-        e.evade = 10;
-        e.damage = 6;
-        e.hit = 120;
+        Enemy e = new CowCubeEnemy(20, 10);
         e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png", 0,0,16,16,1,0.1f);
-        Enemy e2 = new Enemy(sprite, 10, 8, 8);
-        e2.evade = 10;
-        e2.damage = 6;
-        e2.hit = 120;
+        Enemy e2 = new CowCubeEnemy(17, 8);
         e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e2));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
-        Enemy e3 = new Enemy(sprite, 13, 6, 8);
-        e3.evade = 10;
-        e3.damage = 6;
-        e3.hit = 120;
+        Enemy e3 = new CowCubeEnemy(17, 13);
         e3.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy9.png", 0,0,16,16,1,0.1f);
-        Enemy e4 = new Enemy(sprite, 13, 2, 8);
-        e4.evade = 10;
-        e4.damage = 6;
-        e4.hit = 120;
+        Enemy e4 = new CowCubeEnemy(22, 14);
         e4.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e4));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e5 = new Enemy(sprite, 17, 4, 8);
+        Enemy e5 = new Enemy(sprite, 14, 4, 8);
         e5.evade = 10;
         e5.damage = 6;
         e5.hit = 120;
         e5.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e5));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
-        Enemy e6 = new Enemy(sprite, 19, 12, 8);
+        Enemy e6 = new Enemy(sprite, 14, 1, 8);
         e6.evade = 10;
         e6.damage = 6;
         e6.hit = 120;
         e6.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e6));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e7 = new Enemy(sprite, 10, 18, 8);
+        Enemy e7 = new Enemy(sprite, 17, 2, 8);
         e7.evade = 10;
         e7.damage = 6;
         e7.hit = 120;
         e7.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e7));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e8 = new Enemy(sprite, 15, 15, 8);
+        Enemy e8 = new Enemy(sprite, 20, 1, 8);
         e8.evade = 10;
         e8.damage = 6;
         e8.hit = 120;
         e8.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e8));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
-        Enemy e9 = new Enemy(sprite, 19, 18, 8);
+        Enemy e9 = new Enemy(sprite, 22, 2, 8);
         e9.evade = 10;
         e9.damage = 6;
         e9.hit = 120;
@@ -138,10 +128,10 @@ public class Level3BattleState extends LevelState {
         enemyController.getEnemyManager().addEnemy(e3);
         enemyController.getEnemyManager().addEnemy(e4);
         enemyController.getEnemyManager().addEnemy(e5);
-/*        enemyController.getEnemyManager().addEnemy(e6);
+        enemyController.getEnemyManager().addEnemy(e6);
         enemyController.getEnemyManager().addEnemy(e7);
         enemyController.getEnemyManager().addEnemy(e8);
-        enemyController.getEnemyManager().addEnemy(e9);*/
+        enemyController.getEnemyManager().addEnemy(e9);
 
         // TODO: Make this not stupid.
         playerController.setupCursor();
@@ -152,6 +142,7 @@ public class Level3BattleState extends LevelState {
 
         dialogue = new Dialogue();
         dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
+        dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
 
         HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 7, 14, "house1",
                 "Looks like someone is home...", "A player wants to join your party!");
@@ -291,7 +282,8 @@ public class Level3BattleState extends LevelState {
          * Handle the joining of Jack.
          */
         if (!this.b_jackJoined && this.getFlagBoolean("house1")) {
-            this.dialogue.display("Jack has joined your party!");
+            this.dialogue.addDialogue("Hey, I'm Jack! I'd like to help you defeat these vile creatures!", "Jack");
+            this.dialogue.setVisibility(true);
             this.playerController.getPlayerManager().addPlayer(jack);
             b_jackJoined = true;
             return;
@@ -351,68 +343,6 @@ public class Level3BattleState extends LevelState {
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
             Logger.debug("'SELECT' pressed.");
-        }
-    }
-
-    private void handleSelect(Input input, Player current) {
-        entityList = gameEntityManager.getEntitiesInRange(current.x, current.y);
-        int selected;
-
-        boolean inspecting = playerController.isInspecting(), using = playerController.isUsing();
-        if ((selected = playerController.controlSelect(input, entityList)) != -1) {
-            GameEntity e = null;
-
-            if((e = entityList.get(selected)) == null) {
-                dialogue.display("Professor Oak's words echo in your head: It is not the time to use this.");
-                return;
-            }
-            if (using) {
-                String response = e.onUse(this);
-                dialogue.display(response);
-                this.playerController.endTurn(current);
-            } else if (inspecting) {
-                String value = e.onInspect();
-                dialogue.display(value);
-            }
-        }
-    }
-
-    private void handleAttack(Input input, Player current) {
-        // Wait until an enemy is selected.
-        if (attackingList == null) {
-            attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
-                    playerController.getAttackRange());
-        }
-
-        int selected;
-        if ((selected = playerController.controlAttack(input, this.attackingList)) != -1) {
-            if(!this.attackingList.isEmpty()) {
-                int dmg = current.attack(this.attackingList.get(selected));
-                boolean isDead = this.attackingList.get(selected).isDead();
-                String dmgText = null;
-
-                if (dmg < 0) {
-                    dmgText = "Player attacks enemy and misses!";
-                } else {
-                    dmgText = "Player attacks enemy for " + dmg + " damage.";
-                }
-                if(isDead){
-                    enemyController.getEnemyManager().removeEnemy(this.attackingList.get(selected));
-                    dmgText += " The enemy is slain!";
-                }
-                this.dialogue.display(dmgText);
-
-                this.attackingList = null;
-            }
-            else {
-                //Logger.debug("Not allowed to attack nothing! ending your turn idiot...");
-                Logger.debug("The character swings and only hits thin air...");
-                this.dialogue.display("Player swings and hits only thin air");
-            }
-        }
-        else{
-            attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
-                    playerController.getAttackRange());
         }
     }
 }

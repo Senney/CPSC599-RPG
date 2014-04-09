@@ -44,6 +44,7 @@ public class SharedAssets {
     public static Texture seanPortrait;
     public static Texture sashaPortrait;
     public static Texture cowCubePortrait;
+    public static Texture jackPortrait;
 
     public static BitmapFont font_14;
     public static BitmapFont font_12;
@@ -53,6 +54,8 @@ public class SharedAssets {
     public static AnimatedSprite renSprite;
     public static AnimatedSprite sashaSprite;
     public static AnimatedSprite jackSprite;
+
+    public static AnimatedSprite cowCubeSprite;
 
 
     public static void load() {
@@ -76,12 +79,15 @@ public class SharedAssets {
         princePortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/prince.png"));
         sashaPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/female2.png"));
         seanPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male1.png"));
+        jackPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male3.png"));
 
         hikariSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 0, 0, 16, 16, 1, 0.1f);
         seanSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 3, 0, 16, 16, 1, 0.1f);
         sashaSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 2, 0, 16, 16, 1, 0.1f);
         renSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
         jackSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
+
+        loadEnemies();
 
         TextureRegion[][] houseRow = TextureRegion.split(new Texture(PRIMARY_ASSET_FOLDER + "Town/house.png"), 16, 16);
         orangeHouse = houseRow[0][1].getTexture();
@@ -90,6 +96,10 @@ public class SharedAssets {
         loadFont();
 
         loaded = true;
+    }
+
+    private static void loadEnemies() {
+        cowCubeSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/cow_cube.png", 0,0,16,16,1,0.1f);
     }
 
     private static void loadFont() {
