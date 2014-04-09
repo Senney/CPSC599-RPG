@@ -16,6 +16,7 @@ public class SharedAssets {
     }
 
     public static String SCRIPT = "assets/Script/";
+    public static String PROLOGUE = SCRIPT + "prologue.xml";
     public static String CHAPTER_1 = SCRIPT + "chapter1.xml";
     public static String CHAPTER_2 = SCRIPT + "chapter2.xml";
     public static String CHAPTER_3 = SCRIPT + "chapter3.xml";
