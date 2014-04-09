@@ -99,10 +99,10 @@ public abstract class LevelState extends State {
             for (int i = 0; i < attackingList.size(); i++) {
                 Enemy e = attackingList.get(i);
                 if (i == playerController.getSelectedUnit()) {
-                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(e.x),
+                    groundLayer.draw(SharedAssets.cursorHighlighted, CoordinateTranslator.translate(e.x),
                             CoordinateTranslator.translate(e.y));
                 } else {
-                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x),
+                    groundLayer.draw(SharedAssets.cursorNormal, CoordinateTranslator.translate(e.x),
                             CoordinateTranslator.translate(e.y));
                 }
             }

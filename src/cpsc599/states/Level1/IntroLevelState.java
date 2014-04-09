@@ -65,9 +65,7 @@ public class IntroLevelState extends LevelState {
         p.getPlayerInventory().equip(sw);
         p.updateStats();*/
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_right.png", 0, 0, 16, 16, 1, 0.1f);
-
-        Player p3 = new Player("Hikari", sprite, 2, 7, 8, 22, 4, 2, 100, 70);
+        Player p3 = new Player("Hikari", SharedAssets.hikariSprite, 2, 7, 8, 22, 4, 2, 100, 70);
         p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 3, 3));
         p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);
         p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
@@ -154,29 +152,12 @@ public class IntroLevelState extends LevelState {
         super.groundLayer.begin();
         super.groundLayer.setProjectionMatrix(this.camera.combined);
 
+        renderGroundLayer();
         renderAttackables();
         renderUsables();
 
-        // Render players and enemies.
-        this.gameEntityManager.render(super.groundLayer);
-        if (playerController.getPlayerManager().getCurrent() != null) {
-            Player current = playerController.getPlayerManager().getCurrent();
-            groundLayer.draw(SharedAssets.highlight3, CoordinateTranslator.translate(current.x),
-                    CoordinateTranslator.translate(current.y));
-        }
-        for (Player p : playerController.getPlayerManager().getPlayers())
-            p.render(super.groundLayer);
-        for(Enemy e : enemyController.getEnemyManager().getEnemies())
-            e.render(super.groundLayer);
-
-        // If we're in cursor-mode, render the cursor.
-        if (this.playerController.isCursor()) {
-            this.playerController.getCursor().render(this.groundLayer);
-        }
-
         super.groundLayer.end();
 
-        Player current = playerController.getPlayerManager().getCurrent();
         // These have to be rendered outside of the overlay batch.
         this.playerController.getActMenu().render(this.overlayLayer);
         this.playerController.getInventoryMenu().render(super.overlayLayer);
@@ -206,6 +187,7 @@ public class IntroLevelState extends LevelState {
 
         if(enemyController.getEnemyManager().getEnemies().length == 0){
             orb.setState("LEVEL1_FINALE");
+            return;
         }
 
         //you will probably hate me for this...
