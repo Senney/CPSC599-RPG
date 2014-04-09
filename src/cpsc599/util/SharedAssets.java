@@ -60,6 +60,8 @@ public class SharedAssets {
 
     public static AnimatedSprite cowCubeSprite;
     public static TextureRegion healthShrine;
+    public static TextureRegion armour;
+    public static TextureRegion sword;
 
     private static HashMap<String, Texture> textureCache;
 
@@ -95,6 +97,8 @@ public class SharedAssets {
         jackSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
 
         healthShrine = loadTexture(PRIMARY_ASSET_FOLDER + "Items/healthshrine.png", true);
+        armour = loadTexture(PRIMARY_ASSET_FOLDER + "Items/armour.png", true);
+        sword = loadTexture(PRIMARY_ASSET_FOLDER + "Items/sword1.png", true);
 
         loadEnemies();
 
