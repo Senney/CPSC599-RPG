@@ -45,6 +45,11 @@ public class SharedAssets {
     public static BitmapFont font_14;
     public static BitmapFont font_12;
 
+    public static AnimatedSprite hikariSprite;
+    public static AnimatedSprite seanSprite;
+    public static AnimatedSprite renSprite;
+    public static AnimatedSprite sashaSprite;
+
 
     public static void load() {
         if (loaded) return;
@@ -67,6 +72,11 @@ public class SharedAssets {
         princePortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/prince.png"));
         sashaPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/female2.png"));
         seanPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male1.png"));
+
+        hikariSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 0, 0, 16, 16, 1, 0.1f);
+        seanSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 3, 0, 16, 16, 1, 0.1f);
+        sashaSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 2, 0, 16, 16, 1, 0.1f);
+        renSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
 
         loadFont();
 
