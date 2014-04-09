@@ -50,6 +50,7 @@ public class PrologueCinematicState extends CinematicState {
 
     @Override
     protected void loadCinematicActions() {
+    	actions.add(CinematicAction.stepDialogue(this.dialogue));
     	actions.add(CinematicAction.wait(0.4f));
 
         super.loadCinematicActions();
