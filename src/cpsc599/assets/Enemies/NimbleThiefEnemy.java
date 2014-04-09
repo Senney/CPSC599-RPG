@@ -3,8 +3,8 @@ package cpsc599.assets.Enemies;
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Enemy;
 
-public class NimbleTheifEnemy extends Enemy{
-    public NimbleTheifEnemy(AnimatedSprite sprite, int x, int y) {
+public class NimbleThiefEnemy extends Enemy{
+    public NimbleThiefEnemy(AnimatedSprite sprite, int x, int y) {
         super(sprite, x, y, 7);
 
         int baseDamage = 3;

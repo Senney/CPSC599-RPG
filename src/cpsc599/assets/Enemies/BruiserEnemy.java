@@ -3,8 +3,8 @@ package cpsc599.assets.Enemies;
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Enemy;
 
-public class BrusierEnemy extends Enemy{
-    public BrusierEnemy(AnimatedSprite sprite, int x, int y) {
+public class BruiserEnemy extends Enemy{
+    public BruiserEnemy(AnimatedSprite sprite, int x, int y) {
         super(sprite, x, y, 5);
 
         int baseDamage = 5;

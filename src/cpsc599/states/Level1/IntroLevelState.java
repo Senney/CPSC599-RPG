@@ -3,11 +3,10 @@ package cpsc599.states.Level1;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import cpsc599.OrbGame;
-import cpsc599.ai.AStarPathfinder;
-import cpsc599.ai.BasicWarriorAI;
-import cpsc599.ai.OpportunistAI;
-import cpsc599.ai.WanderingAI;
+import cpsc599.ai.*;
 import cpsc599.assets.*;
+import cpsc599.assets.Enemies.BruiserEnemy;
+import cpsc599.assets.Enemies.NimbleThiefEnemy;
 import cpsc599.assets.Entities.*;
 import cpsc599.assets.Enemies.BasicEnemy;
 import cpsc599.assets.Enemies.TankyEnemy;
@@ -20,7 +19,6 @@ import cpsc599.items.Item;
 import cpsc599.managers.LevelManager;
 import cpsc599.states.LevelState;
 import cpsc599.util.Controls;
-import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
 
@@ -55,16 +53,6 @@ public class IntroLevelState extends LevelState {
         playerController.getPlayerManager().reset();
         enemyController.getEnemyManager().reset();
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
-
-        /*Player p = new Player("Ren", sprite, 2, 5, 8, 14, 1, 3, 70, 80);
-
-        Item sw = new Item("Pike", true, Inventory.RHAND_SLOT, 3, 5, 10);
-        p.getPlayerInventory().pickUp(sw);
-        p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1, 1, 5));
-        p.getPlayerInventory().equip(sw);
-        p.updateStats();*/
-
         Player p3 = new Player("Hikari", SharedAssets.hikariSprite, 2, 7, 8, 22, 4, 2, 100, 70);
         p3.getPlayerInventory().pickUp(new Item("Staff", true, Inventory.RHAND_SLOT, 2, 3, 3));
         p3.getPlayerInventory().equip(p3.getPlayerInventory().getCarry()[0]);
@@ -76,16 +64,16 @@ public class IntroLevelState extends LevelState {
                 enemyController.getEnemyManager(), this.gameEntityManager);
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e = new BasicEnemy(sprite, 5, 6);
-        e.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e));
+        Enemy e = new NimbleThiefEnemy(sprite, 5, 6);
+        e.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png", 0,0,16,16,1,0.1f);
         Enemy e2 = new TankyEnemy(sprite, 10, 8);
-        e2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e2));
+        e2.setAiActor(new TankAI(this.playerController.getPlayerManager(), pathfinder, e2));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
-        Enemy e3 = new BasicEnemy(sprite, 13, 6);
-        e3.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e3));
+        Enemy e3 = new NimbleThiefEnemy(sprite, 13, 6);
+        e3.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e3));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy9.png", 0,0,16,16,1,0.1f);
         Enemy e4 = new BasicEnemy(sprite, 13, 2);
@@ -108,8 +96,8 @@ public class IntroLevelState extends LevelState {
         e8.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
-        Enemy e9 = new BasicEnemy(sprite, 19, 18);
-        e9.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e9));
+        Enemy e9 = new BruiserEnemy(sprite, 19, 18);
+        e9.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e9));
 
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
