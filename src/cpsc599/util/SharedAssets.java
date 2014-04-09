@@ -36,6 +36,9 @@ public class SharedAssets {
 
     public static Texture cowCube;
 
+    public static Texture orangeHouse;
+    public static Texture greenHouse;
+
     public static Texture hikariPortrait;
     public static Texture princePortrait;
     public static Texture seanPortrait;
@@ -49,6 +52,7 @@ public class SharedAssets {
     public static AnimatedSprite seanSprite;
     public static AnimatedSprite renSprite;
     public static AnimatedSprite sashaSprite;
+    public static AnimatedSprite jackSprite;
 
 
     public static void load() {
@@ -77,6 +81,11 @@ public class SharedAssets {
         seanSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 3, 0, 16, 16, 1, 0.1f);
         sashaSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 2, 0, 16, 16, 1, 0.1f);
         renSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
+        jackSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
+
+        TextureRegion[][] houseRow = TextureRegion.split(new Texture(PRIMARY_ASSET_FOLDER + "Town/house.png"), 16, 16);
+        orangeHouse = houseRow[0][1].getTexture();
+        greenHouse = houseRow[0][3].getTexture();
 
         loadFont();
 
