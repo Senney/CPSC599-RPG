@@ -350,7 +350,6 @@ public class IntroLevelState extends LevelState {
         }
         if(turnNum == 2 && !isShown) {
             this.dialogue.addDialogue("Sean:\nHey what's going on here!?","Sean");
-            this.dialogue.addDialogue("Sean:\nI have forseen the scene of this fight scene. What have I seen? Have I seen the scene of a fight scene?", "Sean");
             this.dialogue.addDialogue("Sasha:\nWe're here to help! Hold on.", "Sasha");
             this.dialogue.setVisibility(true);
             Player seen = new Player("Sean", SharedAssets.seanSprite, 0, 6, 16, 4, 80, 60, 50, 20);
