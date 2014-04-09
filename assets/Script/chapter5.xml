@@ -3,9 +3,11 @@
 	<!-- Location: Castle Entrance -->
 
 	<p1>
-		<narrative>Hikari and the others have approached what looks to be the headquarters of an organization called the Evil League of Cow Cube Worshippers. But rather than a headquarters, it seems more befitting to call it a castle instead.</narrative>
+		<narrative>Hikari and the others have approached what looks to be the headquarters of an organization called the Evil League of Cow Cube Worshippers.</narrative>
+		<narrative>But rather than a headquarters, it seems more befitting to call it a castle instead.</narrative>
 	
-		<narrative>They walk up to the entrance and, as mentioned, there appears to be a strong magical barrier protecting the front entrance to the castle. An immense amount of power will be required to break through it... Hikari clutches her necklace tightly in her hands and wonders if it really is that legendary orb that their enemies had been talking about. If so, then she should be able to use its powers to break down the barrier easily. Tightening her grip on the orb, she pulls it off her neck and walks up to the barrier.</narrative>
+		<narrative>They walk up to the entrance and, as mentioned, there appears to be a strong magical barrier protecting the front entrance to the castle. An immense amount of power will be required to break through it...</narrative>
+		<narrative>Hikari clutches her necklace tightly in her hands and wonders if it really is that legendary orb that their enemies had been talking about. If so, then she should be able to use its powers to break down the barrier easily. Tightening her grip on the orb, she pulls it off her neck and walks up to the barrier.</narrative>
 	
 		<Hikari>...</Hikari> 
 	
@@ -44,10 +46,11 @@
 	<!-- Where the throne should be, a giant golden bird cage sits. Inside is Ren slumped over. -->
 	<!-- Standing in front of the cage is a human. -->
 
+	<!-- (After the following dialogue line) Hikari rushes towards the bird cage but stops suddenly when the human standing in front of it intercepts her. -->
+	
 	<p3>
 		<Hikari>Ren!</Hikari>
-	
-		<!-- Hikari rushes towards the bird cage but stops suddenly when the human standing in front of it intercepts her. -->
+		
 	
 		<Etien>I wouldn’t do that if I were you. Who knows what kind of traps I could set off if you get too close.</Etien>
 	
@@ -61,7 +64,8 @@
 	<p4>
 		<Hikari>Now, release Ren from that cage!</Hikari>
 	
-		<Etien>HAhAHahAHaHAhA!!! You’re too late! Even though you hold the legendary orb, it can’t prevent the descent of the almighty cow cube any longer! It’s time! All the conditions have been met. My death was the last one. You’ve brought about your own deaths! HAhAha--</Etien>
+		<Etien>HAhAHahAHaHAhA!!!</Etien>
+		<Etien>You’re too late! Even though you hold the legendary orb, it can’t prevent the descent of the almighty cow cube any longer! It’s time! All the conditions have been met. My death was the last one. You’ve brought about your own deaths! HAhAha--</Etien>
 	
 	
 		<Almighty>MOOOOOOOO!!!</Almighty>
@@ -74,8 +78,7 @@
 		＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
 	-->
 
-	<!-- Almight Cow Cube appears -->
-	<!-- Etien is transformed into a mini cow cube -->
+	<!-- Almight Cow Cube appears where Etien was standing -->
 	<!-- Many mini cow cubes appear around the almighty cow cube -->
 
 	<!-- Comments above this occur before Almighty's first line -->
@@ -91,7 +94,8 @@
 
 	<p5>
 		<Hikari>It’s over... Ren!</Hikari>
-	
+		
+		<System>Hikari broke open the lock!</System>
 	
 		<Hikari>Ren..!</Hikari>
 		<Ren>... Hikari?</Ren>
