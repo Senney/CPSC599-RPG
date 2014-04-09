@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import cpsc599.assets.AnimatedSprite;
 import sun.font.TrueTypeFont;
 
+import java.util.HashMap;
+
 import static cpsc599.util.Logger.*;
 
 public class SharedAssets {
@@ -59,11 +61,14 @@ public class SharedAssets {
     public static AnimatedSprite cowCubeSprite;
     public static TextureRegion healthShrine;
 
+    private static HashMap<String, Texture> textureCache;
 
     public static void load() {
         if (loaded) return;
 
         Logger.debug("Loading shared assets...");
+        textureCache = new HashMap<String, Texture>();
+
         Texture menu = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Menus/menu_empty.png"));
         menu_texture = TextureRegion.split(menu, 16, 16);
 
@@ -102,8 +107,27 @@ public class SharedAssets {
         loaded = true;
     }
 
+    private static Texture loadTexture(String filename) {
+        Texture tex = null;
+        if (textureCache.containsKey(filename)) {
+            tex = textureCache.get(filename);
+        } else {
+            tex = new Texture(Gdx.files.internal(filename));
+            textureCache.put(filename, tex);
+        }
+        return tex;
+    }
+
+    private static TextureRegion loadTextureRegion(String filename, int w, int h, int x, int y, boolean flip) {
+        Texture tex = loadTexture(filename);
+        TextureRegion[][] region = TextureRegion.split(tex, w, h);
+        TextureRegion target = region[x][y];
+        target.flip(false, flip);
+        return target;
+    }
+
     private static TextureRegion loadTexture(String filename, boolean flip) {
-        Texture tex = new Texture(Gdx.files.internal(filename));
+        Texture tex = loadTexture(filename);
         TextureRegion region = new TextureRegion(tex);
         region.flip(false, flip);
         return region;
