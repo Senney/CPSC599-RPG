@@ -1,8 +1,8 @@
 package cpsc599.assets.Entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import cpsc599.assets.Actor;
 import cpsc599.assets.GameEntity;
 import cpsc599.states.State;
 
@@ -28,7 +28,7 @@ public class SwitchGameEntity extends GameEntity {
     }
 
     @Override
-    public String onUse(State gameState) {
+    public String onUse(State gameState, Actor activator) {
         boolean lastState = false;
         if (gameState.getFlag(flag_value) != null) {
             lastState = (Boolean)gameState.getFlag(flag_value);

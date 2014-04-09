@@ -105,7 +105,7 @@ public abstract class LevelState extends State {
                 return;
             }
             if (using) {
-                String response = e.onUse(this);
+                String response = e.onUse(this, current);
                 dialogue.display(response);
                 this.playerController.endTurn(current);
             } else if (inspecting) {

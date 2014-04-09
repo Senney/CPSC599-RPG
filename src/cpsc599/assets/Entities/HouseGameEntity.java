@@ -2,6 +2,7 @@ package cpsc599.assets.Entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import cpsc599.assets.Actor;
 import cpsc599.assets.GameEntity;
 import cpsc599.states.State;
 
@@ -25,7 +26,7 @@ public class HouseGameEntity extends GameEntity {
     }
 
     @Override
-    public String onUse(State gameState) {
+    public String onUse(State gameState, Actor activator) {
         gameState.setFlag(flag, true);
         return use;
     }

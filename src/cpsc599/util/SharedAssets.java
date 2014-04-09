@@ -57,6 +57,7 @@ public class SharedAssets {
     public static AnimatedSprite jackSprite;
 
     public static AnimatedSprite cowCubeSprite;
+    public static Texture healthShrine;
 
 
     public static void load() {
@@ -87,6 +88,8 @@ public class SharedAssets {
         sashaSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 2, 0, 16, 16, 1, 0.1f);
         renSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
         jackSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
+
+        healthShrine = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Items/healthshrine.png"));
 
         loadEnemies();
 
