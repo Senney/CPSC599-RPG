@@ -84,10 +84,10 @@ public abstract class LevelState extends State {
                 GameEntity e = entityList.get(i);
                 int x = (int)e.getPosition().x, y = (int)e.getPosition().y;
                 if (i == playerController.getSelectedUnit()) {
-                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(x),
+                    groundLayer.draw(SharedAssets.cursorHighlighted, CoordinateTranslator.translate(x),
                             CoordinateTranslator.translate(y));
                 } else {
-                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(x),
+                    groundLayer.draw(SharedAssets.cursorNormal, CoordinateTranslator.translate(x),
                             CoordinateTranslator.translate(y));
                 }
             }
@@ -99,13 +99,32 @@ public abstract class LevelState extends State {
             for (int i = 0; i < attackingList.size(); i++) {
                 Enemy e = attackingList.get(i);
                 if (i == playerController.getSelectedUnit()) {
-                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(e.x),
+                    groundLayer.draw(SharedAssets.cursorHighlighted, CoordinateTranslator.translate(e.x),
                             CoordinateTranslator.translate(e.y));
                 } else {
-                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x),
+                    groundLayer.draw(SharedAssets.cursorNormal, CoordinateTranslator.translate(e.x),
                             CoordinateTranslator.translate(e.y));
                 }
             }
+        }
+    }
+
+    public void renderGroundLayer() {
+        // Render players and enemies.
+        this.gameEntityManager.render(groundLayer);
+        if (playerController.getPlayerManager().getCurrent() != null) {
+            Player current = playerController.getPlayerManager().getCurrent();
+            groundLayer.draw(SharedAssets.highlight3, CoordinateTranslator.translate(current.x),
+                    CoordinateTranslator.translate(current.y));
+        }
+        for (Player p : playerController.getPlayerManager().getPlayers())
+            p.render(groundLayer);
+        for(Enemy e : enemyController.getEnemyManager().getEnemies())
+            e.render(groundLayer);
+
+        // If we're in cursor-mode, render the cursor.
+        if (this.playerController.isCursor()) {
+            this.playerController.getCursor().render(this.groundLayer);
         }
     }
 

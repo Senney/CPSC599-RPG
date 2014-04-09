@@ -14,6 +14,7 @@ import cpsc599.menus.InventoryMenu;
 import cpsc599.menus.StatsMenu;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
+import cpsc599.util.SharedAssets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class PlayerController {
     }
 
     public void setupCursor() {
-        cursor = new Cursor(new AnimatedSprite("assets/tilesets/cursor.png", 0, 0, 16, 16, 1, 0.1f));
+        cursor = new Cursor(SharedAssets.cursorNormal);
     }
 
     public void setupMenus(){

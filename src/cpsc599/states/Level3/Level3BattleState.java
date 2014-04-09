@@ -48,6 +48,7 @@ public class Level3BattleState extends LevelState {
         super.setLevel(levelManager.setLevel("level2"));
 
         playerController.healAll();
+        playerController.resetTurn();
         gameEntityManager.getEntities().clear();
 
         turnNum = 0;
@@ -160,26 +161,9 @@ public class Level3BattleState extends LevelState {
         super.groundLayer.begin();
         super.groundLayer.setProjectionMatrix(this.camera.combined);
 
+        renderGroundLayer();
         renderAttackables();
         renderUsables();
-
-        // Render players and enemies.
-        this.gameEntityManager.render(super.groundLayer);
-        if (playerController.getPlayerManager().getCurrent() != null) {
-            Player current = playerController.getPlayerManager().getCurrent();
-            groundLayer.draw(SharedAssets.highlight3, CoordinateTranslator.translate(current.x),
-                    CoordinateTranslator.translate(current.y));
-        }
-        for (Player p : playerController.getPlayerManager().getPlayers())
-            p.render(super.groundLayer);
-        for(Enemy e : enemyController.getEnemyManager().getEnemies())
-            e.render(super.groundLayer);
-
-
-        // If we're in cursor-mode, render the cursor.
-        if (this.playerController.isCursor()) {
-            this.playerController.getCursor().render(this.groundLayer);
-        }
 
         super.groundLayer.end();
 

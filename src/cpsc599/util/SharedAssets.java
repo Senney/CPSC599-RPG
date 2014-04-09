@@ -30,6 +30,8 @@ public class SharedAssets {
 
     public static TextureRegion[][] menu_texture;
     public static TextureRegion menu_pointer;
+    public static TextureRegion cursorNormal;
+    public static TextureRegion cursorHighlighted;
     public static TextureRegion highlight;
     public static TextureRegion highlight2;
     public static TextureRegion highlight3;
@@ -98,6 +100,9 @@ public class SharedAssets {
         renSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
         jackSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
 
+        cursorNormal = loadTextureRegion("assets/tilesets/cursor.png", 16, 16, 0, 0, false);
+        cursorHighlighted = loadTextureRegion("assets/tilesets/cursor.png", 16, 16, 1, 0, false);
+
         healthShrine = loadTexture(PRIMARY_ASSET_FOLDER + "Items/healthshrine.png", true);
         armour = loadTexture(PRIMARY_ASSET_FOLDER + "Items/armour.png", true);
         sword = loadTexture(PRIMARY_ASSET_FOLDER + "Items/sword1.png", true);
@@ -131,7 +136,7 @@ public class SharedAssets {
     private static TextureRegion loadTextureRegion(String filename, int w, int h, int x, int y, boolean flip) {
         Texture tex = loadTextureFile(filename);
         TextureRegion[][] region = TextureRegion.split(tex, w, h);
-        TextureRegion target = region[x][y];
+        TextureRegion target = region[y][x];
         target.flip(false, flip);
         return target;
     }

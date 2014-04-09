@@ -30,9 +30,6 @@ public class Level4BattleState extends LevelState{
     private boolean enemyStartTurn;
     private LevelManager levelManager;
 
-    private Player jack;
-    private boolean b_jackJoined;
-
     public int turnNum;
     public boolean isShown;
 
@@ -68,11 +65,6 @@ public class Level4BattleState extends LevelState{
             currentPlayers[i].y = 18;
         }
 
-        jack = new Player("Jack", SharedAssets.jackSprite, 7, 14, 7, 10, 4, 1, 120, 60);
-        jack.getPlayerInventory().pickUp(new Item("Pitchfork", true, Inventory.RHAND_SLOT, 1, 4, 1));
-        jack.getPlayerInventory().equip(jack.getPlayerInventory().getCarry()[0]);
-        jack.updateStats();
-
         // Set up the pathfinder for this level.
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
                 enemyController.getEnemyManager(), this.gameEntityManager);
@@ -89,11 +81,6 @@ public class Level4BattleState extends LevelState{
         dialogue = new Dialogue();
         dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
 
-        HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 7, 14, "house1",
-                "Looks like someone is home...", "A player wants to join your party!");
-        gameEntityManager.addEntity(houseEntity);
-
-        this.b_jackJoined = false;
         this.enemyStartTurn = true;
     }
 
@@ -157,26 +144,9 @@ public class Level4BattleState extends LevelState{
         super.groundLayer.begin();
         super.groundLayer.setProjectionMatrix(this.camera.combined);
 
+        renderGroundLayer();
         renderAttackables();
         renderUsables();
-
-        // Render players and enemies.
-        this.gameEntityManager.render(super.groundLayer);
-        if (playerController.getPlayerManager().getCurrent() != null) {
-            Player current = playerController.getPlayerManager().getCurrent();
-            groundLayer.draw(SharedAssets.highlight3, CoordinateTranslator.translate(current.x),
-                    CoordinateTranslator.translate(current.y));
-        }
-        for (Player p : playerController.getPlayerManager().getPlayers())
-            p.render(super.groundLayer);
-        for(Enemy e : enemyController.getEnemyManager().getEnemies())
-            e.render(super.groundLayer);
-
-
-        // If we're in cursor-mode, render the cursor.
-        if (this.playerController.isCursor()) {
-            this.playerController.getCursor().render(this.groundLayer);
-        }
 
         super.groundLayer.end();
 
