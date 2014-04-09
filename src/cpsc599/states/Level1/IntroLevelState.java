@@ -8,6 +8,7 @@ import cpsc599.ai.AStarPathfinder;
 import cpsc599.ai.BasicWarrior;
 import cpsc599.assets.*;
 import cpsc599.assets.Entities.DoorGameEntity;
+import cpsc599.assets.Entities.HealthShrineGameEntity;
 import cpsc599.assets.Entities.SwitchGameEntity;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
@@ -162,6 +163,9 @@ public class IntroLevelState extends LevelState {
 
         dialogue = new Dialogue();
         dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
+
+        HealthShrineGameEntity shrine = new HealthShrineGameEntity(7, 8, 6);
+        gameEntityManager.addEntity(shrine);
 
         this.enemyStartTurn = true;
     }
