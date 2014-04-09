@@ -123,6 +123,10 @@ public abstract class AIActor {
         actionList.add(new AIAction(AIAction.ATTACK, end));
     }
 
+    public void attack(Player p) {
+        actionList.add(new AIAction(AIAction.ATTACK, new Vector2(p.x, p.y)));
+    }
+
     public boolean skipTurn() {
         actionList.add(new AIAction(AIAction.SKIP, null));
         return true;
