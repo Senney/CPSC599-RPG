@@ -14,6 +14,7 @@ import cpsc599.managers.LevelManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
+import cpsc599.util.SharedAssets;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -60,6 +61,10 @@ public class CinematicState extends LevelState {
         actions = new LinkedList<CinematicAction>();
 
         dialogue = new Dialogue();
+        this.dialogue.mapPortrait("Hikari", SharedAssets.hikariPortrait);
+        this.dialogue.mapPortrait("Sean", SharedAssets.seanPortrait);
+        this.dialogue.mapPortrait("Sasha", SharedAssets.sashaPortrait);
+        this.dialogue.mapPortrait("Ren", SharedAssets.princePortrait);
 
         b_initialized = false;
     }
@@ -143,6 +148,7 @@ public class CinematicState extends LevelState {
     }
 
     protected void goToNextState() {
-        this.orb.setState(this.nextState);
+        if (this.nextState != null)
+            this.orb.setState(this.nextState);
     }
 }

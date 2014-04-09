@@ -1,8 +1,10 @@
 package cpsc599.assets;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.ai.AStarMove;
 import cpsc599.ai.AStarPathfinder;
+import cpsc599.controller.CameraController;
 import cpsc599.managers.PlayerManager;
 import cpsc599.states.CinematicState;
 import cpsc599.util.Logger;
@@ -13,7 +15,7 @@ public class CinematicAction {
     public static float DEFUALT_ACTION_TIME = 0.25f; // 1/4 second.
 
     public enum ActionType {
-        MOVE, SPAWN, DESPAWN, STEP_DIALOGUE, WAIT
+        MOVE, SPAWN, DESPAWN, STEP_DIALOGUE, WAIT, PAN_CAMERA, FOCUS_CAMERA
     };
 
     public ActionType actionType;
@@ -77,6 +79,19 @@ public class CinematicAction {
         return new CinematicAction(ActionType.WAIT, null, null, time);
     }
 
+    public static CinematicAction focusCamera(Actor target, CameraController controller) {
+        return new CinematicAction(ActionType.FOCUS_CAMERA, target, controller, 0.0f);
+    }
+
+    public static CinematicAction panCamera(Vector2 start, Vector2 target, CameraController controller) {
+        Actor dummy = new Actor();
+        dummy.x = (int)start.x;
+        dummy.y = (int)start.y;
+        dummy.moveX = (int)target.x;
+        dummy.moveY = (int)target.y;
+        return new CinematicAction(ActionType.PAN_CAMERA, dummy, controller, 0.10f);
+    }
+
     public boolean act(PlayerManager manager, AStarPathfinder pathfinder, float deltaTime) {
         if (actionType == null) {
             Logger.error("actionType must be set before a CinematicAction can act.");
@@ -110,6 +125,9 @@ public class CinematicAction {
 
                 break;
             case SPAWN:
+                Vector2 pos = (Vector2)obj;
+                this.actor.x = (int)pos.x;
+                this.actor.y = (int)pos.y;
                 manager.addPlayer((Player)this.actor);
                 return true;
             case DESPAWN:
@@ -126,6 +144,22 @@ public class CinematicAction {
                 if (deltaTime > nextTime) return true;
                 return false; // We return false here to maintain the nextTime counter which is automatically
                               // set at the final return point of the function.
+            case FOCUS_CAMERA:
+                ((CameraController)obj).set(actor.x, actor.y);
+                return true;
+            case PAN_CAMERA:
+                if (this.actor.x == this.actor.moveX && this.actor.y == this.actor.moveY) {
+                    return true;
+                } else {
+                    // Loop until the camera actually moves.
+                    while (!((CameraController)obj).set(this.actor.x, this.actor.y)) {
+                        if (this.actor.x == this.actor.moveX && this.actor.y == this.actor.moveY) break;
+                        this.actor.x += (this.actor.x < this.actor.moveX) ? 1 : -1;
+                        this.actor.y += (this.actor.y < this.actor.moveY) ? 1 : -1;
+                    }
+
+                    Logger.debug("Moving camera to: " + this.actor.x + ", " + this.actor.y + " :: " + this.nextTime);
+                }
         }
         this.nextTime = deltaTime + this.time;
 

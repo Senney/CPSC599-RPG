@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import cpsc599.assets.AnimatedSprite;
 import sun.font.TrueTypeFont;
 
 import static cpsc599.util.Logger.*;
@@ -37,6 +38,9 @@ public class SharedAssets {
 
     public static Texture hikariPortrait;
     public static Texture princePortrait;
+    public static Texture seanPortrait;
+    public static Texture sashaPortrait;
+    public static Texture cowCubePortrait;
 
     public static BitmapFont font_14;
     public static BitmapFont font_12;
@@ -61,6 +65,8 @@ public class SharedAssets {
 
         hikariPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/hikari.png"));
         princePortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/prince.png"));
+        sashaPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/female2.png"));
+        seanPortrait = new Texture(Gdx.files.internal(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male1.png"));
 
         loadFont();
 

@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter3>
 	<!-- Location: Relatively empty field -->
-	
-	<Sean>Hey, Hikari. You sure that those guys back there were telling us the truth? About the location of their headquarters and about that legendary orb or whatever?</Sean>
-	<Hikari>... Yes and no. This legendary orb of theirs definitely does have power to it, but we don’t know if they’re actually telling the truth about anything else. ... But it doesn’t matter. As long as there’s a chance that it’s true, we have to get there fast so that we can save Ren from them. If something were to happen to Ren because we were wasting time doubting, I’d never be able to forgive myself.</Hikari>
-	<Sasha>But what about--!</Sasha>
+    <!-- 1,8 :: 1,11 -->
+    <p1>
+        <Sean>Hey, Hikari. You sure that those guys back there were telling us the truth? About the location of their headquarters and about that legendary orb or whatever?</Sean>
+        <Hikari>... Yes and no. This legendary orb of theirs definitely does have power to it, but we don’t know if they’re actually telling the truth about anything else. ... But it doesn’t matter. As long as there’s a chance that it’s true, we have to get there fast so that we can save Ren from them. If something were to happen to Ren because we were wasting time doubting, I’d never be able to forgive myself.</Hikari>
+        <Sasha>But what about--!</Sasha>
+        <Hikari>Tch! More of them!</Hikari>
+        <Cow1>There they are! Call for reinforcements!</Cow1>
+        <Hikari>Get ready to fight!</Hikari>
+    </p1>
+
 
 	<!-- Cow Cubes + enemies appear in front of them. -->
 
-	<Hikari>Tch! More of them!</Hikari>
 
 	<!-- Hikari and the others defeat all the enemies -->
 
-	<Sean>Is it just me? Or are the number of enemies increasing?</Sean>
-	<Hikari>It must mean that we’re on the right track. Come on, let’s hurry!</Hikari>
+    <p2>
+        <Sean>Is it just me? Or are the number of enemies increasing?</Sean>
+        <Hikari>It must mean that we’re on the right track. Come on, let’s hurry!</Hikari>
+    </p2>
 </chapter3>

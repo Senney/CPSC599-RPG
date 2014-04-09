@@ -274,6 +274,7 @@ public class IntroLevelState extends LevelState {
                 //add cool death scene here!
                 this.dialogue.display(p.getName() + " was slain in combat!");
                 playerController.getPlayerManager().removePlayer(p);
+                return;
             }
         }
 
