@@ -36,6 +36,7 @@ public class StatsMenu extends Menu {
         stats.add("Hit: ");
         stats.add("Dodge: ");
         stats.add("Move: ");
+        stats.add("Range: ");
 
         font = SharedAssets.font_12;
     }
@@ -74,6 +75,8 @@ public class StatsMenu extends Menu {
                 font.draw(batch, Integer.toString(actor.dodge), 460, 458 - yv);
             else if(s.equals("Move: "))
                 font.draw(batch, Integer.toString(actor.maxMove), 460, 458 - yv);
+            else if(s.equals("Range: "))
+                font.draw(batch, Integer.toString(actor.range), 460, 458 - yv);
             count++;
         }
         //yv = 0;

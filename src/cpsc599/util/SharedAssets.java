@@ -62,6 +62,8 @@ public class SharedAssets {
     public static TextureRegion healthShrine;
     public static TextureRegion armour;
     public static TextureRegion sword;
+    public static TextureRegion shield;
+    public static TextureRegion amulet;
 
     private static HashMap<String, Texture> textureCache;
 
@@ -99,6 +101,8 @@ public class SharedAssets {
         healthShrine = loadTexture(PRIMARY_ASSET_FOLDER + "Items/healthshrine.png", true);
         armour = loadTexture(PRIMARY_ASSET_FOLDER + "Items/armour.png", true);
         sword = loadTexture(PRIMARY_ASSET_FOLDER + "Items/sword1.png", true);
+        shield = loadTexture(PRIMARY_ASSET_FOLDER + "Items/shield3.png", true);
+        amulet = loadTexture(PRIMARY_ASSET_FOLDER + "Items/amulet1.png", true);
 
         loadEnemies();
 
