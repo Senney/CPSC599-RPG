@@ -8,6 +8,7 @@ import cpsc599.ai.BasicWarriorAI;
 import cpsc599.ai.OpportunistAI;
 import cpsc599.ai.WanderingAI;
 import cpsc599.assets.*;
+import cpsc599.assets.Entities.*;
 import cpsc599.assets.Enemies.BasicEnemy;
 import cpsc599.assets.Enemies.TankyEnemy;
 import cpsc599.assets.Entities.HealthShrineGameEntity;
@@ -136,6 +137,10 @@ public class IntroLevelState extends LevelState {
         dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
 
         HealthShrineGameEntity shrine = new HealthShrineGameEntity(7, 8, 6);
+        ArmourGameEntity armour = new ArmourGameEntity(3, 15, 2);
+        SwordGameEntity sword = new SwordGameEntity(18, 0, 2);
+        gameEntityManager.addEntity(armour);
+        gameEntityManager.addEntity(sword);
         gameEntityManager.addEntity(shrine);
 
         this.enemyStartTurn = true;
