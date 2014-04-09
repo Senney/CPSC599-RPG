@@ -25,7 +25,7 @@ public class Enemy extends Actor{
         this.maxMove = moveDist;
 
         this.maxHealth = 10;
-        this.currentHealth = 7;
+        this.currentHealth = 0;
         this.curMove = maxMove;
 
         this.aiActor = null;

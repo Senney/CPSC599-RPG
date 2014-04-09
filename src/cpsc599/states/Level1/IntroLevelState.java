@@ -259,7 +259,7 @@ public class IntroLevelState extends LevelState {
 
 
         if(enemyController.getEnemyManager().getEnemies().length == 0){
-            orb.setState("LEVEL2_EMPTY_FIELD");
+            orb.setState("LEVEL1_FINALE");
         }
 
         //you will probably hate me for this...
@@ -346,8 +346,7 @@ public class IntroLevelState extends LevelState {
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
         }
-        if(turnNum == 0 && !isShown) {
-            this.dialogue.addDialogue("System:\nSean and Sasha enter", "Sean");
+        if(turnNum == 2 && !isShown) {
             this.dialogue.addDialogue("Sean:\nHey what's going on here!?","Sean");
             this.dialogue.addDialogue("Sasha:\nWe're here to help!", "Sasha");
             this.dialogue.setVisibility(true);
@@ -367,6 +366,7 @@ public class IntroLevelState extends LevelState {
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
             Logger.debug("'SELECT' pressed.");
+            orb.setState("LEVEL1_FINALE");
         }
     }
 

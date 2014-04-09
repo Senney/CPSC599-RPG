@@ -64,8 +64,12 @@
 
 	<!-- Main battle map: Other characters hear the commotion and come to help out Hikari -->
 	<!-- After the map is cleared of enemies... -->
-
+	<p4>
+	<System>The party defeated all the foes</System>
 	<Hikari>They got away... I won’t let them get away with this!</Hikari>
+	<Sean>Let's go get them.</Sean>
+	<Sean>This is a test</Sean>
+	</p4>
 
 	<!-- Chases after where the enemy was heading -->
 </chapter1>

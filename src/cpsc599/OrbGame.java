@@ -17,10 +17,7 @@ import cpsc599.managers.LevelManager;
 import cpsc599.managers.PlayerManager;
 import cpsc599.managers.StateManager;
 import cpsc599.states.*;
-import cpsc599.states.Level1.IntroLevelState;
-import cpsc599.states.Level1.Level1ChaseCinematic;
-import cpsc599.states.Level1.Level1FlowerFieldCinematic;
-import cpsc599.states.Level1.Level1VillageCinematic;
+import cpsc599.states.Level1.*;
 import cpsc599.states.Level3.Level3BattleState;
 import cpsc599.states.Level3.Level3FieldCinematic;
 import cpsc599.util.Logger;
@@ -151,6 +148,7 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL1_FLOWER_FIELD", new Level1FlowerFieldCinematic(this, levelManager.setLevel("flower_field_map"), cameraController, "LEVEL1_CHASE"));
         stateManager.addState("LEVEL1_CHASE", new Level1ChaseCinematic(this, levelManager.setLevel("level0"), cameraController, "LEVEL1"));
         stateManager.addState("LEVEL1", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
+        stateManager.addState("LEVEL1_FINALE", new Level1Finale(this, levelManager.setLevel("level0"), cameraController, "LEVEL3_FIELD"));
 
         // Chapter 2 states
 
