@@ -60,13 +60,13 @@ public class IntroLevelState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/male/friend/friend_right.png", 0, 0, 16, 16, 1, 0.1f);
 
-        Player p = new Player("Ren", sprite, 2, 5, 8, 14, 1, 3, 70, 80);
+        /*Player p = new Player("Ren", sprite, 2, 5, 8, 14, 1, 3, 70, 80);
 
         Item sw = new Item("Pike", true, Inventory.RHAND_SLOT, 3, 5, 10);
         p.getPlayerInventory().pickUp(sw);
         p.getPlayerInventory().pickUp(new Item("Shield", true, Inventory.LHAND_SLOT, 1, 1, 5));
         p.getPlayerInventory().equip(sw);
-        p.updateStats();
+        p.updateStats();*/
 
         sprite = new AnimatedSprite("assets/tilesets/primary/CharacterDesign/characters/female/main character/main_female_right.png", 0, 0, 16, 16, 1, 0.1f);
 
@@ -80,32 +80,80 @@ public class IntroLevelState extends LevelState {
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
                 enemyController.getEnemyManager(), this.gameEntityManager);
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
-        Enemy e = new Enemy(sprite, 12, 7, 8);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
+        Enemy e = new Enemy(sprite, 5, 6, 8);
         e.evade = 10;
         e.damage = 6;
         e.hit = 120;
         e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy14.png", 0,0,16,16,1,0.1f);
-        Enemy e2 = new Enemy(sprite, 10, 5, 8);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png", 0,0,16,16,1,0.1f);
+        Enemy e2 = new Enemy(sprite, 10, 8, 8);
         e2.evade = 10;
         e2.damage = 6;
         e2.hit = 120;
         e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e2));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy5.png", 0,0,16,16,1,0.1f);
-        Enemy e3 = new Enemy(sprite, 10, 9, 8);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
+        Enemy e3 = new Enemy(sprite, 13, 6, 8);
         e3.evade = 10;
         e3.damage = 6;
         e3.hit = 120;
         e3.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
 
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy9.png", 0,0,16,16,1,0.1f);
+        Enemy e4 = new Enemy(sprite, 13, 2, 8);
+        e4.evade = 10;
+        e4.damage = 6;
+        e4.hit = 120;
+        e4.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e4));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
+        Enemy e5 = new Enemy(sprite, 17, 4, 8);
+        e5.evade = 10;
+        e5.damage = 6;
+        e5.hit = 120;
+        e5.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e5));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
+        Enemy e6 = new Enemy(sprite, 19, 12, 8);
+        e6.evade = 10;
+        e6.damage = 6;
+        e6.hit = 120;
+        e6.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e6));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
+        Enemy e7 = new Enemy(sprite, 10, 18, 8);
+        e7.evade = 10;
+        e7.damage = 6;
+        e7.hit = 120;
+        e7.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e7));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
+        Enemy e8 = new Enemy(sprite, 15, 15, 8);
+        e8.evade = 10;
+        e8.damage = 6;
+        e8.hit = 120;
+        e8.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e8));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
+        Enemy e9 = new Enemy(sprite, 19, 18, 8);
+        e9.evade = 10;
+        e9.damage = 6;
+        e9.hit = 120;
+        e9.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e9));
+
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
         enemyController.getEnemyManager().addEnemy(e3);
+        enemyController.getEnemyManager().addEnemy(e4);
+        enemyController.getEnemyManager().addEnemy(e5);
+        enemyController.getEnemyManager().addEnemy(e6);
+        enemyController.getEnemyManager().addEnemy(e7);
+        enemyController.getEnemyManager().addEnemy(e8);
+        enemyController.getEnemyManager().addEnemy(e9);
 
-        playerController.getPlayerManager().addPlayer(p);
+        //playerController.getPlayerManager().addPlayer(p);
         playerController.getPlayerManager().addPlayer(p3);
 
         // TODO: Make this not stupid.

@@ -53,7 +53,9 @@
 	<!-- Hikari draws a weapon and starts to chase after them -->
 
     <p3>
+		<System>The chase continues..</System>
         <Enemy1>I'll slow her down! You move on!</Enemy1>
+		<Enemy3>I bring reinforcement!</Enemy3>
     </p3>
 	<!-- Enemy 1 releases Ren and confronts Hikari -->
 	<!-- Battle: Hikari vs. Enemy 1 -->
