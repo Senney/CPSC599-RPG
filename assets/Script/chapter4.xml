@@ -3,14 +3,20 @@
 	<!-- Location: Field with a range of mountains on the right side of the screen. At the very edge of the right side past the mountains is a rather elaborate looking structure (castle). -->
 
 	<p1>
-	<System>Party enters</System>
-	<Sean>We must be getting close. Wait, is that a snowman?</Sean>
-	<Hikari>Its nose reminds me of the feeling you get when a rat strokes its tail across your forehead...</Hikari>
-	<Sarah>.....Gnocchi</Sarah>
-	<Snowman>Intruders! Quick kill it!</Snowman>
-	<Hikari>Get ready to fight!</Hikari>
+		<System>Party enters</System>
+		<Sean>We must be getting close. Wait, is that a snowman?</Sean>
+		<Hikari>Its nose reminds me of the feeling you get when a rat strokes its tail across your forehead...</Hikari>
+		<Sarah>.....Gnocchi</Sarah>
+		<Snowman>Intruders! Quick kill it!</Snowman>
+		<Hikari>Get ready to fight!</Hikari>
 	</p1>
 	
 	<!-- Enemies appear and Hikari and the others fight them. -->
 	<!-- Once the enemies are defeated or during the fight, they’ll have to find a way around the mountain range and into the castle/headquarters. -->
+	<p2>
+		<System>The party made it to the castle made of glass.</System>
+		<Hikari>We made it! Champagne anyone?</Hikari>
+		<Sean>....</Sean>
+		<Hikari>...ok inside then...</Hikari>
+	</p2>
 </chapter4>

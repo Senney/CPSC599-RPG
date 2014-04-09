@@ -25,6 +25,7 @@ import cpsc599.states.Level3.Level3FieldCinematic;
 import cpsc599.states.Level3.Level3Finale;
 import cpsc599.states.Level4.Level4BattleState;
 import cpsc599.states.Level4.Level4FieldCinematic;
+import cpsc599.states.Level4.Level4Finale;
 import cpsc599.states.Prologue.PrologueCinematicState;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
@@ -170,6 +171,7 @@ public class OrbGame implements ApplicationListener {
         // Chapter 4 states
         stateManager.addState("LEVEL4_FIELD", new Level4FieldCinematic(this, levelManager.setLevel("level3"), this.cameraController, "LEVEL4"));
         stateManager.addState("LEVEL4", new Level4BattleState(this, levelManager, playerController, cameraController, enemyController));
+        stateManager.addState("LEVEL4_FINALE", new Level4Finale(this, levelManager.setLevel("level3"), this.cameraController, "LEVEL5"));
 
         setState("MAIN_MENU");
 	}

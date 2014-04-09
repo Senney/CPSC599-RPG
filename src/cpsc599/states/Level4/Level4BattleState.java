@@ -36,6 +36,8 @@ public class Level4BattleState extends LevelState{
     public int turnNum;
     public boolean isShown;
 
+    public boolean seenCastle;
+
     public Level4BattleState(OrbGame game, LevelManager manager, PlayerController playerController,
                              CameraController cameraController, EnemyController enemyController) {
         super(game, playerController, cameraController, enemyController);
@@ -45,13 +47,14 @@ public class Level4BattleState extends LevelState{
     @Override
     public void init(OrbGame game) {
         super.init(game);
-        super.setLevel(levelManager.setLevel("level2"));
+        super.setLevel(levelManager.setLevel("level3"));
 
         playerController.healAll();
         gameEntityManager.getEntities().clear();
 
         turnNum = 0;
         isShown = false;
+        seenCastle = false;
 
         //playerController.getPlayerManager().reset();
         enemyController.getEnemyManager().reset();
@@ -59,8 +62,8 @@ public class Level4BattleState extends LevelState{
         // Reset the player positions
         Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
         for (int i = 0; i < currentPlayers.length; i++) {
-            currentPlayers[i].x = 1;
-            currentPlayers[i].y = 6 + i;
+            currentPlayers[i].x = 5 + i;
+            currentPlayers[i].y = 18;
         }
 
         jack = new Player("Jack", SharedAssets.jackSprite, 7, 14, 7, 10, 4, 1, 120, 60);
@@ -93,52 +96,45 @@ public class Level4BattleState extends LevelState{
     }
 
     public void createEnemies(AStarPathfinder pathfinder) {
-        Enemy e = new CowCubeEnemy(20, 10);
+        Enemy e = new CowCubeEnemy(8, 8);
         e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e));
 
-        Enemy e2 = new CowCubeEnemy(17, 8);
+        Enemy e2 = new CowCubeEnemy(11, 4);
         e2.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e2));
 
-        Enemy e3 = new CowCubeEnemy(17, 13);
+        Enemy e3 = new CowCubeEnemy(5, 3);
         e3.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e3));
 
-        Enemy e4 = new CowCubeEnemy(22, 14);
+        Enemy e4 = new CowCubeEnemy(1, 5);
         e4.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e4));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e5 = new Enemy(sprite, 14, 4, 8);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
+        Enemy e5 = new Enemy(sprite, 4, 14, 8);
         e5.evade = 10;
         e5.damage = 6;
         e5.hit = 120;
         e5.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e5));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
-        Enemy e6 = new Enemy(sprite, 14, 1, 8);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
+        Enemy e6 = new Enemy(sprite, 10, 14, 8);
         e6.evade = 10;
         e6.damage = 6;
         e6.hit = 120;
         e6.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e6));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e7 = new Enemy(sprite, 17, 2, 8);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
+        Enemy e7 = new Enemy(sprite, 14, 11, 8);
         e7.evade = 10;
         e7.damage = 6;
         e7.hit = 120;
         e7.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e7));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e8 = new Enemy(sprite, 20, 1, 8);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
+        Enemy e8 = new Enemy(sprite, 14, 7, 8);
         e8.evade = 10;
         e8.damage = 6;
         e8.hit = 120;
         e8.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e8));
-
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
-        Enemy e9 = new Enemy(sprite, 22, 2, 8);
-        e9.evade = 10;
-        e9.damage = 6;
-        e9.hit = 120;
-        e9.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e9));
 
 
         enemyController.getEnemyManager().addEnemy(e);
@@ -149,7 +145,6 @@ public class Level4BattleState extends LevelState{
         enemyController.getEnemyManager().addEnemy(e6);
         enemyController.getEnemyManager().addEnemy(e7);
         enemyController.getEnemyManager().addEnemy(e8);
-        enemyController.getEnemyManager().addEnemy(e9);
     }
 
     @Override
@@ -278,15 +273,20 @@ public class Level4BattleState extends LevelState{
             return;
         }
 
-        /**
-         * Handle the joining of Jack.
-         */
-        if (!this.b_jackJoined && this.getFlagBoolean("house1")) {
-            this.dialogue.addDialogue("Hey, I'm Jack! I'd like to help you defeat these vile creatures!", "Jack");
-            this.dialogue.setVisibility(true);
-            this.playerController.getPlayerManager().addPlayer(jack);
-            b_jackJoined = true;
-            return;
+        //checks to see if someone is in range of castle
+        for(int i = 0; i < playerController.getPlayerManager().getPlayers().length; i++) {
+            if(!seenCastle && playerController.getPlayerManager().getPlayer(i).y <= 10) {
+                seenCastle = true;
+                String name = playerController.getPlayerManager().getPlayer(i).getName();
+                dialogue.addDialogue(name + ":\nHey I see a castle in the distance! I think we can navigate around this mountain pass to get there.", name);
+                this.dialogue.setVisibility(true);
+            }
+            if(playerController.getPlayerManager().getPlayer(i).x == 17 && playerController.getPlayerManager().getPlayer(i).y == 3) {
+                Logger.debug("Level complete!");
+                orb.setState("LEVEL4_FINALE");
+            }
+            else
+                break;
         }
 
         if (!playerController.isTurnComplete()) {
@@ -343,7 +343,7 @@ public class Level4BattleState extends LevelState{
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
             Logger.debug("'SELECT' pressed.");
-            orb.setState("LEVEL3_FINALE");
+            orb.setState("LEVEL4_FINALE");
         }
     }
 }
