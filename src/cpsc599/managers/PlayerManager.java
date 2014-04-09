@@ -110,11 +110,13 @@ public class PlayerManager {
     }
 
     public void reset() {
+        Logger.debug("Clearing PlayerController.");
         playerList.clear();
         currentPlayer = null;
     }
 
     public void removePlayer(Player obj) {
+        Logger.debug("Player " + obj.getName() + " removed.");
         this.playerList.remove(obj);
     }
 }
