@@ -75,6 +75,28 @@ public class Level3BattleState extends LevelState {
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
                 enemyController.getEnemyManager(), this.gameEntityManager);
 
+        createEnemies(pathfinder);
+
+        // TODO: Make this not stupid.
+        playerController.setupCursor();
+        playerController.getCursor().x = 2;
+        playerController.getCursor().y = 7;
+
+        playerController.setupMenus();
+
+        dialogue = new Dialogue();
+        dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
+        dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
+
+        HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 7, 14, "house1",
+                "Looks like someone is home...", "A player wants to join your party!");
+        gameEntityManager.addEntity(houseEntity);
+
+        this.b_jackJoined = false;
+        this.enemyStartTurn = true;
+    }
+
+    public void createEnemies(AStarPathfinder pathfinder) {
         Enemy e = new CowCubeEnemy(20, 10);
         e.setAiActor(new BasicWarrior(this.playerController.getPlayerManager(), pathfinder, e));
 
@@ -132,24 +154,6 @@ public class Level3BattleState extends LevelState {
         enemyController.getEnemyManager().addEnemy(e7);
         enemyController.getEnemyManager().addEnemy(e8);
         enemyController.getEnemyManager().addEnemy(e9);
-
-        // TODO: Make this not stupid.
-        playerController.setupCursor();
-        playerController.getCursor().x = 2;
-        playerController.getCursor().y = 7;
-
-        playerController.setupMenus();
-
-        dialogue = new Dialogue();
-        dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
-        dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
-
-        HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 7, 14, "house1",
-                "Looks like someone is home...", "A player wants to join your party!");
-        gameEntityManager.addEntity(houseEntity);
-
-        this.b_jackJoined = false;
-        this.enemyStartTurn = true;
     }
 
     @Override
