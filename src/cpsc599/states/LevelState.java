@@ -8,12 +8,15 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.Main;
 import cpsc599.OrbGame;
-import cpsc599.assets.Level;
+import cpsc599.assets.*;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
 import cpsc599.managers.GameEntityManager;
 import cpsc599.util.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class LevelState extends State {
     protected Level currentLevel;
@@ -28,6 +31,10 @@ public abstract class LevelState extends State {
 
     protected SpriteBatch groundLayer;
     protected SpriteBatch overlayLayer;
+    protected ArrayList<Enemy> attackingList;
+    protected List<GameEntity> entityList;
+    protected Dialogue dialogue;
+
 
     protected LevelState(OrbGame game, PlayerController playerController, CameraController cameraController, EnemyController enemyController) {
         //super.init(game);
@@ -82,5 +89,68 @@ public abstract class LevelState extends State {
 
     public Camera getCamera() {
         return this.camera;
+    }
+
+
+    protected void handleSelect(Input input, Player current) {
+        entityList = gameEntityManager.getEntitiesInRange(current.x, current.y);
+        int selected;
+
+        boolean inspecting = playerController.isInspecting(), using = playerController.isUsing();
+        if ((selected = playerController.controlSelect(input, entityList)) != -1) {
+            GameEntity e = null;
+
+            if(entityList.size() == 0 || (e = entityList.get(selected)) == null) {
+                dialogue.display("Professor Oak's words echo in your head: It is not the time to use this.");
+                return;
+            }
+            if (using) {
+                String response = e.onUse(this);
+                dialogue.display(response);
+                this.playerController.endTurn(current);
+            } else if (inspecting) {
+                String value = e.onInspect();
+                dialogue.display(value);
+            }
+        }
+    }
+
+    protected void handleAttack(Input input, Player current) {
+        // Wait until an enemy is selected.
+        if (attackingList == null) {
+            attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
+                    playerController.getAttackRange());
+        }
+
+        int selected;
+        if ((selected = playerController.controlAttack(input, this.attackingList)) != -1) {
+            if(!this.attackingList.isEmpty()) {
+                int dmg = current.attack(this.attackingList.get(selected));
+                boolean isDead = this.attackingList.get(selected).isDead();
+                String dmgText = null;
+
+                if (dmg < 0) {
+                    dmgText = "Player attacks enemy and misses!";
+                } else {
+                    dmgText = "Player attacks enemy for " + dmg + " damage.";
+                }
+                if(isDead){
+                    enemyController.getEnemyManager().removeEnemy(this.attackingList.get(selected));
+                    dmgText += " The enemy is slain!";
+                }
+                this.dialogue.display(dmgText);
+
+                this.attackingList = null;
+            }
+            else {
+                //Logger.debug("Not allowed to attack nothing! ending your turn idiot...");
+                Logger.debug("The character swings and only hits thin air...");
+                this.dialogue.display("Player swings and hits only thin air");
+            }
+        }
+        else{
+            attackingList = this.enemyController.getEnemyManager().getEnemiesInRange(current.x, current.y,
+                    playerController.getAttackRange());
+        }
     }
 }

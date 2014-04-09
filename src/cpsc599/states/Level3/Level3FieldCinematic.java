@@ -79,9 +79,9 @@ public class Level3FieldCinematic extends CinematicState {
         actions.add(CinematicAction.spawnActor(cc2, new Vector2(25, 11)));
         actions.add(CinematicAction.spawnActor(cc3, new Vector2(24, 13)));
         actions.add(CinematicAction.stepDialogue(this.dialogue));
-        actions.add(CinematicAction.moveToConcurrent(cc1, new Vector2(19, 9)));
+        actions.add(CinematicAction.moveToConcurrent(cc1, new Vector2(17, 8)));
         actions.add(CinematicAction.moveToConcurrent(cc2, new Vector2(20, 10)));
-        actions.add(CinematicAction.moveToConcurrent(cc3, new Vector2(19, 13)));
+        actions.add(CinematicAction.moveToConcurrent(cc3, new Vector2(17, 13)));
         actions.add(CinematicAction.panCamera(new Vector2(25, 10), new Vector2(0, 15), this.cameraController));
         actions.add(CinematicAction.stepDialogue(this.dialogue));
 
