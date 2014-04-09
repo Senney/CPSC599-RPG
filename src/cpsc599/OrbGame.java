@@ -25,6 +25,7 @@ import cpsc599.states.Level3.Level3FieldCinematic;
 import cpsc599.states.Level3.Level3Finale;
 import cpsc599.states.Level4.Level4BattleState;
 import cpsc599.states.Level4.Level4FieldCinematic;
+import cpsc599.states.Prologue.PrologueCinematicState;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
 
@@ -131,6 +132,7 @@ public class OrbGame implements ApplicationListener {
 
         levelManager = new LevelManager(assetManager);
         try {
+        	levelManager.addLevelDir("assets/tilesets/primary/Maps/Prologue");
             levelManager.addLevelDir("assets/tilesets/primary/Maps/Chapter1");
             levelManager.addLevelDir("assets/tilesets/primary/Maps/Chapter2");
             levelManager.addLevelDir("assets/tilesets/primary/Maps/Chapter3");
@@ -147,6 +149,7 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("GAME_OVER", new GameOverState());
 
         // Prologue State
+        stateManager.addState("PROLOGUE", new PrologueCinematicState(this, levelManager.setLevel("black"), this.cameraController, "LEVEL1_VILLAGE"));
 
         // Chapter 1 States
         stateManager.addState("LEVEL1_VILLAGE", new Level1VillageCinematic(this, levelManager.setLevel("field_map"), cameraController, "LEVEL1_FLOWER_FIELD"));
