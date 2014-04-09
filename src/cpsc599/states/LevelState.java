@@ -13,7 +13,9 @@ import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
 import cpsc599.managers.GameEntityManager;
+import cpsc599.util.CoordinateTranslator;
 import cpsc599.util.Logger;
+import cpsc599.util.SharedAssets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +77,37 @@ public abstract class LevelState extends State {
 
     @Override
     public abstract void render();
+
+    protected void renderUsables() {
+        if ((this.playerController.isInspecting() || this.playerController.isUsing()) && this.entityList != null) {
+            for (int i = 0; i < entityList.size(); i++) {
+                GameEntity e = entityList.get(i);
+                int x = (int)e.getPosition().x, y = (int)e.getPosition().y;
+                if (i == playerController.getSelectedUnit()) {
+                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(x),
+                            CoordinateTranslator.translate(y));
+                } else {
+                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(x),
+                            CoordinateTranslator.translate(y));
+                }
+            }
+        }
+    }
+
+    protected void renderAttackables() {
+        if (this.playerController.isAttacking() && attackingList != null && attackingList.size() != 0) {
+            for (int i = 0; i < attackingList.size(); i++) {
+                Enemy e = attackingList.get(i);
+                if (i == playerController.getSelectedUnit()) {
+                    groundLayer.draw(SharedAssets.highlight2, CoordinateTranslator.translate(e.x),
+                            CoordinateTranslator.translate(e.y));
+                } else {
+                    groundLayer.draw(SharedAssets.highlight, CoordinateTranslator.translate(e.x),
+                            CoordinateTranslator.translate(e.y));
+                }
+            }
+        }
+    }
 
     @Override
     public abstract void tick(Input input);
