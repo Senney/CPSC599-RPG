@@ -22,7 +22,7 @@ public class WanderingAI extends AIActor {
         Random rand = new Random(System.currentTimeMillis());
 
         while (iterations < 10) {
-            int xr = rand.nextInt(range) + 1, yr = rand.nextInt(range);
+            int xr = (rand.nextInt(range) + 1) - (range/2), yr = (rand.nextInt(range) + 1) - (range / 2);
             int nx = (int)position.x + xr, ny = (int)position.y + yr;
             if (!level.collide(nx, ny)) {
                 return new Vector2(nx, ny);
