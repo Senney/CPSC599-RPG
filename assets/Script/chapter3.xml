@@ -18,6 +18,7 @@
 	<!-- Hikari and the others defeat all the enemies -->
 
     <p2>
+		<System>The party sucessfully defeated all enemies</System>
         <Sean>Is it just me? Or are the number of enemies increasing?</Sean>
         <Hikari>It must mean that we’re on the right track. Come on, let’s hurry!</Hikari>
     </p2>

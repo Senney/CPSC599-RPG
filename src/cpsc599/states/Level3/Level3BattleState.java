@@ -346,6 +346,7 @@ public class Level3BattleState extends LevelState {
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
             Logger.debug("'SELECT' pressed.");
+            orb.setState("LEVEL3_FINALE");
         }
     }
 }

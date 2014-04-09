@@ -1,4 +1,4 @@
-package cpsc599.states.Level1;
+package cpsc599.states.Level3;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
@@ -11,10 +11,10 @@ import cpsc599.controller.CameraController;
 import cpsc599.states.CinematicState;
 import cpsc599.util.SharedAssets;
 
-public class Level1Finale extends CinematicState{
+public class Level3Finale extends CinematicState{
     Player hik, seen, sash;
 
-    public Level1Finale(OrbGame game, Level level, CameraController cameraController, String nextState) {
+    public Level3Finale(OrbGame game, Level level, CameraController cameraController, String nextState) {
         super(game, level, cameraController, nextState);
     }
 
@@ -22,16 +22,16 @@ public class Level1Finale extends CinematicState{
     public void init(OrbGame game) {
         super.init(game);
 
-        hik = new Player("Hikari", SharedAssets.hikariSprite, 5, 7, 0);
-        seen = new Player("Sean",SharedAssets.seanSprite, 7, 8, 0);
-        sash = new Player("Sasha",SharedAssets.sashaSprite, 7, 6, 0);
+        hik = new Player("Hikari", SharedAssets.hikariSprite, 19, 9, 0);
+        seen = new Player("Sean",SharedAssets.seanSprite, 20, 9, 0);
+        sash = new Player("Sasha",SharedAssets.sashaSprite, 21, 9, 0);
 
         //this.playerController.getPlayerManager().addPlayer(hik);
         //this.playerController.getPlayerManager().addPlayer(ren);
 
 
-        this.dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
-        this.dialogue.setDialogueTag("p4");
+        this.dialogue.loadDialogueXML(SharedAssets.CHAPTER_3);
+        this.dialogue.setDialogueTag("p2");
         this.dialogue.setVisibility(true);
     }
 
@@ -53,17 +53,17 @@ public class Level1Finale extends CinematicState{
     @Override
     protected void loadCinematicActions() {
         // Initial dialogue interaction.
-        actions.add(CinematicAction.panCamera(new Vector2(8, 15), new Vector2(6, 9), this.cameraController));
-        actions.add(CinematicAction.spawnActor(hik, new Vector2(5, 7)));
-        actions.add(CinematicAction.spawnActor(seen, new Vector2(7,8)));
-        actions.add(CinematicAction.spawnActor(sash, new Vector2(7,6)));
+        actions.add(CinematicAction.panCamera(new Vector2(1, 1), new Vector2(18, 10), this.cameraController));
+        actions.add(CinematicAction.spawnActor(hik, new Vector2(19, 9)));
+        actions.add(CinematicAction.spawnActor(seen, new Vector2(20,9)));
+        actions.add(CinematicAction.spawnActor(sash, new Vector2(21,9)));
 
         actions.add(CinematicAction.stepDialogue(dialogue));
         actions.add(CinematicAction.stepDialogue(dialogue));
 
-        actions.add(CinematicAction.moveToConcurrent(hik, new Vector2(7, 18)));
-        actions.add(CinematicAction.moveToConcurrent(seen, new Vector2(8, 18)));
-        actions.add(CinematicAction.moveToConcurrent(sash, new Vector2(9, 18)));
+        actions.add(CinematicAction.moveToConcurrent(hik, new Vector2(25, 10)));
+        actions.add(CinematicAction.moveToConcurrent(seen, new Vector2(25, 11)));
+        actions.add(CinematicAction.moveToConcurrent(sash, new Vector2(24, 11)));
 
         actions.add(CinematicAction.despawnActor(hik));
         actions.add(CinematicAction.despawnActor(seen));
