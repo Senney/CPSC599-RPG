@@ -12,7 +12,7 @@ import cpsc599.states.CinematicState;
 import cpsc599.util.SharedAssets;
 
 public class Level1ChaseCinematic extends CinematicState{
-    Player hik, ren, e1, e2, e3, e4, e5, e6;
+    Player hik, ren, e1, e2, e3, e4, e5;
 
     public Level1ChaseCinematic(OrbGame game, Level level, CameraController cameraController, String nextState) {
         super(game, level, cameraController, nextState);
@@ -32,7 +32,7 @@ public class Level1ChaseCinematic extends CinematicState{
                 0, 0, 16, 16, 1, 0.1f);
         AnimatedSprite enemySprite3 = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png",
                 0, 0, 16, 16, 1, 0.1f);
-        AnimatedSprite enemySprite4 = new AnimatedSprite("assets/tilesets/primary/Enemy/Monster/enemy9.png",
+        AnimatedSprite enemySprite4 = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy9.png",
                 0, 0, 16, 16, 1, 0.1f);
         AnimatedSprite enemySprite5 = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png",
                 0, 0, 16, 16, 1, 0.1f);
@@ -101,7 +101,9 @@ public class Level1ChaseCinematic extends CinematicState{
 
         actions.add(CinematicAction.stepDialogue(dialogue));
 
-        actions.add(CinematicAction.moveToConcurrent(e3, new Vector2(0,6)));
+        actions.add(CinematicAction.moveToConcurrent(e3, new Vector2(13, 6)));
+        actions.add(CinematicAction.moveToConcurrent(e4, new Vector2(13, 2)));
+        actions.add(CinematicAction.moveToConcurrent(e5, new Vector2(10, 8)));
 
         /*actions.add(CinematicAction.stepDialogue(dialogue));
         actions.add(CinematicAction.stepDialogue(dialogue));

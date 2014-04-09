@@ -146,6 +146,24 @@ public class Dialogue {
         loadDialogue();
     }
 
+    public void addDialogue(String message, String portrait) {
+        strings.clear();
+        dialogueStep = 0;
+
+        //NodeList list = doc.getElementsByTagName(tagName);
+        //Node node = list.item(0);
+        //NodeList children = node.getChildNodes();
+        //for (int i = 0; i < children.getLength(); i++) {
+            //String text = children.item(i).getTextContent().trim();
+            //if (text.length() == 0) continue;
+            //String speaker = children.item(i).getNodeName();
+            strings.add(new DialogueElement(message, portraitMap.get(portrait)));
+       // }
+
+        stepDialogue();
+        loadDialogue();
+    }
+
     public boolean stepDialogue() {
         if (dialogueStep == strings.size()) return false;
 

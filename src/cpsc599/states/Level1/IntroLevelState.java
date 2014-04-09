@@ -239,9 +239,6 @@ public class IntroLevelState extends LevelState {
             }
         }
     }
-    public void transition(float time) {
-        
-    }
 
     @Override
     public void tick(Input input) {
@@ -282,7 +279,6 @@ public class IntroLevelState extends LevelState {
         {
             //Game over!
             //add game over state
-            transition(5);
             orb.setState("GAME_OVER");
             //Logger.debug("Game Over...");
         }
@@ -350,8 +346,21 @@ public class IntroLevelState extends LevelState {
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
         }
-        if(turnNum == 2 && !isShown) {
-            this.dialogue.display("Sean: Hey what's going on here!?");
+        if(turnNum == 0 && !isShown) {
+            this.dialogue.addDialogue("System:\nSean and Sasha enter", "Sean");
+            this.dialogue.addDialogue("Sean:\nHey what's going on here!?","Sean");
+            this.dialogue.addDialogue("Sasha:\nWe're here to help!", "Sasha");
+            this.dialogue.setVisibility(true);
+            Player seen = new Player("Sean", SharedAssets.seanSprite, 0, 6, 16, 4, 80, 60, 50, 20);
+            seen.getPlayerInventory().pickUp(new Item("Sabre", true, Inventory.RHAND_SLOT, 3, 2, 3));
+            seen.getPlayerInventory().equip(seen.getPlayerInventory().getCarry()[0]);
+            seen.updateStats();
+            playerController.getPlayerManager().addPlayer(seen);
+            Player sash = new Player("Sean", SharedAssets.sashaSprite, 0, 8, 16, 4, 80, 60, 50, 20);
+            sash.getPlayerInventory().pickUp(new Item("Pointy thruster", true, Inventory.RHAND_SLOT, 3, 2, 3));
+            sash.getPlayerInventory().equip(sash.getPlayerInventory().getCarry()[0]);
+            sash.updateStats();
+            playerController.getPlayerManager().addPlayer(sash);
             isShown = true;
         }
 
