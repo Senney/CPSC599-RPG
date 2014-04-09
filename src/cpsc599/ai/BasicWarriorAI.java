@@ -10,14 +10,14 @@ import cpsc599.util.Logger;
 import java.util.List;
 import java.util.Random;
 
-public class BasicWarrior extends AIActor {
-    public BasicWarrior(PlayerManager playerManager, AStarPathfinder pathfinder, Actor actor) {
+public class BasicWarriorAI extends AIActor {
+    public BasicWarriorAI(PlayerManager playerManager, AStarPathfinder pathfinder, Actor actor) {
         super(playerManager, pathfinder, actor);
     }
 
     @Override
     public boolean decideTurn() {
-        Logger.debug("Deciding turn for BasicWarrior: " + this.actor);
+        Logger.debug("Deciding turn for BasicWarriorAI: " + this.actor);
 
         this.nextStep = 0f;
         Vector2 position = new Vector2(this.actor.x, this.actor.y);
