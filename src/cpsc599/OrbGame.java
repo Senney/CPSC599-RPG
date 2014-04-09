@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.assets.AssetManager;
-
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
@@ -18,6 +18,8 @@ import cpsc599.managers.PlayerManager;
 import cpsc599.managers.StateManager;
 import cpsc599.states.*;
 import cpsc599.states.Level1.*;
+import cpsc599.states.Level2.Level2AfterBattleCinematic;
+import cpsc599.states.Level2.Level2EmptyFieldCinematic;
 import cpsc599.states.Level3.Level3BattleState;
 import cpsc599.states.Level3.Level3FieldCinematic;
 import cpsc599.util.Logger;
@@ -148,10 +150,12 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL1_FLOWER_FIELD", new Level1FlowerFieldCinematic(this, levelManager.setLevel("flower_field_map"), cameraController, "LEVEL1_CHASE"));
         stateManager.addState("LEVEL1_CHASE", new Level1ChaseCinematic(this, levelManager.setLevel("level0"), cameraController, "LEVEL1"));
         stateManager.addState("LEVEL1", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
-        stateManager.addState("LEVEL1_FINALE", new Level1Finale(this, levelManager.setLevel("level0"), cameraController, "LEVEL3_FIELD"));
+        stateManager.addState("LEVEL1_FINALE", new Level1Finale(this, levelManager.setLevel("level0"), cameraController, "LEVEL2_EMPTY_FIELD"));
 
         // Chapter 2 states
-
+        stateManager.addState("LEVEL2_EMPTY_FIELD", new Level2EmptyFieldCinematic(this, levelManager.setLevel("level1"), cameraController, "LEVEL2_AFTER_BATTLE"));
+        stateManager.addState("LEVEL2_AFTER_BATTLE", new Level2AfterBattleCinematic(this, levelManager.setLevel("level1"), this.cameraController, "LEVEL3_FIELD"));
+        
         // Chapter 3 states
         stateManager.addState("LEVEL3_FIELD", new Level3FieldCinematic(this, levelManager.setLevel("level2"), this.cameraController, "LEVEL3"));
         stateManager.addState("LEVEL3", new Level3BattleState(this, levelManager, playerController, cameraController, enemyController));
