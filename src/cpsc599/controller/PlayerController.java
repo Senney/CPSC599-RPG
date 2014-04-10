@@ -489,4 +489,9 @@ public class PlayerController {
         return dynamicDialogue;
     }
 
+    public void endTurn() {
+        for (Player p : playerManager.getPlayers()) {
+            this.endTurn(p);
+        }
+    }
 }

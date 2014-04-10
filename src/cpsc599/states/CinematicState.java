@@ -91,7 +91,7 @@ public class CinematicState extends LevelState {
             loadCinematicActions();
         }
 
-        if (Controls.isKeyTapped(input, Controls.START)) {
+        if (Controls.isKeyTapped(input, Input.Keys.O)) {
             goToNextState();
         }
 

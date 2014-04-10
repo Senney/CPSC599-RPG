@@ -263,10 +263,7 @@ public class Level3BattleState extends LevelState {
          * Handle the joining of Jack.
          */
         if (!this.b_jackJoined && this.getFlagBoolean("house1")) {
-            this.dialogue.addDialogue("Hey, I'm Jack! I'd like to help you defeat these vile creatures!", "Jack");
-            this.dialogue.setVisibility(true);
-            this.playerController.getPlayerManager().addPlayer(jack);
-            b_jackJoined = true;
+            recruitJack();
             return;
         }
 
@@ -328,9 +325,23 @@ public class Level3BattleState extends LevelState {
         }
 
         // TODO: Find a way to abstract this into the PlayerController.
-        if (Controls.isKeyTapped(input, Controls.SELECT)) {
-            Logger.debug("'SELECT' pressed.");
+        if (Controls.isKeyTapped(input, Input.Keys.O)) {
+            if (!b_jackJoined) {
+                this.recruitJack();
+            }
             orb.setState("LEVEL3_FINALE");
         }
+
+        if (Controls.isKeyTapped(input, Input.Keys.R)) {
+            this.restart();
+        }
+    }
+
+    private void recruitJack() {
+        this.dialogue.addDialogue("Hey, I'm Jack! I'd like to help you defeat these vile creatures!", "Jack");
+        this.dialogue.setVisibility(true);
+        this.playerController.getPlayerManager().addPlayer(jack);
+        b_jackJoined = true;
+        return;
     }
 }

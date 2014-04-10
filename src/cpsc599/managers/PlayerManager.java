@@ -125,4 +125,8 @@ public class PlayerManager {
         this.playerList.clear();
         this.playerList.addAll(Arrays.asList(players));
     }
+
+    public int count() {
+        return playerList.size();
+    }
 }

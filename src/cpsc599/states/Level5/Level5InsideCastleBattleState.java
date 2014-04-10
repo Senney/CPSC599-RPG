@@ -102,8 +102,8 @@ public class Level5InsideCastleBattleState extends LevelState {
         Enemy e2 = new BruiserEnemy(SharedAssets.bruiserSprite, 13, 5);
         e2.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e2));
 
-        Enemy e3 = new AssassinEnemy(SharedAssets.assassinSprite, 14, 13);
-        e3.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e3));
+        Enemy e3 = new BruiserEnemy(SharedAssets.assassinSprite, 14, 13);
+        e3.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e3));
 
         Enemy e4 = new AssassinEnemy(SharedAssets.assassinSprite, 9, 13);
         e4.setAiActor(new AssassinAI(this.playerController.getPlayerManager(), pathfinder, e4));
@@ -175,6 +175,12 @@ public class Level5InsideCastleBattleState extends LevelState {
                 playerController.getPlayerManager().removePlayer(p);
                 return;
             }
+        }
+
+        if (!this.getFlagBoolean("b_dialogueShown") && enemyController.getEnemyManager().count() == 0) {
+            this.dialogue.addDialogue("I think the throne room is ahead! Let's go!", "Hikari");
+            this.dialogue.setVisibility(true);
+            this.setFlag("b_dialogueShown", true);
         }
 
 
@@ -252,9 +258,17 @@ public class Level5InsideCastleBattleState extends LevelState {
         }
 
         // TODO: Find a way to abstract this into the PlayerController.
-        if (Controls.isKeyTapped(input, Controls.SELECT)) {
-            Logger.debug("'SELECT' pressed.");
+        if (Controls.isKeyTapped(input, Input.Keys.O)) {
             orb.setState("LEVEL5_BLACKOUT");
+        }
+
+        if (Controls.isKeyTapped(input, Input.Keys.R)) {
+            this.restart();
+        }
+
+
+        if (Controls.isKeyTapped(input, Input.Keys.P)) {
+            this.enemyController.getEnemyManager().reset();
         }
     }
 }
