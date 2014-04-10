@@ -59,6 +59,8 @@ public class IntroLevelState extends LevelState {
         p3.getPlayerInventory().pickUp(new Item("Leather Belt", true, Inventory.LEGS_SLOT));
         p3.updateStats();
 
+        this.initialPlayerList = this.playerController.getPlayerManager().getPlayers();
+
         // Set up the pathfinder for this level.
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
                 enemyController.getEnemyManager(), this.gameEntityManager);
@@ -275,6 +277,11 @@ public class IntroLevelState extends LevelState {
                 addNewPlayers();
             }
             orb.setState("LEVEL1_FINALE");
+        }
+
+        if (Controls.isKeyTapped(input, Input.Keys.R)) {
+            super.restart();
+            return;
         }
     }
 
