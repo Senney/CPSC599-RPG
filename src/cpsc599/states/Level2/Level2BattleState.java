@@ -63,6 +63,7 @@ public class Level2BattleState extends LevelState{
         //playerController.getPlayerManager().reset();
 
         // Reset the player positions
+        this.initialPlayerList = playerController.getPlayerManager().getPlayers();
         playerController.resetTurn();
         Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
         for (int i = 0; i < currentPlayers.length; i++) {

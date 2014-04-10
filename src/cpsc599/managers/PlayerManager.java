@@ -5,6 +5,7 @@ import cpsc599.assets.Player;
 import cpsc599.util.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Manages the player controllable characters that are currently in the game.
@@ -118,5 +119,10 @@ public class PlayerManager {
     public void removePlayer(Player obj) {
         Logger.debug("Player " + obj.getName() + " removed.");
         this.playerList.remove(obj);
+    }
+
+    public void setPlayers(Player[] players) {
+        this.playerList.clear();
+        this.playerList.addAll(Arrays.asList(players));
     }
 }

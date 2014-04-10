@@ -64,6 +64,7 @@ public class Level3BattleState extends LevelState {
         enemyController.getEnemyManager().reset();
 
         // Reset the player positions
+        this.initialPlayerList = playerController.getPlayerManager().getPlayers();
         Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
         for (int i = 0; i < currentPlayers.length; i++) {
             currentPlayers[i].x = 1;
