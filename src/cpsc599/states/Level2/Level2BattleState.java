@@ -3,6 +3,7 @@ package cpsc599.states.Level2;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.sun.corba.se.impl.protocol.SharedCDRClientRequestDispatcherImpl;
 import cpsc599.OrbGame;
 import cpsc599.ai.*;
 import cpsc599.assets.AnimatedSprite;
@@ -21,6 +22,7 @@ import cpsc599.states.LevelState;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
+import org.lwjgl.opengl.SharedDrawable;
 
 public class Level2BattleState extends LevelState{
     int currentEnemy = 0;
@@ -61,6 +63,7 @@ public class Level2BattleState extends LevelState{
         //playerController.getPlayerManager().reset();
 
         // Reset the player positions
+        playerController.resetTurn();
         Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
         for (int i = 0; i < currentPlayers.length; i++) {
             currentPlayers[i].x = 4;
@@ -78,42 +81,42 @@ public class Level2BattleState extends LevelState{
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
                 enemyController.getEnemyManager(), this.gameEntityManager);
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/dragon.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.sniperSprite;
         Enemy e = new SniperEnemy(sprite, 18, 5);
         e.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e));
 
         Enemy e2 = new CowCubeEnemy(13, 8);
         e2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e2));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.thiefSprite;
         Enemy e3 = new NimbleThiefEnemy(sprite, 18, 10);
         e3.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e3));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/golem.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.bruiserSprite;
         Enemy e4 = new BruiserEnemy(sprite, 9, 14);
         e4.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e4));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human1.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.tankySprite;
         Enemy e5 = new TankyEnemy(sprite, 11, 14);
         e5.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e5));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.rangerSprite;
         Enemy e6 = new BasicRangedEnemy(sprite, 14, 16);
         e6.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e6));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.rangerSprite;
         Enemy e7 = new BasicRangedEnemy(sprite, 17, 18);
         e7.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e7));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.thiefSprite;
         Enemy e8 = new NimbleThiefEnemy(sprite, 14, 21);
         e8.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/golem.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.bruiserSprite;
         Enemy e9 = new BruiserEnemy(sprite, 8, 21);
         e9.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e9));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.rangerSprite;
         Enemy e10 = new BasicRangedEnemy(sprite, 6, 16);
         e10.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e10));
 
@@ -123,16 +126,15 @@ public class Level2BattleState extends LevelState{
         Enemy e12 = new CowCubeEnemy(13, 10);
         e12.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e12));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.rangerSprite;
         ex1 = new BasicRangedEnemy(sprite, 0, 5);
         ex1.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, ex1));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/golem.png", 0,0,16,16,1,0.1f);
+        sprite = SharedAssets.bruiserSprite;
         ex2 = new BruiserEnemy(sprite, 1, 6);
         ex2.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, ex2));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/snow_bird.png", 0,0,16,16,1,0.1f);
-        ex3 = new GlassCannonEnemy(sprite, 0, 7);
+        ex3 = new CowCubeEnemy(0, 7);
         ex3.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, ex3));
 
         enemyController.getEnemyManager().addEnemy(e);
@@ -147,9 +149,6 @@ public class Level2BattleState extends LevelState{
         enemyController.getEnemyManager().addEnemy(e10);
         enemyController.getEnemyManager().addEnemy(e11);
         enemyController.getEnemyManager().addEnemy(e12);
-
-        //playerController.getPlayerManager().addPlayer(p);
-        //playerController.getPlayerManager().addPlayer(p3);
 
         prisoner = new Player("Prisoner", SharedAssets.prisonerSprite, 10, 17, 7, 10, 4, 1, 120, 60);
         prisoner.getPlayerInventory().pickUp(new Item("Flesh crackling flesh strip", true, Inventory.RHAND_SLOT, 3, 4, 2));
@@ -166,15 +165,7 @@ public class Level2BattleState extends LevelState{
         playerController.setupMenus();
 
         dialogue = new Dialogue();
-        //dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
         dialogue.mapPortrait("Prisoner", SharedAssets.prisonerPortrait);
-
-        /*HealthShrineGameEntity shrine = new HealthShrineGameEntity(7, 8, 6);
-        ArmourGameEntity armour = new ArmourGameEntity(3, 15, 2);
-        SwordGameEntity sword = new SwordGameEntity(18, 0, 2);
-        gameEntityManager.addEntity(armour);
-        gameEntityManager.addEntity(sword);
-        gameEntityManager.addEntity(shrine);*/
 
         HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 1, 18, "key",
                 "Looks like someone is home...", "Here take this key to unlock one of the cells in the fortress!");
@@ -363,22 +354,6 @@ public class Level2BattleState extends LevelState{
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
         }
-        /*if(turnNum == 2 && !isShown) {
-            this.dialogue.addDialogue("Sean:\nHey what's going on here!?","Sean");
-            this.dialogue.addDialogue("Sasha:\nWe're here to help! Hold on.", "Sasha");
-            this.dialogue.setVisibility(true);
-            Player seen = new Player("Sean", SharedAssets.seanSprite, 0, 6, 7, 16, 3, 2, 100, 70);
-            seen.getPlayerInventory().pickUp(new Item("Sabre", true, Inventory.RHAND_SLOT, 1, 2, 3));
-            seen.getPlayerInventory().equip(seen.getPlayerInventory().getCarry()[0]);
-            seen.updateStats();
-            playerController.getPlayerManager().addPlayer(seen);
-            Player sash = new Player("Sean", SharedAssets.sashaSprite, 0, 8, 9, 12, 3, 1, 100, 70);
-            sash.getPlayerInventory().pickUp(new Item("Pointy thruster", true, Inventory.RHAND_SLOT, 2, 2, 3));
-            sash.getPlayerInventory().equip(sash.getPlayerInventory().getCarry()[0]);
-            sash.updateStats();
-            playerController.getPlayerManager().addPlayer(sash);
-            isShown = true;
-        }*/
 
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
