@@ -2,9 +2,12 @@ package cpsc599.ai;
 
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.*;
+import cpsc599.assets.Enemies.BasicRangedEnemy;
 import cpsc599.assets.Enemies.CowCubeEnemy;
+import cpsc599.assets.Enemies.SniperEnemy;
 import cpsc599.managers.EnemyManager;
 import cpsc599.managers.PlayerManager;
+import cpsc599.util.SharedAssets;
 
 import java.util.Random;
 
@@ -85,9 +88,11 @@ public class EtienAI extends AIActor {
     }
 
     private boolean decidePhase2() {
-        if (this.actor.currentHealth <= 50) {
+        if (this.actor.currentHealth <= 40) {
             this.dialogue.reset();
-            this.dialogue.addDialogue("Agh! My powers are being weakend... Get over here!", "Etien");
+            this.dialogue.addDialogue("You think you're so strong, just because you have the orb? Foolish girl! I am more powerful than any single item, or any single person!!", "Etien");
+            this.dialogue.addDialogue("I made a promise to Ren that I would always protect him. No matter how strong you are, the strength of that promise will always be stronger", "Hikari");
+            this.dialogue.addDialogue("DIE!!!!", "Etien");
             this.dialogue.setVisibility(true);
 
             this.b_phase2 = false;
@@ -98,11 +103,15 @@ public class EtienAI extends AIActor {
         Player p = playerManager.getPlayer(chosen);
         int px = p.x, py = p.y;
 
+        if (rand.nextFloat() <= 0.60) {
+            Vector2 spawn = randomLocation();
+            Enemy ranged = new SniperEnemy(SharedAssets.sniperSprite, (int)spawn.x, (int)spawn.y);
+            ranged.setAiActor(new HitAndRunAI(playerManager, pathfinder, ranged));
+            this.enemyManager.addEnemy(ranged);
+        }
+
         if (teleport(px, py)) {
             attack(p);
-            Vector2 range = findLocationInRange(new Vector2(this.actor.x, this.actor.y), this.pathfinder.getLevel(), 8);
-            if (range != null)
-                moveTo((int)range.x, (int)range.y);
         } else {
             return skipTurn();
         }
@@ -111,12 +120,13 @@ public class EtienAI extends AIActor {
     }
 
     private boolean teleport(int px, int py) {
-        if (canTeleport(px + 1, py)) {
-            this.actor.x = px + 1;
+
+        if (canTeleport(px - 1, py)) {
+            this.actor.x = px - 1;
             this.actor.y = py;
             return true;
-        } else if (canTeleport(px - 1, py)) {
-            this.actor.x = px - 1;
+        } else if (canTeleport(px + 1, py)) {
+            this.actor.x = px + 1;
             this.actor.y = py;
             return true;
         } else if (canTeleport(px, py - 1)) {
@@ -133,6 +143,8 @@ public class EtienAI extends AIActor {
     }
 
     private boolean decidePhase3() {
+
+
         return skipTurn();
     }
 
@@ -144,9 +156,15 @@ public class EtienAI extends AIActor {
         return (p == null && e == null && !collide);
     }
 
+    private Vector2 randomLocation() {
+        Vector2 pos = new Vector2(0, 0);
+        pos.x = rand.nextInt(14) + 1;
+        pos.y = rand.nextInt(6) + 1;
+        return pos;
+    }
+
     private Vector2 findLocationInRange(Vector2 position, Level level, int range) {
         int iterations = 0;
-        Random rand = new Random(System.currentTimeMillis());
 
         while (iterations < 10) {
             int xr = rand.nextInt(range) + 1, yr = rand.nextInt(range);
