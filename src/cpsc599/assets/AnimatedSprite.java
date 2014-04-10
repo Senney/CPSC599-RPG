@@ -59,13 +59,13 @@ public class AnimatedSprite {
         return true;
     }
 
-    public Texture getFrame(int frameCount) {
+    public TextureRegion getFrame(int frameCount) {
         if (frameCount > spriteFrames.length - 1) {
             Logger.error("Unable to get frame " + frameCount + " from animation.");
             return null;
         }
 
-        return spriteFrames[frameCount].getTexture();
+        return spriteFrames[frameCount];
     }
 
     public void render(SpriteBatch batch, int x, int y) {
