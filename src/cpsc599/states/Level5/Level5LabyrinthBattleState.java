@@ -148,7 +148,7 @@ public class Level5LabyrinthBattleState extends LevelState {
             return;
         }
 
-        if (this.etien.isDead()) {
+        if (this.etien.isDead() || this.etien.currentHealth == 1) {
             if (!this.getFlagBoolean("b_etienDeadSpeech")) {
                 this.etien.currentHealth = 1;
                 this.etien.setAiActor(null);
@@ -188,6 +188,7 @@ public class Level5LabyrinthBattleState extends LevelState {
         } else if (b_secondWave && enemyController.getEnemyManager().count() == 1) {
             Logger.debug("Spawning second wave of enemies.");
 
+            this.playerController.resetTurn();
             Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
             for (int i = 0; i < currentPlayers.length; i++) {
                 currentPlayers[i].x = 6 - i;
@@ -202,7 +203,6 @@ public class Level5LabyrinthBattleState extends LevelState {
             this.b_secondWave = false;
             return;
         } else if (!b_secondWave && enemyController.getEnemyManager().count() == 1 && this.b_etienDialogue) {
-            this.playerController.resetTurn();
             Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
             for (int i = 0; i < currentPlayers.length; i++) {
                 currentPlayers[i].x = 13;
@@ -318,7 +318,7 @@ public class Level5LabyrinthBattleState extends LevelState {
                 br4 = new CowCubeEnemy(6, 10);
         // 2 snipers
         Enemy sn1 = new SniperEnemy(SharedAssets.sniperSprite, 2, 8),
-                sn2 = new SniperEnemy(SharedAssets.sniperSprite, 5, 8);
+                sn2 = new BasicRangedEnemy(SharedAssets.rangerSprite, 5, 8);
         // 1 assassin
         Enemy as1 = new AssassinEnemy(SharedAssets.assassinSprite, 3, 9);
         // 1 tanky
