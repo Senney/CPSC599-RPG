@@ -159,8 +159,6 @@ public class Level2BattleState extends LevelState{
         //dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
         dialogue.mapPortrait("Prisoner", SharedAssets.prisonerPortrait);
 
-        playerController.getPlayerManager().addPlayer(prisoner);
-
         /*HealthShrineGameEntity shrine = new HealthShrineGameEntity(7, 8, 6);
         ArmourGameEntity armour = new ArmourGameEntity(3, 15, 2);
         SwordGameEntity sword = new SwordGameEntity(18, 0, 2);
@@ -170,7 +168,20 @@ public class Level2BattleState extends LevelState{
 
         HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 2, 21, "house1",
                 "Looks like someone is home...", "Here take this key to unlock one of the cells in the fortress!");
-        //DoorGameEntity door1 = new DoorGameEntity("key",SharedAssets.amulet, SharedAssets.armour, 10, 15, false);
+        DoorGameEntity door1 = new DoorGameEntity("key1" ,10, 15, false);
+        DoorGameEntity door2 = new DoorGameEntity("key2" ,18, 15, false);
+        DoorGameEntity door3 = new DoorGameEntity("open" ,7, 9, false);
+        DoorGameEntity door4 = new DoorGameEntity("open" ,7, 10, false);
+        DoorGameEntity door5 = new DoorGameEntity("open" ,14, 19, false);
+        DoorGameEntity door6 = new DoorGameEntity("open" ,15, 19, false);
+        DoorGameEntity door7 = new DoorGameEntity("open" ,16, 19, false);
+        gameEntityManager.addEntity(door1);
+        gameEntityManager.addEntity(door2);
+        gameEntityManager.addEntity(door3);
+        gameEntityManager.addEntity(door4);
+        gameEntityManager.addEntity(door5);
+        gameEntityManager.addEntity(door6);
+        gameEntityManager.addEntity(door7);
         gameEntityManager.addEntity(houseEntity);
 
         this.enemyStartTurn = true;
