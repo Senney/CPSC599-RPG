@@ -236,7 +236,7 @@ public class Level3BattleState extends LevelState {
         {
             //Game over!
             //add game over state
-            transition(5);
+            dialogue.addDialogue("All your characters have died...", "Hikari");
             orb.setState("GAME_OVER");
             //Logger.debug("Game Over...");
         }
@@ -256,6 +256,11 @@ public class Level3BattleState extends LevelState {
         if(playerController.restart) {
             super.restart();
             playerController.restart = false;
+            return;
+        }
+
+        if(enemyController.getEnemyManager().getEnemies().length == 0){
+            orb.setState("LEVEL3_FINALE");
             return;
         }
 

@@ -250,11 +250,11 @@ public class Level4BattleState extends LevelState{
         }
 
 
-        if(playerController.getPlayerManager().count() == 0)
+        if(playerController.getPlayerManager().getPlayers().length == 0)
         {
             //Game over!
             //add game over state
-            transition(5);
+            dialogue.addDialogue("All your characters have died...", "Hikari");
             orb.setState("GAME_OVER");
             //Logger.debug("Game Over...");
         }

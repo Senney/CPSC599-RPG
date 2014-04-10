@@ -54,4 +54,14 @@ public class StateManager {
         this.current = stateList.get(stateName);
         return this.current;
     }
+    public State setState(String stateName, String level) {
+        if (!stateList.containsKey(stateName)) {
+            Logger.warn("Unable to get state as it does not exist: " + stateName);
+            return null;
+        }
+
+        Logger.debug("Setting state to: " + stateName);
+        this.current = stateList.get(stateName);
+        return this.current;
+    }
 }
