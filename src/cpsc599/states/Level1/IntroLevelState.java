@@ -215,6 +215,12 @@ public class IntroLevelState extends LevelState {
             return;
         }
 
+        if(playerController.restart) {
+            super.restart();
+            playerController.restart = false;
+            return;
+        }
+
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
         } else {

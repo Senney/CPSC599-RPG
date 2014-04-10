@@ -165,6 +165,7 @@ public abstract class LevelState extends State {
 
             if(entityList.size() == 0 || (e = entityList.get(selected)) == null) {
                 dialogue.display("Professor Oak's words echo in your head: It is not the time to use this.");
+                Logger.debug("Size = " + entityList.size());
                 return;
             }
             if (using) {

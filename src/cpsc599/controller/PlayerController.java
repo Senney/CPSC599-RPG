@@ -25,8 +25,10 @@ import java.util.List;
 public class PlayerController {
     private boolean turnComplete;
     private boolean attacking;
+    public boolean inRange;
     private boolean inspecting;
     private boolean using;
+    public boolean restart;
 
     private int attackRange;
 
@@ -61,7 +63,9 @@ public class PlayerController {
         shapeRenderer =  new ShapeRenderer();
 
         this.inspecting = false;
+        this.inRange = false;
         this.using = false;
+        this.restart = false;
     }
 
     public boolean isCursor() {
@@ -177,12 +181,16 @@ public class PlayerController {
                else if(action.equals("Attack")) {
                     Logger.debug("Attacking");
                     int range = 0;
+                    this.inRange = true;
                     if(playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT) == null){
                         range = 1;      //sets default to fists if no weapon is equipped
                         System.out.println("Defaulting to fists with 1 range.");
                     }
                     else
                         range = playerManager.getCurrent().getPlayerInventory().getEquip(Inventory.RHAND_SLOT).range;
+
+                    dynamicDialogue.setText("Attacking");
+                    dynamicDialogue.setVisibility(true);
 
                     this.attacking = true;
                     this.attackRange = range;
@@ -195,11 +203,15 @@ public class PlayerController {
                     statsMenu.setVisible(true);
                 }else if (action.equals("Inspect")) {
                     Logger.debug("Inspecting");
+                    dynamicDialogue.setText("Inspecting");
+                    dynamicDialogue.setVisibility(true);
                     this.inspecting = true;
                     this.selectedUnit = 0;
                     return;
 
                 } else if (action.equals("Use")) {
+                    dynamicDialogue.setText("Using");
+                    dynamicDialogue.setVisibility(true);
                     this.using = true;
                     this.selected = 0;
                     return;
@@ -235,7 +247,8 @@ public class PlayerController {
                     this.globalMenu.setVisible(false);
                 }
                 else if(action.equals("Restart")) {
-
+                    this.restart = true;
+                    return;
                 }
                 else if(Controls.isKeyTapped(input, Controls.B_BUTTON))
                     globalMenu.setVisible(false);
@@ -401,6 +414,7 @@ public class PlayerController {
     private void moveCursor(Input input) {
         // Control the cursor here.
         if (Controls.isKeyTapped(input, Controls.UP)) {
+
             cursor.move(Controls.UP);
         } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
             cursor.move(Controls.DOWN);
