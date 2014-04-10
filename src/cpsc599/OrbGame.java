@@ -152,10 +152,6 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("MAIN_MENU", new MainMenuState());
         stateManager.addState("GAME_OVER", new GameOverState());
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3f38e1ac333e3e42242f5ebfc0263aaeec727be0
         // Prologue State
         stateManager.addState("PROLOGUE", new PrologueCinematicState(this, levelManager.setLevel("black"), this.cameraController, "LEVEL1_VILLAGE"));
 
