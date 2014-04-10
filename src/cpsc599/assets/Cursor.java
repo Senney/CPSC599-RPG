@@ -3,6 +3,7 @@ package cpsc599.assets;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import cpsc599.Main;
 import cpsc599.OrbGame;
 import cpsc599.managers.LevelManager;
@@ -27,16 +28,19 @@ public class Cursor {
         batch.draw(this.cursorSprite, CoordinateTranslator.translate(x), CoordinateTranslator.translate(y));
     }
 
-    public void move(int direction){
+    public void move(int direction, Level level){
+        Vector2 dimen = level.getMapDimensions();
         switch(direction){
             case Input.Keys.UP:
                 if(y <= 0) break;
                 y--;
                 break;
             case Input.Keys.DOWN:
+                if(y >= dimen.y - 1) break;
                 y++;
                 break;
             case Input.Keys.LEFT:
+                if(x >= dimen.x - 1) break;
                 x++;
                 break;
             case Input.Keys.RIGHT:

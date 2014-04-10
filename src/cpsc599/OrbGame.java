@@ -84,6 +84,7 @@ public class OrbGame implements ApplicationListener {
     public void tick() {
         frameTime += Gdx.graphics.getDeltaTime();
 
+        playerController.setLevel(levelManager.getCurrentLevel());
         this.stateManager.current.tick(Gdx.input);
     }
 
@@ -143,6 +144,8 @@ public class OrbGame implements ApplicationListener {
             Logger.fatal("LevelManager creation failed... Exiting.");
             System.exit(1);
         }
+
+        playerController.setLevel(levelManager.getCurrentLevel());
 
         // TODO: Fill this in with the proper state.
         // Start and Finish states
