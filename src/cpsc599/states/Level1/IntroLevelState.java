@@ -294,6 +294,11 @@ public class IntroLevelState extends LevelState {
             orb.setState("LEVEL1_FINALE");
         }
 
+        if (Controls.isKeyTapped(input, Input.Keys.K)) {
+            for(int i = 0; i < playerController.getPlayerManager().count(); i ++)
+            playerController.getPlayerManager().removePlayer(i);
+        }
+
         if (Controls.isKeyTapped(input, Input.Keys.R)) {
             super.restart();
             return;

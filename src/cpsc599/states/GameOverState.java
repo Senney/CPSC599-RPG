@@ -19,8 +19,9 @@ public class GameOverState extends State{
             return;
         }
         this.spriteBatch.begin();
-        this.drawString("Game Over", (int)(this.orb.width / 2), 20 + (int)(Math.sin(time * 0.07) * 10), StringAlign.CENTER);
-        this.drawString("You have died", this.orb.width/2, this.orb.height/2, StringAlign.CENTER);
+        this.drawString("Game Over", (int)(this.orb.width / 2), 40 + (int)(Math.sin(time * 0.07) * 10), StringAlign.CENTER);
+        this.drawString("Press start", this.orb.width/2, this.orb.height/2, StringAlign.CENTER);
+        this.drawString("to try again", this.orb.width/2, this.orb.height/2 - 20, StringAlign.CENTER);
         this.spriteBatch.end();
     }
 
