@@ -11,7 +11,7 @@ public class GlassCannonEnemy extends Enemy{
         super.maxHealth = 5;
         super.strength = 10;
         super.defence = 1;
-        super.hit = 60;
+        super.hit = 90;
         super.dodge = 30;
         super.range = 1;
 
