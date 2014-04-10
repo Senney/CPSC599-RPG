@@ -271,6 +271,11 @@ public class Level4BattleState extends LevelState{
             handleSelect(input, current);
             return;
         }
+        if(playerController.restart) {
+            super.restart();
+            playerController.restart = false;
+            return;
+        }
 
         //checks to see if someone is in range of castle
         for(int i = 0; i < playerController.getPlayerManager().count(); i++) {

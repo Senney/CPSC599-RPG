@@ -253,6 +253,11 @@ public class Level3BattleState extends LevelState {
             handleSelect(input, current);
             return;
         }
+        if(playerController.restart) {
+            super.restart();
+            playerController.restart = false;
+            return;
+        }
 
         /**
          * Handle the joining of Jack.

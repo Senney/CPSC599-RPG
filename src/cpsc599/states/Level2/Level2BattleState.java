@@ -278,6 +278,11 @@ public class Level2BattleState extends LevelState{
             handleSelect(input, current);
             return;
         }
+        if(playerController.restart) {
+            super.restart();
+            playerController.restart = false;
+            return;
+        }
 
         /**
          * Handle the getting of the key
