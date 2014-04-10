@@ -226,9 +226,14 @@ public class Level5LabyrinthBattleState extends LevelState {
         {
             //Game over!
             //add game over state
-            transition(5);
+            dialogue.addDialogue("All your characters have died...", "Hikari");
             orb.setState("GAME_OVER");
             //Logger.debug("Game Over...");
+        }
+
+        if(enemyController.getEnemyManager().getEnemies().length == 0){
+            orb.setState("LEVEL5_BLACKOUT");
+            return;
         }
 
         this.gameEntityManager.tick(this.currentTime, this);
@@ -241,6 +246,14 @@ public class Level5LabyrinthBattleState extends LevelState {
         } else if (playerController.isInspecting() || playerController.isUsing()) {
             // Handle item inspection and so-on.
             handleSelect(input, current);
+            return;
+        }
+
+        if(playerController.getnext) {
+            Player next = getNextPlayer();
+            playerController.getCursor().x = next.x;
+            playerController.getCursor().y = next.y;
+            playerController.getnext = false;
             return;
         }
 
