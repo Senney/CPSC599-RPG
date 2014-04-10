@@ -7,10 +7,7 @@ import cpsc599.OrbGame;
 import cpsc599.ai.*;
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Dialogue;
-import cpsc599.assets.Enemies.BasicEnemy;
-import cpsc599.assets.Enemies.BruiserEnemy;
-import cpsc599.assets.Enemies.NimbleThiefEnemy;
-import cpsc599.assets.Enemies.TankyEnemy;
+import cpsc599.assets.Enemies.*;
 import cpsc599.assets.Enemy;
 import cpsc599.assets.Entities.*;
 import cpsc599.assets.Player;
@@ -77,53 +74,50 @@ public class Level2BattleState extends LevelState{
         AStarPathfinder pathfinder = new AStarPathfinder(this.currentLevel, playerController.getPlayerManager(),
                 enemyController.getEnemyManager(), this.gameEntityManager);
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e = new NimbleThiefEnemy(sprite, 18, 5);
-        e.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/dragon.png", 0,0,16,16,1,0.1f);
+        Enemy e = new SniperEnemy(sprite, 18, 5);
+        e.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png", 0,0,16,16,1,0.1f);
-        Enemy e2 = new TankyEnemy(sprite, 13, 8);
-        e2.setAiActor(new TankAI(this.playerController.getPlayerManager(), pathfinder, e2));
+        Enemy e2 = new CowCubeEnemy(13, 8);
+        e2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e2));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
         Enemy e3 = new NimbleThiefEnemy(sprite, 18, 10);
         e3.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e3));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy9.png", 0,0,16,16,1,0.1f);
-        Enemy e4 = new BasicEnemy(sprite, 9, 14);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/golem.png", 0,0,16,16,1,0.1f);
+        Enemy e4 = new BruiserEnemy(sprite, 9, 14);
         e4.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e4));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e5 = new BasicEnemy(sprite, 11, 14);
-        e5.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e5));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human1.png", 0,0,16,16,1,0.1f);
+        Enemy e5 = new TankyEnemy(sprite, 11, 14);
+        e5.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e5));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
-        Enemy e6 = new BasicEnemy(sprite, 14, 16);
-        e6.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e6));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        Enemy e6 = new BasicRangedEnemy(sprite, 14, 16);
+        e6.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e6));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e7 = new BasicEnemy(sprite, 17, 18);
-        e7.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e7));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        Enemy e7 = new BasicRangedEnemy(sprite, 17, 18);
+        e7.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e7));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e8 = new BasicEnemy(sprite, 14, 21);
+        Enemy e8 = new NimbleThiefEnemy(sprite, 14, 21);
         e8.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/golem.png", 0,0,16,16,1,0.1f);
         Enemy e9 = new BruiserEnemy(sprite, 8, 21);
-        e9.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e9));
+        e9.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e9));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
-        Enemy e10 = new BruiserEnemy(sprite, 6, 16);
-        e10.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e10));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        Enemy e10 = new BasicRangedEnemy(sprite, 6, 16);
+        e10.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e10));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
-        Enemy e11 = new BruiserEnemy(sprite, 12, 9);
-        e11.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e11));
+        Enemy e11 = new CowCubeEnemy(12, 9);
+        e11.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e11));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
-        Enemy e12 = new BruiserEnemy(sprite, 13, 10);
-        e12.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e12));
+        Enemy e12 = new CowCubeEnemy(13, 10);
+        e12.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e12));
 
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
@@ -275,6 +269,10 @@ public class Level2BattleState extends LevelState{
             this.dialogue.setVisibility(true);
             hasKey = true;
             return;
+        }
+
+        if(hasKey && this.getFlagBoolean("key1") || this.getFlagBoolean("key2") && !usedKey) {
+
         }
 
         if (!playerController.isTurnComplete()) {
