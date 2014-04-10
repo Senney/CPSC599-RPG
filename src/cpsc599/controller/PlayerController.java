@@ -12,6 +12,7 @@ import cpsc599.menus.ActionMenu;
 import cpsc599.menus.GlobalMenu;
 import cpsc599.menus.InventoryMenu;
 import cpsc599.menus.StatsMenu;
+import cpsc599.states.LevelState;
 import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
@@ -29,6 +30,7 @@ public class PlayerController {
     private boolean inspecting;
     private boolean using;
     public boolean restart;
+    public boolean getnext;
 
     private int attackRange;
 
@@ -68,6 +70,7 @@ public class PlayerController {
         this.inRange = false;
         this.using = false;
         this.restart = false;
+        this.getnext = false;
     }
 
     public boolean isCursor() {
@@ -305,6 +308,9 @@ public class PlayerController {
                     releasePlayer();
                 else
                     resetPlayerToCursor(p);
+            }
+            else {
+                this.getnext = true;
             }
         }
         //Display enemy stats on screen

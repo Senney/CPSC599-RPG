@@ -217,4 +217,15 @@ public abstract class LevelState extends State {
                     playerController.getAttackRange());
         }
     }
+
+    protected Player getNextPlayer() {
+        Player next = null;
+        for(int i = 0; i < playerController.getPlayerManager().count(); i++) {
+            if(!playerController.getPlayerManager().getPlayer(i).turnOver) {
+                next = playerController.getPlayerManager().getPlayer(i);
+                return next;
+            }
+        }
+        return next;
+    }
 }
