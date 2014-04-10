@@ -56,7 +56,7 @@
  </tileset>
  <layer name="main" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJzTZ2ZgMMCCDYHYAor18agxR1KHT70hFnWWOPRjE7McQfrtgdgBDTvi0I8tXmAYZj4+NdjsJ+S+UXnqyWOLaxiG6cclD0oTAJEHNuE=
+   eJzTZ2ZgMCATGwKxORBbkIktR/VTrF+fQPwQksdnPyH3jcpTLm8PxA44sCMR8gB3FzbR
   </data>
  </layer>
  <layer name="Collision" width="16" height="15" opacity="0">
