@@ -102,7 +102,7 @@ public class SharedAssets {
         sashaSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 2, 0, 16, 16, 1, 0.1f);
         renSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
         jackSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
-        prisonerSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
+        prisonerSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 1, 0, 16, 16, 1, 0.1f);
 
         cursorNormal = loadTextureRegion("assets/tilesets/cursor.png", 16, 16, 0, 0, false);
         cursorHighlighted = loadTextureRegion("assets/tilesets/cursor.png", 16, 16, 1, 0, false);

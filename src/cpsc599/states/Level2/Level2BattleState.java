@@ -102,7 +102,7 @@ public class Level2BattleState extends LevelState{
         e6.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e6));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e7 = new BasicEnemy(sprite, 18, 14);
+        Enemy e7 = new BasicEnemy(sprite, 17, 18);
         e7.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e7));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
@@ -141,8 +141,8 @@ public class Level2BattleState extends LevelState{
         //playerController.getPlayerManager().addPlayer(p);
         //playerController.getPlayerManager().addPlayer(p3);
 
-        prisoner = new Player("Prisoner", SharedAssets.prisonerSprite, 7, 14, 7, 10, 4, 1, 120, 60);
-        prisoner.getPlayerInventory().pickUp(new Item("Flesh crackling flesh strip", true, Inventory.RHAND_SLOT, 1, 4, 3));
+        prisoner = new Player("Prisoner", SharedAssets.prisonerSprite, 10, 17, 7, 10, 4, 1, 120, 60);
+        prisoner.getPlayerInventory().pickUp(new Item("Flesh crackling flesh strip", true, Inventory.RHAND_SLOT, 3, 4, 2));
         prisoner.getPlayerInventory().equip(prisoner.getPlayerInventory().getCarry()[0]);
         prisoner.updateStats();
 
@@ -159,6 +159,8 @@ public class Level2BattleState extends LevelState{
         //dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
         dialogue.mapPortrait("Prisoner", SharedAssets.prisonerPortrait);
 
+        playerController.getPlayerManager().addPlayer(prisoner);
+
         /*HealthShrineGameEntity shrine = new HealthShrineGameEntity(7, 8, 6);
         ArmourGameEntity armour = new ArmourGameEntity(3, 15, 2);
         SwordGameEntity sword = new SwordGameEntity(18, 0, 2);
@@ -168,7 +170,7 @@ public class Level2BattleState extends LevelState{
 
         HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 2, 21, "house1",
                 "Looks like someone is home...", "Here take this key to unlock one of the cells in the fortress!");
-        //DoorGameEntity door1 = new DoorGameEntity("key",SharedAssets.)
+        //DoorGameEntity door1 = new DoorGameEntity("key",SharedAssets.amulet, SharedAssets.armour, 10, 15, false);
         gameEntityManager.addEntity(houseEntity);
 
         this.enemyStartTurn = true;
