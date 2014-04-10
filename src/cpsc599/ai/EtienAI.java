@@ -22,6 +22,9 @@ public class EtienAI extends AIActor {
     private boolean b_phase1, b_phase2, b_phase3;
     private int turnCount;
 
+    private int chaseStart = 0, chaseTurns = 3;
+    private Player chasePlayer;
+
     private Random rand;
 
     public EtienAI(Dialogue d, EnemyManager enemyManager, PlayerManager playerManager, AStarPathfinder pathfinder, Actor actor) {
@@ -58,7 +61,7 @@ public class EtienAI extends AIActor {
     private boolean decidePhase1() {
         if (!p1_spawnCubesStart) {
             this.dialogue.reset();
-            this.dialogue.addDialogue("Go, my minions! Stop them!", "Etien");
+            this.dialogue.addDialogue("Go, my minions! Stop them!", "Almighty");
             this.dialogue.setVisibility(true);
             int startx = 7;
             int starty = 2;
@@ -76,7 +79,7 @@ public class EtienAI extends AIActor {
 
         if (p1_spawnCubesStart && enemyManager.count() == 1) {
             this.dialogue.reset();
-            this.dialogue.addDialogue("How dare you!", "Etien");
+            this.dialogue.addDialogue("How dare you destroy my beautiful cubes!", "Almighty");
             this.dialogue.setVisibility(true);
 
             this.b_phase1 = false;
@@ -90,13 +93,16 @@ public class EtienAI extends AIActor {
     private boolean decidePhase2() {
         if (this.actor.currentHealth <= 40) {
             this.dialogue.reset();
-            this.dialogue.addDialogue("You think you're so strong, just because you have the orb? Foolish girl! I am more powerful than any single item, or any single person!!", "Etien");
+            this.dialogue.addDialogue("You think you're so strong, just because you have the orb? Foolish girl! I am more powerful than any single item, or any single person!!", "Almighty");
             this.dialogue.addDialogue("I made a promise to Ren that I would always protect him. No matter how strong you are, the strength of that promise will always be stronger", "Hikari");
-            this.dialogue.addDialogue("DIE!!!!", "Etien");
+            this.dialogue.addDialogue("DIE!!!!", "Almighty");
+            this.dialogue.addDialogue("The avatar seems to pulsate with power. He looks like he's going to chase someone! Get away!", "System");
             this.dialogue.setVisibility(true);
 
             this.b_phase2 = false;
             this.b_phase3 = true;
+
+            return skipTurn();
         }
 
         int chosen = rand.nextInt(playerManager.count());
@@ -143,9 +149,33 @@ public class EtienAI extends AIActor {
     }
 
     private boolean decidePhase3() {
+        if (this.actor.currentHealth <= 10) {
+            this.dialogue.reset();
+            this.dialogue.addDialogue("Impossible! How... how could this be! I'm a god!!", "Almighty");
+            this.dialogue.addDialogue("AGHHHHHH!", "Almighty");
+            this.dialogue.addDialogue("Quick! Let's go rescue Ren!", "Hikari");
+            this.dialogue.setVisibility(true);
+            this.b_phase3 = false;
+            return skipTurn();
+        }
 
+        this.actor.maxMove = 6;
+        this.actor.damage = 12;
+        this.actor.defence = 4;
 
-        return skipTurn();
+        // Find a random player to chase.
+        Player p = null;
+        if (turnCount > chaseStart + chaseTurns || chasePlayer != null) {
+            int chosen = rand.nextInt(playerManager.count());
+            p = playerManager.getPlayer(chosen);
+            chasePlayer = p;
+        } else {
+            p = chasePlayer;
+        }
+        int px = p.x, py = p.y;
+
+        attackTo(px, py);
+        return true;
     }
 
     private boolean canTeleport(int x, int y) {
