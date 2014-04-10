@@ -12,9 +12,8 @@ public class PrisonerEntity extends GameEntity{
     private int def;
     private boolean used;
 
-    public PrisonerEntity(int x, int y, int defense) {
+    public PrisonerEntity(int x, int y) {
         super();
-        this.def = defense;
         this.used = false;
 
         super.objSprite = new Sprite(SharedAssets.prisonerSprite.getFrame(0));

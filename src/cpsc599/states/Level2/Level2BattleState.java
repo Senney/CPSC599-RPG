@@ -169,6 +169,8 @@ public class Level2BattleState extends LevelState{
         UsableDoorGameEntity door5 = new UsableDoorGameEntity("open" ,14, 19, false);
         UsableDoorGameEntity door6 = new UsableDoorGameEntity("open" ,15, 19, false);
         UsableDoorGameEntity door7 = new UsableDoorGameEntity("open" ,16, 19, false);
+        PrisonerEntity fakePrisoner = new PrisonerEntity(10,17);
+        gameEntityManager.addEntity(fakePrisoner);
         gameEntityManager.addEntity(door1);
         gameEntityManager.addEntity(door2);
         gameEntityManager.addEntity(door3);
