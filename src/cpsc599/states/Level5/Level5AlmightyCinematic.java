@@ -14,8 +14,8 @@ import cpsc599.util.SharedAssets;
 
 public class Level5AlmightyCinematic extends CinematicState {
 	Player hik, sean, sasha;
-	Player etien, almighty, cc1, cc2, cc3;
-	
+	Player etien, almighty, cc1, cc2, cc3, etien2;
+
     public Level5AlmightyCinematic(OrbGame game, Level level, CameraController cameraController, String nextState) {
         super(game, level, cameraController, nextState);
     }
@@ -32,6 +32,8 @@ public class Level5AlmightyCinematic extends CinematicState {
                 2, 1, 16, 16, 1, 0.1f);
         AnimatedSprite etienSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/etienne.png",
                 0, 0, 16, 16, 1, 0.1f);
+        AnimatedSprite etien2Sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/etienne2.png",
+                0, 0, 16, 16, 1, 0.1f);
         AnimatedSprite almightySprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/giant_cow_cube.png",
         		0, 0, 128, 128, 1, 0.1f);
         AnimatedSprite ccSprite = new AnimatedSprite("assets/tilesets/cowcube.png", 0, 0, 16, 16, 1, 0.1f);
@@ -39,7 +41,8 @@ public class Level5AlmightyCinematic extends CinematicState {
         hik = new Player("Hikari", hikSprite, 8, 8, 0);
         sean = new Player("Sean", seanSprite, 9, 9, 0);
         sasha = new Player("Sasha", sashaSprite, 7, 9, 0);
-        etien = new Player("Etien", etienSprite, 8, 5, 0);
+        etien = new Player("Etien", etienSprite, 8, 2, 0);
+        etien2 = new Player("Etien", etien2Sprite, 8, 5, 0);
         
         almighty = new Player("Almighty", almightySprite);
         cc1 = new Player("Cow1", ccSprite);
@@ -74,9 +77,18 @@ public class Level5AlmightyCinematic extends CinematicState {
     @Override
     protected void loadCinematicActions() {
     	actions.add(CinematicAction.wait(1.0f));
-    	
+
+        actions.add(CinematicAction.moveTo(hik, new Vector2(8, 6), 0.1f));
     	actions.add(CinematicAction.stepDialogue(this.dialogue));
     	actions.add(CinematicAction.wait(0.4f));
+
+        actions.add(CinematicAction.stepDialogue(this.dialogue));
+        actions.add(CinematicAction.wait(1.0f));
+
+        actions.add(CinematicAction.stepDialogue(this.dialogue));
+        actions.add(CinematicAction.moveTo(hik, new Vector2(8, 8), 0.1f));
+        actions.add(CinematicAction.wait(0.4f));
+        actions.add(CinematicAction.moveTo(etien, new Vector2(8, 5)));
     	
     	actions.add(CinematicAction.despawnActor(etien));
     	actions.add(CinematicAction.wait(0.2f));
@@ -112,9 +124,21 @@ public class Level5AlmightyCinematic extends CinematicState {
     	actions.add(CinematicAction.moveToConcurrent(hik, new Vector2(8, 10), 0.4f));
     	actions.add(CinematicAction.moveToConcurrent(sean, new Vector2(9, 11), 0.4f));
     	actions.add(CinematicAction.moveToConcurrent(sasha, new Vector2(7, 11), 0.4f));
-    	
+
+        actions.add(CinematicAction.stepDialogue(this.dialogue));
     	actions.add(CinematicAction.spawnActor(almighty, new Vector2(4, 2)));
-    	actions.add(CinematicAction.wait(0.8f));
+        actions.add(CinematicAction.wait(0.8f));
+        actions.add(CinematicAction.despawnActor(almighty));
+        actions.add(CinematicAction.wait(0.2f));
+        actions.add(CinematicAction.spawnActor(almighty, new Vector2(4, 2)));
+        actions.add(CinematicAction.wait(0.2f));
+        actions.add(CinematicAction.despawnActor(almighty));
+        actions.add(CinematicAction.wait(0.2f));
+        actions.add(CinematicAction.spawnActor(almighty, new Vector2(4, 2)));
+        actions.add(CinematicAction.wait(0.1f));
+        actions.add(CinematicAction.despawnActor(almighty));
+        actions.add(CinematicAction.wait(0.1f));
+        actions.add(CinematicAction.spawnActor(etien2, new Vector2(8, 5)));
     	
     	actions.add(CinematicAction.spawnActor(cc1, new Vector2(4, 9)));
     	actions.add(CinematicAction.wait(0.2f));
@@ -125,6 +149,8 @@ public class Level5AlmightyCinematic extends CinematicState {
     	
     	actions.add(CinematicAction.stepDialogue(this.dialogue));
     	actions.add(CinematicAction.stepDialogue(this.dialogue));
+        actions.add(CinematicAction.stepDialogue(this.dialogue));
+        actions.add(CinematicAction.stepDialogue(this.dialogue));
     	actions.add(CinematicAction.wait(0.4f));
     	
     	actions.add(CinematicAction.wait(0.4f));
