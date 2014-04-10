@@ -12,7 +12,7 @@ public class AssassinEnemy extends Enemy{
         super.strength = 4;
         super.defence = 1;
         super.hit = 140;
-        super.dodge = 70;
+        super.dodge = 55;
         super.range = 1;
 
         super.damage = baseDamage + super.strength;

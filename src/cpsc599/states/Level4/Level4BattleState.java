@@ -36,6 +36,7 @@ public class Level4BattleState extends LevelState{
     public boolean isShown;
 
     public boolean seenCastle;
+    private boolean b_dialogueShown;
 
     public Level4BattleState(OrbGame game, LevelManager manager, PlayerController playerController,
                              CameraController cameraController, EnemyController enemyController) {
@@ -57,6 +58,7 @@ public class Level4BattleState extends LevelState{
         turnNum = 0;
         isShown = false;
         seenCastle = false;
+        this.b_dialogueShown = false;
 
         //playerController.getPlayerManager().reset();
         enemyController.getEnemyManager().reset();
@@ -228,7 +230,7 @@ public class Level4BattleState extends LevelState{
         }
 
         //you will probably hate me for this...
-        for(int i =0; i<playerController.getPlayerManager().getPlayers().length; i++)
+        for(int i =0; i<playerController.getPlayerManager().count(); i++)
         {
             Player p = playerController.getPlayerManager().getPlayer(i);
             if(p.isDead())
@@ -240,8 +242,15 @@ public class Level4BattleState extends LevelState{
             }
         }
 
+        if (!this.b_dialogueShown && enemyController.getEnemyManager().count() == 0) {
+            this.dialogue.addDialogue("All of the enemies are dead! Let's head to that castle.", "Hikari");
+            this.dialogue.setVisibility(true);
+            this.b_dialogueShown = true;
+            return;
+        }
 
-        if(playerController.getPlayerManager().getPlayers().length == 0)
+
+        if(playerController.getPlayerManager().count() == 0)
         {
             //Game over!
             //add game over state
@@ -271,10 +280,12 @@ public class Level4BattleState extends LevelState{
                 String name = playerController.getPlayerManager().getPlayer(i).getName();
                 dialogue.addDialogue(name + ":\nHey I see a castle in the distance! I think we can navigate around this mountain pass to get there.", name);
                 this.dialogue.setVisibility(true);
+                break;
             }
             if(xpos >= 15 && playerController.getPlayerManager().getPlayer(i).y <= 5) {
                 Logger.debug("Level complete!");
                 orb.setState("LEVEL4_FINALE");
+                return;
             }
         }
 
@@ -337,6 +348,10 @@ public class Level4BattleState extends LevelState{
 
         if (Controls.isKeyTapped(input, Input.Keys.R)) {
             this.restart();
+        }
+
+        if (Controls.isKeyTapped(input, Input.Keys.P)) {
+            this.enemyController.getEnemyManager().reset();
         }
     }
 

@@ -213,6 +213,14 @@ public class Dialogue {
         Logger.debug("Setting visibility of Dialogue to " + visible);
         return visible;
     }
+
+    public void reset() {
+        this.text = "";
+        this.textRemains = "";
+        this.textLeft = false;
+        this.setVisibility(false);
+        this.strings.clear();
+    }
 	
 	public void render(SpriteBatch batch) {
 		if (!visible) return;

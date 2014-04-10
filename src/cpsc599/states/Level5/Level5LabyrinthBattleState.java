@@ -3,7 +3,6 @@ package cpsc599.states.Level5;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
 import cpsc599.ai.*;
 import cpsc599.assets.Dialogue;
@@ -31,10 +30,13 @@ public class Level5LabyrinthBattleState extends LevelState {
     private boolean b_firstWave;
     private boolean b_secondWave;
 
+    private Enemy etien;
+
     public int turnNum;
     public boolean isShown;
 
     public boolean seenCastle;
+    private boolean b_etienDialogue;
 
     public Level5LabyrinthBattleState(OrbGame game, LevelManager manager, PlayerController playerController,
                                          CameraController cameraController, EnemyController enemyController) {
@@ -80,6 +82,9 @@ public class Level5LabyrinthBattleState extends LevelState {
 
         playerController.setupMenus();
 
+        this.etien = new EtienBoss(2, 3);
+        this.enemyController.getEnemyManager().addEnemy(etien);
+
         dialogue = new Dialogue();
         dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
         dialogue.addDialogue("What happened!?", "Hikari");
@@ -93,6 +98,7 @@ public class Level5LabyrinthBattleState extends LevelState {
 
         this.b_firstWave = true;
         this.b_secondWave = true;
+        this.b_etienDialogue = true;
     }
 
     @Override
@@ -158,7 +164,7 @@ public class Level5LabyrinthBattleState extends LevelState {
             spawnFirstWave();
             this.b_firstWave = false;
             return;
-        } else if (b_secondWave && enemyController.getEnemyManager().count() == 0) {
+        } else if (b_secondWave && enemyController.getEnemyManager().count() == 1) {
             Logger.debug("Spawning second wave of enemies.");
 
             Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
@@ -166,11 +172,28 @@ public class Level5LabyrinthBattleState extends LevelState {
                 currentPlayers[i].x = 6 - i;
                 currentPlayers[i].y = 13;
             }
+            this.dialogue.reset();
+            this.dialogue.addDialogue("What!? You're stronger than I thought.", "Etien");
             this.dialogue.addDialogue("Let's try making it a little harder...", "Etien");
             this.dialogue.setVisibility(true);
             spawnSecondWave();
 
             this.b_secondWave = false;
+            return;
+        } else if (!b_secondWave && enemyController.getEnemyManager().count() == 1 && this.b_etienDialogue) {
+            Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
+            for (int i = 0; i < currentPlayers.length; i++) {
+                currentPlayers[i].x = 13;
+                currentPlayers[i].y = 1 + i;
+            }
+
+            this.dialogue.reset();
+            this.dialogue.addDialogue("Alright, fools... Prepare for the real battle. PREPARE FOR THE MIGHT OF THE CUBE!", "Etien");
+            this.dialogue.setVisibility(true);
+            this.b_etienDialogue = true;
+
+            this.etien.setAiActor(new EtienAI());
+
             return;
         }
 
@@ -255,6 +278,7 @@ public class Level5LabyrinthBattleState extends LevelState {
 
         if (Controls.isKeyTapped(input, Input.Keys.P)) {
             this.enemyController.getEnemyManager().reset();
+            this.enemyController.getEnemyManager().addEnemy(etien);
         }
 
         if (Controls.isKeyTapped(input, Input.Keys.R)) {
@@ -263,7 +287,38 @@ public class Level5LabyrinthBattleState extends LevelState {
     }
 
     private void spawnSecondWave() {
+        // 4 bruisers
+        Enemy br1 = new BruiserEnemy(SharedAssets.bruiserSprite, 1, 10),
+                br2 = new BruiserEnemy(SharedAssets.bruiserSprite, 2, 10),
+                br3 = new BruiserEnemy(SharedAssets.bruiserSprite, 5, 10),
+                br4 = new BruiserEnemy(SharedAssets.bruiserSprite, 6, 10);
+        // 2 snipers
+        Enemy sn1 = new SniperEnemy(SharedAssets.sniperSprite, 2, 8),
+                sn2 = new SniperEnemy(SharedAssets.sniperSprite, 5, 8);
+        // 1 assassin
+        Enemy as1 = new AssassinEnemy(SharedAssets.assassinSprite, 3, 9);
+        // 1 tanky
+        Enemy ta1 = new TankyEnemy(SharedAssets.tankySprite, 4, 9);
 
+        br1.setAiActor(new OpportunistAI(playerController.getPlayerManager(), pathfinder, br1));
+        br2.setAiActor(new OpportunistAI(playerController.getPlayerManager(), pathfinder, br2));
+        br3.setAiActor(new OpportunistAI(playerController.getPlayerManager(), pathfinder, br3));
+        br4.setAiActor(new OpportunistAI(playerController.getPlayerManager(), pathfinder, br4));
+
+        sn1.setAiActor(new BasicWarriorAI(playerController.getPlayerManager(), pathfinder, sn1));
+        sn2.setAiActor(new BasicWarriorAI(playerController.getPlayerManager(), pathfinder, sn2));
+
+        as1.setAiActor(new HitAndRunAI(playerController.getPlayerManager(), pathfinder, as1));
+        ta1.setAiActor(new TankAI(playerController.getPlayerManager(), pathfinder, ta1));
+
+        this.enemyController.getEnemyManager().addEnemy(br1);
+        this.enemyController.getEnemyManager().addEnemy(br2);
+        this.enemyController.getEnemyManager().addEnemy(br3);
+        this.enemyController.getEnemyManager().addEnemy(br4);
+        this.enemyController.getEnemyManager().addEnemy(sn1);
+        this.enemyController.getEnemyManager().addEnemy(sn2);
+        this.enemyController.getEnemyManager().addEnemy(as1);
+        this.enemyController.getEnemyManager().addEnemy(ta1);
     }
 
     private void spawnFirstWave() {

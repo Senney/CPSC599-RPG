@@ -179,10 +179,8 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL5_CRYSTAL_CASTLE", new Level5CrystalCastleCinematic(this, levelManager.setLevel("crystal_castle"), this.cameraController, "LEVEL5_INSIDE_CASTLE"));
         stateManager.addState("LEVEL5_INSIDE_CASTLE", new Level5InsideCastleBattleState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL5_BLACKOUT", new Level5BlackoutCinematic(this, levelManager.setLevel("blackout_castle"), this.cameraController, "LEVEL5_ALMIGHTY"));
-        //stateManager.addState("LEVEL5_THRONE_ROOM", new Level5ThroneRoomCinematic(this, levelManager.setLevel("throne_room"), this.cameraController, "LEVEL5_ALMIGHTY"));
-        //stateManager.addState("LEVEL5_ETIEN_BATTLE", new Level5EtienBattleState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL5_ALMIGHTY", new Level5AlmightyCinematic(this, levelManager.setLevel("throne_room"), this.cameraController, "LEVEL5_LABYRINTH"));
-        //stateManager.addState("LEVEL5_ALMIGHTY_BATTLE", new Level5AlmightyBattleState(this, levelManager, playerController, cameraController, enemyController));
+        stateManager.addState("LEVEL5_LABYRINTH", new Level5LabyrinthBattleState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL5_FINALE", new Level5FinaleCinematic(this, levelManager.setLevel("empty_throne_room"), this.cameraController, ""));
         
         setState("MAIN_MENU");
