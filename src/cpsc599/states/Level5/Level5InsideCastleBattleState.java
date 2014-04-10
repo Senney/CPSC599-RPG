@@ -22,7 +22,7 @@ import cpsc599.util.Controls;
 import cpsc599.util.Logger;
 import cpsc599.util.SharedAssets;
 
-public class Level5InsideCastleState extends LevelState {
+public class Level5InsideCastleBattleState extends LevelState {
     int currentEnemy = 0;
     float currentTime = 0f;
 
@@ -38,8 +38,8 @@ public class Level5InsideCastleState extends LevelState {
 
     public boolean seenCastle;
 
-    public Level5InsideCastleState(OrbGame game, LevelManager manager, PlayerController playerController,
-                                   CameraController cameraController, EnemyController enemyController) {
+    public Level5InsideCastleBattleState(OrbGame game, LevelManager manager, PlayerController playerController,
+                                         CameraController cameraController, EnemyController enemyController) {
         super(game, playerController, cameraController, enemyController);
         this.levelManager = manager;
     }

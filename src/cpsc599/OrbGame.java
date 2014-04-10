@@ -7,8 +7,6 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
-import cpsc599.assets.AnimatedSprite;
-import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
@@ -179,7 +177,7 @@ public class OrbGame implements ApplicationListener {
 
      // Chapter 5 states
         stateManager.addState("LEVEL5_CRYSTAL_CASTLE", new Level5CrystalCastleCinematic(this, levelManager.setLevel("crystal_castle"), this.cameraController, "LEVEL5_INSIDE_CASTLE"));
-        stateManager.addState("LEVEL5_INSIDE_CASTLE", new Level5InsideCastleState(this, levelManager, playerController, cameraController, enemyController));
+        stateManager.addState("LEVEL5_INSIDE_CASTLE", new Level5InsideCastleBattleState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL5_BLACKOUT", new Level5BlackoutCinematic(this, levelManager.setLevel("blackout_castle"), this.cameraController, "LEVEL5_THRONE_ROOM"));
         stateManager.addState("LEVEL5_THRONE_ROOM", new Level5ThroneRoomCinematic(this, levelManager.setLevel("throne_room"), this.cameraController, "LEVEL5_ETIEN_BATTLE"));
         //stateManager.addState("LEVEL5_ETIEN_BATTLE", new Level5EtienBattleState(this, levelManager, playerController, cameraController, enemyController));
