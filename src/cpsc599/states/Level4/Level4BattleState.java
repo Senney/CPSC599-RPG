@@ -5,13 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
-import cpsc599.ai.AStarPathfinder;
-import cpsc599.ai.BasicWarriorAI;
+import cpsc599.ai.*;
 import cpsc599.assets.*;
-import cpsc599.assets.Enemies.AssassinEnemy;
-import cpsc599.assets.Enemies.CowCubeEnemy;
-import cpsc599.assets.Entities.HealthShrineGameEntity;
-import cpsc599.assets.Entities.HouseGameEntity;
+import cpsc599.assets.Enemies.*;
+import cpsc599.assets.Entities.*;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
 import cpsc599.controller.PlayerController;
@@ -56,7 +53,6 @@ public class Level4BattleState extends LevelState{
         gameEntityManager.getEntities().clear();
 
         cameraController.set(6, 23);
-        playerController.getCursor().move(1);
 
         turnNum = 0;
         isShown = false;
@@ -134,6 +130,30 @@ public class Level4BattleState extends LevelState{
         e8.hit = 120;
         e8.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
+        Enemy e9 = new GlassCannonEnemy(SharedAssets.glassCannonSprite, 0, 5);
+        e9.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e9));
+
+        Enemy e10 = new AssassinEnemy(SharedAssets.assassinSprite, 2, 5);
+        e10.setAiActor(new AssassinAI(this.playerController.getPlayerManager(), pathfinder, e10));
+
+        Enemy e11 = new GlassCannonEnemy(SharedAssets.glassCannonSprite, 5, 5);
+        e11.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e11));
+
+        Enemy e12 = new BruiserEnemy(SharedAssets.bruiserSprite, 8, 5);
+        e12.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e12));
+
+        Enemy e13 = new BruiserEnemy(SharedAssets.bruiserSprite, 11, 5);
+        e13.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e13));
+
+        Enemy e14 = new GlassCannonEnemy(SharedAssets.glassCannonSprite, 14, 12);
+        e14.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e14));
+
+        Enemy e15 = new GlassCannonEnemy(SharedAssets.glassCannonSprite, 13, 18);
+        e15.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e15));
+
+        Enemy e16 = new SniperEnemy(SharedAssets.sniperSprite, 14, 18);
+        e16.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e16));
+
 
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
@@ -143,6 +163,23 @@ public class Level4BattleState extends LevelState{
         enemyController.getEnemyManager().addEnemy(e6);
         enemyController.getEnemyManager().addEnemy(e7);
         enemyController.getEnemyManager().addEnemy(e8);
+        enemyController.getEnemyManager().addEnemy(e9);
+        enemyController.getEnemyManager().addEnemy(e10);
+        enemyController.getEnemyManager().addEnemy(e11);
+        enemyController.getEnemyManager().addEnemy(e12);
+        enemyController.getEnemyManager().addEnemy(e13);
+        enemyController.getEnemyManager().addEnemy(e14);
+        enemyController.getEnemyManager().addEnemy(e15);
+        enemyController.getEnemyManager().addEnemy(e16);
+
+        gameEntityManager.addEntity(new HealthShrineGameEntity(9, 10, 7));
+        gameEntityManager.addEntity(new ArmourGameEntity(12, 16, 2));
+        gameEntityManager.addEntity(new ShieldGameEntity(14, 15, 2));
+        gameEntityManager.addEntity(new AmuletGameEntity(14, 13, 2));
+        gameEntityManager.addEntity(new SwordGameEntity(0, 3, 2));
+        gameEntityManager.addEntity(new ArmourGameEntity(6, 3, 2));
+        gameEntityManager.addEntity(new HealthGameEntity(12, 4, 2));
+
     }
 
     @Override

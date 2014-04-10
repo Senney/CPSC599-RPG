@@ -84,7 +84,7 @@ public class Level2BattleState extends LevelState{
 
         sprite = SharedAssets.sniperSprite;
         Enemy e = new SniperEnemy(sprite, 18, 5);
-        e.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e));
+        e.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e));
 
         Enemy e2 = new CowCubeEnemy(13, 8);
         e2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e2));
