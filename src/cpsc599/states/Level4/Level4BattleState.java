@@ -289,6 +289,7 @@ public class Level4BattleState extends LevelState{
             }
             if(xpos >= 15 && playerController.getPlayerManager().getPlayer(i).y <= 5) {
                 Logger.debug("Level complete!");
+                playerController.getPlayerManager().setCurrent(null);
                 orb.setState("LEVEL4_FINALE");
                 return;
             }

@@ -32,6 +32,8 @@ public class PlayerController {
 
     private int attackRange;
 
+    public Level level;
+
     private int selectedUnit;
 
     public PlayerManager getPlayerManager() {
@@ -157,6 +159,10 @@ public class PlayerController {
         this.attackRange = 0;
     }
 
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
     public void control(Input input, Level currentLevel) {
         Player p = this.playerManager.getCurrent();
         this.dynamicDialogue.setVisibility(false);
@@ -254,7 +260,7 @@ public class PlayerController {
                     globalMenu.setVisible(false);
                     return;
             }
-            moveCursor(input);
+            moveCursor(input, level);
         }
 
         // Move the player or select an enemy.
@@ -411,17 +417,17 @@ public class PlayerController {
         }
     }
 
-    private void moveCursor(Input input) {
+    private void moveCursor(Input input, Level level) {
         // Control the cursor here.
         if (Controls.isKeyTapped(input, Controls.UP)) {
 
-            cursor.move(Controls.UP);
+            cursor.move(Controls.UP, level);
         } else if (Controls.isKeyTapped(input, Controls.DOWN)) {
-            cursor.move(Controls.DOWN);
+            cursor.move(Controls.DOWN, level);
         } else if (Controls.isKeyTapped(input, Controls.RIGHT)) {
-            cursor.move(Controls.LEFT);
+            cursor.move(Controls.LEFT, level);
         } else if (Controls.isKeyTapped(input, Controls.LEFT)) {
-            cursor.move(Controls.RIGHT);
+            cursor.move(Controls.RIGHT, level);
         }
     }
 
