@@ -12,10 +12,10 @@ public class EtienBoss extends Enemy {
                 x, y, 6);
 
         int baseDamage = 7;
-        super.maxHealth = 80;
+        super.maxHealth = 120;
         super.strength = 4;
         super.defence = 0;
-        super.hit = 140;
+        super.hit = 160;
         super.dodge = 20;
         super.range = 1;
 
