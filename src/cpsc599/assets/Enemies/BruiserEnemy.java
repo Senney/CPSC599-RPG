@@ -11,7 +11,7 @@ public class BruiserEnemy extends Enemy{
         super.maxHealth = 13;
         super.strength = 3;
         super.defence = 3;
-        super.hit = 90;
+        super.hit = 110;
         super.dodge = 30;
         super.range = 1;
 

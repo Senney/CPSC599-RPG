@@ -148,6 +148,7 @@ public class Level3BattleState extends LevelState {
         serpentBoss = new AssassinEnemy(serpentSprite, 18, 8);
         serpentBoss.maxHealth = 14;
         serpentBoss.heal(-1);
+        serpentBoss.setAiActor(new AssassinAI(this.playerController.getPlayerManager(), pathfinder, serpentBoss));
         this.b_serpentSpawned = false;
 
         enemyController.getEnemyManager().addEnemy(e);
