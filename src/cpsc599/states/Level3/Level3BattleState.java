@@ -33,7 +33,10 @@ public class Level3BattleState extends LevelState {
     private Player jack;
     private boolean b_jackJoined;
 
+    private Enemy ex1, ex2, ex3;
+
     public int turnNum;
+    public boolean extra;
     public boolean isShown;
     private boolean b_serpentSpawned;
     private Enemy serpentBoss;
@@ -55,6 +58,7 @@ public class Level3BattleState extends LevelState {
 
         turnNum = 0;
         isShown = false;
+        extra = false;
 
         //playerController.getPlayerManager().reset();
         enemyController.getEnemyManager().reset();
@@ -131,6 +135,10 @@ public class Level3BattleState extends LevelState {
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
         Enemy e10 = new NimbleThiefEnemy(sprite, 19, 4);
         e10.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e10));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/dragon.png", 0,0,16,16,1,0.1f);
+        ex2 = new SniperEnemy(sprite, 9, 1);
+        ex2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, ex2));
 
         AnimatedSprite serpentSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/serpent.png", 0, 0, 16, 16, 1, 0.1f);
         serpentBoss = new AssassinEnemy(serpentSprite, 18, 8);
@@ -249,6 +257,11 @@ public class Level3BattleState extends LevelState {
             this.playerController.getPlayerManager().addPlayer(jack);
             b_jackJoined = true;
             return;
+        }
+
+        if(turnNum == 5 && !extra) {
+            enemyController.getEnemyManager().addEnemy(ex2);
+            extra = true;
         }
 
         if (!playerController.isTurnComplete()) {
