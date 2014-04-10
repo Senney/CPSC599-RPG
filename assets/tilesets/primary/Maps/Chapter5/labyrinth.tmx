@@ -56,7 +56,12 @@
  </tileset>
  <layer name="main" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJzTZ2ZgMMCBLYHYHI+8IVTeAge2HJWnuTyuuCEm/gwGgftHurw9EDvgwDD9uOQdgRgAzY824Q==
+   eJzTZ2ZgMMCCDYHYAor18agxR1KHT70hFnWWOPRjE7McQfrtgdgBDTvi0I8tXmAYZj4+NdjsJ+S+UXnqyWOLaxiG6cclD0oTAJEHNuE=
+  </data>
+ </layer>
+ <layer name="Collision" width="16" height="15" opacity="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYMSBYQCXPLo6QupxqcMmTqzYcNVPSTiTinGBUXn6yFOCAcdMAGc=
   </data>
  </layer>
 </map>
