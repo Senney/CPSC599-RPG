@@ -3,6 +3,7 @@ package cpsc599.states.Level5;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
 import cpsc599.ai.AStarPathfinder;
 import cpsc599.ai.BasicWarriorAI;
@@ -10,6 +11,7 @@ import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Dialogue;
 import cpsc599.assets.Enemies.CowCubeEnemy;
 import cpsc599.assets.Enemy;
+import cpsc599.assets.Entities.*;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
@@ -45,7 +47,7 @@ public class Level5InsideCastleState extends LevelState {
     @Override
     public void init(OrbGame game) {
         super.init(game);
-        super.setLevel(levelManager.setLevel("level3"));
+        super.setLevel(levelManager.setLevel("inside_crystal_castle"));
 
         playerController.healAll();
         playerController.resetTurn();
@@ -83,6 +85,11 @@ public class Level5InsideCastleState extends LevelState {
         dialogue = new Dialogue();
         dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
 
+        this.gameEntityManager.addEntity(new DoorGameEntity("level5key", 6, 10, false));
+        this.gameEntityManager.addEntity(new SwitchGameEntity(new Sprite(SharedAssets.doorSwitch), "level5key", 1, 1));
+        this.gameEntityManager.addEntity(new HealthShrineGameEntity(1, 8, 10));
+        this.gameEntityManager.addEntity(new SwordGameEntity(1, 11, 1));
+        this.gameEntityManager.addEntity(new HealthGameEntity(1, 13, 4));
 
         this.enemyStartTurn = true;
     }
@@ -91,52 +98,8 @@ public class Level5InsideCastleState extends LevelState {
         Enemy e = new CowCubeEnemy(8, 8);
         e.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e));
 
-        Enemy e2 = new CowCubeEnemy(11, 4);
-        e2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e2));
-
-        Enemy e3 = new CowCubeEnemy(5, 3);
-        e3.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e3));
-
-        Enemy e4 = new CowCubeEnemy(1, 5);
-        e4.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e4));
-
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
-        Enemy e5 = new Enemy(sprite, 4, 14, 8);
-        e5.evade = 10;
-        e5.damage = 6;
-        e5.hit = 120;
-        e5.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e5));
-
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
-        Enemy e6 = new Enemy(sprite, 10, 14, 8);
-        e6.evade = 10;
-        e6.damage = 6;
-        e6.hit = 120;
-        e6.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e6));
-
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
-        Enemy e7 = new Enemy(sprite, 14, 11, 8);
-        e7.evade = 10;
-        e7.damage = 6;
-        e7.hit = 120;
-        e7.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e7));
-
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/snowman.png", 0,0,16,16,1,0.1f);
-        Enemy e8 = new Enemy(sprite, 14, 7, 8);
-        e8.evade = 10;
-        e8.damage = 6;
-        e8.hit = 120;
-        e8.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
 
-        enemyController.getEnemyManager().addEnemy(e);
-        enemyController.getEnemyManager().addEnemy(e2);
-        enemyController.getEnemyManager().addEnemy(e3);
-        enemyController.getEnemyManager().addEnemy(e4);
-        enemyController.getEnemyManager().addEnemy(e5);
-        enemyController.getEnemyManager().addEnemy(e6);
-        enemyController.getEnemyManager().addEnemy(e7);
-        enemyController.getEnemyManager().addEnemy(e8);
     }
 
     @Override
