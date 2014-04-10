@@ -57,7 +57,7 @@ public abstract class AIActor {
             AIAction action = actionList.get(0);
             if (action.action == AIAction.MOVE) {
                 List<AStarMove> movementList = (List<AStarMove>)action.obj;
-                if (movementList.size() == 1) {
+                if (movementList.size() <= 1) {
                     actionList.remove(action);
                 } else {
                     AStarMove top = movementList.get(movementList.size() - 1);
