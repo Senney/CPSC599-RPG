@@ -14,7 +14,7 @@ public class UsableDoorGameEntity extends GameEntity {
 
     private Sprite openDoor, closedDoor;
 
-    public UsableDoorGameEntity(int x, int y, String flag, boolean open) {
+    public UsableDoorGameEntity(String flag,int x, int y, boolean open) {
         this.x = x;
         this.y = y;
         this.flag = flag;
