@@ -150,7 +150,7 @@ public class Dialogue {
     public void addDialogue(String message, String portrait) {
         // If we have no strings left, reset the dialogue step, add the dialogue, and then step us into it.
         if (strings.size() == 0) this.dialogueStep = 0;
-        message = portrait + "\n" + message;
+        message = portrait + ":\n" + message;
         strings.add(new DialogueElement(message, portraitMap.get(portrait)));
         if (strings.size() == 1)
             stepDialogue();
