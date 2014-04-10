@@ -88,7 +88,7 @@ public class SharedAssets {
 
         cowCube = new Texture(Gdx.files.internal("assets/tilesets/cowcube.png"));
 
-        doorSwitch = loadTexture(PRIMARY_ASSET_FOLDER + "Buttons/A_button3.png");
+        doorSwitch = loadTexture(PRIMARY_ASSET_FOLDER + "Items/shield1.png");
         defaultPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/enemy/Monster/cow_cube.png");
 
         hikariPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/hikari.png");
