@@ -5,11 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
-import cpsc599.ai.AStarPathfinder;
-import cpsc599.ai.BasicWarriorAI;
+import cpsc599.ai.*;
 import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Dialogue;
-import cpsc599.assets.Enemies.CowCubeEnemy;
+import cpsc599.assets.Enemies.*;
 import cpsc599.assets.Enemy;
 import cpsc599.assets.Entities.*;
 import cpsc599.assets.Player;
@@ -26,10 +25,6 @@ public class Level5InsideCastleBattleState extends LevelState {
     int currentEnemy = 0;
     float currentTime = 0f;
 
-    private Enemy serpentBoss;
-    private boolean b_serpentSpawned;
-
-    private AnimatedSprite sprite;
     private boolean enemyStartTurn;
     private LevelManager levelManager;
 
@@ -64,9 +59,10 @@ public class Level5InsideCastleBattleState extends LevelState {
 
         // Reset the player positions
         Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
+        Logger.debug("Initializing level with " + currentPlayers.length + " players.");
         for (int i = 0; i < currentPlayers.length; i++) {
-            currentPlayers[i].x = 5 + i;
-            currentPlayers[i].y = 18;
+            currentPlayers[i].x = 7;
+            currentPlayers[i].y = 13 - i;
         }
 
         // Set up the pathfinder for this level.
@@ -85,7 +81,9 @@ public class Level5InsideCastleBattleState extends LevelState {
         dialogue = new Dialogue();
         dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
 
-        this.gameEntityManager.addEntity(new DoorGameEntity("level5key", 6, 10, false));
+        this.gameEntityManager.addEntity(new DoorGameEntity("level5key",
+                SharedAssets.loadTextureRegion(SharedAssets.PRIMARY_ASSET_FOLDER + "Town/walls.png", 16, 16, 1, 0, true),
+                null, 6, 10, false));
         this.gameEntityManager.addEntity(new SwitchGameEntity(new Sprite(SharedAssets.doorSwitch), "level5key", 1, 1));
         this.gameEntityManager.addEntity(new HealthShrineGameEntity(1, 8, 10));
         this.gameEntityManager.addEntity(new SwordGameEntity(1, 11, 1));
@@ -95,11 +93,30 @@ public class Level5InsideCastleBattleState extends LevelState {
     }
 
     public void createEnemies(AStarPathfinder pathfinder) {
-        Enemy e = new CowCubeEnemy(8, 8);
-        e.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e));
+        Enemy e = new GlassCannonEnemy(SharedAssets.glassCannonSprite, 14, 1);
+        e.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e));
 
+        Enemy e1 = new TankyEnemy(SharedAssets.tankySprite, 10, 5);
+        e1.setAiActor(new TankAI(this.playerController.getPlayerManager(), pathfinder, e1));
 
+        Enemy e2 = new BruiserEnemy(SharedAssets.bruiserSprite, 13, 5);
+        e2.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e2));
 
+        Enemy e3 = new AssassinEnemy(SharedAssets.assassinSprite, 14, 13);
+        e3.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e3));
+
+        Enemy e4 = new AssassinEnemy(SharedAssets.assassinSprite, 9, 13);
+        e4.setAiActor(new AssassinAI(this.playerController.getPlayerManager(), pathfinder, e4));
+
+        Enemy e5 = new NimbleThiefEnemy(SharedAssets.thiefSprite, 14, 9);
+        e5.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e5));
+
+        this.enemyController.getEnemyManager().addEnemy(e);
+        this.enemyController.getEnemyManager().addEnemy(e1);
+        this.enemyController.getEnemyManager().addEnemy(e2);
+        this.enemyController.getEnemyManager().addEnemy(e3);
+        this.enemyController.getEnemyManager().addEnemy(e4);
+        this.enemyController.getEnemyManager().addEnemy(e5);
     }
 
     @Override
@@ -183,22 +200,6 @@ public class Level5InsideCastleBattleState extends LevelState {
             return;
         }
 
-        //checks to see if someone is in range of castle
-        for(int i = 0; i < playerController.getPlayerManager().getPlayers().length; i++) {
-            if(!seenCastle && playerController.getPlayerManager().getPlayer(i).y <= 10) {
-                seenCastle = true;
-                String name = playerController.getPlayerManager().getPlayer(i).getName();
-                dialogue.addDialogue(name + ":\nHey I see a castle in the distance! I think we can navigate around this mountain pass to get there.", name);
-                this.dialogue.setVisibility(true);
-            }
-            if(playerController.getPlayerManager().getPlayer(i).x == 17 && playerController.getPlayerManager().getPlayer(i).y == 3) {
-                Logger.debug("Level complete!");
-                orb.setState("LEVEL4_FINALE");
-            }
-            else
-                break;
-        }
-
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
         } else {
@@ -253,7 +254,7 @@ public class Level5InsideCastleBattleState extends LevelState {
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
             Logger.debug("'SELECT' pressed.");
-            orb.setState("LEVEL4_FINALE");
+            orb.setState("LEVEL5_BLACKOUT");
         }
     }
 }
