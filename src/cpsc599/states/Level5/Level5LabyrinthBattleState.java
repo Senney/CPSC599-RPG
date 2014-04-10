@@ -86,6 +86,10 @@ public class Level5LabyrinthBattleState extends LevelState {
         this.enemyController.getEnemyManager().addEnemy(etien);
 
         dialogue = new Dialogue();
+        this.dialogue.mapPortrait("Hikari", SharedAssets.hikariPortrait);
+        this.dialogue.mapPortrait("Sean", SharedAssets.seanPortrait);
+        this.dialogue.mapPortrait("Sasha", SharedAssets.sashaPortrait);
+        this.dialogue.mapPortrait("Ren", SharedAssets.princePortrait);
         dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
         dialogue.addDialogue("What happened!?", "Hikari");
         dialogue.addDialogue("HahaHHahHah!! I have teleported you fools to my labyrinth. Prepare to die.", "Etien");
