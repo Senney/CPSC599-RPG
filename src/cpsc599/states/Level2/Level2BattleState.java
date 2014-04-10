@@ -2,6 +2,7 @@ package cpsc599.states.Level2;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
 import cpsc599.ai.*;
 import cpsc599.assets.AnimatedSprite;
@@ -11,9 +12,7 @@ import cpsc599.assets.Enemies.BruiserEnemy;
 import cpsc599.assets.Enemies.NimbleThiefEnemy;
 import cpsc599.assets.Enemies.TankyEnemy;
 import cpsc599.assets.Enemy;
-import cpsc599.assets.Entities.ArmourGameEntity;
-import cpsc599.assets.Entities.HealthShrineGameEntity;
-import cpsc599.assets.Entities.SwordGameEntity;
+import cpsc599.assets.Entities.*;
 import cpsc599.assets.Player;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
@@ -29,6 +28,12 @@ import cpsc599.util.SharedAssets;
 public class Level2BattleState extends LevelState{
     int currentEnemy = 0;
     float currentTime = 0f;
+
+    private boolean hasKey;
+    private boolean usedKey;
+    private Player prisoner;
+    private boolean prisoner_joined;
+
 
     private AnimatedSprite sprite;
     private boolean enemyStartTurn;
@@ -50,6 +55,8 @@ public class Level2BattleState extends LevelState{
 
         turnNum = 0;
         isShown = false;
+        hasKey = false;
+        usedKey = false;
         //playerController.getPlayerManager().reset();
 
         // Reset the player positions
@@ -71,40 +78,52 @@ public class Level2BattleState extends LevelState{
                 enemyController.getEnemyManager(), this.gameEntityManager);
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e = new NimbleThiefEnemy(sprite, 5, 6);
+        Enemy e = new NimbleThiefEnemy(sprite, 18, 5);
         e.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png", 0,0,16,16,1,0.1f);
-        Enemy e2 = new TankyEnemy(sprite, 10, 8);
+        Enemy e2 = new TankyEnemy(sprite, 13, 8);
         e2.setAiActor(new TankAI(this.playerController.getPlayerManager(), pathfinder, e2));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
-        Enemy e3 = new NimbleThiefEnemy(sprite, 13, 6);
+        Enemy e3 = new NimbleThiefEnemy(sprite, 18, 10);
         e3.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e3));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy9.png", 0,0,16,16,1,0.1f);
-        Enemy e4 = new BasicEnemy(sprite, 13, 2);
+        Enemy e4 = new BasicEnemy(sprite, 9, 14);
         e4.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e4));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e5 = new BasicEnemy(sprite, 17, 4);
+        Enemy e5 = new BasicEnemy(sprite, 11, 14);
         e5.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e5));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
-        Enemy e6 = new BasicEnemy(sprite, 19, 12);
+        Enemy e6 = new BasicEnemy(sprite, 14, 16);
         e6.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e6));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e7 = new BasicEnemy(sprite, 10, 18);
+        Enemy e7 = new BasicEnemy(sprite, 18, 14);
         e7.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e7));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e8 = new BasicEnemy(sprite, 15, 15);
+        Enemy e8 = new BasicEnemy(sprite, 14, 21);
         e8.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
-        Enemy e9 = new BruiserEnemy(sprite, 19, 18);
+        Enemy e9 = new BruiserEnemy(sprite, 8, 21);
         e9.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e9));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
+        Enemy e10 = new BruiserEnemy(sprite, 6, 16);
+        e10.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e10));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
+        Enemy e11 = new BruiserEnemy(sprite, 12, 9);
+        e11.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e11));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
+        Enemy e12 = new BruiserEnemy(sprite, 13, 10);
+        e12.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e12));
 
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
@@ -115,9 +134,19 @@ public class Level2BattleState extends LevelState{
         enemyController.getEnemyManager().addEnemy(e7);
         enemyController.getEnemyManager().addEnemy(e8);
         enemyController.getEnemyManager().addEnemy(e9);
+        enemyController.getEnemyManager().addEnemy(e10);
+        enemyController.getEnemyManager().addEnemy(e11);
+        enemyController.getEnemyManager().addEnemy(e12);
 
         //playerController.getPlayerManager().addPlayer(p);
         //playerController.getPlayerManager().addPlayer(p3);
+
+        prisoner = new Player("Prisoner", SharedAssets.prisonerSprite, 7, 14, 7, 10, 4, 1, 120, 60);
+        prisoner.getPlayerInventory().pickUp(new Item("Flesh crackling flesh strip", true, Inventory.RHAND_SLOT, 1, 4, 3));
+        prisoner.getPlayerInventory().equip(prisoner.getPlayerInventory().getCarry()[0]);
+        prisoner.updateStats();
+
+        prisoner_joined = false;
 
         // TODO: Make this not stupid.
         playerController.setupCursor();
@@ -127,14 +156,20 @@ public class Level2BattleState extends LevelState{
         playerController.setupMenus();
 
         dialogue = new Dialogue();
-        dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
+        //dialogue.loadDialogueXML(SharedAssets.CHAPTER_1);
+        dialogue.mapPortrait("Prisoner", SharedAssets.prisonerPortrait);
 
-        HealthShrineGameEntity shrine = new HealthShrineGameEntity(7, 8, 6);
+        /*HealthShrineGameEntity shrine = new HealthShrineGameEntity(7, 8, 6);
         ArmourGameEntity armour = new ArmourGameEntity(3, 15, 2);
         SwordGameEntity sword = new SwordGameEntity(18, 0, 2);
         gameEntityManager.addEntity(armour);
         gameEntityManager.addEntity(sword);
-        gameEntityManager.addEntity(shrine);
+        gameEntityManager.addEntity(shrine);*/
+
+        HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 2, 21, "house1",
+                "Looks like someone is home...", "Here take this key to unlock one of the cells in the fortress!");
+        //DoorGameEntity door1 = new DoorGameEntity("key",SharedAssets.)
+        gameEntityManager.addEntity(houseEntity);
 
         this.enemyStartTurn = true;
     }
@@ -219,6 +254,16 @@ public class Level2BattleState extends LevelState{
             return;
         }
 
+        /**
+         * Handle the getting of the key
+         */
+        if (this.getFlagBoolean("house1") && !hasKey && !usedKey) {
+            this.dialogue.addDialogue("Key obtained!", "Prisoner");
+            this.dialogue.setVisibility(true);
+            hasKey = true;
+            return;
+        }
+
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
         } else {
@@ -271,7 +316,7 @@ public class Level2BattleState extends LevelState{
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
         }
-        if(turnNum == 2 && !isShown) {
+        /*if(turnNum == 2 && !isShown) {
             this.dialogue.addDialogue("Sean:\nHey what's going on here!?","Sean");
             this.dialogue.addDialogue("Sasha:\nWe're here to help! Hold on.", "Sasha");
             this.dialogue.setVisibility(true);
@@ -286,7 +331,7 @@ public class Level2BattleState extends LevelState{
             sash.updateStats();
             playerController.getPlayerManager().addPlayer(sash);
             isShown = true;
-        }
+        }*/
 
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {

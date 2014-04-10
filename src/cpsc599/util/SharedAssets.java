@@ -50,6 +50,7 @@ public class SharedAssets {
     public static TextureRegion sashaPortrait;
     public static TextureRegion cowCubePortrait;
     public static TextureRegion jackPortrait;
+    public static TextureRegion prisonerPortrait;
 
     public static BitmapFont font_14;
     public static BitmapFont font_12;
@@ -59,6 +60,7 @@ public class SharedAssets {
     public static AnimatedSprite renSprite;
     public static AnimatedSprite sashaSprite;
     public static AnimatedSprite jackSprite;
+    public static AnimatedSprite prisonerSprite;
 
     public static AnimatedSprite cowCubeSprite;
     public static TextureRegion healthShrine;
@@ -93,12 +95,14 @@ public class SharedAssets {
         sashaPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/female2.png");
         seanPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male1.png");
         jackPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male3.png");
+        prisonerPortrait = loadTexture(PRIMARY_ASSET_FOLDER + "Character_profile_box/hero/male2.png");
 
         hikariSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 0, 0, 16, 16, 1, 0.1f);
         seanSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 3, 0, 16, 16, 1, 0.1f);
         sashaSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/female.png", 2, 0, 16, 16, 1, 0.1f);
         renSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 0, 0, 16, 16, 1, 0.1f);
         jackSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
+        prisonerSprite = new AnimatedSprite(PRIMARY_ASSET_FOLDER + "CharacterDesign/male.png", 2, 0, 16, 16, 1, 0.1f);
 
         cursorNormal = loadTextureRegion("assets/tilesets/cursor.png", 16, 16, 0, 0, false);
         cursorHighlighted = loadTextureRegion("assets/tilesets/cursor.png", 16, 16, 1, 0, false);
