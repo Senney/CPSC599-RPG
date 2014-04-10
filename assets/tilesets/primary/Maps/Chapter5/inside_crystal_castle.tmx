@@ -40,25 +40,25 @@
   <image source="../../Environment/beach.png" width="256" height="128"/>
  </tileset>
  <tileset firstgid="490" name="castle" tilewidth="16" tileheight="16">
-  <image source="../../Castle/castle.png" width="256" height="240"/>
+  <image source="../../Castle/castle.png" width="256" height="256"/>
  </tileset>
- <tileset firstgid="730" name="walls" tilewidth="16" tileheight="16">
+ <tileset firstgid="746" name="walls" tilewidth="16" tileheight="16">
   <image source="../../Town/walls.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="794" name="inside_castle" tilewidth="16" tileheight="16">
+ <tileset firstgid="810" name="inside_castle" tilewidth="16" tileheight="16">
   <image source="../../Castle/inside_castle.png" width="128" height="64"/>
  </tileset>
- <tileset firstgid="826" name="inside_castle" tilewidth="16" tileheight="16">
+ <tileset firstgid="842" name="inside_castle" tilewidth="16" tileheight="16">
   <image source="../../Castle/inside_castle.png" width="128" height="64"/>
  </tileset>
  <layer name="Tile Layer 2" width="16" height="15">
   <data encoding="base64" compression="zlib">
-   eJyTZ2ZgUCATKwKxOhBrkIk1R/UPqP7TDEPb/cNBvzYWrAWldYBYF4j1oDQ2DAA4ACix
+   eJzTZ2ZgMCATGwKxORBbkIktR/UT1O8PxAFQDBOD8YnRH45H7jQDZfojofYHYMGBJOin1H5cckNBfzwQJ+DANnjkQDgRiAFNADzA
   </data>
  </layer>
  <layer name="Collision" width="16" height="15" opacity="0">
   <data encoding="base64" compression="zlib">
-   eJzjYGBg4KAQkwtG9Y/qH9VPGQYAbY0B0Q==
+   eJzjYGBg4KAQkwtG9RPWjy2cSQl/fPLU0o8vXdDDfnz6hoJ+SjAAVPwCeQ==
   </data>
  </layer>
 </map>
