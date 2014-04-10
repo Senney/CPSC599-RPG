@@ -18,8 +18,12 @@ public class DoorGameEntity extends GameEntity {
 
     public DoorGameEntity(String switchFlag, TextureRegion closedDoor, TextureRegion openDoor, int x, int y, boolean open) {
         this.open = open;
-        this.openDoor = new Sprite(openDoor);
-        this.closedDoor = new Sprite(closedDoor);
+
+        if (openDoor != null)
+            this.openDoor = new Sprite(openDoor);
+        if (closedDoor != null)
+            this.closedDoor = new Sprite(closedDoor);
+
         this.flagName = switchFlag;
 
         this.identifier = this.IDENTIFIER;
