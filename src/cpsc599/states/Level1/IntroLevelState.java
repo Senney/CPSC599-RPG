@@ -95,7 +95,7 @@ public class IntroLevelState extends LevelState {
         Enemy e8 = new BasicEnemy(sprite, 15, 15);
         e8.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/golem.png", 0,0,16,16,1,0.1f);
         Enemy e9 = new BruiserEnemy(sprite, 19, 18);
         e9.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e9));
 
