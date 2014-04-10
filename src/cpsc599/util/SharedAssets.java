@@ -64,7 +64,17 @@ public class SharedAssets {
     public static AnimatedSprite jackSprite;
     public static AnimatedSprite prisonerSprite;
 
+    // Enemy Sprites
     public static AnimatedSprite cowCubeSprite;
+    public static AnimatedSprite assassinSprite;
+    public static AnimatedSprite rangerSprite;
+    public static AnimatedSprite sniperSprite;
+    public static AnimatedSprite bruiserSprite;
+    public static AnimatedSprite glassCannonSprite;
+    public static AnimatedSprite thiefSprite;
+    public static AnimatedSprite tankySprite;
+
+    // Item sprites
     public static TextureRegion healthShrine;
     public static TextureRegion armour;
     public static TextureRegion sword;
@@ -165,6 +175,13 @@ public class SharedAssets {
 
     private static void loadEnemies() {
         cowCubeSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/cow_cube.png", 0,0,16,16,1,0.1f);
+        assassinSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/serpent.png", 0, 0, 16, 16, 1, 0.1f);
+        bruiserSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/golem.png", 0,0,16,16,1,0.1f);
+        rangerSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        sniperSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/dragon.png", 0,0,16,16,1,0.1f);
+        tankySprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human1.png", 0,0,16,16,1,0.1f);
+        thiefSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
+        glassCannonSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/snow_bird.png", 0, 0, 16, 16, 1, 0.1f);
     }
 
     private static void loadFont() {
