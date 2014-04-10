@@ -1,6 +1,7 @@
 package cpsc599.assets.Entities;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Actor;
 import cpsc599.assets.GameEntity;
@@ -15,10 +16,10 @@ public class DoorGameEntity extends GameEntity {
     private Sprite openDoor, closedDoor;
     private String flagName;
 
-    public DoorGameEntity(String switchFlag, int x, int y, boolean open) {
+    public DoorGameEntity(String switchFlag, TextureRegion closedDoor, TextureRegion openDoor, int x, int y, boolean open) {
         this.open = open;
-        this.openDoor = new Sprite(SharedAssets.doorOpen);
-        this.closedDoor = new Sprite(SharedAssets.doorClosed);
+        this.openDoor = new Sprite(openDoor);
+        this.closedDoor = new Sprite(closedDoor);
         this.flagName = switchFlag;
 
         this.identifier = this.IDENTIFIER;
@@ -26,6 +27,10 @@ public class DoorGameEntity extends GameEntity {
         setDoorSprite();
 
         this.inspect = "A door, it looks like it's opened elsewhere!";
+    }
+
+    public DoorGameEntity(String switchFlag, int x, int y, boolean open) {
+        this(switchFlag, SharedAssets.doorClosed, SharedAssets.doorOpen, x, y, open);
     }
 
     private void setDoorSprite() {

@@ -144,7 +144,7 @@ public class SharedAssets {
         return tex;
     }
 
-    private static TextureRegion loadTextureRegion(String filename, int w, int h, int x, int y, boolean flip) {
+    public static TextureRegion loadTextureRegion(String filename, int w, int h, int x, int y, boolean flip) {
         Texture tex = loadTextureFile(filename);
         TextureRegion[][] region = TextureRegion.split(tex, w, h);
         TextureRegion target = region[y][x];
