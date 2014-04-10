@@ -140,6 +140,10 @@ public class Level3BattleState extends LevelState {
         ex2 = new SniperEnemy(sprite, 9, 1);
         ex2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, ex2));
 
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/snow_bird.png", 0,0,16,16,1,0.1f);
+        ex3 = new GlassCannonEnemy(sprite, 8, 1);
+        ex2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, ex3));
+
         AnimatedSprite serpentSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/serpent.png", 0, 0, 16, 16, 1, 0.1f);
         serpentBoss = new AssassinEnemy(serpentSprite, 18, 8);
         serpentBoss.maxHealth = 14;
@@ -259,8 +263,9 @@ public class Level3BattleState extends LevelState {
             return;
         }
 
-        if(turnNum == 5 && !extra) {
+        if(turnNum == 5 && !extra && playerController.getPlayerManager().getPlayers().length >= 4) {
             enemyController.getEnemyManager().addEnemy(ex2);
+            enemyController.getEnemyManager().addEnemy(ex3);
             extra = true;
         }
 
