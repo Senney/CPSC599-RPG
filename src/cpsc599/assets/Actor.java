@@ -65,6 +65,7 @@ public class Actor {
     {
         Boolean isDead = false;
         int dmg = (damage - enemy.defence);
+        if(dmg < 0) dmg = 0;
         int hitChance = (hit - enemy.dodge);
 
         Random rand = new Random();
