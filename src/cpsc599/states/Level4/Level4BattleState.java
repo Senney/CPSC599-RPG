@@ -331,9 +331,20 @@ public class Level4BattleState extends LevelState{
         }
 
         // TODO: Find a way to abstract this into the PlayerController.
-        if (Controls.isKeyTapped(input, Controls.SELECT)) {
-            Logger.debug("'SELECT' pressed.");
+        if (Controls.isKeyTapped(input, Input.Keys.O)) {
+            applyPowerups();
             orb.setState("LEVEL4_FINALE");
         }
+
+        if (Controls.isKeyTapped(input, Input.Keys.R)) {
+            this.restart();
+        }
+    }
+
+    private void applyPowerups() {
+        this.playerController.getPlayerManager().getPlayerByName("Hikari").defence += 2;
+        this.playerController.getPlayerManager().getPlayerByName("Sean").defence += 2;
+        this.playerController.getPlayerManager().getPlayerByName("Sasha").damage += 2;
+        this.playerController.getPlayerManager().getPlayerByName("Sasha").maxHealth += 2;
     }
 }

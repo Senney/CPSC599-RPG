@@ -297,10 +297,7 @@ public class Level2BattleState extends LevelState{
         }
 
         if(this.getFlagBoolean("getPrisoner")) {
-            Logger.debug("Prisoner has joined the party");
-            playerController.getPlayerManager().addPlayer(prisoner);
-            prisoner_joined = true;
-            this.setFlag("getPrisoner", false);
+            recruitPrisoner();
         }
 
         if (!playerController.isTurnComplete()) {
@@ -356,10 +353,22 @@ public class Level2BattleState extends LevelState{
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
         }
 
-        // TODO: Find a way to abstract this into the PlayerController.
-        if (Controls.isKeyTapped(input, Controls.SELECT)) {
-            Logger.debug("'SELECT' pressed.");
+        if (Controls.isKeyTapped(input, Input.Keys.O)) {
+            if (!prisoner_joined) {
+                recruitPrisoner();
+            }
             orb.setState("LEVEL2_FINALE");
         }
+
+        if (Controls.isKeyTapped(input, Input.Keys.R)) {
+            this.restart();
+        }
+    }
+
+    private void recruitPrisoner() {
+        Logger.debug("Prisoner has joined the party");
+        playerController.getPlayerManager().addPlayer(prisoner);
+        prisoner_joined = true;
+        this.setFlag("getPrisoner", false);
     }
 }

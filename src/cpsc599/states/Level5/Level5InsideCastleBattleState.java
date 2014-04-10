@@ -252,8 +252,7 @@ public class Level5InsideCastleBattleState extends LevelState {
         }
 
         // TODO: Find a way to abstract this into the PlayerController.
-        if (Controls.isKeyTapped(input, Controls.SELECT)) {
-            Logger.debug("'SELECT' pressed.");
+        if (Controls.isKeyTapped(input, Input.Keys.O)) {
             orb.setState("LEVEL5_BLACKOUT");
         }
     }

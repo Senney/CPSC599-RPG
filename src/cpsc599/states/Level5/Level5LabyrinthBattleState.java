@@ -249,13 +249,16 @@ public class Level5LabyrinthBattleState extends LevelState {
         }
 
         // TODO: Find a way to abstract this into the PlayerController.
-        if (Controls.isKeyTapped(input, Controls.SELECT)) {
-            Logger.debug("'SELECT' pressed.");
-            orb.setState("LEVEL5_BLACKOUT");
+        if (Controls.isKeyTapped(input, Input.Keys.O)) {
+            orb.setState("LEVEL5_FINALE");
         }
 
         if (Controls.isKeyTapped(input, Input.Keys.P)) {
             this.enemyController.getEnemyManager().reset();
+        }
+
+        if (Controls.isKeyTapped(input, Input.Keys.R)) {
+            this.restart();
         }
     }
 
