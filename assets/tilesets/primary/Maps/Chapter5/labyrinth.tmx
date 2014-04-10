@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="15" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="grass" tilewidth="16" tileheight="16">
+  <image source="../../Environment/grass.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="17" name="female" tilewidth="16" tileheight="16">
+  <image source="../../CharacterDesign/female.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="33" name="male" tilewidth="16" tileheight="16">
+  <image source="../../CharacterDesign/male.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="49" name="cow_cube" tilewidth="16" tileheight="16">
+  <image source="../../Enemy/Monsters/cow_cube.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="50" name="trees" tilewidth="16" tileheight="16">
+  <image source="../../Environment/trees.png" width="64" height="32"/>
+ </tileset>
+ <tileset firstgid="58" name="mountain" tilewidth="16" tileheight="16">
+  <image source="../../Environment/mountain.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="74" name="beach" tilewidth="16" tileheight="16">
+  <image source="../../Environment/beach.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="202" name="snow" tilewidth="16" tileheight="16">
+  <image source="../../Environment/snow.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="234" name="river" tilewidth="16" tileheight="16">
+  <image source="../../Environment/river.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="298" name="ocean" tilewidth="16" tileheight="16">
+  <image source="../../Environment/ocean.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="314" name="hill" tilewidth="16" tileheight="16">
+  <image source="../../Environment/hill.png" width="64" height="128"/>
+ </tileset>
+ <tileset firstgid="346" name="desert" tilewidth="16" tileheight="16">
+  <image source="../../Environment/desert.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="362" name="beach" tilewidth="16" tileheight="16">
+  <image source="../../Environment/beach.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="490" name="castle" tilewidth="16" tileheight="16">
+  <image source="../../Castle/castle.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="746" name="walls" tilewidth="16" tileheight="16">
+  <image source="../../Town/walls.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="810" name="inside_castle" tilewidth="16" tileheight="16">
+  <image source="../../Castle/inside_castle.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="842" name="throne_room" tilewidth="16" tileheight="16">
+  <image source="../../Castle/throne_room.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="1098" name="prince_birdcage" tilewidth="16" tileheight="16">
+  <image source="../../Castle/prince_birdcage.png" width="64" height="64"/>
+ </tileset>
+ <layer name="main" width="16" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzTZ2ZgMMCCDYHYAor18agxR1KHT70hFnWWOPRjE7McQfrtgdgBDTvi0I8tXmAYZj4+NdjsJ+S+UXnqyWOLaxiG6cclD0oTAJEHNuE=
+  </data>
+ </layer>
+ <layer name="Collision" width="16" height="15" opacity="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYMSBYQCXPLo6QupxqcMmTqzYcNVPSTiTinGBUXn6yFOCAcdMAGc=
+  </data>
+ </layer>
+</map>

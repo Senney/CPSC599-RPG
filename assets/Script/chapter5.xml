@@ -48,28 +48,22 @@
 
 	<!-- (After the following dialogue line) Hikari rushes towards the bird cage but stops suddenly when the human standing in front of it intercepts her. -->
 	
-	<p3>
+	<p4>
 		<Hikari>Ren!</Hikari>
 		
 	
 		<Etien>I wouldn’t do that if I were you. Who knows what kind of traps I could set off if you get too close.</Etien>
 	
-		<Hikari>You--! You’ll pay for this!</Hikari>
-	</p3>
-	
-	<!-- Hikari charges at Etien -->
-	<!-- Hikari VS Etien -->
-	<!-- Hikari defeats Etien -->
-
-	<p4>
-		<Hikari>Now, release Ren from that cage!</Hikari>
+		<Hikari>You--! You’ll pay for this! Release Ren from that cage and we won't destroy you like the rest of your minions!</Hikari>
 	
 		<Etien>HAhAHahAHaHAhA!!!</Etien>
 		<Etien>You’re too late! Even though you hold the legendary orb, it can’t prevent the descent of the almighty cow cube any longer! It’s time! All the conditions have been met. My death was the last one. You’ve brought about your own deaths! HAhAha--</Etien>
 	
 	
 		<Almighty>MOOOOOOOO!!!</Almighty>
-		<CowCubes>Moo!! Kill!!</CowCubes>
+        <Almighty>I AM ALIVE!!!</Almighty>
+        <Almighty>I have taken this humble servant as my own personal avatar. Beware mortals, the might of the COW CUBE!</Almighty>
+		<Almighty>Now, enter my labyrinth and fight.</Almighty>
 	</p4>
 	
 	<!--
