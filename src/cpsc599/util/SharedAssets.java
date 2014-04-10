@@ -113,8 +113,8 @@ public class SharedAssets {
         sword = loadTexture(PRIMARY_ASSET_FOLDER + "Items/sword1.png", true);
         shield = loadTexture(PRIMARY_ASSET_FOLDER + "Items/shield3.png", true);
         amulet = loadTexture(PRIMARY_ASSET_FOLDER + "Items/amulet1.png", true);
-        doorOpen = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/walls.png", 16, 16, 0, 0, true);
-        doorClosed = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/walls.png", 16, 16, 2, 2, true);
+        doorOpen = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/walls.png", 16, 16, 2, 2, true);
+        doorClosed = loadTextureRegion(PRIMARY_ASSET_FOLDER + "Town/walls.png", 16, 16, 0, 0, true);
 
 
         loadEnemies();

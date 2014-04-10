@@ -35,15 +35,6 @@ public class DoorGameEntity extends GameEntity {
 
     @Override
     public boolean tick(float time, State gameState) {
-        Object status = gameState.getFlag(flagName);
-        if (status != null) {
-            boolean bstatus = (Boolean)status;
-            if ((bstatus && !open) || (!bstatus && open)) {
-                this.open = bstatus;
-                setDoorSprite();
-                return true;
-            }
-        }
 
         return false;
     }
@@ -56,10 +47,15 @@ public class DoorGameEntity extends GameEntity {
 
     @Override
     public String onUse(State gameState, Actor activator) {
-        this.open = !open;
-        gameState.setFlag(flagName, open);
-        setDoorSprite();
-        return "Used the door!";
+        // Assume the flag is a key.
+        if (gameState.getFlagBoolean(this.flagName)) {
+            gameState.setFlag(this.flagName, false);
+            this.open = true;
+            setDoorSprite();
+            return "Used the door!";
+        } else {
+            return "The door appears to be locked. You need to find a key.";
+        }
     }
 
     public boolean isOpen() {
