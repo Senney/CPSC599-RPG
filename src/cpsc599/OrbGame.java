@@ -187,7 +187,7 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL5_FINALE", new Level5FinaleCinematic(this, levelManager.setLevel("empty_throne_room"), this.cameraController, "WON"));
         stateManager.addState("WON", new GameWonState());
         
-        setState("WON");
+        setState("MAIN_MENU");
 	}
 
     public StateManager getStateManager() {
