@@ -3,6 +3,7 @@ package cpsc599.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import cpsc599.assets.AnimatedSprite;
@@ -71,6 +72,7 @@ public class SharedAssets {
     public static TextureRegion amulet;
 
     private static HashMap<String, Texture> textureCache;
+    public static TextureRegion healthPotion;
 
     public static void load() {
         if (loaded) return;
@@ -109,6 +111,7 @@ public class SharedAssets {
         cursorHighlighted = loadTextureRegion("assets/tilesets/cursor.png", 16, 16, 1, 0, false);
 
         healthShrine = loadTexture(PRIMARY_ASSET_FOLDER + "Items/healthshrine.png", true);
+        healthPotion = loadTexture(PRIMARY_ASSET_FOLDER + "Items/potion.png", true);
         armour = loadTexture(PRIMARY_ASSET_FOLDER + "Items/armour.png", true);
         sword = loadTexture(PRIMARY_ASSET_FOLDER + "Items/sword1.png", true);
         shield = loadTexture(PRIMARY_ASSET_FOLDER + "Items/shield3.png", true);
