@@ -12,7 +12,7 @@ public class NimbleThiefEnemy extends Enemy{
         super.strength = 1;
         super.defence = 1;
         super.hit = 130;
-        super.dodge = 70;
+        super.dodge = 50;
         super.range = 1;
 
         super.damage = baseDamage + super.strength;

@@ -12,7 +12,7 @@ public class BasicRangedEnemy extends Enemy{
         super.strength = 2;
         super.defence = 1;
         super.hit = 90;
-        super.dodge = 50;
+        super.dodge = 20;
         super.range = 4;
 
         super.damage = baseDamage + super.strength;
