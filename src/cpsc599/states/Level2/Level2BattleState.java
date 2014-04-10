@@ -293,6 +293,13 @@ public class Level2BattleState extends LevelState{
             hasKey = true;
             return;
         }
+        if(playerController.getnext) {
+            Player next = getNextPlayer();
+            playerController.getCursor().x = next.x;
+            playerController.getCursor().y = next.y;
+            playerController.getnext = false;
+            return;
+        }
 
         if(turnNum == 4 && !extras) {
             enemyController.getEnemyManager().addEnemy(ex1);

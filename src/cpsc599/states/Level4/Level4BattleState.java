@@ -352,6 +352,14 @@ public class Level4BattleState extends LevelState{
             orb.setState("LEVEL4_FINALE");
         }
 
+        if(playerController.getnext) {
+            Player next = getNextPlayer();
+            playerController.getCursor().x = next.x;
+            playerController.getCursor().y = next.y;
+            playerController.getnext = false;
+            return;
+        }
+
         if (Controls.isKeyTapped(input, Input.Keys.R)) {
             this.restart();
         }

@@ -273,6 +273,14 @@ public class Level3BattleState extends LevelState {
             extra = true;
         }
 
+        if(playerController.getnext) {
+            Player next = getNextPlayer();
+            playerController.getCursor().x = next.x;
+            playerController.getCursor().y = next.y;
+            playerController.getnext = false;
+            return;
+        }
+
         if (!playerController.isTurnComplete()) {
             playerController.control(input, this.currentLevel);
         } else {
