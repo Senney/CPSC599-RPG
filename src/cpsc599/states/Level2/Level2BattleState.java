@@ -31,6 +31,7 @@ public class Level2BattleState extends LevelState{
     private Player prisoner;
     private boolean prisoner_joined;
 
+    private boolean extras;
 
     private AnimatedSprite sprite;
     private boolean enemyStartTurn;
@@ -38,6 +39,8 @@ public class Level2BattleState extends LevelState{
 
     public int turnNum;
     public boolean isShown;
+
+    private Enemy ex1, ex2, ex3;
 
     public Level2BattleState(OrbGame game, LevelManager manager, PlayerController playerController,
                            CameraController cameraController, EnemyController enemyController) {
@@ -54,6 +57,7 @@ public class Level2BattleState extends LevelState{
         isShown = false;
         hasKey = false;
         usedKey = false;
+        extras = false;
         //playerController.getPlayerManager().reset();
 
         // Reset the player positions
@@ -119,6 +123,18 @@ public class Level2BattleState extends LevelState{
         Enemy e12 = new CowCubeEnemy(13, 10);
         e12.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e12));
 
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        ex1 = new BasicRangedEnemy(sprite, 0, 5);
+        ex1.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, ex1));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/golem.png", 0,0,16,16,1,0.1f);
+        ex2 = new BruiserEnemy(sprite, 1, 6);
+        ex2.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, ex2));
+
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/snow_bird.png", 0,0,16,16,1,0.1f);
+        ex3 = new GlassCannonEnemy(sprite, 0, 7);
+        ex3.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, ex3));
+
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
         enemyController.getEnemyManager().addEnemy(e3);
@@ -173,9 +189,11 @@ public class Level2BattleState extends LevelState{
         ShieldGameEntity shield = new ShieldGameEntity(18, 12, 2);
         AmuletGameEntity amulet = new AmuletGameEntity(18, 13, 2);
         SwordGameEntity sword = new SwordGameEntity(18, 14, 2);
+        gameEntityManager.addEntity(new HealthShrineGameEntity(14, 12, 6));
         gameEntityManager.addEntity(fakePrisoner);
         gameEntityManager.addEntity(shield);
         gameEntityManager.addEntity(amulet);
+        gameEntityManager.addEntity(new HealthGameEntity(18,8,2));
         gameEntityManager.addEntity(sword);
         gameEntityManager.addEntity(door1);
         gameEntityManager.addEntity(door2);
@@ -277,6 +295,13 @@ public class Level2BattleState extends LevelState{
             this.dialogue.setVisibility(true);
             hasKey = true;
             return;
+        }
+
+        if(turnNum == 4 && !extras) {
+            enemyController.getEnemyManager().addEnemy(ex1);
+            enemyController.getEnemyManager().addEnemy(ex2);
+            enemyController.getEnemyManager().addEnemy(ex3);
+            extras = true;
         }
 
         if(this.getFlagBoolean("getPrisoner")) {
