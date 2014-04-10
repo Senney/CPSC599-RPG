@@ -56,6 +56,7 @@ public class Level4BattleState extends LevelState{
         gameEntityManager.getEntities().clear();
 
         cameraController.set(6, 23);
+        playerController.getCursor().move(1);
 
         turnNum = 0;
         isShown = false;
@@ -80,8 +81,8 @@ public class Level4BattleState extends LevelState{
 
         // TODO: Make this not stupid.
         playerController.setupCursor();
-        playerController.getCursor().x = 2;
-        playerController.getCursor().y = 7;
+        playerController.getCursor().x = 5;
+        playerController.getCursor().y = 18;
 
         playerController.setupMenus();
 
