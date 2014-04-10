@@ -189,5 +189,8 @@ public class OrbGame implements ApplicationListener {
         
         setState("MAIN_MENU");
 	}
-	
+
+    public StateManager getStateManager() {
+        return stateManager;
+    }
 }

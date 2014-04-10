@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class StateManager {
     private HashMap<String, State> stateList;
     public State current;
+    public String previousStateName, currentStateName;
 
     public StateManager() {
         Logger.debug("Initializing StateManager.");
@@ -47,6 +48,9 @@ public class StateManager {
         }
 
         Logger.debug("Setting state to: " + stateName);
+        this.previousStateName = this.currentStateName;
+        this.currentStateName = stateName;
+
         this.current = stateList.get(stateName);
         return this.current;
     }
