@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import cpsc599.assets.Actor;
 import cpsc599.assets.GameEntity;
 import cpsc599.states.State;
+import cpsc599.util.SharedAssets;
 
 public class DoorGameEntity extends GameEntity {
     public static String IDENTIFIER = "Door";
@@ -14,10 +15,10 @@ public class DoorGameEntity extends GameEntity {
     private Sprite openDoor, closedDoor;
     private String flagName;
 
-    public DoorGameEntity(String switchFlag, Sprite closed, Sprite opened, int x, int y, boolean open) {
+    public DoorGameEntity(String switchFlag, int x, int y, boolean open) {
         this.open = open;
-        this.openDoor = opened;
-        this.closedDoor = closed;
+        this.openDoor = new Sprite(SharedAssets.doorOpen);
+        this.closedDoor = new Sprite(SharedAssets.doorClosed);
         this.flagName = switchFlag;
 
         this.identifier = this.IDENTIFIER;
@@ -57,6 +58,7 @@ public class DoorGameEntity extends GameEntity {
     public String onUse(State gameState, Actor activator) {
         this.open = !open;
         gameState.setFlag(flagName, open);
+        setDoorSprite();
         return "Used the door!";
     }
 
