@@ -55,6 +55,10 @@ public class Level2BattleState extends LevelState{
         super.init(game);
         super.setLevel(levelManager.setLevel("level1"));
 
+        playerController.healAll();
+        playerController.resetTurn();
+        gameEntityManager.getEntities().clear();
+
         turnNum = 0;
         isShown = false;
         hasKey = false;
@@ -262,6 +266,7 @@ public class Level2BattleState extends LevelState{
         {
             //Game over!
             //add game over state
+            dialogue.addDialogue("All your characters have died...", "Hikari");
             orb.setState("GAME_OVER");
             //Logger.debug("Game Over...");
         }

@@ -7,6 +7,7 @@ import cpsc599.util.Logger;
 //Game over state
 public class GameOverState extends State{
     private int time = 0;
+    public String level;
 
     public GameOverState() {
         Logger.debug("Initializing MainMenuState");
@@ -28,7 +29,7 @@ public class GameOverState extends State{
     public void tick(Input input) {
         time++; // Increment the time value.
         if (Controls.isKeyTapped(input, Controls.START)) {
-            orb.setState("LEVEL0");
+            orb.setState(level);
         }
     }
 }
