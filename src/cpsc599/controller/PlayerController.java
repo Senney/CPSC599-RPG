@@ -234,6 +234,9 @@ public class PlayerController {
                     }
                     this.globalMenu.setVisible(false);
                 }
+                else if(action.equals("Restart")) {
+
+                }
                 else if(Controls.isKeyTapped(input, Controls.B_BUTTON))
                     globalMenu.setVisible(false);
                     return;
@@ -259,6 +262,11 @@ public class PlayerController {
                     globalMenu.setVisible(true);
                 }
             } else {
+                for(int i = 0; i < playerManager.getPlayers().length; i++) {
+                    if(!playerManager.getPlayer(i).equals(p) && p.x == playerManager.getPlayer(i).x && p.y == playerManager.getPlayer(i).y) {
+                        return;
+                    }
+                }
                 actMenu.toggleVisible();
                 Logger.debug("entering action menu");
             }

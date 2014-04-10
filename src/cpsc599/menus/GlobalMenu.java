@@ -23,6 +23,7 @@ public class GlobalMenu extends Menu{
 
         //These are temporary right now
         options.add("End turn");
+        options.add("Restart");
 
 
         font = SharedAssets.font_12;
@@ -53,7 +54,7 @@ public class GlobalMenu extends Menu{
         batch.begin();
         this.drawMenu(batch, 359, 250, 144, 208);
 
-        batch.draw(SharedAssets.menu_pointer, 370, 250 + pointer_y + 185);
+        batch.draw(SharedAssets.menu_pointer, 370, 250 - pointer_y + 185);
 
         int yv = 0;
         for (String s : options) {
