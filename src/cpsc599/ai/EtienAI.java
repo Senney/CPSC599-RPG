@@ -169,6 +169,11 @@ public class EtienAI extends AIActor {
             int chosen = rand.nextInt(playerManager.count());
             p = playerManager.getPlayer(chosen);
             chasePlayer = p;
+            this.dialogue.reset();
+            this.dialogue.addDialogue("I'm coming for you, " + p.getName() + "!", "Almighty");
+            this.dialogue.setVisibility(true);
+
+            this.actor.maxMove = 3;
         } else {
             p = chasePlayer;
         }
