@@ -93,6 +93,8 @@ public class Level5LabyrinthBattleState extends LevelState {
         dialogue.setVisibility(true);
 
         gameEntityManager.addEntity(new HealthShrineGameEntity(1, 12, 8));
+        gameEntityManager.addEntity(new HealthShrineGameEntity(1, 6, 10));
+        gameEntityManager.addEntity(new HealthShrineGameEntity(1, 1, 10));
 
         this.enemyStartTurn = true;
 
@@ -146,6 +148,25 @@ public class Level5LabyrinthBattleState extends LevelState {
             return;
         }
 
+        if (this.etien.isDead()) {
+            if (!this.getFlagBoolean("b_etienDeadSpeech")) {
+                this.etien.currentHealth = 1;
+                this.etien.setAiActor(null);
+                enemyController.getEnemyManager().addEnemy(this.etien);
+
+                this.dialogue.reset();
+                this.dialogue.addDialogue("Impossible! How... how could this be! I'm a god!!", "Almighty");
+                this.dialogue.addDialogue("AGHHHHHH!", "Almighty");
+                this.dialogue.addDialogue("Quick! Let's go rescue Ren!", "Hikari");
+                this.dialogue.setVisibility(true);
+
+                this.setFlag("b_etienDeadSpeech", true);
+                return;
+            } else {
+                this.orb.setState("LEVEL5_FINALE");
+            }
+        }
+
         //you will probably hate me for this...
         for(int i =0; i<playerController.getPlayerManager().getPlayers().length; i++)
         {
@@ -181,6 +202,7 @@ public class Level5LabyrinthBattleState extends LevelState {
             this.b_secondWave = false;
             return;
         } else if (!b_secondWave && enemyController.getEnemyManager().count() == 1 && this.b_etienDialogue) {
+            this.playerController.resetTurn();
             Player[] currentPlayers = playerController.getPlayerManager().getPlayers();
             for (int i = 0; i < currentPlayers.length; i++) {
                 currentPlayers[i].x = 13;
@@ -290,10 +312,10 @@ public class Level5LabyrinthBattleState extends LevelState {
 
     private void spawnSecondWave() {
         // 4 bruisers
-        Enemy br1 = new BruiserEnemy(SharedAssets.bruiserSprite, 1, 10),
-                br2 = new BruiserEnemy(SharedAssets.bruiserSprite, 2, 10),
-                br3 = new BruiserEnemy(SharedAssets.bruiserSprite, 5, 10),
-                br4 = new BruiserEnemy(SharedAssets.bruiserSprite, 6, 10);
+        Enemy br1 = new CowCubeEnemy(1, 10),
+                br2 = new CowCubeEnemy(2, 10),
+                br3 = new CowCubeEnemy(5, 10),
+                br4 = new CowCubeEnemy(6, 10);
         // 2 snipers
         Enemy sn1 = new SniperEnemy(SharedAssets.sniperSprite, 2, 8),
                 sn2 = new SniperEnemy(SharedAssets.sniperSprite, 5, 8);

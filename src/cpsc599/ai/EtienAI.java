@@ -109,7 +109,7 @@ public class EtienAI extends AIActor {
         Player p = playerManager.getPlayer(chosen);
         int px = p.x, py = p.y;
 
-        if (rand.nextFloat() <= 0.60) {
+        if (rand.nextFloat() <= 0.40) {
             Vector2 spawn = randomLocation();
             Enemy ranged = new SniperEnemy(SharedAssets.sniperSprite, (int)spawn.x, (int)spawn.y);
             ranged.setAiActor(new HitAndRunAI(playerManager, pathfinder, ranged));
@@ -126,7 +126,6 @@ public class EtienAI extends AIActor {
     }
 
     private boolean teleport(int px, int py) {
-
         if (canTeleport(px - 1, py)) {
             this.actor.x = px - 1;
             this.actor.y = py;
@@ -150,12 +149,6 @@ public class EtienAI extends AIActor {
 
     private boolean decidePhase3() {
         if (this.actor.currentHealth <= 10) {
-            this.dialogue.reset();
-            this.dialogue.addDialogue("Impossible! How... how could this be! I'm a god!!", "Almighty");
-            this.dialogue.addDialogue("AGHHHHHH!", "Almighty");
-            this.dialogue.addDialogue("Quick! Let's go rescue Ren!", "Hikari");
-            this.dialogue.setVisibility(true);
-            this.b_phase3 = false;
             return skipTurn();
         }
 
