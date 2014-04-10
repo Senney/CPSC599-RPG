@@ -19,9 +19,9 @@ public class AssassinAI extends AIActor {
         Vector2 myPos = new Vector2(this.actor.x, this.actor.y);
         for (Player p : players) {
             Vector2 theirPos = new Vector2(p.x, p.y);
-            if (s == null || p.currentHealth < s.currentHealth) {
+            if (s == null || (p.currentHealth < s.currentHealth && myPos.dst(theirPos) < this.actor.maxMove * 2)) {
                 s = p;
-            } else if (p.currentHealth == s.currentHealth) {
+            } else if (p.currentHealth == s.currentHealth && myPos.dst(theirPos) < this.actor.maxMove * 2) {
                 Vector2 oldPos = new Vector2(s.x, s.y);
                 if (myPos.dst(theirPos) < myPos.dst(oldPos)) {
                     s = p;
