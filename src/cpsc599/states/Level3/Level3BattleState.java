@@ -5,10 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
-import cpsc599.ai.AStarPathfinder;
-import cpsc599.ai.BasicWarriorAI;
+import cpsc599.ai.*;
 import cpsc599.assets.*;
-import cpsc599.assets.Enemies.CowCubeEnemy;
+import cpsc599.assets.Enemies.*;
 import cpsc599.assets.Entities.HouseGameEntity;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
@@ -106,41 +105,29 @@ public class Level3BattleState extends LevelState {
         Enemy e4 = new CowCubeEnemy(22, 14);
         e4.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e4));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e5 = new Enemy(sprite, 14, 4, 8);
-        e5.evade = 10;
-        e5.damage = 6;
-        e5.hit = 120;
-        e5.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e5));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        Enemy e5 = new BasicRangedEnemy(sprite, 14, 4);
+        e5.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e5));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy13.png", 0,0,16,16,1,0.1f);
-        Enemy e6 = new Enemy(sprite, 14, 1, 8);
-        e6.evade = 10;
-        e6.damage = 6;
-        e6.hit = 120;
-        e6.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e6));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human6.png", 0,0,16,16,1,0.1f);
+        Enemy e6 = new BasicRangedEnemy(sprite, 15, 4);
+        e6.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e6));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Monsters/enemy15.png", 0,0,16,16,1,0.1f);
-        Enemy e7 = new Enemy(sprite, 17, 2, 8);
-        e7.evade = 10;
-        e7.damage = 6;
-        e7.hit = 120;
-        e7.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e7));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png", 0,0,16,16,1,0.1f);
+        Enemy e7 = new SniperEnemy(sprite, 23, 4);
+        e7.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e7));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human2.png", 0,0,16,16,1,0.1f);
-        Enemy e8 = new Enemy(sprite, 20, 1, 8);
-        e8.evade = 10;
-        e8.damage = 6;
-        e8.hit = 120;
-        e8.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e8));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human1.png", 0,0,16,16,1,0.1f);
+        Enemy e8 = new TankyEnemy(sprite, 20, 1);
+        e8.setAiActor(new OpportunistAI(this.playerController.getPlayerManager(), pathfinder, e8));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human3.png", 0,0,16,16,1,0.1f);
-        Enemy e9 = new Enemy(sprite, 22, 2, 8);
-        e9.evade = 10;
-        e9.damage = 6;
-        e9.hit = 120;
-        e9.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, e9));
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
+        Enemy e9 = new NimbleThiefEnemy(sprite, 21, 4);
+        e9.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e9));
 
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human4.png", 0,0,16,16,1,0.1f);
+        Enemy e10 = new NimbleThiefEnemy(sprite, 19, 4);
+        e10.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e10));
 
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
@@ -151,6 +138,7 @@ public class Level3BattleState extends LevelState {
         enemyController.getEnemyManager().addEnemy(e7);
         enemyController.getEnemyManager().addEnemy(e8);
         enemyController.getEnemyManager().addEnemy(e9);
+        enemyController.getEnemyManager().addEnemy(e10);
     }
 
     @Override

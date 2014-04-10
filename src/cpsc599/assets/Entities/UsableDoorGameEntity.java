@@ -7,21 +7,19 @@ import cpsc599.states.State;
 import cpsc599.util.SharedAssets;
 
 public class UsableDoorGameEntity extends GameEntity {
-    private final int x;
-    private final int y;
     private final String flag;
     private boolean open;
 
     private Sprite openDoor, closedDoor;
 
-    public UsableDoorGameEntity(String flag,int x, int y, boolean open) {
-        this.x = x;
-        this.y = y;
+    public UsableDoorGameEntity(String flag, int x, int y, boolean open) {
+        setPosition(x, y);
         this.flag = flag;
         this.open = open;
 
         this.openDoor = new Sprite(SharedAssets.doorOpen);
         this.closedDoor = new Sprite(SharedAssets.doorClosed);
+        setDoorSprite();
 
         this.inspect = "This door looks like it could be opened easily.";
     }

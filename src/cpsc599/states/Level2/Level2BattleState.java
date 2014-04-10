@@ -164,11 +164,11 @@ public class Level2BattleState extends LevelState{
                 "Looks like someone is home...", "Here take this key to unlock one of the cells in the fortress!");
         DoorGameEntity door1 = new DoorGameEntity("key1" ,10, 15, false);
         DoorGameEntity door2 = new DoorGameEntity("key2" ,18, 15, false);
-        DoorGameEntity door3 = new DoorGameEntity("open" ,7, 9, false);
-        DoorGameEntity door4 = new DoorGameEntity("open" ,7, 10, false);
-        DoorGameEntity door5 = new DoorGameEntity("open" ,14, 19, false);
-        DoorGameEntity door6 = new DoorGameEntity("open" ,15, 19, false);
-        DoorGameEntity door7 = new DoorGameEntity("open" ,16, 19, false);
+        UsableDoorGameEntity door3 = new UsableDoorGameEntity("open" ,7, 9, false);
+        UsableDoorGameEntity door4 = new UsableDoorGameEntity("open" ,7, 10, false);
+        UsableDoorGameEntity door5 = new UsableDoorGameEntity("open" ,14, 19, false);
+        UsableDoorGameEntity door6 = new UsableDoorGameEntity("open" ,15, 19, false);
+        UsableDoorGameEntity door7 = new UsableDoorGameEntity("open" ,16, 19, false);
         gameEntityManager.addEntity(door1);
         gameEntityManager.addEntity(door2);
         gameEntityManager.addEntity(door3);

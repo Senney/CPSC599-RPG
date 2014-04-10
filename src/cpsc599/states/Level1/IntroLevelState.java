@@ -287,7 +287,7 @@ public class IntroLevelState extends LevelState {
         seen.getPlayerInventory().equip(seen.getPlayerInventory().getCarry()[0]);
         seen.updateStats();
         playerController.getPlayerManager().addPlayer(seen);
-        Player sash = new Player("Sean", SharedAssets.sashaSprite, 0, 8, 9, 12, 3, 1, 100, 70);
+        Player sash = new Player("Sasha", SharedAssets.sashaSprite, 0, 8, 9, 12, 3, 1, 100, 70);
         sash.getPlayerInventory().pickUp(new Item("Pointy thruster", true, Inventory.RHAND_SLOT, 2, 2, 3));
         sash.getPlayerInventory().equip(sash.getPlayerInventory().getCarry()[0]);
         sash.updateStats();
