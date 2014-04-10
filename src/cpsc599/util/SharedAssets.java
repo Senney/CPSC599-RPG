@@ -56,6 +56,7 @@ public class SharedAssets {
 
     public static BitmapFont font_14;
     public static BitmapFont font_12;
+    public static BitmapFont font_16;
 
     public static AnimatedSprite hikariSprite;
     public static AnimatedSprite seanSprite;
@@ -188,5 +189,6 @@ public class SharedAssets {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("assets/prstartk.ttf"));
         font_14 = generator.generateFont(14);
         font_12 = generator.generateFont(12);
+        font_16 = generator.generateFont(16);
     }
 }

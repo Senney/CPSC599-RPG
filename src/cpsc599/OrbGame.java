@@ -154,8 +154,6 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("MAIN_MENU", new MainMenuState());
         stateManager.addState("GAME_OVER", gover);
 
-        gover.level = "LEVEL1";
-
         // Prologue State
         stateManager.addState("PROLOGUE", new PrologueCinematicState(this, levelManager.setLevel("black"), this.cameraController, "LEVEL1_VILLAGE"));
 
@@ -166,35 +164,32 @@ public class OrbGame implements ApplicationListener {
         stateManager.addState("LEVEL1", new IntroLevelState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL1_FINALE", new Level1Finale(this, levelManager.setLevel("level0"), cameraController, "LEVEL2_EMPTY_FIELD"));
 
-        gover.level = "LEVEL2";
         // Chapter 2 states
         stateManager.addState("LEVEL2_EMPTY_FIELD", new Level2EmptyFieldCinematic(this, levelManager.setLevel("level1"), cameraController, "LEVEL2"));
         stateManager.addState("LEVEL2", new Level2BattleState(this, levelManager, playerController, cameraController, enemyController));
         //stateManager.addState("LEVEL2", new Level2BattleState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL2_FINALE", new Level2AfterBattleCinematic(this, levelManager.setLevel("level1"), this.cameraController, "LEVEL3_FIELD"));
 
-        gover.level = "LEVEL3";
         // Chapter 3 states
         stateManager.addState("LEVEL3_FIELD", new Level3FieldCinematic(this, levelManager.setLevel("level2"), this.cameraController, "LEVEL3"));
         stateManager.addState("LEVEL3", new Level3BattleState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL3_FINALE", new Level3Finale(this, levelManager.setLevel("level2"), this.cameraController, "LEVEL4_FIELD"));
 
-        gover.level = "LEVEL4";
         // Chapter 4 states
         stateManager.addState("LEVEL4_FIELD", new Level4FieldCinematic(this, levelManager.setLevel("level3"), this.cameraController, "LEVEL4"));
         stateManager.addState("LEVEL4", new Level4BattleState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL4_FINALE", new Level4Finale(this, levelManager.setLevel("level3"), this.cameraController, "LEVEL5_CRYSTAL_CASTLE"));
 
-        gover.level = "LEVEL5_ALMIGHTY";
         // Chapter 5 states
         stateManager.addState("LEVEL5_CRYSTAL_CASTLE", new Level5CrystalCastleCinematic(this, levelManager.setLevel("crystal_castle"), this.cameraController, "LEVEL5_INSIDE_CASTLE"));
         stateManager.addState("LEVEL5_INSIDE_CASTLE", new Level5InsideCastleBattleState(this, levelManager, playerController, cameraController, enemyController));
         stateManager.addState("LEVEL5_BLACKOUT", new Level5BlackoutCinematic(this, levelManager.setLevel("blackout_castle"), this.cameraController, "LEVEL5_ALMIGHTY"));
         stateManager.addState("LEVEL5_ALMIGHTY", new Level5AlmightyCinematic(this, levelManager.setLevel("throne_room"), this.cameraController, "LEVEL5_LABYRINTH"));
         stateManager.addState("LEVEL5_LABYRINTH", new Level5LabyrinthBattleState(this, levelManager, playerController, cameraController, enemyController));
-        stateManager.addState("LEVEL5_FINALE", new Level5FinaleCinematic(this, levelManager.setLevel("empty_throne_room"), this.cameraController, ""));
+        stateManager.addState("LEVEL5_FINALE", new Level5FinaleCinematic(this, levelManager.setLevel("empty_throne_room"), this.cameraController, "WON"));
+        stateManager.addState("WON", new GameWonState());
         
-        setState("MAIN_MENU");
+        setState("WON");
 	}
 
     public StateManager getStateManager() {
