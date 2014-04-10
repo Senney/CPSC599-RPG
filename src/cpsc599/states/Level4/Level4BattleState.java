@@ -264,19 +264,18 @@ public class Level4BattleState extends LevelState{
         }
 
         //checks to see if someone is in range of castle
-        for(int i = 0; i < playerController.getPlayerManager().getPlayers().length; i++) {
-            if(!seenCastle && playerController.getPlayerManager().getPlayer(i).y <= 10) {
+        for(int i = 0; i < playerController.getPlayerManager().count(); i++) {
+            int xpos = playerController.getPlayerManager().getPlayer(i).x, ypos = playerController.getPlayerManager().getPlayer(i).y;
+            if(!seenCastle && ypos <= 10) {
                 seenCastle = true;
                 String name = playerController.getPlayerManager().getPlayer(i).getName();
                 dialogue.addDialogue(name + ":\nHey I see a castle in the distance! I think we can navigate around this mountain pass to get there.", name);
                 this.dialogue.setVisibility(true);
             }
-            if(playerController.getPlayerManager().getPlayer(i).x == 17 && playerController.getPlayerManager().getPlayer(i).y == 3) {
+            if(xpos >= 15 && playerController.getPlayerManager().getPlayer(i).y <= 5) {
                 Logger.debug("Level complete!");
                 orb.setState("LEVEL4_FINALE");
             }
-            else
-                break;
         }
 
         if (!playerController.isTurnComplete()) {
