@@ -74,4 +74,8 @@ public class EnemyManager {
     public void reset() {
         enemyList.clear();
     }
+
+    public int count() {
+        return this.enemyList.size();
+    }
 }
