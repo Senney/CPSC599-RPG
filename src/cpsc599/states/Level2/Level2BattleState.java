@@ -160,17 +160,23 @@ public class Level2BattleState extends LevelState{
         gameEntityManager.addEntity(sword);
         gameEntityManager.addEntity(shrine);*/
 
-        HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 2, 21, "house1",
+        HouseGameEntity houseEntity = new HouseGameEntity(new Sprite(SharedAssets.orangeHouse), 1, 18, "key",
                 "Looks like someone is home...", "Here take this key to unlock one of the cells in the fortress!");
-        DoorGameEntity door1 = new DoorGameEntity("key1" ,10, 15, false);
-        DoorGameEntity door2 = new DoorGameEntity("key2" ,18, 15, false);
+        DoorGameEntity door1 = new DoorGameEntity("key" ,10, 15, false);
+        DoorGameEntity door2 = new DoorGameEntity("key" ,18, 15, false);
         UsableDoorGameEntity door3 = new UsableDoorGameEntity("open" ,7, 9, false);
         UsableDoorGameEntity door4 = new UsableDoorGameEntity("open" ,7, 10, false);
         UsableDoorGameEntity door5 = new UsableDoorGameEntity("open" ,14, 19, false);
         UsableDoorGameEntity door6 = new UsableDoorGameEntity("open" ,15, 19, false);
         UsableDoorGameEntity door7 = new UsableDoorGameEntity("open" ,16, 19, false);
         PrisonerEntity fakePrisoner = new PrisonerEntity(10,17);
+        ShieldGameEntity shield = new ShieldGameEntity(18, 12, 2);
+        AmuletGameEntity amulet = new AmuletGameEntity(18, 13, 2);
+        SwordGameEntity sword = new SwordGameEntity(18, 14, 2);
         gameEntityManager.addEntity(fakePrisoner);
+        gameEntityManager.addEntity(shield);
+        gameEntityManager.addEntity(amulet);
+        gameEntityManager.addEntity(sword);
         gameEntityManager.addEntity(door1);
         gameEntityManager.addEntity(door2);
         gameEntityManager.addEntity(door3);
@@ -266,15 +272,18 @@ public class Level2BattleState extends LevelState{
         /**
          * Handle the getting of the key
          */
-        if (this.getFlagBoolean("house1") && !hasKey && !usedKey) {
+        if (this.getFlagBoolean("key") && !hasKey && !usedKey) {
             this.dialogue.addDialogue("Key obtained!", "Prisoner");
             this.dialogue.setVisibility(true);
             hasKey = true;
             return;
         }
 
-        if(hasKey && this.getFlagBoolean("key1") || this.getFlagBoolean("key2") && !usedKey) {
-
+        if(this.getFlagBoolean("getPrisoner")) {
+            Logger.debug("Prisoner has joined the party");
+            playerController.getPlayerManager().addPlayer(prisoner);
+            prisoner_joined = true;
+            this.setFlag("getPrisoner", false);
         }
 
         if (!playerController.isTurnComplete()) {

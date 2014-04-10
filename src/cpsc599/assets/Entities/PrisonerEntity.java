@@ -3,7 +3,9 @@ package cpsc599.assets.Entities;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import cpsc599.assets.Actor;
+import cpsc599.assets.Dialogue;
 import cpsc599.assets.GameEntity;
+import cpsc599.controller.PlayerController;
 import cpsc599.states.State;
 import cpsc599.util.SharedAssets;
 
@@ -11,10 +13,13 @@ public class PrisonerEntity extends GameEntity{
 
     private int def;
     private boolean used;
+    private Dialogue d;
 
     public PrisonerEntity(int x, int y) {
         super();
         this.used = false;
+
+        this.d = d;
 
         super.objSprite = new Sprite(SharedAssets.prisonerSprite.getFrame(0));
         super.setPosition(x, y);
@@ -30,9 +35,10 @@ public class PrisonerEntity extends GameEntity{
     public String onUse(State gameState, Actor activator) {
         if (this.used) return "All power this remnant once had is long gone...";
 
-        activator.defence = activator.defence + def;
+        gameState.setFlag("getPrisoner", true);
         this.used = true;
-        return "Player's defense has been increased by " + this.def + " !";
+
+        return "Prisoner: Thanks for rescuing me! I'll help you on your quest.";
     }
     @Override
     public void render(SpriteBatch batch) {
