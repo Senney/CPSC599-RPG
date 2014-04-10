@@ -338,22 +338,6 @@ public class Level2BattleState extends LevelState{
         } else {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
         }
-        /*if(turnNum == 2 && !isShown) {
-            this.dialogue.addDialogue("Sean:\nHey what's going on here!?","Sean");
-            this.dialogue.addDialogue("Sasha:\nWe're here to help! Hold on.", "Sasha");
-            this.dialogue.setVisibility(true);
-            Player seen = new Player("Sean", SharedAssets.seanSprite, 0, 6, 7, 16, 3, 2, 100, 70);
-            seen.getPlayerInventory().pickUp(new Item("Sabre", true, Inventory.RHAND_SLOT, 1, 2, 3));
-            seen.getPlayerInventory().equip(seen.getPlayerInventory().getCarry()[0]);
-            seen.updateStats();
-            playerController.getPlayerManager().addPlayer(seen);
-            Player sash = new Player("Sean", SharedAssets.sashaSprite, 0, 8, 9, 12, 3, 1, 100, 70);
-            sash.getPlayerInventory().pickUp(new Item("Pointy thruster", true, Inventory.RHAND_SLOT, 2, 2, 3));
-            sash.getPlayerInventory().equip(sash.getPlayerInventory().getCarry()[0]);
-            sash.updateStats();
-            playerController.getPlayerManager().addPlayer(sash);
-            isShown = true;
-        }*/
 
         // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Controls.SELECT)) {
