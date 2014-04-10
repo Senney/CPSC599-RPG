@@ -13,7 +13,7 @@ public class GameWonState extends State {
     public void init(OrbGame game) {
         super.init(game);
 
-        font = SharedAssets.font_14;
+        font = SharedAssets.font_12;
     }
 
     @Override
