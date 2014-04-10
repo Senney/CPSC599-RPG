@@ -37,6 +37,7 @@ public abstract class LevelState extends State {
     protected List<GameEntity> entityList;
     protected Dialogue dialogue;
 
+    protected Player[] initialPlayerList;
 
     protected LevelState(OrbGame game, PlayerController playerController, CameraController cameraController, EnemyController enemyController) {
         //super.init(game);
@@ -126,6 +127,16 @@ public abstract class LevelState extends State {
         if (this.playerController.isCursor()) {
             this.playerController.getCursor().render(this.groundLayer);
         }
+    }
+
+    public void restart() {
+        if (this.initialPlayerList == null) {
+            Logger.error("Must set initial player list before restarting the level.");
+            return;
+        }
+
+        this.playerController.getPlayerManager().setPlayers(this.initialPlayerList);
+        this.init(this.orb);
     }
 
     @Override
