@@ -11,8 +11,8 @@ public class EtienBoss extends Enemy {
         super(new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/etienne2.png", 0, 0, 16, 16, 1, 0.1f),
                 x, y, 6);
 
-        int baseDamage = 7;
-        super.maxHealth = 120;
+        int baseDamage = 4;
+        super.maxHealth = 110;
         super.strength = 4;
         super.defence = 0;
         super.hit = 160;

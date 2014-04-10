@@ -337,7 +337,6 @@ public class Level3BattleState extends LevelState {
             this.cameraController.set(this.playerController.getCursor().x, this.playerController.getCursor().y);
         }
 
-        // TODO: Find a way to abstract this into the PlayerController.
         if (Controls.isKeyTapped(input, Input.Keys.O)) {
             if (!b_jackJoined) {
                 this.recruitJack();

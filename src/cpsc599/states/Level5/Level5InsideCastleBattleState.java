@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import cpsc599.OrbGame;
 import cpsc599.ai.*;
-import cpsc599.assets.AnimatedSprite;
 import cpsc599.assets.Dialogue;
 import cpsc599.assets.Enemies.*;
 import cpsc599.assets.Enemy;

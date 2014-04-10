@@ -304,12 +304,12 @@ public class IntroLevelState extends LevelState {
         this.dialogue.addDialogue("Sean:\nHey what's going on here!?","Sean");
         this.dialogue.addDialogue("Sasha:\nWe're here to help! Hold on.", "Sasha");
         this.dialogue.setVisibility(true);
-        Player seen = new Player("Sean", SharedAssets.seanSprite, 0, 6, 7, 16, 3, 2, 130, 70);
+        Player seen = new Player("Sean", SharedAssets.seanSprite, 0, 6, 7, 20, 3, 2, 130, 70);
         seen.getPlayerInventory().pickUp(new Item("Sabre", true, Inventory.RHAND_SLOT, 1, 2, 3));
         seen.getPlayerInventory().equip(seen.getPlayerInventory().getCarry()[0]);
         seen.updateStats();
         playerController.getPlayerManager().addPlayer(seen);
-        Player sash = new Player("Sasha", SharedAssets.sashaSprite, 0, 8, 9, 12, 3, 1, 110, 70);
+        Player sash = new Player("Sasha", SharedAssets.sashaSprite, 0, 8, 9, 14, 4, 1, 110, 70);
         sash.getPlayerInventory().pickUp(new Item("Pointy thruster", true, Inventory.RHAND_SLOT, 2, 2, 3));
         sash.getPlayerInventory().equip(sash.getPlayerInventory().getCarry()[0]);
         sash.updateStats();
