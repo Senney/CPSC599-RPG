@@ -8,6 +8,7 @@ import cpsc599.OrbGame;
 import cpsc599.ai.*;
 import cpsc599.assets.*;
 import cpsc599.assets.Enemies.*;
+import cpsc599.assets.Entities.HealthShrineGameEntity;
 import cpsc599.assets.Entities.HouseGameEntity;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
@@ -34,6 +35,8 @@ public class Level3BattleState extends LevelState {
 
     public int turnNum;
     public boolean isShown;
+    private boolean b_serpentSpawned;
+    private Enemy serpentBoss;
 
     public Level3BattleState(OrbGame game, LevelManager manager, PlayerController playerController,
                            CameraController cameraController, EnemyController enemyController) {
@@ -113,7 +116,7 @@ public class Level3BattleState extends LevelState {
         Enemy e6 = new BasicRangedEnemy(sprite, 15, 4);
         e6.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, e6));
 
-        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Human/human5.png", 0,0,16,16,1,0.1f);
+        sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/dragon.png", 0,0,16,16,1,0.1f);
         Enemy e7 = new SniperEnemy(sprite, 23, 4);
         e7.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e7));
 
@@ -129,6 +132,12 @@ public class Level3BattleState extends LevelState {
         Enemy e10 = new NimbleThiefEnemy(sprite, 19, 4);
         e10.setAiActor(new WanderingAI(this.playerController.getPlayerManager(), pathfinder, e10));
 
+        AnimatedSprite serpentSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/serpent.png", 0, 0, 16, 16, 1, 0.1f);
+        serpentBoss = new AssassinEnemy(serpentSprite, 18, 8);
+        serpentBoss.maxHealth = 14;
+        serpentBoss.heal(-1);
+        this.b_serpentSpawned = false;
+
         enemyController.getEnemyManager().addEnemy(e);
         enemyController.getEnemyManager().addEnemy(e2);
         enemyController.getEnemyManager().addEnemy(e3);
@@ -139,6 +148,8 @@ public class Level3BattleState extends LevelState {
         enemyController.getEnemyManager().addEnemy(e8);
         enemyController.getEnemyManager().addEnemy(e9);
         enemyController.getEnemyManager().addEnemy(e10);
+
+        gameEntityManager.addEntity(new HealthShrineGameEntity(25, 10, 8));
     }
 
     @Override
@@ -197,6 +208,14 @@ public class Level3BattleState extends LevelState {
                 playerController.getPlayerManager().removePlayer(p);
                 return;
             }
+        }
+
+        if (enemyController.getEnemyManager().getEnemies().length == 3 && !b_serpentSpawned) {
+            this.enemyController.getEnemyManager().addEnemy(this.serpentBoss);
+            this.dialogue.display("Who dares fight against the Cow Cube Cult!?");
+            b_serpentSpawned = true;
+            cameraController.set(this.serpentBoss.x, this.serpentBoss.y);
+            return;
         }
 
         if(playerController.getPlayerManager().getPlayers().length == 0)

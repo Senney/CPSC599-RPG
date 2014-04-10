@@ -8,7 +8,9 @@ import cpsc599.OrbGame;
 import cpsc599.ai.AStarPathfinder;
 import cpsc599.ai.BasicWarriorAI;
 import cpsc599.assets.*;
+import cpsc599.assets.Enemies.AssassinEnemy;
 import cpsc599.assets.Enemies.CowCubeEnemy;
+import cpsc599.assets.Entities.HealthShrineGameEntity;
 import cpsc599.assets.Entities.HouseGameEntity;
 import cpsc599.controller.CameraController;
 import cpsc599.controller.EnemyController;
@@ -25,6 +27,9 @@ import cpsc599.util.SharedAssets;
 public class Level4BattleState extends LevelState{
     int currentEnemy = 0;
     float currentTime = 0f;
+
+    private Enemy serpentBoss;
+    private boolean b_serpentSpawned;
 
     private AnimatedSprite sprite;
     private boolean enemyStartTurn;
@@ -47,6 +52,7 @@ public class Level4BattleState extends LevelState{
         super.setLevel(levelManager.setLevel("level3"));
 
         playerController.healAll();
+        playerController.resetTurn();
         gameEntityManager.getEntities().clear();
 
         cameraController.set(6, 23);
@@ -80,6 +86,7 @@ public class Level4BattleState extends LevelState{
 
         dialogue = new Dialogue();
         dialogue.mapPortrait("Jack", SharedAssets.jackPortrait);
+
 
         this.enemyStartTurn = true;
     }
@@ -193,6 +200,7 @@ public class Level4BattleState extends LevelState{
                 return;
             }
         }
+
 
         if(playerController.getPlayerManager().getPlayers().length == 0)
         {
