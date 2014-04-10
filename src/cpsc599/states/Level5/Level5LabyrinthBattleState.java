@@ -190,9 +190,11 @@ public class Level5LabyrinthBattleState extends LevelState {
             this.dialogue.reset();
             this.dialogue.addDialogue("Alright, fools... Prepare for the real battle. PREPARE FOR THE MIGHT OF THE CUBE!", "Etien");
             this.dialogue.setVisibility(true);
-            this.b_etienDialogue = true;
+            this.b_etienDialogue = false;
 
-            this.etien.setAiActor(new EtienAI());
+            this.playerController.endTurn();
+            this.etien.setAiActor(new EtienAI(this.dialogue, this.enemyController.getEnemyManager(),
+                    this.playerController.getPlayerManager(), pathfinder, this.etien));
 
             return;
         }
