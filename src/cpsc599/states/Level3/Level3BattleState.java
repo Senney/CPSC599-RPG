@@ -139,11 +139,11 @@ public class Level3BattleState extends LevelState {
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/dragon.png", 0,0,16,16,1,0.1f);
         ex2 = new SniperEnemy(sprite, 9, 1);
-        ex2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, ex2));
+        ex2.setAiActor(new HitAndRunAI(this.playerController.getPlayerManager(), pathfinder, ex2));
 
         sprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/snow_bird.png", 0,0,16,16,1,0.1f);
         ex3 = new GlassCannonEnemy(sprite, 8, 1);
-        ex2.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, ex3));
+        ex3.setAiActor(new BasicWarriorAI(this.playerController.getPlayerManager(), pathfinder, ex3));
 
         AnimatedSprite serpentSprite = new AnimatedSprite("assets/tilesets/primary/Enemy/Boss/serpent.png", 0, 0, 16, 16, 1, 0.1f);
         serpentBoss = new AssassinEnemy(serpentSprite, 18, 8);
