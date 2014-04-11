@@ -109,7 +109,7 @@ public class EtienAI extends AIActor {
         Player p = playerManager.getPlayer(chosen);
         int px = p.x, py = p.y;
 
-        if (rand.nextFloat() <= 0.40) {
+        if (rand.nextFloat() <= 0.50) {
             Vector2 spawn = randomLocation();
             Enemy ranged = new SniperEnemy(SharedAssets.sniperSprite, (int)spawn.x, (int)spawn.y);
             ranged.setAiActor(new HitAndRunAI(playerManager, pathfinder, ranged));
