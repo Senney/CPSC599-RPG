@@ -22,8 +22,9 @@ public class EtienAI extends AIActor {
     private boolean b_phase1, b_phase2, b_phase3;
     private int turnCount;
 
-    private int chaseStart = 0, chaseTurns = 3;
+    private int chaseStart = 0, chaseTurns = 2;
     private Player chasePlayer;
+    private boolean newChase;
 
     private Random rand;
 
@@ -105,10 +106,6 @@ public class EtienAI extends AIActor {
             return skipTurn();
         }
 
-        int chosen = rand.nextInt(playerManager.count());
-        Player p = playerManager.getPlayer(chosen);
-        int px = p.x, py = p.y;
-
         if (rand.nextFloat() <= 0.50) {
             Vector2 spawn = randomLocation();
             Enemy ranged = new SniperEnemy(SharedAssets.sniperSprite, (int)spawn.x, (int)spawn.y);
@@ -116,13 +113,21 @@ public class EtienAI extends AIActor {
             this.enemyManager.addEnemy(ranged);
         }
 
-        if (teleport(px, py)) {
-            attack(p);
-        } else {
-            return skipTurn();
-        }
+        int attempt = 0;
+        while (!teleportRandomPlayer() && attempt++ < 10) {}
 
         return true;
+    }
+
+    private boolean teleportRandomPlayer() {
+        int chosen = rand.nextInt(playerManager.count());
+        Player p = playerManager.getPlayer(chosen);
+        int px = p.x, py = p.y;
+        if (teleport(px, py)) {
+            attack(p);
+            return true;
+        }
+        return false;
     }
 
     private boolean teleport(int px, int py) {
@@ -152,15 +157,18 @@ public class EtienAI extends AIActor {
             return skipTurn();
         }
 
-        this.actor.maxMove = 6;
+        this.actor.maxMove = this.actor.curMove = 6;
         this.actor.damage = 12;
         this.actor.defence = 4;
 
         // Find a random player to chase.
         Player p = null;
-        if (turnCount > chaseStart + chaseTurns || chasePlayer == null) {
+        if (turnCount > chaseStart + chaseTurns || chasePlayer == null || chasePlayer.isDead()) {
             int chosen = rand.nextInt(playerManager.count());
-            p = playerManager.getPlayer(chosen);
+            while ((p = playerManager.getPlayer(chosen)) == chasePlayer && playerManager.count() > 1) {
+                chosen = rand.nextInt(playerManager.count());
+            }
+
             chasePlayer = p;
             this.dialogue.reset();
             this.dialogue.addDialogue("I'm coming for you, " + p.getName() + "!", "Almighty");
@@ -168,7 +176,7 @@ public class EtienAI extends AIActor {
 
             this.chaseStart = turnCount;
 
-            this.actor.maxMove = 3;
+            this.actor.maxMove = this.actor.curMove = 3;
         } else {
             p = chasePlayer;
         }
