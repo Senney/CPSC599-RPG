@@ -306,8 +306,8 @@ public class IntroLevelState extends LevelState {
     }
 
     public void addNewPlayers() {
-        this.dialogue.addDialogue("Sean:\nHey what's going on here!?","Sean");
-        this.dialogue.addDialogue("Sasha:\nWe're here to help! Hold on.", "Sasha");
+        this.dialogue.addDialogue("Hey what's going on here!?","Sean");
+        this.dialogue.addDialogue("We're here to help! Hold on.", "Sasha");
         this.dialogue.setVisibility(true);
         Player seen = new Player("Sean", SharedAssets.seanSprite, 0, 6, 7, 20, 3, 2, 130, 70);
         seen.getPlayerInventory().pickUp(new Item("Sabre", true, Inventory.RHAND_SLOT, 1, 2, 3));

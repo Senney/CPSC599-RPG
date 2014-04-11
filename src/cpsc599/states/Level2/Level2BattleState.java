@@ -293,7 +293,7 @@ public class Level2BattleState extends LevelState{
          * Handle the getting of the key
          */
         if (this.getFlagBoolean("key") && !hasKey && !usedKey) {
-            this.dialogue.addDialogue("Key obtained!", "Prisoner");
+            this.dialogue.addDialogue("Key obtained!", "System");
             this.dialogue.setVisibility(true);
             hasKey = true;
             return;

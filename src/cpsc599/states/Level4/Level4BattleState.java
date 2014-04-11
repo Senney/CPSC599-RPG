@@ -283,7 +283,7 @@ public class Level4BattleState extends LevelState{
             if(!seenCastle && ypos <= 10) {
                 seenCastle = true;
                 String name = playerController.getPlayerManager().getPlayer(i).getName();
-                dialogue.addDialogue(name + ":\nHey I see a castle in the distance! I think we can navigate around this mountain pass to get there.", name);
+                dialogue.addDialogue("Hey I see a castle in the distance! I think we can navigate around this mountain pass to get there.", name);
                 this.dialogue.setVisibility(true);
                 break;
             }
