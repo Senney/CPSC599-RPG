@@ -71,7 +71,7 @@ public class Level3BattleState extends LevelState {
             currentPlayers[i].y = 6 + i;
         }
 
-        jack = new Player("Jack", SharedAssets.jackSprite, 7, 14, 7, 10, 4, 1, 120, 60);
+        jack = new Player("Jack", SharedAssets.jackSprite, 7, 14, 7, 10, 4, 1, 120, 70);
         jack.getPlayerInventory().pickUp(new Item("Pitchfork", true, Inventory.RHAND_SLOT, 1, 4, 1));
         jack.getPlayerInventory().equip(jack.getPlayerInventory().getCarry()[0]);
         jack.updateStats();
