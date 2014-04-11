@@ -67,7 +67,7 @@ public class EtienAI extends AIActor {
             int starty = 2;
             for (int i = 0; i < 4; i++) {
                 Enemy cube = new CowCubeEnemy(7, 2 + i);
-                cube.damage = 10;
+                cube.damage = 7;
                 cube.maxHealth = 16;
                 cube.heal(-1);
                 cube.setAiActor(new BasicWarriorAI(this.playerManager, this.pathfinder, cube));
